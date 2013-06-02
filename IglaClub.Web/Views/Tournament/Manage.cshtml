@@ -1,21 +1,22 @@
-﻿@using IglaClub.ObjectModel.Enums
-@using IglaClub.Web.Views.Helpers
-@model IglaClub.ObjectModel.Entities.Tournament
+﻿@using IglaClub.ObjectModel.Entities
+@using IglaClub.ObjectModel.Enums
+@using Pair = IglaClub.ObjectModel.Entities.Pair
+@model IglaClub.Web.Models.ViewModels.TournamentManageVm
 
 @{
-    ViewBag.Title = "Manage tournament " + Model.Name;
+    ViewBag.Title = "Manage tournament " + Model.Tournament.Name;
     
 }
 
 <h2>Manage tournament </h2>
 <div>
-    <div style="display: inline-block">
+    <div style="float: left">
         <ul>
-            <li>@Html.ActionLink("Edit details", "Edit")</li>
+            <li>@Html.ActionLink("Edit details", "Edit", new { id = Model.Tournament.Id })</li>
             <li>@Html.ActionLink("Delete tournament", "Delete")</li>
             <li>@Html.ActionLink("Start Tournament", "Start")</li>
             <li>@Html.ActionLink("Calculate results", "CalculateResults")</li>
-            @if (Model.TournamentStatus == TournamentStatus.Started && Model.TournamentType == TournamentTypes.Cavendish)
+            @if (Model.Tournament.TournamentStatus == TournamentStatus.Started && Model.Tournament.TournamentType == TournamentTypes.Cavendish)
             {
                 <li>@Html.ActionLink("Generate next round", "GenerateNextRound")</li>
             }
@@ -25,15 +26,25 @@
             @Html.ActionLink("Back to List", "Index")
         </div>
     </div>
-    <div style="display: inline-block">>
-        @Html.TableVertical(Model.Pairs,8, 
-            @<text>
-                 <label for="@Html.Id(@item.Player1 == null ? "Empty" : @item.Player1.Name)" >
-                     <span>@item.ToString()</span>
-                 </label>
-            <li>@Html.ActionLink("Remove", "RemovePair", new { tournamentId=Model.Id, pairId = @item.Id })</li>
-            </text>)
-            @Html.ActionLink("Add pair", "AddPair", new { id = Model.Id })
-            
+   
+    <div style="float: right">
+        <h4>Lista zapisanych par:</h4>
+        <table>
+            @foreach (Pair pair in Model.Tournament.Pairs)
+            {
+                var p1Name = (pair.Player1 == null ? "Unknown" : pair.Player1.Name);
+                var p2Name = (pair.Player2 == null ? "Unknown" : pair.Player2.Name);
+                <tr>
+                    <td>
+                        @p1Name - @p2Name
+                    </td>
+                    <td>
+                        @Html.ActionLink("Remove", "RemovePair", new { tournamentId=Model.Tournament.Id, pairId = @pair.Id })
+                    </td>
+                </tr>
+            }
+        </table>
+        
+        @Html.ActionLink("Add pair", "AddPair", new { id = Model.Tournament.Id })
     </div>
 </div>

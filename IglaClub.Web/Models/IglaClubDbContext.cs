@@ -1,4 +1,5 @@
-﻿using IglaClub.ObjectModel.Entities;
+﻿using IglaClub.ObjectModel;
+using IglaClub.ObjectModel.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -7,7 +8,7 @@ using System.Web;
 
 namespace IglaClub.Web.Models
 {
-    public class IglaClubDbContext : DbContext
+    public class IglaClubDbContext : DbContext, IIglaClubDbContext
     {
             public IglaClubDbContext()
                 : base("name=IglaClubConnection")

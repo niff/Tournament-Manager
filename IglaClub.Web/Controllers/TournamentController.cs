@@ -7,13 +7,14 @@ using System.Web;
 using System.Web.Mvc;
 using IglaClub.ObjectModel.Entities;
 using IglaClub.Web.Models;
+using IglaClub.Web.Models.ViewModels;
 
 namespace IglaClub.Web.Controllers
 {
     public class TournamentController : Controller
     {
         private readonly IglaClubDbContext db = new IglaClubDbContext();
-
+        private readonly TournamentManager.TournamentManager tournamentManager = new TournamentManager.TournamentManager(new IglaClubDbContext()); 
         //
         // GET: /Tournament/
 
@@ -34,8 +35,8 @@ namespace IglaClub.Web.Controllers
             {
                 return HttpNotFound();
             }
-
-            return View(tournament);
+            var tournamentVm = new TournamentManageVm() {Tournament = tournament};
+            return View(tournamentVm);
             
         }
 
@@ -164,12 +165,11 @@ namespace IglaClub.Web.Controllers
             return RedirectToAction("Manage");
         }
 
+        
         public ActionResult AddPair(long id)
         {
-            Tournament tournament = db.Tournaments.Find(id);
-            //tournament.Pairs.Add(new Pair(){Tournament = tournament,PairNumber = 1, Users = new List<User>(){new User(){Name = "Pierwszy"},new User(){Name = "Drugi"}}});
-            tournament.Pairs.Add(new Pair() { Tournament = tournament, PairNumber = 1, Player1 = new User() { Name = "Pierwszy" }, Player2 = new User() { Name = "Drugi" } } );
-            db.SaveChanges();
+            this.tournamentManager.AddPair(id, 1, 2);
+            
             return RedirectToAction("Manage",new {id = id});
         }
     }
