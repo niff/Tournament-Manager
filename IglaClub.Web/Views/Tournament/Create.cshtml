@@ -1,0 +1,77 @@
+﻿@using IglaClub.ObjectModel.Enums
+@model IglaClub.ObjectModel.Entities.Tournament
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Tournament</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BoardsInRound)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BoardsInRound)
+            @Html.ValidationMessageFor(model => model.BoardsInRound)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TournamentScoringType)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.TournamentScoringType, new SelectList(Enum.GetValues(typeof(TournamentScoringTypes))))
+            @Html.ValidationMessageFor(model => model.TournamentScoringType)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TournamentType)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.TournamentType, new SelectList(Enum.GetValues(typeof(TournamentTypes))))
+            @Html.ValidationMessageFor(model => model.TournamentType)
+        </div>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PlannedStartDate)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.PlannedStartDate, new { @Value = DateTime.Now, id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.PlannedStartDate)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

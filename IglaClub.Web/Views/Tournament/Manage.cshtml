@@ -1,0 +1,39 @@
+﻿@using IglaClub.ObjectModel.Enums
+@using IglaClub.Web.Views.Helpers
+@model IglaClub.ObjectModel.Entities.Tournament
+
+@{
+    ViewBag.Title = "Manage tournament " + Model.Name;
+    
+}
+
+<h2>Manage tournament </h2>
+<div>
+    <div style="display: inline-block">
+        <ul>
+            <li>@Html.ActionLink("Edit details", "Edit")</li>
+            <li>@Html.ActionLink("Delete tournament", "Delete")</li>
+            <li>@Html.ActionLink("Start Tournament", "Start")</li>
+            <li>@Html.ActionLink("Calculate results", "CalculateResults")</li>
+            @if (Model.TournamentStatus == TournamentStatus.Started && Model.TournamentType == TournamentTypes.Cavendish)
+            {
+                <li>@Html.ActionLink("Generate next round", "GenerateNextRound")</li>
+            }
+        </ul>
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+    <div style="display: inline-block">>
+        @Html.TableVertical(Model.Pairs,8, 
+            @<text>
+                 <label for="@Html.Id(@item.Player1 == null ? "Empty" : @item.Player1.Name)" >
+                     <span>@item.ToString()</span>
+                 </label>
+            <li>@Html.ActionLink("Remove", "RemovePair", new { tournamentId=Model.Id, pairId = @item.Id })</li>
+            </text>)
+            @Html.ActionLink("Add pair", "AddPair", new { id = Model.Id })
+            
+    </div>
+</div>
