@@ -181,7 +181,7 @@ namespace IglaClub.Web.Controllers
         {
             this.tournamentManager.AddPair(id, 1, 2);
 
-            return RedirectToAction("Manage", new {id });
+            return RedirectToAction("Manage", new { id });
         }
 
         public ActionResult ManageResults(long id)
@@ -200,7 +200,8 @@ namespace IglaClub.Web.Controllers
             var model = new PairsViewModel
                 {
                     PairsInTounament = pairRepository.GetPairsByTournament(tournamentId),
-                    AvailableUsers = userRepository.GetAvailableUsersForTournament(tournamentId)
+                    AvailableUsers = userRepository.GetAvailableUsersForTournament(tournamentId),
+                    Tournament = db.Tournaments.Find(tournamentId)
                 };
             return PartialView("_TournamentParticipants", model);
         }
