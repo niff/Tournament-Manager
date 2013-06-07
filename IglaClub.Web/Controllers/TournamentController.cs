@@ -200,7 +200,7 @@ namespace IglaClub.Web.Controllers
             var model = new PairsViewModel
                 {
                     PairsInTounament = pairRepository.GetPairsByTournament(tournamentId),
-                    AvailableUsers = userRepository.GetAvailableUsersForTournament()
+                    AvailableUsers = userRepository.GetAvailableUsersForTournament(tournamentId)
                 };
             return PartialView("_TournamentParticipants", model);
         }
