@@ -63,6 +63,9 @@
     <Compile Include="Enums\Vulnerable.cs" />
     <Compile Include="IIglaClubDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\BaseRepository.cs" />
+    <Compile Include="Repositories\PairRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Tools\CollectionHelper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
