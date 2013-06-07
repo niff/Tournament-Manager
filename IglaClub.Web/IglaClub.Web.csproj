@@ -190,6 +190,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\IglaClubDbContext.cs" />
+    <Compile Include="Models\ViewModels\PairsViewModel.cs" />
     <Compile Include="Models\ViewModels\TournamentResultsVm.cs" />
     <Compile Include="Models\ViewModels\TournamentManageVm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

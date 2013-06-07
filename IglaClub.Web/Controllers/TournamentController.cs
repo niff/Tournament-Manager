@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using IglaClub.ObjectModel.Entities;
+using IglaClub.ObjectModel.Repositories;
 using IglaClub.Web.Models;
 using IglaClub.Web.Models.ViewModels;
 
@@ -14,10 +15,19 @@ namespace IglaClub.Web.Controllers
     public class TournamentController : Controller
     {
         private readonly IglaClubDbContext db = new IglaClubDbContext();
-        private readonly TournamentManager.TournamentManager tournamentManager = new TournamentManager.TournamentManager(new IglaClubDbContext()); 
+        private readonly TournamentManager.TournamentManager tournamentManager = new TournamentManager.TournamentManager(new IglaClubDbContext());
+
+        private readonly PairRepository pairRepository;
+        private readonly UserRepository userRepository;
+
+        public TournamentController()
+        {
+             pairRepository = new PairRepository(db);
+            userRepository = new UserRepository(db);
+        }
+        
         //
         // GET: /Tournament/
-
         public ActionResult Index()
         {
             return View(db.Tournaments.ToList());
@@ -35,7 +45,7 @@ namespace IglaClub.Web.Controllers
             {
                 return HttpNotFound();
             }
-            var tournamentVm = new TournamentManageVm() {Tournament = tournament};
+            var tournamentVm = new TournamentManageVm() { Tournament = tournament };
             return View(tournamentVm);
             
         }
@@ -183,6 +193,16 @@ namespace IglaClub.Web.Controllers
                 .Include(t => t.Pairs).FirstOrDefault(t => t.Id == id);
 
             return View(new TournamentResultsVm() {Tournament = tournament});
+        }
+
+        public PartialViewResult Pairs(int tournamentId)
+        {
+            var model = new PairsViewModel
+                {
+                    PairsInTounament = pairRepository.GetPairsByTournament(tournamentId),
+                    AvailableUsers = userRepository.GetAvailableUsersForTournament()
+                };
+            return PartialView("_TournamentParticipants", model);
         }
     }
 }

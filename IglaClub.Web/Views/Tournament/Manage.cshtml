@@ -13,13 +13,13 @@
     <div style="float: left">
         <ul>
             <li>@Html.ActionLink("Edit details", "Edit", new { id = Model.Tournament.Id })</li>
-            <li>@Html.ActionLink("Delete tournament", "Delete",new { id = Model.Tournament.Id })</li>
-            <li>@Html.ActionLink("Start Tournament", "Start",new { id = Model.Tournament.Id })</li>
-            <li>@Html.ActionLink("Manage results", "ManageResults",new { id = Model.Tournament.Id })</li>
-            <li>@Html.ActionLink("Calculate results", "CalculateResults",new { id = Model.Tournament.Id })</li>
+            <li>@Html.ActionLink("Delete tournament", "Delete", new { id = Model.Tournament.Id })</li>
+            <li>@Html.ActionLink("Start Tournament", "Start", new { id = Model.Tournament.Id })</li>
+            <li>@Html.ActionLink("Manage results", "ManageResults", new { id = Model.Tournament.Id })</li>
+            <li>@Html.ActionLink("Calculate results", "CalculateResults", new { id = Model.Tournament.Id })</li>
             @if (Model.Tournament.TournamentStatus == TournamentStatus.Started && Model.Tournament.TournamentType == TournamentTypes.Cavendish)
             {
-                <li>@Html.ActionLink("Generate next round", "GenerateNextRound",new { tournamentId = Model.Tournament.Id })</li>
+                <li>@Html.ActionLink("Generate next round", "GenerateNextRound", new { tournamentId = Model.Tournament.Id })</li>
             }
         </ul>
 
@@ -27,7 +27,7 @@
             @Html.ActionLink("Back to List", "Index")
         </div>
     </div>
-   
+
     <div style="float: right">
         <h4>Lista zapisanych par:</h4>
         <table>
@@ -40,12 +40,12 @@
                         @p1Name - @p2Name
                     </td>
                     <td>
-                        @Html.ActionLink("Remove", "RemovePair", new { tournamentId=Model.Tournament.Id, pairId = @pair.Id })
+                        @Html.ActionLink("Remove", "RemovePair", new { tournamentId = Model.Tournament.Id, pairId = @pair.Id })
                     </td>
                 </tr>
             }
         </table>
-        
+
         @Html.ActionLink("Add pair", "AddPair", new { id = Model.Tournament.Id })
     </div>
 </div>
