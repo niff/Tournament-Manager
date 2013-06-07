@@ -16,5 +16,15 @@ namespace IglaClub.ObjectModel.Entities
         public ContractColors ContractColor { get; set; }
 
         public int ContractLevel { get; set; }
+
+        public virtual BoardInstance Board { get; set; }
+
+        public virtual Tournament Tournament { get; set; }
+
+        public int RoundNumber { get; set; }
+
+        public int TableNumber { get; set; }
+
+
     }
 }

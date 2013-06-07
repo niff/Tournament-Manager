@@ -14,5 +14,6 @@ namespace IglaClub.ObjectModel
         DbSet<Card> Cards { get; set; }
         DbSet<Result> Results { get; set; }
 
+        int SaveChanges();
     }
 }

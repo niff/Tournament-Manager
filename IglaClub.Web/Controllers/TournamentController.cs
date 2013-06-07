@@ -141,12 +141,13 @@ namespace IglaClub.Web.Controllers
 
         public ActionResult Start(long id)
         {
-            throw new NotImplementedException();
+            this.tournamentManager.StartTournament(id);
+            return RedirectToAction("Manage", new {id});
         }
 
         public ActionResult CalculateResults(long id)
         {
-            //Tournament tournament = db.Tournaments.Find(id);
+            //Tournament tournament = db.Tournaments.Find(tournamentId);
             //return View("CalculateResults",tournament.Pairs);
             throw new NotImplementedException();
         }
@@ -165,12 +166,23 @@ namespace IglaClub.Web.Controllers
             return RedirectToAction("Manage");
         }
 
-        
+
         public ActionResult AddPair(long id)
         {
             this.tournamentManager.AddPair(id, 1, 2);
-            
-            return RedirectToAction("Manage",new {id = id});
+
+            return RedirectToAction("Manage", new {id });
+        }
+
+        public ActionResult ManageResults(long id)
+        {
+            Tournament tournament = db.Tournaments
+                .Include(t => t.Results)
+                .Include(t => t.Results.Select(r=>r.NS))
+                .Include(t => t.Results.Select(r => r.EW))
+                .Include(t => t.Pairs).FirstOrDefault(t => t.Id == id);
+
+            return View(new TournamentResultsVm() {Tournament = tournament});
         }
     }
 }

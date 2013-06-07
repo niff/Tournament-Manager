@@ -33,7 +33,11 @@ namespace IglaClub.ObjectModel.Entities
 
         public virtual IList<BoardInstance> Boards { get; set; }
 
+        public virtual IList<Result> Results { get; set; }
+
         public TournamentStatus TournamentStatus { get; set; }
+
+        public int CurrentRound { get; set; }
 
         [DataType(DataType.DateTime)]
         public DateTime? PlannedStartDate { get; set; }
@@ -44,6 +48,7 @@ namespace IglaClub.ObjectModel.Entities
 
         public DateTime? FinishDate { get; set; }
 
+        
 
 
      }

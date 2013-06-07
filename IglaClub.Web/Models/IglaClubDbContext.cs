@@ -34,17 +34,37 @@ namespace IglaClub.Web.Models
             {
                 protected override void Seed(IglaClubDbContext context)
                 {
-                    context.Clubs.Add(new Club { Name = "Bracka", Description = "Róg brackiej i reformackiej" });
-                    context.Users.Add(new User { Login = "a" });
-                    context.Users.Add(new User { Login = "b" });
-                    context.Users.Add(new User { Login = "c" });
-                    context.Users.Add(new User { Login = "d" });
-                    context.Users.Add(new User { Login = "e" });
-                    
-                    
+                    var club = new Club {Name = "Bracka", Description = "Róg brackiej i reformackiej"};
+                    var userA = new User {Login = "a", Name = "a"};
+                    var userB = new User {Login = "b", Name = "b"};
+                    context.Clubs.Add(club);
+                    context.Users.Add(userA);
+                    context.Users.Add(userB);
+                    context.Users.Add(new User { Login = "c", Name = "c" });
+                    context.Users.Add(new User { Login = "d", Name = "d" });
+                    context.Users.Add(new User { Login = "e", });
+                    var tournament = new Tournament()
+                        {
+                            Name = "Pierwszy turniej",
+                            BoardsInRound = 3,
+                            Club = club,
+                            Description = "Tournament description",
+                            Pairs = new List<Pair>(),
+                            Boards = new List<BoardInstance>(),
+                            Results = new List<Result>(),
+                            CreationDate = DateTime.Now
+                        };
+                    var pair = new Pair() {Player1 = userA, Player2 = userB, Tournament = tournament};
+                    tournament.Pairs.Add(pair);
+                    context.Tournaments.Add(tournament);
                     context.SaveChanges();
                 }
             }
+
+        public new int SaveChanges()
+        {
+           return base.SaveChanges();
+        }
         
     }
 }

@@ -11,11 +11,10 @@ namespace IglaClub.ObjectModel.Entities
 
         public virtual Tournament Tournament { get; set; }
 
-        
         public virtual BoardDefinition BoardDefinition { get; set; }
 
         public virtual IList<Result> Results { get; set; }
 
-        
+        public int BoardNumber { get; set; }
     }
 }
