@@ -14,10 +14,7 @@ namespace IglaClub.ObjectModel.Repositories
 
         public List<Pair> GetPairsByTournament(int id)
         {
-            var tournament = db.Tournaments.Include(t => t.Pairs).FirstOrDefault(t => t.Id == id);
-            if (tournament != null)
-                return tournament.Pairs.ToList();
-            return null;
+            return db.Tournaments.Find(id).Pairs.ToList();
         }
     }
 }
