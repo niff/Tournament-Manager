@@ -15,12 +15,14 @@ namespace IglaClub.ObjectModel.Repositories
 
         public List<User> GetAvailableUsersForTournament(long tournamentId)
         {
-            IList<Pair> subscribedPairs = db.Tournaments.Find(tournamentId).Pairs;
-            var availableUsers = 
-                db.Users.Where(u =>
-                !subscribedPairs.Any(
-                    p => (p.Player1 != null && p.Player1.Id != u.Id) || (p.Player2 != null && p.Player2.Id != u.Id)));
-            return availableUsers.ToList();
+            List<long> subscribedPairsIds = ( from pairs in db.Tournaments.Find(tournamentId).Pairs
+                                                    where pairs.Player1 != null
+                                                    select pairs.Player1.Id)
+                                                   .Union(from pairs in db.Tournaments.Find(tournamentId).Pairs
+                                                                                  where pairs.Player2 != null
+                                                                                  select pairs.Player2.Id).ToList();
+            var availableUsers = db.Users.Where(u => !subscribedPairsIds.Contains(u.Id)).ToList();
+            return availableUsers;
         }
     }
 }
