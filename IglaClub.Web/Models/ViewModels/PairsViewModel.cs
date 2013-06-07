@@ -8,6 +8,7 @@ namespace IglaClub.Web.Models.ViewModels
 {
     public class PairsViewModel
     {
+        public Tournament Tournament { get; set; }
         public List<Pair> PairsInTounament { get; set; }
         public List<User> AvailableUsers { get; set; }
     }

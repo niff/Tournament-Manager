@@ -28,24 +28,5 @@
         </div>
     </div>
 
-    <div style="float: right">
-        <h4>Lista zapisanych par:</h4>
-        <table>
-            @foreach (Pair pair in Model.Tournament.Pairs)
-            {
-                var p1Name = (pair.Player1 == null ? "Unknown" : pair.Player1.Name);
-                var p2Name = (pair.Player2 == null ? "Unknown" : pair.Player2.Name);
-                <tr>
-                    <td>
-                        @p1Name - @p2Name
-                    </td>
-                    <td>
-                        @Html.ActionLink("Remove", "RemovePair", new { tournamentId = Model.Tournament.Id, pairId = @pair.Id })
-                    </td>
-                </tr>
-            }
-        </table>
-
-        @Html.ActionLink("Add pair", "AddPair", new { id = Model.Tournament.Id })
-    </div>
+    @Html.Action("Pairs", new { tournamentId = @Model.Tournament.Id} )
 </div>

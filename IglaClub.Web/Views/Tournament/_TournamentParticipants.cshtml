@@ -1,21 +1,26 @@
-﻿@model IEnumerable<IglaClub.Web.Models.ViewModels.PairsViewModel>
+﻿@model IglaClub.Web.Models.ViewModels.PairsViewModel
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th></th>
-    </tr>
+<div style="float: right">
+        <h4>Lista zapisanych par:</h4>
+        <table>
+            @foreach (var pair in @Model.PairsInTounament)
+            {
+                var p1Name = (pair.Player1 == null ? "Unknown" : pair.Player1.Name);
+                var p2Name = (pair.Player2 == null ? "Unknown" : pair.Player2.Name);
+                <tr>
+                    <td>
+                        @p1Name - @p2Name
+                    </td>
+                    <td>
+                        @Html.ActionLink("Remove", "RemovePair", new { tournamentId = Model.Tournament.Id, pairId = pair.Id })
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td>@Html.DropDownListFor(pvm => pvm.AvailableUsers, new SelectList(Model.AvailableUsers, "id", "name"))</td>
+                <td></td>
+            </tr>
+        </table>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
-
-</table>
+        @Html.ActionLink("Add pair", "AddPair", new { id = Model.Tournament.Id })
+    </div>
