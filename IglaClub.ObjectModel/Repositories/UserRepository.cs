@@ -26,7 +26,7 @@ namespace IglaClub.ObjectModel.Repositories
             return availableUsers;
         }
 
-        public List<User> GetUsersByStringAndTournament(long tournamentId, string userPartName)
+        public List<User> GetUsersByPhraseAndTournament(long tournamentId, string phrase)
         {
             //todo: filter by club users
             List<long> subscribedPairUsersIds = ( from pairs in db.Tournaments.Find(tournamentId).Pairs
@@ -38,7 +38,7 @@ namespace IglaClub.ObjectModel.Repositories
             List<User> matchedUsers =
                 db.Users
                 .Where(u => !subscribedPairUsersIds.Contains(u.Id))
-                .Where(u =>u.Name.Contains(userPartName) || u.Lastname.Contains(userPartName) || u.Login.Contains(userPartName))
+                .Where(u =>u.Name.Contains(phrase) || u.Lastname.Contains(phrase) || u.Login.Contains(phrase))
                 .ToList();
             return matchedUsers;
         }
