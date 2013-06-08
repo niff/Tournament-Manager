@@ -208,7 +208,7 @@ namespace IglaClub.Web.Controllers
 
         public JsonResult SearchUsers(long tournamentId, string phrase)
         {
-            var result = userRepository.GetUsersByStringAndTournament(tournamentId, phrase)
+            var result = userRepository.GetUsersByPhraseAndTournament(tournamentId, phrase)
                         .Select(u => new { u.Id, value = u.Name })
                         .Take(10)
                         .ToArray();
