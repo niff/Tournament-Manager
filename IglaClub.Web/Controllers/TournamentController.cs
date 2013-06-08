@@ -23,7 +23,7 @@ namespace IglaClub.Web.Controllers
         public TournamentController()
         {
              pairRepository = new PairRepository(db);
-            userRepository = new UserRepository(db);
+             userRepository = new UserRepository(db);
         }
         
         //
@@ -204,6 +204,16 @@ namespace IglaClub.Web.Controllers
                     Tournament = db.Tournaments.Find(tournamentId)
                 };
             return PartialView("_TournamentParticipants", model);
+        }
+
+        public JsonResult SearchUsers(long tournamentId, string phrase)
+        {
+            var result = userRepository.GetUsersByStringAndTournament(tournamentId, phrase)
+                        .Select(u => new { u.Id, value = u.Name })
+                        .Take(10)
+                        .ToArray();
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

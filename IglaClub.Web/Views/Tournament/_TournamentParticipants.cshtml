@@ -1,26 +1,45 @@
 ﻿@model IglaClub.Web.Models.ViewModels.PairsViewModel
 
 <div style="float: right">
-        <h4>Lista zapisanych par:</h4>
-        <table>
-            @foreach (var pair in @Model.PairsInTounament)
-            {
-                var p1Name = (pair.Player1 == null ? "Unknown" : pair.Player1.Name);
-                var p2Name = (pair.Player2 == null ? "Unknown" : pair.Player2.Name);
-                <tr>
-                    <td>
-                        @p1Name - @p2Name
-                    </td>
-                    <td>
-                        @Html.ActionLink("Remove", "RemovePair", new { tournamentId = Model.Tournament.Id, pairId = pair.Id })
-                    </td>
-                </tr>
-            }
+    <h4>Lista zapisanych par:</h4>
+    <table>
+        @foreach (var pair in @Model.PairsInTounament)
+        {
+            var p1Name = (pair.Player1 == null ? "Unknown" : pair.Player1.Name);
+            var p2Name = (pair.Player2 == null ? "Unknown" : pair.Player2.Name);
             <tr>
-                <td>@Html.DropDownListFor(pvm => pvm.AvailableUsers, new SelectList(Model.AvailableUsers, "id", "name"))</td>
-                <td></td>
+                <td>
+                    @p1Name - @p2Name
+                </td>
+                <td>
+                    @Html.ActionLink("Remove", "RemovePair", new { tournamentId = Model.Tournament.Id, pairId = pair.Id })
+                </td>
             </tr>
-        </table>
+        }
+        <tr>
+            @*<td>@Html.DropDownListFor(pvm => pvm.AvailableUsers, new SelectList(Model.AvailableUsers, "id", "name"))</td>
+            <td>@Html.DropDownListFor(pvm => pvm.AvailableUsers, new SelectList(Model.AvailableUsers, "id", "name"))</td>*@
+            <td><input type="text" name="pairSearch" id ="pairSearch" value="wartosc"/></td>
+        </tr>
+    </table>
 
-        @Html.ActionLink("Add pair", "AddPair", new { id = Model.Tournament.Id })
-    </div>
+    @Html.ActionLink("Add pair", "AddPair", new { id = Model.Tournament.Id })
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $(function () {
+            $("#pairSearch").autocomplete({
+                source: '/Tournament/SearchUsers',
+                minLength: 1,
+                select: function (event, ui) {
+                    alert('Item: ' + ui.item.value);
+                }
+            });
+        });
+    });
+    
+    
+
+</script>
