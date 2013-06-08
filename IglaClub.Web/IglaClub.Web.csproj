@@ -319,6 +319,7 @@
     <Content Include="Views\Tournament\ManageResults.cshtml" />
     <Content Include="Views\Tournament\_TournamentParticipants.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Results\Manage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
