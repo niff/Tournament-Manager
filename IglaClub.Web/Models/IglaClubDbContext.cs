@@ -35,14 +35,16 @@ namespace IglaClub.Web.Models
                 protected override void Seed(IglaClubDbContext context)
                 {
                     var club = new Club {Name = "Bracka", Description = "Róg brackiej i reformackiej"};
-                    var userA = new User {Login = "a", Name = "a"};
-                    var userB = new User {Login = "b", Name = "b"};
+                    var userA = new User {Login = "antoni", Name = "antek"};
+                    var userB = new User {Login = "bartek", Name = "bartłomiej"};
+                    var userC = new User { Login = "cieszka", Name = "ciesława" };
+                    var userD = new User { Login = "darek", Name = "dariusz" };
                     context.Clubs.Add(club);
                     context.Users.Add(userA);
                     context.Users.Add(userB);
-                    context.Users.Add(new User { Login = "c", Name = "c" });
-                    context.Users.Add(new User { Login = "d", Name = "d" });
-                    context.Users.Add(new User { Login = "e", });
+                    context.Users.Add(userC);
+                    context.Users.Add(userD);
+                    context.Users.Add(new User { Login = "ela", Name = "elżbieta" });
                     var tournament = new Tournament()
                         {
                             Name = "Pierwszy turniej",
@@ -54,8 +56,10 @@ namespace IglaClub.Web.Models
                             Results = new List<Result>(),
                             CreationDate = DateTime.Now
                         };
-                    var pair = new Pair() {Player1 = userA, Player2 = userB, Tournament = tournament};
-                    tournament.Pairs.Add(pair);
+                    var pair1 = new Pair() {Player1 = userA, Player2 = userB, Tournament = tournament};
+                    var pair2 = new Pair() { Player1 = userC, Player2 = userD, Tournament = tournament };
+                    tournament.Pairs.Add(pair1);
+                    tournament.Pairs.Add(pair2);
                     context.Tournaments.Add(tournament);
                     context.SaveChanges();
                 }

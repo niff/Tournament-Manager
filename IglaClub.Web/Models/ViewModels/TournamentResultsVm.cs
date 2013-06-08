@@ -17,8 +17,8 @@ namespace IglaClub.Web.Models.ViewModels
                 return Tournament.Results.Select(r => new
                                                           ResultVm()
                     {
-                        NsId = r.NS.Id,
-                        EwId = r.EW.Id,
+                        //NsId = r.NS.Id,
+                        //EwId = r.EW.Id,
                         EwPairNumber = r.EW.PairNumber,
                         NsPairNumber = r.NS.PairNumber,
                         NsName = r.NS.ToString(),
@@ -32,8 +32,8 @@ namespace IglaClub.Web.Models.ViewModels
 
         public class ResultVm
         {
-            public long NsId { get; set; }
-            public long EwId { get; set; }
+            //public long NsId { get; set; }
+            //public long EwId { get; set; }
             public long NsPairNumber { get; set; }
             public long EwPairNumber { get; set; }
             public int RoundNumber { get; set; }
@@ -43,6 +43,7 @@ namespace IglaClub.Web.Models.ViewModels
 
             public string EwName { get; set; }
             public string NsName { get; set; }
+
             
             
             

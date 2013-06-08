@@ -8,7 +8,7 @@
     
 }
 
-<h2>Manage tournament </h2>
+<h2>Manage tournament [@Model.Tournament.Name]</h2>
 <div>
     <div style="float: left">
         <ul>
@@ -27,6 +27,6 @@
             @Html.ActionLink("Back to List", "Index")
         </div>
     </div>
-
+    Tournament is <strong>@Model.Tournament.TournamentStatus.ToString() </strong><br/>
     @Html.Action("Pairs", new { tournamentId = @Model.Tournament.Id} )
 </div>

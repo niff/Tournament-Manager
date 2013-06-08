@@ -34,11 +34,11 @@ namespace IglaClub.TournamentManager
         public bool StartTournament(long tournamentId)
         {
             Tournament tournament = db.Tournaments.Find(tournamentId);
-            List<BoardInstance> boards = GenerateBoards(tournament);
-            AddBoardsToTournament(tournament, boards);
+            IEnumerable<BoardInstance> boards = GenerateEmptyBoards(tournament);
+            TournamentHelper.AddBoardsToTournament(tournament, boards);
 
-            List<Result> results = GenerateInitialSittingPosition(tournament);
-            AddResultsToTournament(tournament, results);
+            IEnumerable<Result> results = TournamentHelper.GenerateInitialSittingPosition(tournament);
+            TournamentHelper.AddResultsToTournament(tournament, results);
             
             tournament.CurrentRound = 1;
             tournament.TournamentStatus = TournamentStatus.Started;
@@ -46,58 +46,8 @@ namespace IglaClub.TournamentManager
             db.SaveChanges();
             return true;
         }
-
-        private void AddResultsToTournament(Tournament tournament, IEnumerable<Result> results)
-        {
-            foreach (var result in results)
-            {
-                tournament.Results.Add(result);
-            }
-        }
-
-        private static List<Result> GenerateInitialSittingPosition(Tournament tournament)
-        {
-            var results = new List<Result>();
-            CorrectPairNumbers(tournament.Pairs);
-            if(tournament.Pairs.Count%2 == 1)
-                tournament.Pairs.Add(new Pair() { Player1 = null, Player2 = null, PairNumber = tournament.Pairs.Count +1});
-
-            for (int i = 0; i < tournament.Pairs.Count/2; i++)
-            {
-                for (int j = 0; j < tournament.BoardsInRound; j++)
-                {
-                    var result = new Result()
-                        {
-                            Tournament = tournament,
-                            Board = tournament.Boards[j],
-                            NS = tournament.Pairs[i],
-                            EW = tournament.Pairs[i + tournament.Pairs.Count],
-                            RoundNumber = 1
-                        };
-                    results.Add(result);      
-                }  
-            }
-            return results;
-        }
-
-        private static void CorrectPairNumbers(IList<Pair> pairs)
-        {
-            for (int i = 0; i < pairs.Count; i++)
-            {
-                pairs[i].PairNumber = i+1;
-
-            }
-        }
-
-        private static void AddBoardsToTournament(Tournament tournament, IEnumerable<BoardInstance> boards)
-        {
-            foreach (var boardInstance in boards)
-            {
-                tournament.Boards.Add(boardInstance);
-            }
-        }
-
-        private List<BoardInstance> GenerateBoards(Tournament tournament)
+        
+        private IEnumerable<BoardInstance> GenerateEmptyBoards(Tournament tournament)
         {
             var boardInstances = new List<BoardInstance>();
             if (tournament.TournamentType != TournamentTypes.Cavendish)
@@ -116,8 +66,8 @@ namespace IglaClub.TournamentManager
             var boardDefinition = new BoardDefinition()
                 {
                     CreationDate = DateTime.Now,
-                    Dealer = GetDealerByBoardNumber(boardNumber),
-                    Vulnerability = GetVulneralbityByBoardNumber(boardNumber)
+                    Dealer = TournamentHelper.GetDealerByBoardNumber(boardNumber),
+                    Vulnerability = TournamentHelper.GetVulneralbityByBoardNumber(boardNumber)
                 };
             db.BoardDefinitions.Add(boardDefinition);
             db.SaveChanges();
@@ -128,67 +78,9 @@ namespace IglaClub.TournamentManager
                     BoardNumber = boardNumber,
                     Tournament = tournament
                 };
-            //db.BoardInstances.Add(boardInstance);
-            //db.SaveChanges();
             return boardInstance;
         }
 
-        public static NESW GetDealerByBoardNumber(int boardNumber)
-        {
-            switch (boardNumber % 4)
-            {
-                case 1:
-                    return NESW.North;
-                case 2: 
-                    return NESW.East;
-                case 3:
-                    return NESW.South;
-                case 0:
-                    return NESW.West;
-                default:
-                    return NESW.North;
-            }
-        }
-
-        public static Vulnerable GetVulneralbityByBoardNumber(int boardNumber)
-        {
-            switch (boardNumber % 16)
-            {
-                case 1:
-                    return Vulnerable.None;
-                case 2:
-                    return Vulnerable.NS;
-                case 3:
-                    return Vulnerable.EW;
-                case 4:
-                    return Vulnerable.Both;
-                case 5:
-                    return Vulnerable.NS;
-                case 6:
-                    return Vulnerable.EW;
-                case 7:
-                    return Vulnerable.Both;
-                case 8:
-                    return Vulnerable.None;
-                case 9:
-                    return Vulnerable.EW;
-                case 10:
-                    return Vulnerable.NS;
-                case 11:
-                    return Vulnerable.Both;
-                case 12:
-                    return Vulnerable.None;
-                case 13:
-                    return Vulnerable.Both;
-                case 14:
-                    return Vulnerable.None;
-                case 15:
-                    return Vulnerable.NS;
-                case 0:
-                    return Vulnerable.EW;
-                default:
-                    return Vulnerable.None;
-            }
-        }
+        
     }
 }

@@ -754,3 +754,25 @@ tr.pager td {
             margin: 0;
         }
 }
+
+
+/*-------------- Manage results -------------*/
+.rowStyleOdd {
+    background-color: lightblue;
+    border: solid 1px;
+    text-align: center;
+}
+
+.rowStyleEven {
+    border: solid 1px;
+    text-align: center;
+}
+
+.headerStyle {
+    padding: 5px 15px;
+    border: solid 1px;
+    text-align: center;
+}
+.headerStyle th {
+    padding: 5px 15px;
+}
