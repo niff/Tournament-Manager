@@ -29,6 +29,7 @@ namespace IglaClub.ObjectModel.Repositories
         public List<User> GetUsersByPhraseAndTournament(long tournamentId, string phrase)
         {
             //todo: filter by club users
+            //phrase = phrase.ToLowerInvariant();
             List<long> subscribedPairUsersIds = ( from pairs in db.Tournaments.Find(tournamentId).Pairs
                                                     where pairs.Player1 != null
                                                     select pairs.Player1.Id)
@@ -38,7 +39,8 @@ namespace IglaClub.ObjectModel.Repositories
             List<User> matchedUsers =
                 db.Users
                 .Where(u => !subscribedPairUsersIds.Contains(u.Id))
-                .Where(u =>u.Name.Contains(phrase) || u.Lastname.Contains(phrase) || u.Login.Contains(phrase))
+                .Where(u => u.Name.IndexOf(phrase, StringComparison.InvariantCultureIgnoreCase) != -1 || u.Lastname.IndexOf(phrase, StringComparison.InvariantCultureIgnoreCase) != -1
+                    || u.Login.IndexOf(phrase, StringComparison.InvariantCultureIgnoreCase) != -1)
                 .ToList();
             return matchedUsers;
         }
