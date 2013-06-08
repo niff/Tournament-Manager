@@ -1,0 +1,28 @@
+﻿@model IglaClub.ObjectModel.Entities.Tournament
+@using IglaClub.Web.Controllers;
+@{
+    ViewBag.Title = "Tournament results";
+}
+
+
+<h2>Tournament @Model.Name results</h2>
+@{
+    var grid = new WebGrid(Model.Results);
+}
+
+@grid.GetHtml(columns: grid.Columns( 
+        grid.Column("TableNumber",header: "Table Number", format: @<text>@item.TableNumber</text>),
+        grid.Column("RoundNumber",header: "Round Number", format: @<text>@item.RoundNumber</text>),
+        grid.Column("NsPairNumber",header: "Ns Pair Number", format: @<text>@item.Ns.PairNumber</text>),
+        grid.Column("EwPairNumber",header: "Ew Pair Number", format: @<text>@item.Ew.PairNumber</text>),
+        grid.Column("ContractColor",header: "Contract Color", format: @<text>@item.ContractColor.ToString()</text>),
+        grid.Column("ContractLevel",header: "Contract Level", format: @<text>@item.ContractLevel.ToString()</text>),
+        grid.Column("PlayedBy",header: "Played By", format: @<text>@item.PlayedBy.ToString()</text>),
+        grid.Column("BoardNumber",header: "BoardNumber", format: @<text>@item.Board.Id</text>),
+        grid.Column("Remove",header: "Remove", format: @<text>@Html.ActionLink("Remove", "Delete", new { id = @item.Ew.PairNumber })</text>)
+        )
+        ,rowStyle: "rowStyleOdd", alternatingRowStyle: "rowStyleEven" , headerStyle: "headerStyle"
+)
+
+<div>    @Html.ActionLink("Manage tournament", "Manage","Tournament",new { id = Model.Id},null)</div>
+
