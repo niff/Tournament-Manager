@@ -12,7 +12,7 @@ using IglaClub.Web.Models.ViewModels;
 
 namespace IglaClub.Web.Controllers
 {
-    public class TournamentController : Controller
+    public class ResultsController : Controller
     {
         private readonly IglaClubDbContext db = new IglaClubDbContext();
         private readonly TournamentManager.TournamentManager tournamentManager = new TournamentManager.TournamentManager(new IglaClubDbContext());
@@ -20,10 +20,10 @@ namespace IglaClub.Web.Controllers
         private readonly PairRepository pairRepository;
         private readonly UserRepository userRepository;
 
-        public TournamentController()
+        public ResultsController()
         {
              pairRepository = new PairRepository(db);
-             userRepository = new UserRepository(db);
+            userRepository = new UserRepository(db);
         }
         
         //
@@ -205,16 +205,6 @@ namespace IglaClub.Web.Controllers
                     Tournament = db.Tournaments.Find(tournamentId)
                 };
             return PartialView("_TournamentParticipants", model);
-        }
-
-        public JsonResult SearchUsers(long tournamentId, string phrase)
-        {
-            var result = userRepository.GetUsersByPhraseAndTournament(tournamentId, phrase)
-                        .Select(u => new { u.Id, value = u.Name })
-                        .Take(10)
-                        .ToArray();
-
-            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

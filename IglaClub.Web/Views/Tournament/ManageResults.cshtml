@@ -1,4 +1,4 @@
-﻿@model IglaClub.Web.Models.ViewModels.TournamentResultsVm
+﻿@model IglaClub.ObjectModel.Entities.Tournament
 
 @{
     ViewBag.Title = "Tournament results";
@@ -7,7 +7,7 @@
 
 <h2>Tournament </h2>
 @*@Html.DisplayFor(x=> x.Tournament.Results)*@
-<table style="border: solid 1px">
+@*<table style="border: solid 1px">
     <th>Result.Id</th><th>Result.NS.Id</th><th>Result.EW.Id</th><th>Result.TableNumber</th><th>Result.RoundNumber</th><th>Result.NumberOfTricks</th><th>Result.ContractColor</th><th>esult.ContractLevel</th>
     @foreach (var result in Model.Tournament.Results)
     {
@@ -15,15 +15,23 @@
             <td>@result.Id</td><td>@result.NS.Id</td><td>@result.EW.Id</td><td>@result.TableNumber</td><td>@result.RoundNumber</td><td>@result.NumberOfTricks</td><td>@result.ContractColor</td><td>@result.ContractLevel</td>
         </tr>
     }
-</table>
+</table>*@
 
 @{
-    var grid = new WebGrid(Model.ResultsVm);
+    var grid = new WebGrid(Model.Results);
 }
 
-@grid.GetHtml()
+@grid.GetHtml(columns: grid.Columns( 
+        grid.Column("TableNumber",header: "Table Number", format: @<text>@item.TableNumber</text>),
+        grid.Column("RoundNumber",header: "Round Number", format: @<text>@item.RoundNumber</text>),
+        grid.Column("NsPairNumber",header: "Ns Pair Number", format: @<text>@item.Ns.PairNumber</text>),
+        grid.Column("EwPairNumber",header: "Ew Pair Number", format: @<text>@item.Ew.PairNumber</text>)
+        //grid.Column("Remove",header: "Remove", format: @<text>@Html.ActionLink("Remove","Remove","" item.Ew.PairNumber</text>)
+        )
+        ,rowStyle: "rowStyleOdd", alternatingRowStyle: "rowStyleEven" , headerStyle: "headerStyle"
+)
 @*Pair:
 @Html.DisplayFor(x=>x.Tournament.Pairs[0])
 Result:
 @Html.DisplayFor(x=>x.Tournament.Results[0])*@
-<div>    @Html.ActionLink("Manage tournament", "Manage", new { id = Model.Tournament.Id})</div>
+<div>    @Html.ActionLink("Manage tournament", "Manage", new { id = Model.Id})</div>
