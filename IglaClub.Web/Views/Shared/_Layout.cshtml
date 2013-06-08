@@ -7,6 +7,9 @@
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery")
+        @*<script src="~/Scripts/jquery-1.8.2.js"></script>*@
+        <script src="~/Scripts/jquery-ui-1.8.2.js"></script>
     </head>
     <body>
         <header>
@@ -41,8 +44,8 @@
                 </div>
             </div>
         </footer>
-
-        @Scripts.Render("~/bundles/jquery")
+        
         @RenderSection("scripts", required: false)
+        
     </body>
 </html>
