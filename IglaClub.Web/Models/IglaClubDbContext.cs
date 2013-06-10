@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using IglaClub.ObjectModel.Enums;
 
 namespace IglaClub.Web.Models
 {
@@ -30,7 +31,7 @@ namespace IglaClub.Web.Models
 
 
 
-            public class IglaClubDbContextInitializer : DropCreateDatabaseIfModelChanges<IglaClubDbContext>
+            public class IglaClubDbContextInitializer : DropCreateDatabaseAlways<IglaClubDbContext>
             {
                 protected override void Seed(IglaClubDbContext context)
                 {
@@ -45,6 +46,9 @@ namespace IglaClub.Web.Models
                     context.Users.Add(userC);
                     context.Users.Add(userD);
                     context.Users.Add(new User { Login = "ela", Name = "elżbieta" });
+                    context.Users.Add(new User { Login = "elzbieeta", Name = "elzbieeta" });
+                    context.Users.Add(new User { Login = "igiel", Name = "Bartek Igla" });
+                    context.Users.Add(new User { Login = "justka", Name = "Justyna Bogucka" });
                     var tournament = new Tournament()
                         {
                             Name = "Pierwszy turniej",
@@ -61,6 +65,21 @@ namespace IglaClub.Web.Models
                     tournament.Pairs.Add(pair1);
                     tournament.Pairs.Add(pair2);
                     context.Tournaments.Add(tournament);
+
+                    var t = new Tournament()
+                    {
+                        Name = "Czerwcowy",
+                        BoardsInRound = 10,
+                        Club = club,
+                        Description = "Tournament rocks",
+                        Pairs = new List<Pair>(),
+                        Boards = new List<BoardInstance>(),
+                        Results = new List<Result>(),
+                        CreationDate = DateTime.Now,
+                        TournamentStatus = TournamentStatus.Planned
+
+                    };
+                    context.Tournaments.Add(t);
                     context.SaveChanges();
                 }
             }

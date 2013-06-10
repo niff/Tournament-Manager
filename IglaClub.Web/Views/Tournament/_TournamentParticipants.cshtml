@@ -1,5 +1,5 @@
 ﻿@model IglaClub.Web.Models.ViewModels.PairsViewModel
-
+<link href="~/Content/themes/base/jquery.ui.autocomplete.css" rel="stylesheet" />
 <div style="float: right">
     <h4>Lista zapisanych par:</h4>
     <table>
@@ -19,27 +19,62 @@
         <tr>
             @*<td>@Html.DropDownListFor(pvm => pvm.AvailableUsers, new SelectList(Model.AvailableUsers, "id", "name"))</td>
             <td>@Html.DropDownListFor(pvm => pvm.AvailableUsers, new SelectList(Model.AvailableUsers, "id", "name"))</td>*@
-            <td><input type="text" name="pairSearch" id ="pairSearch" value="wartosc"/></td>
+            <td><input type="text" name="pairSearch1" id ="pairSearch1" /></td>
+            <td><input type="text" name="pairSearch2" id ="pairSearch2" /></td>
         </tr>
     </table>
 
-    @Html.ActionLink("Add pair", "AddPair", new { id = Model.Tournament.Id })
+   @* @Html.ActionLink("Add pair", "AddPair", new { id = Model.Tournament.Id })*@
 </div>
 
 <script type="text/javascript">
 
     $(document).ready(function() {
-        $(function () {
-            $("#pairSearch").autocomplete({
-                source: '/Tournament/SearchUsers',
-                minLength: 1,
-                select: function (event, ui) {
-                    alert('Item: ' + ui.item.value);
+        var url = function (request, response) {
+            var idOfTriggeringElement = '#' + this.element.attr("id");
+            $.getJSON("@Url.Action("SearchUsers")", { phrase: $(idOfTriggeringElement).val(), tournamentId: 1 },
+                function(data) {
+                    response($.map(data, function(item) {
+                        return {
+                            label: item.value,
+                            id: item.Id
+                        };
+                    }));
                 }
-            });
-        });
+            );
+        };
+    
+    
+    var termTemplate = "<span class='ui-autocomplete-term'>%s</span>";
+    $(function () {
+        $("#pairSearch1, #pairSearch2")
+            .autocomplete({
+                source: url,
+                messages: {
+                    noResults: '',
+                    results: ''
+                },
+                open: function(e, ui) {
+                    var acData = $(this).data('ui-autocomplete'),
+                        styledTerm = termTemplate.replace('%s', acData.term);
+
+                    acData
+                        .menu
+                        .element
+                        .find('a.matchedItem')
+                        .each(function() {
+                            var me = $(this);
+                            var keywords = acData.term.split(' ').join('|');
+                            me.html(me.text().replace(new RegExp("(" + keywords + ")", "gi"), '<b>$1</b>'));
+                        });
+                }
+            })
+            .data("ui-autocomplete")._renderItem = function(ul, item) {
+                return $("<li>")
+                    .append("<a class='matchedItem' href='Details/" + item.id + "'>" + item.label + "</a>")
+                    .appendTo(ul);
+            };
     });
-    
-    
+    });
 
 </script>

@@ -776,3 +776,9 @@ tr.pager td {
 .headerStyle th {
     padding: 5px 15px;
 }
+.ui-menu-item{
+	background-color: whitesmoke;
+}
+.ui-autocomplete-term {
+	font-style: bold;
+}
