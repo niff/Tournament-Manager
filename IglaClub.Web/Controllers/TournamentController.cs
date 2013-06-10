@@ -213,8 +213,8 @@ namespace IglaClub.Web.Controllers
                         .Select(u => new { u.Id, value = u.Name })
                         .Take(10)
                         .ToArray();
-
-            return Json(result, JsonRequestBehavior.AllowGet);
+            var jsonResult = Json(result, JsonRequestBehavior.AllowGet);
+            return jsonResult;
         }
     }
 }
