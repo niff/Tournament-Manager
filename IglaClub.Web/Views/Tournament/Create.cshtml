@@ -41,15 +41,15 @@
             @Html.LabelFor(model => model.TournamentScoringType)
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model => model.TournamentScoringType, new SelectList(Enum.GetValues(typeof(TournamentScoringTypes))))
+            @Html.DropDownListFor(model => model.TournamentScoringType, new SelectList(Enum.GetValues(typeof(TournamentScoringType))))
             @Html.ValidationMessageFor(model => model.TournamentScoringType)
         </div>
         <div class="editor-label">
-            @Html.LabelFor(model => model.TournamentType)
+            @Html.LabelFor(model => model.TournamentMovingType)
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model => model.TournamentType, new SelectList(Enum.GetValues(typeof(TournamentTypes))))
-            @Html.ValidationMessageFor(model => model.TournamentType)
+            @Html.DropDownListFor(model => model.TournamentMovingType, new SelectList(Enum.GetValues(typeof(TournamentMovingType))))
+            @Html.ValidationMessageFor(model => model.TournamentMovingType)
         </div>
         
         <div class="editor-label">

@@ -183,19 +183,7 @@ namespace IglaClub.Web.Controllers
 
             return RedirectToAction("Manage", new { id });
         }
-
-        public ActionResult ManageResults(long id)
-        {
-            Tournament tournament = db.Tournaments
-                .Include(t => t.Results)
-                .Include(t => t.Results.Select(r=>r.NS))
-                .Include(t => t.Results.Select(r => r.EW))
-                .Include(t => t.Pairs).FirstOrDefault(t => t.Id == id);
-
-            //return View(new TournamentResultsVm() {Tournament = tournament});
-            return View(tournament);
-        }
-
+        
         public PartialViewResult Pairs(int tournamentId)
         {
             var model = new PairsViewModel
@@ -215,6 +203,11 @@ namespace IglaClub.Web.Controllers
                         .ToArray();
             var jsonResult = Json(result, JsonRequestBehavior.AllowGet);
             return jsonResult;
+        }
+
+        public ActionResult GenerateNextRound(long id)
+        {
+            tournamentManager
         }
     }
 }
