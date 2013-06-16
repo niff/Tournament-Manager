@@ -19,7 +19,9 @@
         grid.Column("ContractLevel",header: "Contract Level", format: @<text>@item.ContractLevel.ToString()</text>),
         grid.Column("PlayedBy",header: "Played By", format: @<text>@item.PlayedBy.ToString()</text>),
         grid.Column("BoardNumber",header: "BoardNumber", format: @<text>@item.Board.Id</text>),
-        grid.Column("Remove",header: "Remove", format: @<text>@Html.ActionLink("Remove", "Delete", new { id = @item.Ew.PairNumber })</text>)
+        grid.Column("Remove",header: "Remove", format: @<text>@Html.ActionLink("Remove", "Delete", new { id = @item.Id })</text>),
+        grid.Column("Score",header: "Score", format: @<text>@item.Score</text>)
+        
         )
         ,rowStyle: "rowStyleOdd", alternatingRowStyle: "rowStyleEven" , headerStyle: "headerStyle"
 )

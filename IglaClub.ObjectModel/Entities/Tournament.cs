@@ -23,9 +23,9 @@ namespace IglaClub.ObjectModel.Entities
 
         public virtual Club Club { get; set; }
 
-        public TournamentScoringTypes TournamentScoringType { get; set; }
+        public TournamentScoringType TournamentScoringType { get; set; }
 
-        public TournamentTypes TournamentType { get; set; }
+        public TournamentMovingType TournamentMovingType { get; set; }
 
         public virtual IList<Pair> Pairs { get; set; }
 

@@ -46,14 +46,31 @@ namespace IglaClub.TournamentManager
             db.SaveChanges();
             return true;
         }
+
+        public bool GenerateNextRound(long tournamentId)
+        {
+            Tournament tournament = db.Tournaments.Find(tournamentId);
+            //check whether round is finished (all boards are played (number of tricks))
+            IEnumerable<BoardInstance> boards = GenerateEmptyBoards(tournament);
+            TournamentHelper.AddBoardsToTournament(tournament, boards);
+
+            //todo: check if tournament should finish if michell
+            IEnumerable<Result> results = TournamentHelper.GenerateNextCavendishRound(tournament,false);
+            TournamentHelper.AddResultsToTournament(tournament, results);
+
+            tournament.CurrentRound ++;
+            
+            db.SaveChanges();
+            return true;
+        }
         
         private IEnumerable<BoardInstance> GenerateEmptyBoards(Tournament tournament)
         {
             var boardInstances = new List<BoardInstance>();
-            if (tournament.TournamentType != TournamentTypes.Cavendish)
+            if (tournament.TournamentMovingType != TournamentMovingType.Cavendish)
                 throw new NotSupportedException("By now only Cavendish tournament type is supported");
-            
-            for (int i = 1; i < tournament.BoardsInRound+1; i++)
+            var currentMaxBoardNumber = tournament.Boards.Count == 0 ? 0 : tournament.Boards.Max(b => b.BoardNumber);
+            for (int i = currentMaxBoardNumber + 1; i < tournament.BoardsInRound + currentMaxBoardNumber + 1; i++)
             {
                 boardInstances.Add(CreateEmptyBoardInstance(tournament, i));
             }

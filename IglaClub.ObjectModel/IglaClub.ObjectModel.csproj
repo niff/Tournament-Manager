@@ -56,10 +56,11 @@
     <Compile Include="Enums\CardColor.cs" />
     <Compile Include="Enums\CardValue.cs" />
     <Compile Include="Enums\ContractColors.cs" />
+    <Compile Include="Enums\ContractDoubled.cs" />
     <Compile Include="Enums\TournamentStatus.cs" />
-    <Compile Include="Enums\TournamentTypes.cs" />
+    <Compile Include="Enums\TournamentMovingType.cs" />
     <Compile Include="Enums\NESW.cs" />
-    <Compile Include="Enums\TournamentScoringTypes.cs" />
+    <Compile Include="Enums\TournamentScoringType.cs" />
     <Compile Include="Enums\Vulnerable.cs" />
     <Compile Include="IIglaClubDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

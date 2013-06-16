@@ -316,7 +316,6 @@
     <Content Include="Views\Tournament\Edit.cshtml" />
     <Content Include="Views\Tournament\Delete.cshtml" />
     <Content Include="Views\Tournament\Manage.cshtml" />
-    <Content Include="Views\Tournament\ManageResults.cshtml" />
     <Content Include="Views\Tournament\_TournamentParticipants.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Results\Manage.cshtml" />

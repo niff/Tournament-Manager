@@ -14,8 +14,12 @@ namespace IglaClub.ObjectModel.Entities
         public int NumberOfTricks { get; set; }
         
         public ContractColors ContractColor { get; set; }
+        
+        public ContractDoubled ContractDoubled { get; set; }
 
         public int ContractLevel { get; set; }
+
+        public int? ResultNsPoints { get; set; }
 
         public virtual BoardInstance Board { get; set; }
 
@@ -25,6 +29,7 @@ namespace IglaClub.ObjectModel.Entities
 
         public int TableNumber { get; set; }
 
-
+        public float? ScoreNs { get; set; }
+        public float? ScoreEw { get; set; }
     }
 }
