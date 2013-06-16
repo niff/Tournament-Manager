@@ -119,11 +119,16 @@ namespace IglaClub.TournamentManager
         public static IEnumerable<Result> GenerateNextCavendishRound(Tournament tournament, bool withPairRepeats)
         {
             UpdateResultsScores(tournament);
-            IList<Pair> pairsList = CalculatePairsOrder(tournament);
-            if (!withPairRepeats)
-                CorrectRepeats(pairsList);
+            //IList<Pair> pairsList = CalculatePairsOrder(tournament);
+            //if (!withPairRepeats)
+            //    CorrectRepeats(pairsList);
             IEnumerable<Result> newResults = CreateNewSitting(tournament);
             return newResults;
+        }
+
+        private static IEnumerable<Result> CreateNewSitting(Tournament tournament)
+        {
+            throw new NotImplementedException();
         }
 
         public static void UpdateResultsScores(Tournament tournament)

@@ -207,7 +207,8 @@ namespace IglaClub.Web.Controllers
 
         public ActionResult GenerateNextRound(long id)
         {
-            tournamentManager
+            //tournamentManager.
+            return RedirectToAction("Manage", new { id });
         }
     }
 }
