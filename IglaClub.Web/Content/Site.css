@@ -780,5 +780,13 @@ tr.pager td {
 	background-color: whitesmoke;
 }
 .ui-autocomplete-term {
-	font-style: bold;
+	font-weight: bold;
+}
+.pairSearch {
+	font-size: small;
+}
+.pairSearchInput{
+	font-size: small;
+	width: 100px;
+	height: 10px;
 }

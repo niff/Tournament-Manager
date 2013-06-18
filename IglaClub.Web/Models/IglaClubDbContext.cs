@@ -31,7 +31,7 @@ namespace IglaClub.Web.Models
 
 
 
-            public class IglaClubDbContextInitializer : DropCreateDatabaseAlways<IglaClubDbContext>
+            public class IglaClubDbContextInitializer : DropCreateDatabaseIfModelChanges<IglaClubDbContext>
             {
                 protected override void Seed(IglaClubDbContext context)
                 {
