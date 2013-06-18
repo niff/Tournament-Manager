@@ -16,5 +16,12 @@ namespace IglaClub.ObjectModel.Repositories
         {
             return db.Tournaments.Find(id).Pairs.ToList();
         }
+
+        public void AddPairToTournament(Pair pair, int tournamentId)
+        {
+            var tournament = db.Tournaments.FirstOrDefault(t => t.Id == tournamentId);
+            if (tournament != null) tournament.Pairs.Add(pair);
+            db.SaveChanges();
+        }
     }
 }

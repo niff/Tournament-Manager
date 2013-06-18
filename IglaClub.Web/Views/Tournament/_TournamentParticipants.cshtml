@@ -1,7 +1,8 @@
 ﻿@model IglaClub.Web.Models.ViewModels.PairsViewModel
+
 <link href="~/Content/themes/base/jquery.ui.autocomplete.css" rel="stylesheet" />
-<div style="float: right">
-    <h4>Lista zapisanych par:</h4>
+<div id="participantsDiv" style="float: right" class="pairSearch">
+    <h4>Lista zapisanych par (@Model.PairsInTounament.Count):</h4>
     <table>
         @foreach (var pair in @Model.PairsInTounament)
         {
@@ -9,20 +10,29 @@
             var p2Name = (pair.Player2 == null ? "Unknown" : pair.Player2.Name);
             <tr>
                 <td>
-                    @p1Name - @p2Name
+                    @p1Name
                 </td>
                 <td>
-                    @Html.ActionLink("Remove", "RemovePair", new { tournamentId = Model.Tournament.Id, pairId = pair.Id })
+                    @p2Name
+                </td>
+                <td></td>
+                <td>
+                    @*@Html.ActionLink("Remove", "RemovePair", new { tournamentId = Model.Tournament.Id, pairId = pair.Id })*@
+                    <a href="#" class="removePairLink" onclick="removePair(@Model.Tournament.Id, @pair.Id)">Usuń</a>
                 </td>
             </tr>
         }
         <tr>
             @*<td>@Html.DropDownListFor(pvm => pvm.AvailableUsers, new SelectList(Model.AvailableUsers, "id", "name"))</td>
             <td>@Html.DropDownListFor(pvm => pvm.AvailableUsers, new SelectList(Model.AvailableUsers, "id", "name"))</td>*@
-            <td><input type="text" name="pairSearch1" id ="pairSearch1" /></td>
-            <td><input type="text" name="pairSearch2" id ="pairSearch2" /></td>
+            <td><input type="text" class="pairSearchInput" name="pairSearch1" id ="pairSearch1" /></td>
+            <td><input type="text" class="pairSearchInput" name="pairSearch2" id ="pairSearch2" /></td>
+            <td class="hidden"><input type="hidden" class="pairSearchInput" id ="user1" />
+                <input type="hidden" class="pairSearchInput" id ="user2" /></td>
+            <td><input type="submit" class="pairSearchSubmit" id ="pairSearchSubmit" value="Dodaj" /></td>
         </tr>
     </table>
+
 
    @* @Html.ActionLink("Add pair", "AddPair", new { id = Model.Tournament.Id })*@
 </div>
@@ -32,9 +42,9 @@
     $(document).ready(function() {
         var url = function (request, response) {
             var idOfTriggeringElement = '#' + this.element.attr("id");
-            $.getJSON("@Url.Action("SearchUsers")", { phrase: $(idOfTriggeringElement).val(), tournamentId: 1 },
+            $.getJSON("@Url.Action("SearchUsers")", { phrase: $(idOfTriggeringElement).val(), tournamentId: '@Model.Tournament.Id' },
                 function(data) {
-                    response($.map(data, function(item) {
+                    response($.map(data, function (item) {
                         return {
                             label: item.value,
                             id: item.Id
@@ -44,37 +54,76 @@
             );
         };
     
-    
-    var termTemplate = "<span class='ui-autocomplete-term'>%s</span>";
-    $(function () {
-        $("#pairSearch1, #pairSearch2")
-            .autocomplete({
-                source: url,
-                messages: {
-                    noResults: '',
-                    results: ''
-                },
-                open: function(e, ui) {
-                    var acData = $(this).data('ui-autocomplete'),
-                        styledTerm = termTemplate.replace('%s', acData.term);
+        $(function () {
+            $("#pairSearch1, #pairSearch2")
+            
+                .autocomplete({
+                    source: url,
+                    messages: {
+                        noResults: '',
+                        results: ''
+                    },
+                    open: function (e, ui) {
+                        var idOfTriggeringElement = '#' + this.id;
+                        var acData = $(idOfTriggeringElement).data('autocomplete');
+                        
+                        acData
+                            .menu
+                            .element
+                            .find('a.ui-corner-all')
+                            .each(function() {
+                                var me = $(this);
+                                var keywords = acData.term.split(' ').join('|');
+                                me.html(me.text().replace(new RegExp("(" + keywords + ")", "gi"), '<b>$1</b>'));
+                            });
+                    },
+                    select: function (event, ui) {
+                        event.preventDefault();
+                        var elem = this.id;
+                        var sufix = elem.substr((elem.length - 1), 1);
+                        var userId = "#user" + sufix;
+                        if (ui.item) {
+                            $(userId).val(ui.item.id);
+                        }
+                    }
+                })
+                //.data("autocomplete")._renderItem = function (ul, item) {
+                //    var idOfTriggeringElement = '#' + this.id;
+                //    return $("<li>")
+                //        .append("<a href='#'>" + item.label  + "</a>")
+                //        .appendTo(ul);
+                //};
+        });
 
-                    acData
-                        .menu
-                        .element
-                        .find('a.matchedItem')
-                        .each(function() {
-                            var me = $(this);
-                            var keywords = acData.term.split(' ').join('|');
-                            me.html(me.text().replace(new RegExp("(" + keywords + ")", "gi"), '<b>$1</b>'));
-                        });
-                }
-            })
-            .data("ui-autocomplete")._renderItem = function(ul, item) {
-                return $("<li>")
-                    .append("<a class='matchedItem' href='Details/" + item.id + "'>" + item.label + "</a>")
-                    .appendTo(ul);
-            };
+        $('#pairSearchSubmit').on("click", function() {
+            var user1 = $('#user1').val();
+            var user2 = $('#user2').val();
+            if (user1 == user2) {
+                alert("Wybierz dwóch różnych użytkowników");
+                return false;
+            }
+            $.ajax({
+                url: "/Tournament/AddPair",
+                type: "POST",
+                data: { user1: user1, user2: user2, tournamentId: '@Model.Tournament.Id' },
+                success: refreshParticipants
+            });
+        });
+
     });
-    });
+    
+    function removePair(tId, pairId) {
+        $('.removePairLink').attr('href','');
+        $.ajax({
+            url: "/Tournament/RemovePair",
+            type: "POST",
+            data: { tournamentId: tId, pairId: pairId },
+                success: refreshParticipants
+        });
+    }
+
+    function refreshParticipants() {
+        $('#participantsDiv').load('@Url.Action("Pairs", new { tournamentId = @Model.Tournament.Id })');
+    }
 
 </script>

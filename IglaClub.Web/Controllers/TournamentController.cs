@@ -167,13 +167,12 @@ namespace IglaClub.Web.Controllers
             throw new NotImplementedException();
         }
 
-        public ActionResult RemovePair(long tournamentId, long pairId )
+        public void RemovePair(long tournamentId, long pairId )
         {
             Tournament tournament = db.Tournaments.Find(tournamentId);
             Pair pair = db.Pairs.Find(pairId);
             tournament.Pairs.Remove(pair);
             db.SaveChanges();
-            return RedirectToAction("Manage");
         }
 
 
@@ -198,7 +197,7 @@ namespace IglaClub.Web.Controllers
         public JsonResult SearchUsers(long tournamentId, string phrase)
         {
             var result = userRepository.GetUsersByPhraseAndTournament(tournamentId, phrase)
-                        .Select(u => new { u.Id, value = u.Name })
+                .Select(u => new { u.Id, value = u.Name + ( (!String.IsNullOrWhiteSpace(u.Nickname) ) ? " (" + u.Nickname + ")" : "")})
                         .Take(10)
                         .ToArray();
             var jsonResult = Json(result, JsonRequestBehavior.AllowGet);
@@ -210,5 +209,12 @@ namespace IglaClub.Web.Controllers
             //tournamentManager.
             return RedirectToAction("Manage", new { id });
         }
+
+        [HttpPost]
+        public void AddPair(int user1, int user2, int tournamentId)
+        {
+            tournamentManager.AddPair(tournamentId, user1, user2);
+        }
+
     }
 }
