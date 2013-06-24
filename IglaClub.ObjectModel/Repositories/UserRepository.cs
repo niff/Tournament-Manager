@@ -13,6 +13,18 @@ namespace IglaClub.ObjectModel.Repositories
         {
         }
 
+        public long Add(string name, string email)
+        {
+            var user = new User
+                {
+                    Name = name,
+                    Email = email
+                };
+            db.Users.Add(user);
+            db.SaveChanges();
+            return user.Id;
+        }
+
         public List<User> GetAvailableUsersForTournament(long tournamentId)
         {
             //todo: filter by club users

@@ -1,14 +1,24 @@
 ﻿@model IglaClub.Web.Models.ViewModels.PairsViewModel
 
 <link href="~/Content/themes/base/jquery.ui.autocomplete.css" rel="stylesheet" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" /> @*todo change to local*@
+<style>
+    label, input { display:block; }
+    input.text { margin-bottom:0px; width:95%; padding: .4em; }
+    fieldset { padding:0; border:0; margin-top:25px; }
+</style>
 <div id="participantsDiv" style="float: right" class="pairSearch">
     <h4>Lista zapisanych par (@Model.PairsInTounament.Count):</h4>
     <table>
+        @{
+            var counter = 1;
+        }
         @foreach (var pair in @Model.PairsInTounament)
-        {
+        {            
             var p1Name = (pair.Player1 == null ? "Unknown" : pair.Player1.Name);
             var p2Name = (pair.Player2 == null ? "Unknown" : pair.Player2.Name);
             <tr>
+                <td>@counter .</td>
                 <td>
                     @p1Name
                 </td>
@@ -17,21 +27,37 @@
                 </td>
                 <td></td>
                 <td>
-                    @*@Html.ActionLink("Remove", "RemovePair", new { tournamentId = Model.Tournament.Id, pairId = pair.Id })*@
                     <a href="#" class="removePairLink" onclick="removePair(@Model.Tournament.Id, @pair.Id)">Usuń</a>
                 </td>
             </tr>
+            counter++;
         }
         <tr>
-            @*<td>@Html.DropDownListFor(pvm => pvm.AvailableUsers, new SelectList(Model.AvailableUsers, "id", "name"))</td>
-            <td>@Html.DropDownListFor(pvm => pvm.AvailableUsers, new SelectList(Model.AvailableUsers, "id", "name"))</td>*@
+            <td></td>
             <td><input type="text" class="pairSearchInput" name="pairSearch1" id ="pairSearch1" /></td>
             <td><input type="text" class="pairSearchInput" name="pairSearch2" id ="pairSearch2" /></td>
-            <td class="hidden"><input type="hidden" class="pairSearchInput" id ="user1" />
-                <input type="hidden" class="pairSearchInput" id ="user2" /></td>
+            <td class="hidden">
+                <input type="hidden" class="hidden user" id ="user1" />
+                <input type="hidden" class="hidden user" id ="user2" />
+            </td>
             <td><input type="submit" class="pairSearchSubmit" id ="pairSearchSubmit" value="Dodaj" /></td>
         </tr>
     </table>
+    <div id="dialog-form" title="Create new user">
+        <p class="validateTips">All form fields are required.</p>
+
+        <form>
+            <fieldset>
+                <legend>Dodaj parę</legend>
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" />
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all" />
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" />
+            </fieldset>
+        </form>
+    </div>
 
 
    @* @Html.ActionLink("Add pair", "AddPair", new { id = Model.Tournament.Id })*@
@@ -39,11 +65,17 @@
 
 <script type="text/javascript">
 
+    //global
+    var whichUserInNewUserDialog = "";
+    
     $(document).ready(function() {
         var url = function (request, response) {
             var idOfTriggeringElement = '#' + this.element.attr("id");
             $.getJSON("@Url.Action("SearchUsers")", { phrase: $(idOfTriggeringElement).val(), tournamentId: '@Model.Tournament.Id' },
-                function(data) {
+                function (data) {
+                    if (data.length < 1) {
+                        data.push({ value: "<a href=\"#\">Nie znaleziono. Dodaj</a>", Id: 0 });
+                    }
                     response($.map(data, function (item) {
                         return {
                             label: item.value,
@@ -77,15 +109,22 @@
                                 me.html(me.text().replace(new RegExp("(" + keywords + ")", "gi"), '<b>$1</b>'));
                             });
                     },
-                    select: function (event, ui) {
-                        event.preventDefault();
-                        var elem = this.id;
-                        var sufix = elem.substr((elem.length - 1), 1);
-                        var userId = "#user" + sufix;
-                        if (ui.item) {
-                            $(userId).val(ui.item.id);
+                    select: function(event, ui) {
+                        if (ui.item.id != 0) {
+                            //event.preventDefault();
+                            var elem = this.id;
+                            var sufix = elem.substr((elem.length - 1), 1);
+                            var userId = "#user" + sufix;
+                            if (ui.item) {
+                                $(userId).val(ui.item.id);
+                            }
+                        } else {
+                            $("#dialog-form").dialog("open");
+                            whichUserInNewUserDialog = '#' + this.id;
+                            $('#name').val($(whichUserInNewUserDialog).val());
+                            return false;
                         }
-                    }
+                }
                 })
                 //.data("autocomplete")._renderItem = function (ul, item) {
                 //    var idOfTriggeringElement = '#' + this.id;
@@ -98,6 +137,10 @@
         $('#pairSearchSubmit').on("click", function() {
             var user1 = $('#user1').val();
             var user2 = $('#user2').val();
+            if (user1 == '' || user2 == '') {
+                alert("Nie wybrano użytkownika bądź jest nieprawidłowy");
+                return false;
+            }
             if (user1 == user2) {
                 alert("Wybierz dwóch różnych użytkowników");
                 return false;
@@ -108,8 +151,48 @@
                 data: { user1: user1, user2: user2, tournamentId: '@Model.Tournament.Id' },
                 success: refreshParticipants
             });
+            clearHiddenUsers();
+        });
+        
+
+        $( "#dialog-form" ).dialog({
+            autoOpen: false,
+            height: 300,
+            width: 350,
+            modal: true,
+            buttons: {
+                "Create an account": function() {
+                    //ajax : add user
+                    var newId = addUser($('#name').val(), $('#email').val());
+                    //fill hidden input with id, fill input with name if changed
+                    var sufix = whichUserInNewUserDialog.substr((whichUserInNewUserDialog.length - 1), 1);
+                    var idInputForFill = '#user' + sufix;
+                    $(idInputForFill).val(newId);
+
+                    var nameInputForFill = whichUserInNewUserDialog;
+                    $(nameInputForFill).val($('#name').val());
+                    //if create, fill, then search again- > set hidden to null
+                    $(this).dialog("close");
+                    //clear dialog fields
+                },
+                    Cancel: function() {
+                        $( this ).dialog( "close" );
+                    }
+                },
+            close: function() {
+            }
         });
 
+        function addUser(name, email) {
+            return $.ajax({
+                url: "/Tournament/AddUser",
+                type: "POST",
+                data: { name: name, email: email },
+                async: false,
+                success: function (data) {  return data; }
+            }).responseText;
+            
+        }
     });
     
     function removePair(tId, pairId) {
@@ -117,6 +200,7 @@
         $.ajax({
             url: "/Tournament/RemovePair",
             type: "POST",
+            async: false,
             data: { tournamentId: tId, pairId: pairId },
                 success: refreshParticipants
         });
@@ -124,6 +208,13 @@
 
     function refreshParticipants() {
         $('#participantsDiv').load('@Url.Action("Pairs", new { tournamentId = @Model.Tournament.Id })');
+    }
+
+    function clearHiddenUsers() {
+        //$('#user1').val('');
+        //$('#user2').val('');
+        $('.hidden.user').val('');
+        
     }
 
 </script>
