@@ -216,5 +216,11 @@ namespace IglaClub.Web.Controllers
             tournamentManager.AddPair(tournamentId, user1, user2);
         }
 
+        public JsonResult AddUser(string name, string email)
+        {
+            var id =  userRepository.Add(name, email);
+            return Json(id);
+        }
+
     }
 }

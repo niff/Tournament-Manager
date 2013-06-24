@@ -790,3 +790,11 @@ tr.pager td {
 	width: 100px;
 	height: 10px;
 }
+
+table tr {
+	border-bottom: 1px solid gray;
+}
+
+table tr td {
+	font-size: smaller;
+}
