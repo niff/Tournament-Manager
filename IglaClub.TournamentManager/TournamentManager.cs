@@ -47,7 +47,7 @@ namespace IglaClub.TournamentManager
             return true;
         }
 
-        public bool GenerateNextRound(long tournamentId)
+        public bool GenerateNextRound(long tournamentId, bool withPairRepeats)
         {
             Tournament tournament = db.Tournaments.Find(tournamentId);
             //check whether round is finished (all boards are played (number of tricks))
@@ -55,7 +55,7 @@ namespace IglaClub.TournamentManager
             TournamentHelper.AddBoardsToTournament(tournament, boards);
 
             //todo: check if tournament should finish if michell
-            IEnumerable<Result> results = TournamentHelper.GenerateNextCavendishRound(tournament,false);
+            IEnumerable<Result> results = TournamentHelper.GenerateNextCavendishRound(tournament,withPairRepeats);
             TournamentHelper.AddResultsToTournament(tournament, results);
 
             tournament.CurrentRound ++;

@@ -204,9 +204,9 @@ namespace IglaClub.Web.Controllers
             return jsonResult;
         }
 
-        public ActionResult GenerateNextRound(long id)
+        public ActionResult GenerateNextRound(long id, bool withPairsRepeat)
         {
-            //tournamentManager.
+            tournamentManager.GenerateNextRound(id, withPairsRepeat);
             return RedirectToAction("Manage", new { id });
         }
 
