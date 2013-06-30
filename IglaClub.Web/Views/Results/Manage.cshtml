@@ -10,6 +10,8 @@
     var grid = new WebGrid(Model.Results);
 }
 
+@Html.ActionLink("Edytuj", "Edit", new {tournamentId = @Model.Id})
+
 @grid.GetHtml(columns: grid.Columns( 
         grid.Column("TableNumber",header: "Table Number", format: @<text>@item.TableNumber</text>),
         grid.Column("RoundNumber",header: "Round Number", format: @<text>@item.RoundNumber</text>),

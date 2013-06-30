@@ -3,7 +3,7 @@
 <link href="~/Content/themes/base/jquery.ui.autocomplete.css" rel="stylesheet" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" /> @*todo change to local*@
 <style>
-    label, input { display:block; }
+    label, input { display:block;font-size: small;}
     input.text { margin-bottom:0px; width:95%; padding: .4em; }
     fieldset { padding:0; border:0; margin-top:25px; }
 </style>
@@ -43,24 +43,13 @@
             <td><input type="submit" class="pairSearchSubmit" id ="pairSearchSubmit" value="Dodaj" /></td>
         </tr>
     </table>
-    <div id="dialog-form" title="Create new user">
-        <p class="validateTips">All form fields are required.</p>
-
+    <div id="dialog-form" title="Utwórz użytkownika w systemie IglaClub">
         <form>
-            <fieldset>
-                <legend>Dodaj parę</legend>
-                <label for="name">Name</label>
-                <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" />
-                <label for="email">Email</label>
-                <input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all" />
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" />
-            </fieldset>
+            <label for="name">Nazwa</label><input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" />               
+            <label for="email">Email</label><input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all" />               
+            <label for="password">Hasło</label><input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" />
         </form>
     </div>
-
-
-   @* @Html.ActionLink("Add pair", "AddPair", new { id = Model.Tournament.Id })*@
 </div>
 
 <script type="text/javascript">
@@ -74,7 +63,7 @@
             $.getJSON("@Url.Action("SearchUsers")", { phrase: $(idOfTriggeringElement).val(), tournamentId: '@Model.Tournament.Id' },
                 function (data) {
                     if (data.length < 1) {
-                        data.push({ value: "<a href=\"#\">Nie znaleziono. Dodaj</a>", Id: 0 });
+                        data.push({ value: "Nie znaleziono. Dodaj", Id: 0 });
                     }
                     response($.map(data, function (item) {
                         return {
@@ -103,10 +92,12 @@
                             .menu
                             .element
                             .find('a.ui-corner-all')
-                            .each(function() {
-                                var me = $(this);
-                                var keywords = acData.term.split(' ').join('|');
-                                me.html(me.text().replace(new RegExp("(" + keywords + ")", "gi"), '<b>$1</b>'));
+                            .each(function () {
+                               // if ($(this).val() != 0) {
+                                    var me = $(this);
+                                    var keywords = acData.term.split(' ').join('|');
+                                    me.html(me.text().replace(new RegExp("(" + keywords + ")", "gi"), '<b>$1</b>'));
+                               // }
                             });
                     },
                     select: function(event, ui) {
@@ -161,7 +152,7 @@
             width: 350,
             modal: true,
             buttons: {
-                "Create an account": function() {
+                "Dodaj": function() {
                     //ajax : add user
                     var newId = addUser($('#name').val(), $('#email').val());
                     //fill hidden input with id, fill input with name if changed
@@ -175,7 +166,7 @@
                     $(this).dialog("close");
                     //clear dialog fields
                 },
-                    Cancel: function() {
+                    "Anuluj": function() {
                         $( this ).dialog( "close" );
                     }
                 },
@@ -211,10 +202,7 @@
     }
 
     function clearHiddenUsers() {
-        //$('#user1').val('');
-        //$('#user2').val('');
-        $('.hidden.user').val('');
-        
+        $('.hidden.user').val('');      
     }
 
 </script>

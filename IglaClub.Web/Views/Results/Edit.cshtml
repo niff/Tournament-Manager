@@ -1,0 +1,62 @@
+﻿@model IEnumerable<IglaClub.ObjectModel.Entities.Result>
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+<table class="result">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfTricks)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContractLevel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ResultNsPoints)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoundNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TableNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScoreNs)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScoreEw)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.TextBoxFor(modelItem => item.NumberOfTricks)
+        </td>
+        <td>
+            @Html.TextBoxFor(modelItem => item.ContractLevel)
+        </td>
+        <td>
+            @Html.TextBoxFor(modelItem => item.ResultNsPoints)
+        </td>
+        <td>
+            @Html.TextBoxFor(modelItem => item.RoundNumber)
+        </td>
+        <td>
+            @Html.TextBoxFor(modelItem => item.TableNumber)
+        </td>
+        <td>
+            @Html.TextBoxFor(modelItem => item.ScoreNs)
+        </td>
+        <td>
+            @Html.TextBoxFor(modelItem => item.ScoreEw)
+        </td>
+    </tr>
+}
+
+</table>
