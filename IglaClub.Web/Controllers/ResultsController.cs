@@ -39,20 +39,39 @@ namespace IglaClub.Web.Controllers
         
         //
         // POST: /Tournament/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(Result result)
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit(Result result)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(result).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Manage", new { id = result.Tournament.Id});
+        //    }
+        //    return RedirectToAction("Manage", new { id = result.Tournament.Id });
+        //    //return View(result);
+        //}
+
+        public ActionResult Edit(long tournamentId)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(result).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Manage", new { id = result.Tournament.Id});
-            }
-            return RedirectToAction("Manage", new { id = result.Tournament.Id });
-            //return View(result);
+            var model = db.Tournaments.Find(tournamentId).Results;
+            return View(model);
         }
-        
+
+        [HttpPost]
+        public ActionResult Edit(IEnumerable<Result> results)
+        {
+            var enumerable = results as IList<Result> ?? results.ToList();
+            foreach (var result in enumerable)
+            {
+                //var t = tournamentRepository.Find();
+                //t = result;
+
+            }
+            return RedirectToAction("Manage", new {enumerable.First().Tournament.Id});
+        }
+
         //
         // GET: /Results/Manage/5
 

@@ -798,3 +798,13 @@ table tr {
 table tr td {
 	font-size: smaller;
 }
+ul.ui-autocomplete li a {
+	cursor: pointer;
+}
+.dialog-form input.text {
+	font-size: small;
+}
+
+.result tr td input {
+	width: 30px;
+}
