@@ -19,12 +19,14 @@
             <li>@Html.ActionLink("Calculate results", "CalculateResults", new { id = Model.Tournament.Id })</li>
             @if (Model.Tournament.TournamentStatus == TournamentStatus.Started && Model.Tournament.TournamentMovingType == TournamentMovingType.Cavendish)
             {
-                <li>@Html.ActionLink("Generate next round", "GenerateNextRound", new { tournamentId = Model.Tournament.Id })</li>
+                <li>@Html.ActionLink("Generate next round", "GenerateNextRound", new { tournamentId = Model.Tournament.Id, withPairsRepeat = false })</li>
             }
+            S
+
         </ul>
 
         <div>
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back to List", "Index")  @Html.Label("Results left to complete round: " +Model.ResultsToComplete.ToString())
         </div>
     </div>
     Tournament is <strong>@Model.Tournament.TournamentStatus.ToString() </strong><br/>
