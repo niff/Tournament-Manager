@@ -19,11 +19,13 @@ namespace IglaClub.Web.Controllers
 
         private readonly PairRepository pairRepository;
         private readonly UserRepository userRepository;
+        private readonly TournamentRepository tournamentRepository;
 
         public ResultsController()
         {
             pairRepository = new PairRepository(db);
             userRepository = new UserRepository(db);
+            tournamentRepository = new TournamentRepository(db);
         }
         
         //Results from tournament, as partial view
@@ -56,12 +58,7 @@ namespace IglaClub.Web.Controllers
 
         public ActionResult Manage(long tournamentId)
         {
-            Tournament tournament = db.Tournaments
-                                      .Include(t => t.Results)
-                                      .Include(t => t.Results.Select(r => r.NS))
-                                      .Include(t => t.Results.Select(r => r.EW))
-                                      .Include(t => t.Boards)
-                                      .Include(t => t.Pairs).FirstOrDefault(t => t.Id == tournamentId);
+            Tournament tournament = tournamentRepository.GetTournament(tournamentId);  
                 
             return View(tournament);
         }
