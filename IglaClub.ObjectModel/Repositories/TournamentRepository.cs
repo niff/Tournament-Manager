@@ -14,7 +14,7 @@ namespace IglaClub.ObjectModel.Repositories
         {
         }
 
-        public Tournament GetTournament(int id)
+        public Tournament GetTournament(long id)
         {
             return db.Tournaments
                             .Include(t => t.Results)
