@@ -14,7 +14,7 @@ namespace IglaClub.ObjectModel.Repositories
         {
         }
 
-        public Tournament GetTournament(long id)
+        public Tournament GetTournamentWithInclude(long id)
         {
             return db.Tournaments
                             .Include(t => t.Results)
@@ -23,6 +23,12 @@ namespace IglaClub.ObjectModel.Repositories
                             .Include(t => t.Boards)
                             .Include(t => t.Pairs).FirstOrDefault(t => t.Id == id);
         }
+        public Tournament GetTournament(long id)
+        {
+            return db.Tournaments
+                            .FirstOrDefault(t => t.Id == id);
+        }
+
 
     }
 }

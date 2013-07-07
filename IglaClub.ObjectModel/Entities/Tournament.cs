@@ -29,14 +29,17 @@ namespace IglaClub.ObjectModel.Entities
 
         public virtual IList<Pair> Pairs { get; set; }
 
+        [Display(Name = "Boards in round")]
         public int BoardsInRound { get; set; }
 
         public virtual IList<BoardInstance> Boards { get; set; }
 
         public virtual IList<Result> Results { get; set; }
 
+        [Display(Name = "Tournament Status")]
         public TournamentStatus TournamentStatus { get; set; }
 
+        [Display(Name = "Current Round")]
         public int CurrentRound { get; set; }
 
         [DataType(DataType.DateTime)]

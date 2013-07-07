@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using IglaClub.ObjectModel.Entities;
+using IglaClub.ObjectModel.Enums;
 using IglaClub.ObjectModel.Repositories;
 using IglaClub.Web.Models;
 using IglaClub.Web.Models.ViewModels;
@@ -19,6 +20,7 @@ namespace IglaClub.Web.Controllers
 
         private readonly PairRepository pairRepository;
         private readonly UserRepository userRepository;
+        private readonly ResultRepository resultRepository;
         private readonly TournamentRepository tournamentRepository;
 
         public ResultsController()
@@ -26,6 +28,7 @@ namespace IglaClub.Web.Controllers
             pairRepository = new PairRepository(db);
             userRepository = new UserRepository(db);
             tournamentRepository = new TournamentRepository(db);
+            resultRepository = new ResultRepository(db);
         }
         
         //Results from tournament, as partial view
@@ -81,7 +84,7 @@ namespace IglaClub.Web.Controllers
 
         public ActionResult Manage(long tournamentId, string sort, string sortdir)
         {
-            Tournament tournament = tournamentRepository.GetTournament(tournamentId);
+            Tournament tournament = tournamentRepository.GetTournamentWithInclude(tournamentId);
             List<Result> results = tournament.Results.ToList();
             if (!string.IsNullOrEmpty(sort))
             {
@@ -147,5 +150,19 @@ namespace IglaClub.Web.Controllers
             return RedirectToAction("Manage", new { tournamentId });
         }
 
+        public PartialViewResult PairsResults(int tournamentId)
+        {
+            var tournament = tournamentRepository.GetTournament(tournamentId);
+            Dictionary<long, int> pairNumberMaxPoints = resultRepository.GetDictionaryPairNumberMaxPoints(tournamentId);
+            var pairsResultsViewModel = new PairsResultsViewModel
+                {
+                    TournamentScoringType = tournament.TournamentScoringType,
+                    PairsInTounament = pairRepository.GetPairsByTournament(tournamentId).OrderByDescending(p=>p.Score).ToList(),
+                    PairNumberMaxPoints = pairNumberMaxPoints
+                    
+                };
+
+            return PartialView("_PairsResults", pairsResultsViewModel);
+        }
     }
 }
