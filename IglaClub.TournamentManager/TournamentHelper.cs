@@ -86,7 +86,8 @@ namespace IglaClub.TournamentManager
                         NS = sortedPairsList[i],
                         EW = sortedPairsList[i + sortedPairsList.Count / 2],
                         RoundNumber = tournament.CurrentRound+1,
-                        TableNumber = i + 1
+                        TableNumber = i + 1,
+                        PlayedBy = NESW.Unavailable
                     };
                     results.Add(result);
                 }
@@ -96,8 +97,10 @@ namespace IglaClub.TournamentManager
 
         public static void UpdatePointsPerBoard(Tournament tournament)
         {
-            var resultsGroupedByBoards = tournament.Results.GroupBy(r => r.Board.BoardNumber, r=>r, 
-                (key,g) => new { BoardId = key, Results = g.ToList()}).ToList();
+            var resultsGroupedByBoards = tournament.Results
+                .Where(r=>r.ResultNsPoints != null)
+                .GroupBy(r => r.Board.BoardNumber, r=>r, (key,g) => new { BoardId = key, Results = g.ToList()})
+                .ToList();
             foreach (var resultsGroupedByBoard in resultsGroupedByBoards)
             {
                 UpdateBoardScores(resultsGroupedByBoard.Results,tournament.TournamentScoringType);
@@ -116,7 +119,10 @@ namespace IglaClub.TournamentManager
         {
             foreach (var result in resultsGroupedByBoard)
             {
-                result.ResultNsPoints = UpdateScoreInBoards(result, DealerIsVulnerable(result));
+                int? newScore = UpdateScoreInBoards(result, DealerIsVulnerable(result));
+                if (newScore == null) //that means the score was wrtitten witout the contract
+                    continue;
+                result.ResultNsPoints = newScore;
             }
         }
 

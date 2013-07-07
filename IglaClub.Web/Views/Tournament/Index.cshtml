@@ -11,22 +11,22 @@
 </p>
 <table>
     <tr>
-        <th>
+        <th class="headerStyle">
             @Html.DisplayNameFor(model => model.Name)
         </th>
-        <th>
+        <th class="headerStyle">
             @Html.DisplayNameFor(model => model.Description)
         </th>
-        <th>
+        <th class="headerStyle">
             @Html.DisplayNameFor(model => model.BoardsInRound)
         </th>
-        <th>
+        <th class="headerStyle">
             @Html.DisplayNameFor(model => model.TournamentStatus)
         </th>
-        <th>
+        <th class="headerStyle">
             @Html.DisplayNameFor(model => model.CurrentRound)
-        </th>
-        <th></th>
+        </th >
+        <th class="headerStyle">Options</th>
     </tr>
 
 @foreach (var item in Model) {

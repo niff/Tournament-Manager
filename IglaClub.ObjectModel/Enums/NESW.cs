@@ -5,10 +5,11 @@ namespace IglaClub.ObjectModel.Enums
     [Flags]
     public enum NESW
     {
-        North = 1,
-        East = 2,
-        South = 4,
-        West = 8,
-        PassedOut = 16
+        Unavailable = 1,
+        North = 2,
+        East = 4,
+        South = 8,
+        West = 16,
+        PassedOut = 32
     }
 }

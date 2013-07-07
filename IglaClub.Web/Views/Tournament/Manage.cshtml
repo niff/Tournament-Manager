@@ -10,6 +10,7 @@
 
 <h2>Manage tournament [@Model.Tournament.Name]</h2>
 <div>
+    Tournament is <strong>@Model.Tournament.TournamentStatus.ToString() </strong><br/>
     <div style="float: left">
         <ul>
             <li>@Html.ActionLink("Edit details", "Edit", new { id = Model.Tournament.Id })</li>
@@ -20,17 +21,17 @@
             @if (Model.Tournament.TournamentStatus == TournamentStatus.Started && Model.Tournament.TournamentMovingType == TournamentMovingType.Cavendish)
             {
                 <li>@Html.ActionLink("Generate next round", "GenerateNextRound", new { tournamentId = Model.Tournament.Id, withPairsRepeat = false })</li>
-                
+                @Html.Label("Results left to complete round: " +Model.ResultsToComplete.ToString())
             }
             
-
         </ul>
 
         <div>
-                @Html.Label("Round number: " +Model.Tournament.CurrentRound.ToString())
-            @Html.ActionLink("Back to List", "Index")  @Html.Label("Results left to complete round: " +Model.ResultsToComplete.ToString())
+            @Html.Label("Round number: " +Model.Tournament.CurrentRound.ToString())
+            @Html.ActionLink("Back to List", "Index")  
         </div>
     </div>
-    Tournament is <strong>@Model.Tournament.TournamentStatus.ToString() </strong><br/>
-    @Html.Action("Pairs", new { tournamentId = @Model.Tournament.Id} )
+    @if(Model.Tournament.TournamentStatus == TournamentStatus.Planned)
+    {  @Html.Action("Pairs", new { tournamentId = @Model.Tournament.Id} )}
+    @Html.Action("PairsResults", "Results",new { tournamentId = @Model.Tournament.Id} )
 </div>
