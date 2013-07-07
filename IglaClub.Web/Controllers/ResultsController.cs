@@ -60,16 +60,20 @@ namespace IglaClub.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(IEnumerable<Result> results)
+        public ActionResult Edit(List<Result> results)
         {
-            var enumerable = results as IList<Result> ?? results.ToList();
-            foreach (var result in enumerable)
+            //var enumerable = results as IList<Result> ?? results.ToList();
+            if (results != null)
             {
-                //var t = tournamentRepository.Find();
-                //t = result;
+                foreach (var result in results)
+                {
+                    //var t = tournamentRepository.Find();
+                    //t = result;
 
+                }
+                
             }
-            return RedirectToAction("Manage", new {enumerable.First().Tournament.Id});
+            return RedirectToAction("Manage", new {results.First().Tournament.Id});
         }
 
         //

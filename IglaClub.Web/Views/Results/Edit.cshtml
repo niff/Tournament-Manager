@@ -1,16 +1,17 @@
-﻿@model IEnumerable<IglaClub.ObjectModel.Entities.Result>
+﻿@model List<IglaClub.ObjectModel.Entities.Result>
 
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var list = @Model;
 }
 
 <h2>Edit</h2>
-
+@using (Html.BeginForm()){
 <table class="result">
-    <tr>
+@*    <tr>
         <th>
-            @Html.DisplayNameFor(model => model.NumberOfTricks)
+            @Html.DisplayNameFor(list[0].NumberOfTricks)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ContractLevel)
@@ -31,32 +32,35 @@
             @Html.DisplayNameFor(model => model.ScoreEw)
         </th>
         <th></th>
-    </tr>
+    </tr>*@
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.TextBoxFor(modelItem => item.NumberOfTricks)
-        </td>
-        <td>
-            @Html.TextBoxFor(modelItem => item.ContractLevel)
-        </td>
-        <td>
-            @Html.TextBoxFor(modelItem => item.ResultNsPoints)
-        </td>
-        <td>
-            @Html.TextBoxFor(modelItem => item.RoundNumber)
-        </td>
-        <td>
-            @Html.TextBoxFor(modelItem => item.TableNumber)
-        </td>
-        <td>
-            @Html.TextBoxFor(modelItem => item.ScoreNs)
-        </td>
-        <td>
-            @Html.TextBoxFor(modelItem => item.ScoreEw)
-        </td>
-    </tr>
-}
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.TextBoxFor(modelItem => item.NumberOfTricks)
+            </td>
+            <td>
+                @Html.TextBoxFor(modelItem => item.ContractLevel)
+            </td>
+            <td>
+                @Html.TextBoxFor(modelItem => item.ResultNsPoints)
+            </td>
+            <td>
+                @Html.TextBoxFor(modelItem => item.RoundNumber)
+            </td>
+            <td>
+                @Html.TextBoxFor(modelItem => item.TableNumber)
+            </td>
+            <td>
+                @Html.TextBoxFor(modelItem => item.ScoreNs)
+            </td>
+            <td>
+                @Html.TextBoxFor(modelItem => item.ScoreEw)
+            </td>
+        </tr>
+
+    }
 
 </table>
+<input type="submit" value="Zapisz"/>
+}
