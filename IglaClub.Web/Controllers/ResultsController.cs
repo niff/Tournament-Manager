@@ -75,11 +75,28 @@ namespace IglaClub.Web.Controllers
         //
         // GET: /Results/Manage/5
 
-        public ActionResult Manage(long tournamentId)
+        public ActionResult Manage(long tournamentId, string sort, string sortdir)
         {
-            Tournament tournament = tournamentRepository.GetTournament(tournamentId);  
-                
-            return View(tournament);
+            Tournament tournament = tournamentRepository.GetTournament(tournamentId);
+            List<Result> results = tournament.Results.ToList();
+            if (!string.IsNullOrEmpty(sort))
+            {
+                switch (sort)
+                {
+                    case "BoardNumber":
+                        results = tournament.Results.OrderBy(r => r.Board.BoardNumber).ToList();
+                        break;
+                    case "TableNumber":
+                        results = tournament.Results.OrderBy(r => r.TableNumber).ToList();
+                        break;
+                    default:
+                        results = tournament.Results.OrderBy(r => r.RoundNumber).ToList();
+                        break;
+                }
+                if (sortdir == "DESC")
+                    results.Reverse();
+            }
+            return View(new TournamentResultsVm{Tournament = tournament, Results = results});
         }
 
         public ActionResult CreateEmpty(long tournamentId)
@@ -112,6 +129,18 @@ namespace IglaClub.Web.Controllers
         public ActionResult Calculate(long id)
         {
             throw new NotImplementedException();
+        }
+
+        public ActionResult RemoveLastRound(long id)
+        {
+            tournamentManager.RemoveLastRound(id);
+            return RedirectToAction("Manage", new { tournamentId = id });
+        }
+
+        public ActionResult GenerateNextRound(long tournamentId, bool withPairsRepeat)
+        {
+            tournamentManager.GenerateNextRound(tournamentId, withPairsRepeat);
+            return RedirectToAction("Manage", new { tournamentId });
         }
 
     }

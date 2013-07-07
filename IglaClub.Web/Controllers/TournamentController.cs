@@ -157,14 +157,14 @@ namespace IglaClub.Web.Controllers
 
         public ActionResult CalculateResults(long id)
         {
-            //Tournament tournament = db.Tournaments.Find(tournamentId);
-            //return View("CalculateResults",tournament.Pairs);
-            throw new NotImplementedException();
+            tournamentManager.CalculateResults(id);
+            return RedirectToAction("Manage","Results", new { tournamentId = id });
         }
 
-        public ActionResult GenerateNextRound()
+        public ActionResult CalculateScore(long id)
         {
-            throw new NotImplementedException();
+            tournamentManager.CalculateScore(id);
+            return RedirectToAction("Manage", "Results", new { tournamentId = id });
         }
 
         public void RemovePair(long tournamentId, long pairId )
@@ -204,10 +204,10 @@ namespace IglaClub.Web.Controllers
             return jsonResult;
         }
 
-        public ActionResult GenerateNextRound(long id, bool withPairsRepeat)
+        public ActionResult GenerateNextRound(long tournamentId, bool withPairsRepeat)
         {
-            tournamentManager.GenerateNextRound(id, withPairsRepeat);
-            return RedirectToAction("Manage", new { id });
+            tournamentManager.GenerateNextRound(tournamentId, withPairsRepeat);
+            return RedirectToAction("Manage", new { id = tournamentId });
         }
 
         [HttpPost]

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -26,7 +27,8 @@ namespace IglaClub.TournamentManager
             Tournament tournament = db.Tournaments.Find(tournamentId);
             User player1 = db.Users.Find(player1Id);
             User player2 = db.Users.Find(player2Id);
-            tournament.Pairs.Add(new Pair() { Tournament = tournament, PairNumber = 1, Player1 = player1, Player2 = player2} );
+            int pairNumber = tournament.Pairs.Max(p => p.PairNumber) + 1;
+            tournament.Pairs.Add(new Pair() { Tournament = tournament, PairNumber = pairNumber, Player1 = player1, Player2 = player2} );
             db.SaveChanges();
             return true;
         }
@@ -47,21 +49,25 @@ namespace IglaClub.TournamentManager
             return true;
         }
 
-        public bool GenerateNextRound(long tournamentId, bool withPairRepeats)
+        public OperationStatus GenerateNextRound(long tournamentId, bool withPairRepeats)
         {
             Tournament tournament = db.Tournaments.Find(tournamentId);
-            //check whether round is finished (all boards are played (number of tricks))
+            if (tournament == null) 
+                return new OperationStatus(false,"Tournament with id " + tournamentId + " not found");
+            if (tournament.TournamentMovingType != TournamentMovingType.Cavendish)
+                return new OperationStatus(false,"Tournament with id " + tournamentId + " moving type is different than cavendish (cannot generate extra round)");;
+            if (tournament.Results.Any(r => r.ResultNsPoints == null))
+                return new OperationStatus(false, "Round is still not finished. " + tournament.Results.Count(r => r.ResultNsPoints == null) + " results not entered left.");
             IEnumerable<BoardInstance> boards = GenerateEmptyBoards(tournament);
             TournamentHelper.AddBoardsToTournament(tournament, boards);
 
-            //todo: check if tournament should finish if michell
             IEnumerable<Result> results = TournamentHelper.GenerateNextCavendishRound(tournament,withPairRepeats);
             TournamentHelper.AddResultsToTournament(tournament, results);
 
             tournament.CurrentRound ++;
             
             db.SaveChanges();
-            return true;
+            return new OperationStatus(true);
         }
         
         private IEnumerable<BoardInstance> GenerateEmptyBoards(Tournament tournament)
@@ -98,6 +104,41 @@ namespace IglaClub.TournamentManager
             return boardInstance;
         }
 
-        
+        public OperationStatus CalculateScore(long tournamentId)
+        {
+            Tournament tournament = db.Tournaments.Find(tournamentId);
+            if (tournament == null)
+            {
+                return new OperationStatus(false, "Tournament not found");
+            }
+            TournamentHelper.UpdateEachResultScore(tournament.Results);
+            db.SaveChanges();
+            return new OperationStatus(true);
+        }
+        public OperationStatus CalculateResults(long tournamentId)
+        {
+            Tournament tournament = db.Tournaments.Find(tournamentId);
+            if (tournament == null)
+            {
+                return new OperationStatus(false, "Tournament not found");
+            }
+            TournamentHelper.UpdatePointsPerBoard(tournament);
+            TournamentHelper.UpdatePairsResultsInTournament(tournament);
+            db.SaveChanges();
+            return new OperationStatus(true);
+        }
+
+        public OperationStatus RemoveLastRound(long tournamentId)
+        {
+            Tournament tournament = db.Tournaments.Find(tournamentId);
+            var resultsToRemove= tournament.Results.Where(r => r.RoundNumber == tournament.CurrentRound).ToList();
+            foreach (var result in resultsToRemove)
+            {
+                tournament.Results.Remove(result);
+            }
+            tournament.CurrentRound--;
+            db.SaveChanges();
+            return new OperationStatus(true);
+        }
     }
 }
