@@ -197,7 +197,7 @@ namespace IglaClub.Web.Controllers
         public JsonResult SearchUsers(long tournamentId, string phrase)
         {
             var result = userRepository.GetUsersByPhraseAndTournament(tournamentId, phrase)
-                .Select(u => new { u.Id, value = u.Name + ( (!String.IsNullOrWhiteSpace(u.Nickname) ) ? " (" + u.Nickname + ")" : "")})
+                .Select(u => new { u.Id, value = u.Name +" "+ u.Lastname  + ( (!String.IsNullOrWhiteSpace(u.Nickname) ) ? " (" + u.Nickname + ")" : "")})
                         .Take(10)
                         .ToArray();
             var jsonResult = Json(result, JsonRequestBehavior.AllowGet);

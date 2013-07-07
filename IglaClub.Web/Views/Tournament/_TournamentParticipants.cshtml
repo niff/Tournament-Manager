@@ -62,9 +62,9 @@
             var idOfTriggeringElement = '#' + this.element.attr("id");
             $.getJSON("@Url.Action("SearchUsers")", { phrase: $(idOfTriggeringElement).val(), tournamentId: '@Model.Tournament.Id' },
                 function (data) {
-                    if (data.length < 1) {
-                        data.push({ value: "Nie znaleziono. Dodaj", Id: 0 });
-                    }
+                    //if (data.length < 1) {
+                        data.push({ value: "Dodaj...", Id: 0 });
+                    //}
                     response($.map(data, function (item) {
                         return {
                             label: item.value,
@@ -84,6 +84,7 @@
                         noResults: '',
                         results: ''
                     },
+                    minLength:0,
                     open: function (e, ui) {
                         var idOfTriggeringElement = '#' + this.id;
                         var acData = $(idOfTriggeringElement).data('autocomplete');
@@ -100,9 +101,9 @@
                                // }
                             });
                     },
-                    select: function(event, ui) {
+                    select: function (event, ui) {
+                        //event.preventDefault();
                         if (ui.item.id != 0) {
-                            //event.preventDefault();
                             var elem = this.id;
                             var sufix = elem.substr((elem.length - 1), 1);
                             var userId = "#user" + sufix;
@@ -117,6 +118,7 @@
                         }
                 }
                 })
+                .focus(function () { $(this).autocomplete("search", ""); })
                 //.data("autocomplete")._renderItem = function (ul, item) {
                 //    var idOfTriggeringElement = '#' + this.id;
                 //    return $("<li>")

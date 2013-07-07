@@ -34,7 +34,7 @@ namespace IglaClub.ObjectModel.Repositories
                                                    .Union(from pairs in db.Tournaments.Find(tournamentId).Pairs
                                                                                   where pairs.Player2 != null
                                                                                   select pairs.Player2.Id).ToList();
-            var availableUsers = db.Users.Where(u => !subscribedPairUsersIds.Contains(u.Id)).ToList();
+            var availableUsers = db.Users.Where(u => !subscribedPairUsersIds.Contains(u.Id)).OrderByDescending(p=>p.Nickname).ToList();
             return availableUsers;
         }
 
