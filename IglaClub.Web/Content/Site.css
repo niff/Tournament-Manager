@@ -758,7 +758,7 @@ tr.pager td {
 
 /*-------------- Manage results -------------*/
 .rowStyleOdd {
-    background-color: lightblue;
+    background-color: lightgray;
     border: solid 1px;
     text-align: center;
 }
@@ -774,7 +774,9 @@ tr.pager td {
     text-align: center;
 }
 .headerStyle th {
-    padding: 5px 15px;
+    width: 30px;
+    padding: 5px 5px;
+    font-size: 0.8em;
 }
 .ui-menu-item{
 	background-color: whitesmoke;

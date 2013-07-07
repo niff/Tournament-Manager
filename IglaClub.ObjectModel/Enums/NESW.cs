@@ -8,6 +8,7 @@ namespace IglaClub.ObjectModel.Enums
         North = 1,
         East = 2,
         South = 4,
-        West = 8
+        West = 8,
+        PassedOut = 16
     }
 }

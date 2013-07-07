@@ -8,15 +8,15 @@ namespace IglaClub.ObjectModel.Entities
 
         public virtual Pair EW { get; set; }
 
-        public NESW PlayedBy { get; set; }
-        
-        public int NumberOfTricks { get; set; }
-        
+        public int ContractLevel { get; set; }
+
         public ContractColors ContractColor { get; set; }
         
         public ContractDoubled ContractDoubled { get; set; }
 
-        public int ContractLevel { get; set; }
+        public NESW PlayedBy { get; set; }
+        
+        public int NumberOfTricks { get; set; }
 
         public int? ResultNsPoints { get; set; }
 

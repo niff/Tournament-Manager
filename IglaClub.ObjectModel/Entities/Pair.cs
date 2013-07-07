@@ -18,9 +18,13 @@ namespace IglaClub.ObjectModel.Entities
 
         public virtual User Player2 { get; set; }
 
+        public float Score { get; set; }
+
         public override string ToString()
         {
             return (Player1 == null ? "Unknown" : Player1.Name) + " - " +(Player2 == null ? "Unknown" : Player2.Name);
         }
+
+        
     }
 }

@@ -20,12 +20,14 @@
             @if (Model.Tournament.TournamentStatus == TournamentStatus.Started && Model.Tournament.TournamentMovingType == TournamentMovingType.Cavendish)
             {
                 <li>@Html.ActionLink("Generate next round", "GenerateNextRound", new { tournamentId = Model.Tournament.Id, withPairsRepeat = false })</li>
+                
             }
-            S
+            
 
         </ul>
 
         <div>
+                @Html.Label("Round number: " +Model.Tournament.CurrentRound.ToString())
             @Html.ActionLink("Back to List", "Index")  @Html.Label("Results left to complete round: " +Model.ResultsToComplete.ToString())
         </div>
     </div>

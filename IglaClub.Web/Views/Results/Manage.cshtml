@@ -1,32 +1,45 @@
-﻿@model IglaClub.ObjectModel.Entities.Tournament
+﻿@model IglaClub.Web.Models.ViewModels.TournamentResultsVm
+@using IglaClub.ObjectModel.Enums
 @using IglaClub.Web.Controllers;
+@using IglaClub.Web.Views.Helpers
 @{
     ViewBag.Title = "Tournament results";
 }
 
 
-<h2>Tournament @Model.Name results</h2>
+<h2>Tournament @Model.Tournament.Name results</h2>
 @{
-    var grid = new WebGrid(Model.Results);
+    var grid = new WebGrid(Model.Results,rowsPerPage: 40);
 }
 
-@Html.ActionLink("Edytuj", "Edit", new {tournamentId = @Model.Id})
+@Html.ActionLink("Edytuj", "Edit", new {tournamentId = @Model.Tournament.Id})
 
 @grid.GetHtml(columns: grid.Columns( 
+        grid.Column("ResultFinished",header: "Ok", format: @<text>@ResultHelper.GetStringForFinished(@item.ResultNsPoints)</text>),
         grid.Column("TableNumber",header: "Table Number", format: @<text>@item.TableNumber</text>),
         grid.Column("RoundNumber",header: "Round Number", format: @<text>@item.RoundNumber</text>),
         grid.Column("NsPairNumber",header: "Ns Pair Number", format: @<text>@item.Ns.PairNumber</text>),
         grid.Column("EwPairNumber",header: "Ew Pair Number", format: @<text>@item.Ew.PairNumber</text>),
-        grid.Column("ContractColor",header: "Contract Color", format: @<text>@item.ContractColor.ToString()</text>),
+        grid.Column("BoardNumber",header: "Board Number", format: @<text>@item.Board.Id</text>),
         grid.Column("ContractLevel",header: "Contract Level", format: @<text>@item.ContractLevel.ToString()</text>),
-        grid.Column("PlayedBy",header: "Played By", format: @<text>@item.PlayedBy.ToString()</text>),
-        grid.Column("BoardNumber",header: "BoardNumber", format: @<text>@item.Board.Id</text>),
-        grid.Column("Remove",header: "Remove", format: @<text>@Html.ActionLink("Remove", "Delete", new { id = @item.Id })</text>)
-        //grid.Column("Score",header: "Score", format: @<text>@item.Score</text>)
+        grid.Column("ContractColor",header: "Contract Color", format: @<text>@Enum.GetName(typeof(ContractColors), item.ContractColor)</text>),
+        grid.Column("IsDoubled",header: "dbl", format: @<text>@ResultHelper.GetStringForDoubledContract(item.ContractDoubled)</text>),
+        grid.Column("PlayedBy",header: "Played by", format: @<text>@item.PlayedBy.ToString()</text>),
+        grid.Column("NumberOfTricks",header: "Number of Tricks", format: @<text>@item.NumberOfTricks</text>),
+        grid.Column("Vulnerable",header: "Vul", format: @<text>@item.Board.BoardDefinition.Vulnerability</text>),
+        grid.Column("Remove",header: "Remove", format: @<text>@Html.ActionLink("Remove", "Delete", new { id = @item.Id })</text>),
+        grid.Column("Result",header: "Result", format: @<text>@item.ResultNsPoints</text>),
+        grid.Column("ScoreNS",header: "Score NS", format: @<text>@item.ScoreNS</text>),
+        grid.Column("ScoreEW",header: "Score EW", format: @<text>@item.ScoreEW</text>)
         
         )
         ,rowStyle: "rowStyleOdd", alternatingRowStyle: "rowStyleEven" , headerStyle: "headerStyle"
 )
 
-<div>    @Html.ActionLink("Manage tournament", "Manage","Tournament",new { id = Model.Id},null)</div>
+<div>    @Html.ActionLink("Manage tournament", "Manage","Tournament",new { id = Model.Tournament.Id},null)  |  
+    @Html.ActionLink("Calculate score", "CalculateScore", "Tournament", new { id = Model.Tournament.Id },null)  |
+    @Html.ActionLink("Calculate results", "CalculateResults", "Tournament", new { id = Model.Tournament.Id },null) |
+    @Html.ActionLink("Remove last round", "RemoveLastRound", "Results", new { id = Model.Tournament.Id },null) |
+    @Html.ActionLink("Generate next round", "GenerateNextRound", new { tournamentId = Model.Tournament.Id, withPairsRepeat = false })
+</div>
 

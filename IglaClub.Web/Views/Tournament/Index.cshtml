@@ -20,6 +20,12 @@
         <th>
             @Html.DisplayNameFor(model => model.BoardsInRound)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TournamentStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CurrentRound)
+        </th>
         <th></th>
     </tr>
 
@@ -33,6 +39,12 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.BoardsInRound)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TournamentStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CurrentRound)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
