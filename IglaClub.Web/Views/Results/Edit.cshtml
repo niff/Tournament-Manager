@@ -34,31 +34,32 @@
         <th></th>
     </tr>*@
 
-    @foreach (var item in Model) {
+    @for (int i= 0; i< @Model.Count(); i++) {
         <tr>
             <td>
-                @Html.TextBoxFor(modelItem => item.NumberOfTricks)
+                @Html.TextBoxFor(m => m[i].NumberOfTricks)
             </td>
             <td>
-                @Html.TextBoxFor(modelItem => item.ContractLevel)
+                @Html.TextBoxFor(m => m[i].ContractLevel)
             </td>
             <td>
-                @Html.TextBoxFor(modelItem => item.ResultNsPoints)
+                @Html.TextBoxFor(m => m[i].ResultNsPoints)
             </td>
             <td>
-                @Html.TextBoxFor(modelItem => item.RoundNumber)
+                @Html.TextBoxFor(m => m[i].RoundNumber)
             </td>
             <td>
-                @Html.TextBoxFor(modelItem => item.TableNumber)
+                @Html.TextBoxFor(m => m[i].TableNumber)
             </td>
             <td>
-                @Html.TextBoxFor(modelItem => item.ScoreNs)
+                @Html.TextBoxFor(m => m[i].ScoreNs)
             </td>
             <td>
-                @Html.TextBoxFor(modelItem => item.ScoreEw)
+                @Html.TextBoxFor(m => m[i].ScoreEw)
             </td>
         </tr>
-
+        
+    @Html.HiddenFor(m => m[i].Tournament)
     }
 
 </table>

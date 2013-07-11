@@ -6,7 +6,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using IglaClub.ObjectModel.Entities;
-using IglaClub.ObjectModel.Enums;
 using IglaClub.ObjectModel.Repositories;
 using IglaClub.Web.Models;
 using IglaClub.Web.Models.ViewModels;
@@ -27,64 +26,38 @@ namespace IglaClub.Web.Controllers
         {
             pairRepository = new PairRepository(db);
             userRepository = new UserRepository(db);
-            tournamentRepository = new TournamentRepository(db);
             resultRepository = new ResultRepository(db);
+            tournamentRepository = new TournamentRepository(db);
         }
-        
-        //Results from tournament, as partial view
-        // GET: /Results/1
+
         public PartialViewResult Index(long tournamentId)
         {
             throw new NotImplementedException();
-            //return View(db.Tournaments.ToList());
         }
-        
-        
-        //
-        // POST: /Tournament/Edit/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit(Result result)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(result).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Manage", new { id = result.Tournament.Id});
-        //    }
-        //    return RedirectToAction("Manage", new { id = result.Tournament.Id });
-        //    //return View(result);
-        //}
 
         public ActionResult Edit(long tournamentId)
         {
-            var model = db.Tournaments.Find(tournamentId).Results;
+            var model = db.Tournaments.Find(tournamentId).Results.ToList();
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Edit(List<Result> results)
         {
-            //var enumerable = results as IList<Result> ?? results.ToList();
             if (results != null)
             {
                 foreach (var result in results)
                 {
-                    //var t = tournamentRepository.Find();
-                    //t = result;
-
+                    resultRepository.InsertOrUpdate(result);
                 }
                 
             }
             return RedirectToAction("Manage", new {results.First().Tournament.Id});
         }
 
-        //
-        // GET: /Results/Manage/5
-
         public ActionResult Manage(long tournamentId, string sort, string sortdir)
         {
-            Tournament tournament = tournamentRepository.GetTournamentWithInclude(tournamentId);
+            Tournament tournament = tournamentRepository.GetTournament(tournamentId);
             List<Result> results = tournament.Results.ToList();
             if (!string.IsNullOrEmpty(sort))
             {
@@ -113,9 +86,6 @@ namespace IglaClub.Web.Controllers
             db.Results.Add(result);
             return RedirectToAction("Manage",new { tournamentId });
         }
-
-        //
-        // POST: /Tournament/Delete/5
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

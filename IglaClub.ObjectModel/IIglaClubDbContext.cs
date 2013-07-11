@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using IglaClub.ObjectModel.Entities;
+using System.Data.Entity.Infrastructure;
 
 namespace IglaClub.ObjectModel
 {
@@ -15,5 +16,7 @@ namespace IglaClub.ObjectModel
         DbSet<Result> Results { get; set; }
 
         int SaveChanges();
+
+        DbEntityEntry Entry(object entity);
     }
 }
