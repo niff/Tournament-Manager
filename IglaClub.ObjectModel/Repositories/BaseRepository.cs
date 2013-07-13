@@ -27,5 +27,11 @@ namespace IglaClub.ObjectModel.Repositories
                                            EntityState.Modified;
                 db.SaveChanges();
         }
+
+        //public T Get<T>(long id)
+        //{
+        //    (new IglaClubDbContext()).
+        //    db.
+        //}
     }
 }
