@@ -9,30 +9,30 @@
 <h2>Edit</h2>
 @using (Html.BeginForm()){
 <table class="result">
-@*    <tr>
+    <tr>
         <th>
-            @Html.DisplayNameFor(list[0].NumberOfTricks)
+            @Html.DisplayNameFor(model =>model[0].NumberOfTricks)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ContractLevel)
+            @Html.DisplayNameFor(model => model[0].ContractLevel)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ResultNsPoints)
+            @Html.DisplayNameFor(model => model[0].ResultNsPoints)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RoundNumber)
+            @Html.DisplayNameFor(model => model[0].RoundNumber)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TableNumber)
+            @Html.DisplayNameFor(model => model[0].TableNumber)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ScoreNs)
+            @Html.DisplayNameFor(model => model[0].ScoreNs)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ScoreEw)
+            @Html.DisplayNameFor(model => model[0].ScoreEw)
         </th>
         <th></th>
-    </tr>*@
+    </tr>
 
     @for (int i = 0; i < @Model.Count(); i++)
     {
@@ -41,7 +41,25 @@
                 @Html.TextBoxFor(m => m[i].NumberOfTricks)
             </td>
             <td>
+                @Html.TextBoxFor(m => m[i].NS.PairNumber)
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m[i].EW.PairNumber)
+            </td>
+            <td>
                 @Html.TextBoxFor(m => m[i].ContractLevel)
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m[i].ContractDoubled)
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m[i].ContractColor)
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m[i].Board.BoardNumber)
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m[i].PlayedBy)
             </td>
             <td>
                 @Html.TextBoxFor(m => m[i].ResultNsPoints)
@@ -58,13 +76,21 @@
             <td>
                 @Html.TextBoxFor(m => m[i].ScoreEw)
             </td>
+            <td>
+                @Html.TextBoxFor(m => m[i].ResultNsPoints)
+            </td>
+            <td>
+                @Html.HiddenFor(m => m[i].TournamentId)
+                @Html.HiddenFor(m => m[i].BoardId)
+                @Html.HiddenFor(m => m[i].Id)
+            </td>
         </tr>
     }
-    if(@Model.Any())
-    {@Html.HiddenFor(m => m[0].TournamentId)}
-    
-
-
 </table>
+    if (@Model.Any())
+    {
+        @Html.HiddenFor(m => m[0].TournamentId)
+        @Html.HiddenFor(m => m[0].BoardId)
+}
 <input type="submit" value="Zapisz"/>
 }
