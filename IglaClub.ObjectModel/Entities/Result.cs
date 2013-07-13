@@ -1,4 +1,5 @@
-﻿using IglaClub.ObjectModel.Enums;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using IglaClub.ObjectModel.Enums;
 
 namespace IglaClub.ObjectModel.Entities
 {
@@ -20,9 +21,16 @@ namespace IglaClub.ObjectModel.Entities
 
         public int? ResultNsPoints { get; set; }
 
+
         public virtual BoardInstance Board { get; set; }
 
+        [Column("Board_Id")]
+        public long BoardId { get; set; }
+
         public virtual Tournament Tournament { get; set; }
+
+        [Column("Tournament_Id")]
+        public long TournamentId { get; set; }
 
         public int RoundNumber { get; set; }
 
