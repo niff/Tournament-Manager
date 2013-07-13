@@ -44,15 +44,18 @@ namespace IglaClub.Web.Controllers
         [HttpPost]
         public ActionResult Edit(List<Result> results)
         {
+
             if (results != null)
             {
                 foreach (var result in results)
                 {
                     resultRepository.InsertOrUpdate(result);
                 }
-                
+
+                if (results.Any())
+                    return RedirectToAction("Manage", new {results.FirstOrDefault().TournamentId});
             }
-            return RedirectToAction("Manage", new {results.First().Tournament.Id});
+            return null;
         }
 
         public ActionResult Manage(long tournamentId, string sort, string sortdir)

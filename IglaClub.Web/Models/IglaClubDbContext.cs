@@ -60,8 +60,8 @@ namespace IglaClub.Web.Models
                             Results = new List<Result>(),
                             CreationDate = DateTime.Now
                         };
-                    var pair1 = new Pair() {Player1 = userA, Player2 = userB, Tournament = tournament};
-                    var pair2 = new Pair() { Player1 = userC, Player2 = userD, Tournament = tournament };
+                    var pair1 = new Pair() {Player1 = userA, Player2 = userB, Tournament = tournament, PairNumber = 1};
+                    var pair2 = new Pair() { Player1 = userC, Player2 = userD, Tournament = tournament, PairNumber = 2};
                     tournament.Pairs.Add(pair1);
                     tournament.Pairs.Add(pair2);
                     context.Tournaments.Add(tournament);
