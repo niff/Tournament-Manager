@@ -40,8 +40,13 @@
                     }
                     else
                     {
-                        var s = string.Format("{0:P} ({1})", Model.PairsInTounament[i].Score/
+                        var s = "0";
+                        if (Model.PairsInTounament[i].Score > 0)
+                        {
+                            s = string.Format("{0:P} ({1})", Model.PairsInTounament[i].Score/
                                                              Model.PairNumberMaxPoints.FirstOrDefault(p => p.Key == Model.PairsInTounament[i].PairNumber).Value, Model.PairsInTounament[i].Score);
+                        }
+                    
                         <span>@s</span>
                     }
 
