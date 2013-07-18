@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -23,32 +24,38 @@ namespace IglaClub.ObjectModel.Entities
 
         public virtual Club Club { get; set; }
 
+        [DisplayName("Tournament Scoring Type")]
         public TournamentScoringType TournamentScoringType { get; set; }
 
+        [DisplayName("Tournament Moving Type")]
         public TournamentMovingType TournamentMovingType { get; set; }
 
         public virtual IList<Pair> Pairs { get; set; }
 
-        [Display(Name = "Boards in round")]
+        [DisplayName ("Boards in round")]
         public int BoardsInRound { get; set; }
 
         public virtual IList<BoardInstance> Boards { get; set; }
 
         public virtual IList<Result> Results { get; set; }
 
-        [Display(Name = "Tournament Status")]
+        [DisplayName ("Tournament Status")]
         public TournamentStatus TournamentStatus { get; set; }
 
-        [Display(Name = "Current Round")]
+        [DisplayName ("Current Round")]
         public int CurrentRound { get; set; }
 
         [DataType(DataType.DateTime)]
+        [DisplayName("Planned Start Date")]
         public DateTime? PlannedStartDate { get; set; }
 
+        [DisplayName("Creation Date")]
         public DateTime? CreationDate { get; set; }
 
+        [DisplayName("Start Date")]
         public DateTime? StartDate { get; set; }
 
+        [DisplayName("Finish Date")]
         public DateTime? FinishDate { get; set; }
 
         
