@@ -13,21 +13,29 @@
     Tournament is <strong>@Model.Tournament.TournamentStatus.ToString() </strong><br/>
     <div style="float: left">
         <ul>
+            <li>@Html.ActionLink("Start Tournament", "Start", new { id = Model.Tournament.Id })</li>
+            
+            @if (Model.Tournament.TournamentStatus == TournamentStatus.Started)
+            {
+                <li>@Html.ActionLink("Manage results", "Manage","Results", new { tournamentId = Model.Tournament.Id },null)</li>
+                <li>@Html.ActionLink("Calculate results", "CalculateResults", new { id = Model.Tournament.Id })</li>
+                if (Model.Tournament.TournamentMovingType == TournamentMovingType.Cavendish)
+                {
+                    <li>@Html.ActionLink("Generate next round", "GenerateNextRound", new {tournamentId = Model.Tournament.Id, withPairsRepeat = false})</li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink("Move to the next round", "MoveToNextRound", new {tournamentId = Model.Tournament.Id, withPairsRepeat = false})</li>
+                }
+                @Html.Label("Results left to complete round: " + Model.ResultsToComplete.ToString())
+                @Html.Label("Round number: " +Model.Tournament.CurrentRound.ToString())
+            }
             <li>@Html.ActionLink("Edit details", "Edit", new { id = Model.Tournament.Id })</li>
             <li>@Html.ActionLink("Delete tournament", "Delete", new { id = Model.Tournament.Id })</li>
-            <li>@Html.ActionLink("Start Tournament", "Start", new { id = Model.Tournament.Id })</li>
-            <li>@Html.ActionLink("Manage results", "Manage","Results", new { tournamentId = Model.Tournament.Id },null)</li>
-            <li>@Html.ActionLink("Calculate results", "CalculateResults", new { id = Model.Tournament.Id })</li>
-            @if (Model.Tournament.TournamentStatus == TournamentStatus.Started && Model.Tournament.TournamentMovingType == TournamentMovingType.Cavendish)
-            {
-                <li>@Html.ActionLink("Generate next round", "GenerateNextRound", new { tournamentId = Model.Tournament.Id, withPairsRepeat = false })</li>
-                @Html.Label("Results left to complete round: " +Model.ResultsToComplete.ToString())
-            }
             
         </ul>
 
         <div>
-            @Html.Label("Round number: " +Model.Tournament.CurrentRound.ToString())
             @Html.ActionLink("Back to List", "Index")  
         </div>
     </div>
