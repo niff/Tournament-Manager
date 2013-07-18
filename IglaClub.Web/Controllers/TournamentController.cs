@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using IglaClub.ObjectModel.Entities;
+using IglaClub.ObjectModel.Enums;
 using IglaClub.ObjectModel.Repositories;
 using IglaClub.Web.Models;
 using IglaClub.Web.Models.ViewModels;
@@ -80,8 +81,7 @@ namespace IglaClub.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Tournaments.Add(tournament);
-                db.SaveChanges();
+                tournamentManager.Create(tournament);
                 return RedirectToAction("Index");
             }
 

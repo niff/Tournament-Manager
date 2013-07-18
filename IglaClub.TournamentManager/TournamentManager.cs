@@ -27,7 +27,7 @@ namespace IglaClub.TournamentManager
             Tournament tournament = db.Tournaments.Find(tournamentId);
             User player1 = db.Users.Find(player1Id);
             User player2 = db.Users.Find(player2Id);
-            int pairNumber = tournament.Pairs.Max(p => p.PairNumber) + 1;
+            int pairNumber = tournament.Pairs.Any() ? tournament.Pairs.Max(p => p.PairNumber) + 1 : 1;
             tournament.Pairs.Add(new Pair() { Tournament = tournament, PairNumber = pairNumber, Player1 = player1, Player2 = player2} );
             db.SaveChanges();
             return true;
@@ -139,6 +139,17 @@ namespace IglaClub.TournamentManager
             tournament.CurrentRound--;
             db.SaveChanges();
             return new OperationStatus(true);
+        }
+
+        public bool Create(Tournament tournament)
+        {
+            if (tournament.Id != 0)
+                return false;
+            tournament.TournamentStatus = TournamentStatus.Planned;
+            tournament.CreationDate = DateTime.Now;
+            db.Tournaments.Add(tournament);
+            db.SaveChanges();
+            return true;
         }
     }
 }

@@ -33,5 +33,6 @@
     </div>
     @if(Model.Tournament.TournamentStatus == TournamentStatus.Planned)
     {  @Html.Action("Pairs", new { tournamentId = @Model.Tournament.Id} )}
-    @Html.Action("PairsResults", "Results",new { tournamentId = @Model.Tournament.Id} )
+    else
+    {@Html.Action("PairsResults", "Results",new { tournamentId = @Model.Tournament.Id} )}
 </div>
