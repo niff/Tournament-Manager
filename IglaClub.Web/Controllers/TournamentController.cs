@@ -222,5 +222,9 @@ namespace IglaClub.Web.Controllers
             return Json(id);
         }
 
+        public ActionResult MoveToNextRound(long tournamentid, bool withpairsrepeat)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

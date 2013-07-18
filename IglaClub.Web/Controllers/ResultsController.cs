@@ -90,14 +90,11 @@ namespace IglaClub.Web.Controllers
             return RedirectToAction("Manage",new { tournamentId });
         }
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [ActionName("Delete")]
         public ActionResult DeleteConfirmed(long id)
         {
-            Result result = db.Results.Find(id);
-            db.Results.Remove(result);
-            db.SaveChanges();
-            return RedirectToAction("Manage", new { id = result.Tournament.Id});
+            long tournamentId = tournamentManager.DeleteResult(id);
+            return RedirectToAction("Manage", new { tournamentId});
         }
 
         protected override void Dispose(bool disposing)

@@ -793,7 +793,17 @@ tr.pager td {
 	height: 10px;
 }
 
+.tournamentsListTable {
+	border: 1px solid gray;
+    text-align: center; 
+}
+
 table tr {
+	border-bottom: 1px solid gray;
+}
+
+table tr:hover {
+    background-color: lightgray; 
 	border-bottom: 1px solid gray;
 }
 

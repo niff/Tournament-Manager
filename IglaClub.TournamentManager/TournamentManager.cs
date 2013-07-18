@@ -151,5 +151,18 @@ namespace IglaClub.TournamentManager
             db.SaveChanges();
             return true;
         }
+
+        /// <summary>
+        /// Deletes result from db
+        /// </summary>
+        /// <param name="resultId"></param>
+        /// <returns>Tournament id which from result is deleted</returns>
+        public long DeleteResult(long resultId)
+        {
+            Result result = db.Results.Find(resultId);
+            db.Results.Remove(result);
+            db.SaveChanges();
+            return result.TournamentId;
+        }
     }
 }
