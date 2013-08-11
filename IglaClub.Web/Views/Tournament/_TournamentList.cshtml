@@ -1,0 +1,54 @@
+﻿@model IEnumerable<IglaClub.ObjectModel.Entities.Tournament>
+
+
+<table class="tournamentsListTable">
+@*    <tr>
+        <th class="headerStyle">
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th class="headerStyle">
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th class="headerStyle">
+            @Html.DisplayNameFor(model => model.BoardsInRound)
+        </th>
+        <th class="headerStyle">
+            @Html.DisplayNameFor(model => model.TournamentStatus)
+        </th>
+        <th class="headerStyle">
+            @Html.DisplayNameFor(model => model.CurrentRound)
+        </th >
+        <th class="headerStyle">Options</th>
+    </tr>*@
+
+@foreach (var item in Model) {
+    var date = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("dd MMM yyyy") : "";
+    var hour = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("hh:mm") : "";
+    <tr>
+        <td>
+            <a href="Tournament/Manage/@item.Id">@Html.DisplayFor(modelItem => item.Name)</a>
+        </td>
+        <td>
+            @date
+        </td><td>
+            @hour
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.BoardsInRound)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TournamentStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CurrentRound)
+        </td>*@
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id }) |
+            @Html.ActionLink("Manage", "Manage", new { id=item.Id })
+        </td>*@
+    </tr>
+}
+
+</table>

@@ -326,6 +326,7 @@
     <Content Include="Views\Results\Manage.cshtml" />
     <Content Include="Views\Results\Edit.cshtml" />
     <Content Include="Views\Results\_PairsResults.cshtml" />
+    <Content Include="Views\Tournament\_TournamentList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
