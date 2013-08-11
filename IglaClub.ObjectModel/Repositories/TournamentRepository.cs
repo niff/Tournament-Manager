@@ -30,5 +30,19 @@ namespace IglaClub.ObjectModel.Repositories
         }
 
 
+        public IEnumerable<Tournament> GetOncoming()
+        {
+            return db.Tournaments.Where(t => t.TournamentStatus == Enums.TournamentStatus.Planned);
+        }
+
+        public IEnumerable<Tournament> GetPast()
+        {
+            return db.Tournaments.Where(t => t.TournamentStatus == Enums.TournamentStatus.Finished);
+        }
+
+        public IEnumerable<Tournament> GetOngoing()
+        {
+            return db.Tournaments.Where(t => t.TournamentStatus == Enums.TournamentStatus.Started);
+        }
     }
 }

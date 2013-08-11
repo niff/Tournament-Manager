@@ -20,11 +20,13 @@ namespace IglaClub.Web.Controllers
 
         private readonly PairRepository pairRepository;
         private readonly UserRepository userRepository;
+        private readonly TournamentRepository tournamentRepository;
 
         public TournamentController()
         {
              pairRepository = new PairRepository(db);
              userRepository = new UserRepository(db);
+             tournamentRepository = new TournamentRepository(db);
         }
         
         //
@@ -225,6 +227,17 @@ namespace IglaClub.Web.Controllers
         public ActionResult MoveToNextRound(long tournamentid, bool withpairsrepeat)
         {
             throw new NotImplementedException();
+        }
+
+        public PartialViewResult Oncoming()
+        {
+            return PartialView("_TournamentList", tournamentRepository.GetOncoming());
+        }
+
+
+        public PartialViewResult Past()
+        {
+            return PartialView("_TournamentList", tournamentRepository.GetPast());
         }
     }
 }
