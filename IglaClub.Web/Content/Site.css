@@ -8,8 +8,8 @@ body {
     background-color: #fff;
     border-top: solid 10px #000;
     color: #333;
-    font-size: .85em;
-    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    /*font-size: .85em;*/
+    /*font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;*/
     margin: 0;
     padding: 0;
 }
@@ -797,7 +797,7 @@ tr.pager td {
 .pairSearchInput {
     font-size: small;
     width: 100px;
-    height: 10px;
+    height: 20px;
 }
 
 .tournamentsListTable {
@@ -823,8 +823,8 @@ ul.ui-autocomplete li a {
 }
 
 .result tr td input {
-    width: 15px;
-    height: 5px;
+    width: 30px;
+    height: 20px;
     border: 1px rgb(128, 128, 128) solid;
 }
 
