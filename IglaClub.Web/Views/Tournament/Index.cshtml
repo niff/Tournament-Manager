@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<IglaClub.ObjectModel.Entities.Tournament>
 
+
 <div>
     @Html.ActionLink("New Tounament", "Create")
 </div>
@@ -10,6 +11,9 @@
 <div class="tile past">
     <p>Past</p>
     @Html.Action("Past")</div>
+<div class="tile ongoing">
+    <p>Ongoing</p>
+    @Html.Action("Ongoing")</div>
 
 
 

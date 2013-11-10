@@ -164,5 +164,24 @@ namespace IglaClub.TournamentManager
             db.SaveChanges();
             return result.TournamentId;
         }
+
+        public void DeleteTournament(long tournamentId)
+        {
+            Tournament tournament = db.Tournaments.Find(tournamentId);
+            foreach (var result in tournament.Results.ToList())
+            {
+                db.Results.Remove(result);
+            }
+            foreach (var pair in tournament.Pairs.ToList())
+            {
+                db.Pairs.Remove(pair);
+            }
+            foreach (var boardInstance in tournament.Boards.ToList())
+            {
+                db.BoardInstances.Remove(boardInstance);
+            }
+            db.Tournaments.Remove(tournament);
+            db.SaveChanges();
+        }
     }
 }

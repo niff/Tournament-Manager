@@ -58,7 +58,8 @@ namespace IglaClub.Web.Models
                             Pairs = new List<Pair>(),
                             Boards = new List<BoardInstance>(),
                             Results = new List<Result>(),
-                            CreationDate = DateTime.Now
+                            CreationDate = DateTime.Now,
+                            TournamentStatus = TournamentStatus.Planned
                         };
                     var pair1 = new Pair() {Player1 = userA, Player2 = userB, Tournament = tournament, PairNumber = 1};
                     var pair2 = new Pair() { Player1 = userC, Player2 = userD, Tournament = tournament, PairNumber = 2};
