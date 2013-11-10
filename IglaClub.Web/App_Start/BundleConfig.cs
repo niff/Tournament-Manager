@@ -23,8 +23,11 @@ namespace IglaClub.Web
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/Site.css"));
-
+            bundles.Add(new StyleBundle("~/Content/css").Include(
+                        "~/Content/bootstrap/css/bootstrap.css",
+                        "~/Content/bootstrap/css/bootstrap-responsive.css",
+                        "~/Content/site.css"));
+        
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",
                         "~/Content/themes/base/jquery.ui.resizable.css",
