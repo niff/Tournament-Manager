@@ -23,7 +23,7 @@
 
 @foreach (var item in Model) {
     var date = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("dd MMM yyyy") : "";
-    var hour = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("hh:mm") : "";
+    var hour = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("HH:mm") : "";
     <tr>
         <td>
             <a href="Tournament/Manage/@item.Id">@Html.DisplayFor(modelItem => item.Name)</a>

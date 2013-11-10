@@ -21,7 +21,8 @@ namespace IglaClub.ObjectModel.Repositories
                             .Include(t => t.Results.Select(r => r.NS))
                             .Include(t => t.Results.Select(r => r.EW))
                             .Include(t => t.Boards)
-                            .Include(t => t.Pairs).FirstOrDefault(t => t.Id == id);
+                            .Include(t => t.Pairs)
+                            .FirstOrDefault(t => t.Id == id);
         }
         public Tournament GetTournament(long id)
         {

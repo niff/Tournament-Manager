@@ -33,7 +33,7 @@ namespace IglaClub.Web.Controllers
         // GET: /Tournament/
         public ActionResult Index()
         {
-            return View(db.Tournaments.ToList());
+            return View(db.Tournaments.Include(t=>t.Pairs).OrderBy(t=>t.TournamentStatus).ToList());
         }
 
         //
@@ -139,9 +139,7 @@ namespace IglaClub.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            Tournament tournament = db.Tournaments.Find(id);
-            db.Tournaments.Remove(tournament);
-            db.SaveChanges();
+            tournamentManager.DeleteTournament(id);
             return RedirectToAction("Index");
         }
 
@@ -238,6 +236,11 @@ namespace IglaClub.Web.Controllers
         public PartialViewResult Past()
         {
             return PartialView("_TournamentList", tournamentRepository.GetPast());
+        }
+        
+        public PartialViewResult Ongoing()
+        {
+            return PartialView("_TournamentList", tournamentRepository.GetOngoing());
         }
     }
 }

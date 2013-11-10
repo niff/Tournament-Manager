@@ -13,8 +13,10 @@
     Tournament is <strong>@Model.Tournament.TournamentStatus.ToString() </strong><br/>
     <div style="float: left">
         <ul>
-            <li>@Html.ActionLink("Start Tournament", "Start", new { id = Model.Tournament.Id })</li>
-            
+            @if (Model.Tournament.TournamentStatus == TournamentStatus.Planned)
+            {
+                <li>@Html.ActionLink("Start Tournament", "Start", new {id = Model.Tournament.Id})</li>
+            }
             @if (Model.Tournament.TournamentStatus == TournamentStatus.Started)
             {
                 <li>@Html.ActionLink("Manage results", "Manage","Results", new { tournamentId = Model.Tournament.Id },null)</li>
@@ -27,12 +29,14 @@
                 {
                     <li>@Html.ActionLink("Move to the next round", "MoveToNextRound", new {tournamentId = Model.Tournament.Id, withPairsRepeat = false})</li>
                 }
-                @Html.Label("Results left to complete round: " + Model.ResultsToComplete.ToString())
-                @Html.Label("Round number: " +Model.Tournament.CurrentRound.ToString())
             }
             <li>@Html.ActionLink("Edit details", "Edit", new { id = Model.Tournament.Id })</li>
             <li>@Html.ActionLink("Delete tournament", "Delete", new { id = Model.Tournament.Id })</li>
-            
+            @if (Model.Tournament.TournamentStatus == TournamentStatus.Started)
+            {
+                @Html.Label("Results left to complete round: " + Model.ResultsToComplete.ToString())
+                @Html.Label("Round number: " +Model.Tournament.CurrentRound.ToString())
+            }
         </ul>
 
         <div>

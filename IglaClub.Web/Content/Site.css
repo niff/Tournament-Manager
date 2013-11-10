@@ -874,3 +874,14 @@ table.result {
     border: 15px solid rgb(255, 243, 175);
     float:right;
 }
+
+
+.ongoing table {
+    border: 15px solid rgb(196, 177, 205);
+    float:right;
+}
+
+.ongoing table tr:hover {
+    background-color: rgb(196, 177, 205);
+}
+
