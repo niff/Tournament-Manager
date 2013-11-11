@@ -25,8 +25,9 @@ namespace IglaClub.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                         "~/Content/bootstrap/css/bootstrap.css",
-                        "~/Content/bootstrap/css/bootstrap-responsive.css",
-                        "~/Content/site.css"));
+                        "~/Content/bootstrap/css/bootstrap-responsive.css"
+                        ,"~/Content/global.css"
+                        ));
         
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",
