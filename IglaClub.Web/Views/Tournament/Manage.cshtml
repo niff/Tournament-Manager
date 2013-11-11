@@ -10,41 +10,48 @@
 
 <h2>Manage tournament [@Model.Tournament.Name]</h2>
 <div>
-    Tournament is <strong>@Model.Tournament.TournamentStatus.ToString() </strong><br/>
+    Tournament is <strong>@Model.Tournament.TournamentStatus.ToString() </strong>
+    @if (Model.Tournament.TournamentStatus == TournamentStatus.Planned && Model.Tournament.PlannedStartDate != null)
+    {
+        <span>[Start: @Model.Tournament.PlannedStartDate.Value.ToLongDateString() @Model.Tournament.PlannedStartDate.Value.ToShortTimeString()]</span>
+    }
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Tournament.Id })
+    || @Html.ActionLink("Delete", "Delete", new { id = Model.Tournament.Id })
+    <br />
+    
     <div style="float: left">
         <ul>
             @if (Model.Tournament.TournamentStatus == TournamentStatus.Planned)
             {
-                <li>@Html.ActionLink("Start Tournament", "Start", new {id = Model.Tournament.Id})</li>
+                <li>@Html.ActionLink("Start Tournament", "Start", new { id = Model.Tournament.Id })</li>
             }
             @if (Model.Tournament.TournamentStatus == TournamentStatus.Started)
             {
-                <li>@Html.ActionLink("Manage results", "Manage","Results", new { tournamentId = Model.Tournament.Id },null)</li>
+                <li>@Html.ActionLink("Manage results", "Manage", "Results", new { tournamentId = Model.Tournament.Id }, null)</li>
                 <li>@Html.ActionLink("Calculate results", "CalculateResults", new { id = Model.Tournament.Id })</li>
                 if (Model.Tournament.TournamentMovingType == TournamentMovingType.Cavendish)
                 {
-                    <li>@Html.ActionLink("Generate next round", "GenerateNextRound", new {tournamentId = Model.Tournament.Id, withPairsRepeat = false})</li>
+                <li>@Html.ActionLink("Generate next round", "GenerateNextRound", new { tournamentId = Model.Tournament.Id, withPairsRepeat = false })</li>
                 }
                 else
                 {
-                    <li>@Html.ActionLink("Move to the next round", "MoveToNextRound", new {tournamentId = Model.Tournament.Id, withPairsRepeat = false})</li>
+                <li>@Html.ActionLink("Move to the next round", "MoveToNextRound", new { tournamentId = Model.Tournament.Id, withPairsRepeat = false })</li>
                 }
             }
-            <li>@Html.ActionLink("Edit details", "Edit", new { id = Model.Tournament.Id })</li>
-            <li>@Html.ActionLink("Delete tournament", "Delete", new { id = Model.Tournament.Id })</li>
+
+            
             @if (Model.Tournament.TournamentStatus == TournamentStatus.Started)
             {
-                @Html.Label("Results left to complete round: " + Model.ResultsToComplete.ToString())
-                @Html.Label("Round number: " +Model.Tournament.CurrentRound.ToString())
+                @Html.Label("Results left to complete round: " + Model.ResultsToComplete)
+                @Html.Label("Round number: " + Model.Tournament.CurrentRound)
             }
         </ul>
 
         <div>
-            @Html.ActionLink("Back to List", "Index")  
+            @Html.ActionLink("Back to List", "Index")
         </div>
     </div>
-    @if(Model.Tournament.TournamentStatus == TournamentStatus.Planned)
-    {  @Html.Action("Pairs", new { tournamentId = @Model.Tournament.Id} )}
-    else
-    {@Html.Action("PairsResults", "Results",new { tournamentId = @Model.Tournament.Id} )}
+    <div>
+        @(Model.Tournament.TournamentStatus == TournamentStatus.Planned ? Html.Action("Pairs", new {tournamentId = @Model.Tournament.Id}) : Html.Action("PairsResults", "Results", new {tournamentId = @Model.Tournament.Id}))
+    </div>
 </div>

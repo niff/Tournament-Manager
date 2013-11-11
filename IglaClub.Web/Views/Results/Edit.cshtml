@@ -1,4 +1,5 @@
-﻿@model List<IglaClub.ObjectModel.Entities.Result>
+﻿@using IglaClub.ObjectModel.Enums
+@model List<IglaClub.ObjectModel.Entities.Result>
 
 @{
     ViewBag.Title = "Edit";
@@ -73,16 +74,19 @@
                 @Html.TextBoxFor(m => m[i].ContractLevel)
             </td>
             <td>
-                @Html.TextBoxFor(m => m[i].ContractDoubled)
+                @Html.DropDownListFor(m => m[i].ContractDoubled, new SelectList(Enum.GetValues(typeof(ContractDoubled))))
+                @*@Html.TextBoxFor(m => m[i].ContractDoubled)*@
             </td>
             <td>
-                @Html.TextBoxFor(m => m[i].ContractColor)
+                @Html.DropDownListFor(m => m[i].ContractColor, new SelectList(Enum.GetValues(typeof(ContractColors))))
+                @*@Html.TextBoxFor(m => m[i].ContractColor)*@
             </td>
             <td>
                 @Html.TextBoxFor(m => m[i].Board.BoardNumber)
             </td>
             <td>
-                @Html.TextBoxFor(m => m[i].PlayedBy)
+                @Html.DropDownListFor(m => m[i].PlayedBy, new SelectList(Enum.GetValues(typeof(NESW))))
+               @* @Html.TextBoxFor(m => m[i].PlayedBy)*@
             </td>
             <td>
                 @Html.TextBoxFor(m => m[i].ResultNsPoints)
@@ -110,10 +114,6 @@
         </tr>
     }
 </table>
-    if (@Model.Any())
-    {
-        @Html.HiddenFor(m => m[0].TournamentId)
-        @Html.HiddenFor(m => m[0].BoardId)
-}
+    
 <input type="submit" value="Zapisz"/>
 }
