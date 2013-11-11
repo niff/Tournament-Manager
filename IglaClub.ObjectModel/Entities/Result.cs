@@ -14,7 +14,7 @@ namespace IglaClub.ObjectModel.Entities
         [DisplayName ("Contract Level")]
         public int ContractLevel { get; set; }
 
-        [DisplayName("Contract Level")]
+        [DisplayName("Contract Color")]
         public ContractColors ContractColor { get; set; }
 
         [DisplayName("Contract Doubled")]

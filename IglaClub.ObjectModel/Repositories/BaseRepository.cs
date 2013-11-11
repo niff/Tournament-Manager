@@ -20,13 +20,26 @@ namespace IglaClub.ObjectModel.Repositories
             db = _db;
         }
 
-        public void InsertOrUpdate(BaseEntity entity)
+        public virtual void InsertOrUpdate(BaseEntity entity)
         {
-                db.Entry(entity).State = entity.Id == 0 ?
-                                           EntityState.Added :
-                                           EntityState.Modified;
-                db.SaveChanges();
+                //db.Entry(entity).State = entity.Id == 0 ?
+                //                           EntityState.Added :
+                //                           EntityState.Modified;
+            var dbObj = db.Results.Find(entity.Id);
+            db.Entry(dbObj).CurrentValues.SetValues(entity);
+            db.SaveChanges();
         }
+
+        //public void InsertOrUpdate<T>(T entity) where T: BaseEntity
+        //{
+        //    //db.Entry(entity).State = entity.Id == 0 ?
+        //    //                           EntityState.Added :
+        //    //                           EntityState.Modified;
+            
+        //    var dbObj = db..Find(entity.Id);
+        //    db.Entry(dbObj).CurrentValues.SetValues(entity);
+        //    db.SaveChanges();
+        //}
 
         //public T Get<T>(long id)
         //{

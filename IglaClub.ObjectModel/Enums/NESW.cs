@@ -10,6 +10,7 @@ namespace IglaClub.ObjectModel.Enums
         East = 4,
         South = 8,
         West = 16,
-        PassedOut = 32
+        PassedOut = 32,
+        DirectorScore = 64
     }
 }

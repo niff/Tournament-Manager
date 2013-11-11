@@ -36,10 +36,21 @@
                 @Html.EditorFor(model => model.BoardsInRound)
                 @Html.ValidationMessageFor(model => model.BoardsInRound)
             </div>
+            <div class="editor-label">
+                 @Html.LabelFor(model => model.PlannedStartDate)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.PlannedStartDate, new { id = "datepicker" })
+                @Html.ValidationMessageFor(model => model.PlannedStartDate)
+            </div>
 
             @Html.HiddenFor(model => model.Id)
-        
-
+            @Html.HiddenFor(model => model.StartDate)
+            
+            @Html.HiddenFor(model => model.CreationDate)
+            @Html.HiddenFor(model => model.TournamentStatus)
+            
+            
             <p>
                 <input type="submit" value="Save" />
             </p>
