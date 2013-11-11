@@ -17,7 +17,7 @@ namespace IglaClub.ObjectModel.Entities
             //Boards = new List<BoardInstance>();
         }
 
-        [Required]
+        [Required(ErrorMessage="The name is required")]
         public string  Name { get; set; }
 
         public string Description { get; set; }
@@ -33,6 +33,7 @@ namespace IglaClub.ObjectModel.Entities
         public virtual IList<Pair> Pairs { get; set; }
 
         [DisplayName ("Boards in round")]
+        [Required(ErrorMessage = "The boards in round field is required")]
         public int BoardsInRound { get; set; }
 
         public virtual IList<BoardInstance> Boards { get; set; }

@@ -1,12 +1,6 @@
 ﻿@using IglaClub.ObjectModel.Enums
 @model IglaClub.ObjectModel.Entities.Tournament
 
-@{
-    ViewBag.Title = "Create";
-}
-
-<h2>Create</h2>
-
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -15,7 +9,7 @@
         DateTime startDate = DateTime.Now.AddMinutes(-DateTime.Now.Minute).AddSeconds(-DateTime.Now.Second).AddHours(1);
     
     <fieldset>
-        <legend>Tournament</legend>
+        <legend>Add new tournament</legend>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Name)
@@ -29,7 +23,7 @@
             @Html.LabelFor(model => model.Description)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Description)
+            @Html.TextAreaFor(model => model.Description)
             @Html.ValidationMessageFor(model => model.Description)
         </div>
 
@@ -64,7 +58,8 @@
         </div>
 
         <p>
-            <input type="submit" value="Create" />
+            @*<input type="submit" value="Create" />*@
+            <button type="submit" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus"></span> Create</button>
         </p>
     </fieldset>
 }

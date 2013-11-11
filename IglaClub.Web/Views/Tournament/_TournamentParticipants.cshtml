@@ -2,12 +2,7 @@
 
 <link href="~/Content/themes/base/jquery.ui.autocomplete.css" rel="stylesheet" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" /> @*todo change to local*@
-<style>
-    label, input { display:block;font-size: small;}
-    input.text { margin-bottom:0px; width:95%; padding: .4em; }
-    fieldset { padding:0; border:0; margin-top:25px; }
-</style>
-<div id="participantsDiv" style="float: right" class="pairSearch">
+
     <h4>Lista zapisanych par (@Model.PairsInTounament.Count):</h4>
     <table>
         @{
@@ -34,11 +29,13 @@
         }
         <tr>
             <td></td>
-            <td><input type="text" class="pairSearchInput" name="pairSearch1" id ="pairSearch1" /></td>
-            <td><input type="text" class="pairSearchInput" name="pairSearch2" id ="pairSearch2" /></td>
+            <td><input type="text" name="pairSearch1" id ="pairSearch1" /></td>
+            <td><input type="text" name="pairSearch2" id ="pairSearch2" /></td>
             <td class="hidden">
+                <div class="form-group">
                 <input type="hidden" class="hidden user" id ="user1" />
                 <input type="hidden" class="hidden user" id ="user2" />
+                    </div>
             </td>
             <td><input type="submit" class="pairSearchSubmit" id ="pairSearchSubmit" value="Dodaj" /></td>
         </tr>
@@ -50,7 +47,7 @@
             <label for="password">Hasło</label><input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" />
         </form>
     </div>
-</div>
+
 
 <script type="text/javascript">
 
