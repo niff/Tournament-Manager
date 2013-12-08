@@ -26,7 +26,8 @@
     var hour = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("HH:mm") : "";
     <tr>
         <td>
-            <a href="Manage/@item.Id">@Html.DisplayFor(modelItem => item.Name)</a>
+            @*<a href="Manage/@item.Id">@Html.DisplayFor(modelItem => item.Name)</a>*@
+            @Html.ActionLink(item.Name, "Manage", "Tournament", new { id = @item.Id }, null)
         </td>
         <td>
             @date
