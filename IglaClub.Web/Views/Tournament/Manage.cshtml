@@ -9,74 +9,75 @@
 }
 
 
-    <div class="row">
-        <p>Manage tournament</p>
+    <div class="">
+        <p>@Html.ActionLink("Tournaments", "Index") > Manage tournament</p>
         <h3>@Model.Tournament.Name</h3>
     </div>
-    <div class="row">
-        Tournament is <strong>@Model.Tournament.TournamentStatus.ToString() </strong>
+    <div class="">
+        Tournament is <strong>@Model.Tournament.TournamentStatus.ToString() </strong><br />
         @if (Model.Tournament.TournamentStatus == TournamentStatus.Planned && Model.Tournament.PlannedStartDate != null)
         {
-            <span><i class="small text-muted">will start on</i> @Model.Tournament.PlannedStartDate.Value.ToLongDateString() 
+            <span><i class="small text-muted">and will start on</i> @Model.Tournament.PlannedStartDate.Value.ToLongDateString() 
                 <i class="small text-muted">at</i> @Model.Tournament.PlannedStartDate.Value.ToShortTimeString()</span>
+        }
+        @if (Model.Tournament.TournamentStatus == TournamentStatus.Started && Model.Tournament.StartDate != null)
+        {
+            <span><i class="small text-muted">and started on</i> @Model.Tournament.StartDate.Value.ToLongDateString() 
+                <i class="small text-muted">at</i> @Model.Tournament.StartDate.Value.ToShortTimeString()</span>
         }
         <button class="btn btn-info btn-small">
             <span class="glyphicon glyphicon-pencil"></span>
             @Html.ActionLink("Edit", "Edit", new { id = Model.Tournament.Id })</button>
-        <button class="btn btn-info btn-small">
-            <span class="glyphicon glyphicon-remove"></span>
-            @Html.ActionLink("Delete", "Delete", new { id = Model.Tournament.Id })</button>
+        
         <br />
     </div>
+<div class="">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
             @(Model.Tournament.TournamentStatus == TournamentStatus.Planned ?
             Html.Action("Pairs", new { tournamentId = @Model.Tournament.Id }) :
             Html.Action("PairsResults", "Results", new { tournamentId = @Model.Tournament.Id }))
         </div>
-        <div class="col-md-2"></div>
-        <div class="col-md-4">
-
+        @*<div class="col-md-2"></div>*@
+        <div class="col-md-6 text-left action-pane">
             @if (Model.Tournament.TournamentStatus == TournamentStatus.Planned)
             {
                 <button class="btn btn-primary">
                     @Html.ActionLink("Start Tournament", "Start", new { id = Model.Tournament.Id })
-                </button>
+                </button><br />
             }
             @if (Model.Tournament.TournamentStatus == TournamentStatus.Started)
             {
                 <button class="btn btn-primary">
                     @Html.ActionLink("Manage results", "Manage", "Results", new { tournamentId = Model.Tournament.Id }, null)
-                </button>
+                </button><br />
                 <button class="btn btn-primary">
                     @Html.ActionLink("Calculate results", "CalculateResults", new { id = Model.Tournament.Id })
-                </button>
+                </button><br />
                 if (Model.Tournament.TournamentMovingType == TournamentMovingType.Cavendish)
                 {
                 <button class="btn btn-primary">
                     @Html.ActionLink("Generate next round", "GenerateNextRound",
                         new { tournamentId = Model.Tournament.Id, withPairsRepeat = false })
-                </button>
+                </button><br />
                 }
                 else
                 {
                 <button class="btn btn-primary">
                     @Html.ActionLink("Move to the next round", "MoveToNextRound",
                         new { tournamentId = Model.Tournament.Id, withPairsRepeat = false })
-                </button>
+                </button><br />
                 }
             }
-
+            <button class="btn btn-info btn-small">
+            <span class="glyphicon glyphicon-remove"></span>
+            @Html.ActionLink("Delete", "Delete", new { id = Model.Tournament.Id })</button>
 
             @if (Model.Tournament.TournamentStatus == TournamentStatus.Started)
             {
                 @Html.Label("Results left to complete round: " + Model.ResultsToComplete)
                 @Html.Label("Round number: " + Model.Tournament.CurrentRound)
             }
-
-            <div>
-                @Html.ActionLink("Back to List", "Index")
-            </div>
         </div>
     </div>
-
+</div>
