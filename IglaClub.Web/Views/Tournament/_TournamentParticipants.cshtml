@@ -2,9 +2,9 @@
 
 <link href="~/Content/themes/base/jquery.ui.autocomplete.css" rel="stylesheet" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" /> @*todo change to local*@
-
-    <h4>Lista zapisanych par (@Model.PairsInTounament.Count):</h4>
-    <table>
+<div class="pairs">
+    <p>Pairs list (@Model.PairsInTounament.Count):</p>
+    <table class="table table-striped table-hover">
         @{
             var counter = 1;
         }
@@ -32,12 +32,10 @@
             <td><input type="text" name="pairSearch1" id ="pairSearch1" /></td>
             <td><input type="text" name="pairSearch2" id ="pairSearch2" /></td>
             <td class="hidden">
-                <div class="form-group">
                 <input type="hidden" class="hidden user" id ="user1" />
                 <input type="hidden" class="hidden user" id ="user2" />
-                    </div>
             </td>
-            <td><input type="submit" class="pairSearchSubmit" id ="pairSearchSubmit" value="Dodaj" /></td>
+            <td><input type="submit" class="pairSearchSubmit btn btn-default btn-small" id ="pairSearchSubmit" value="Add" /></td>
         </tr>
     </table>
     <div id="dialog-form" title="Utwórz użytkownika w systemie IglaClub">
@@ -47,7 +45,7 @@
             <label for="password">Hasło</label><input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" />
         </form>
     </div>
-
+    </div>
 
 <script type="text/javascript">
 

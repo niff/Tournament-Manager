@@ -1,21 +1,17 @@
 ﻿@using IglaClub.ObjectModel.Enums
 @model IglaClub.Web.Models.ViewModels.PairsResultsViewModel
 
-<style>
-    label, input { display:block;font-size: small;}
-    input.text { margin-bottom:0px; width:95%; padding: .4em; }
-    fieldset { padding:0; border:0; margin-top:25px; }
-</style>
-<div id="pairsResults" style="float: right" >
+<div id="pairsResults" class="pairs">
 @{
-    var pointsHeader = "Wynik";
+    var pointsHeader = "Result";
     if (Model.TournamentScoringType == TournamentScoringType.Imps)
     {
         pointsHeader += "(punkty)";
     }
 }
-    <table>
-        <tr><th></th><th>Para</th><th></th><th></th>
+    <p>Results</p>
+    <table class="table table-striped table-hover">
+        <tr><th></th><th>Pair</th><th></th><th></th>
             <th>@pointsHeader</th>
 
         </tr>
@@ -43,8 +39,10 @@
                         var s = "0";
                         if (Model.PairsInTounament[i].Score > 0)
                         {
-                            s = string.Format("{0:P} ({1})", Model.PairsInTounament[i].Score/
-                                                             Model.PairNumberMaxPoints.FirstOrDefault(p => p.Key == Model.PairsInTounament[i].PairNumber).Value, Model.PairsInTounament[i].Score);
+                            s = string.Format("{0:P} ({1})", 
+                                Model.PairsInTounament[i].Score/
+                                Model.PairNumberMaxPoints.FirstOrDefault(p => p.Key == Model.PairsInTounament[i].PairNumber).Value, 
+                                Model.PairsInTounament[i].Score);
                         }
                     
                         <span>@s</span>
