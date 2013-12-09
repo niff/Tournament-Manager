@@ -822,15 +822,7 @@ ul.ui-autocomplete li a {
     font-size: small;
 }
 
-.result tr td input {
-    width: 30px;
-    height: 20px;
-    border: 1px rgb(128, 128, 128) solid;
-}
 
-table.result {
-    font-size: x-small;
-}
 
 .tile {
     float: left;

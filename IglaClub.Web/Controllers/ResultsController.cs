@@ -103,11 +103,6 @@ namespace IglaClub.Web.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult Calculate(long id)
-        {
-            throw new NotImplementedException();
-        }
-
         public ActionResult RemoveLastRound(long id)
         {
             tournamentManager.RemoveLastRound(id);

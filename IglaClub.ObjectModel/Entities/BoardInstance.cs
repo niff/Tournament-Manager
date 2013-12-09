@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
@@ -15,6 +16,7 @@ namespace IglaClub.ObjectModel.Entities
 
         public virtual IList<Result> Results { get; set; }
 
+        [DisplayName("Board Number")]
         public int BoardNumber { get; set; }
     }
 }

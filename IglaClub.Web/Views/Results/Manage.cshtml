@@ -20,7 +20,7 @@
         grid.Column("RoundNumber",header: "Round Number", format: @<text>@item.RoundNumber</text>),
         grid.Column("NsPairNumber",header: "Ns Pair Number", format: @<text>@item.Ns.PairNumber</text>),
         grid.Column("EwPairNumber",header: "Ew Pair Number", format: @<text>@item.Ew.PairNumber</text>),
-        grid.Column("BoardNumber",header: "Board Number", format: @<text>@item.Board.Id</text>),
+        grid.Column("BoardNumber",header: "Board Number", format: @<text>@item.Board.BoardNumber</text>),
         grid.Column("ContractLevel",header: "Contract Level", format: @<text>@item.ContractLevel.ToString()</text>),
         grid.Column("ContractColor",header: "Contract Color", format: @<text>@Enum.GetName(typeof(ContractColors), item.ContractColor)</text>),
         grid.Column("IsDoubled",header: "dbl", format: @<text>@ResultHelper.GetStringForDoubledContract(item.ContractDoubled)</text>),
@@ -40,6 +40,6 @@
     @Html.ActionLink("Calculate score", "CalculateScore", "Tournament", new { id = Model.Tournament.Id },null)  |
     @Html.ActionLink("Calculate results", "CalculateResults", "Tournament", new { id = Model.Tournament.Id },null) |
     @Html.ActionLink("Remove last round", "RemoveLastRound", "Results", new { id = Model.Tournament.Id },null) |
-    @Html.ActionLink("Generate next round", "GenerateNextRound", new { tournamentId = Model.Tournament.Id, withPairsRepeat = false })
+    @Html.ActionLink("Generate next round", "GenerateNextRound", "Tournament", new { tournamentId = Model.Tournament.Id, withPairsRepeat = false }, null)
 </div>
 
