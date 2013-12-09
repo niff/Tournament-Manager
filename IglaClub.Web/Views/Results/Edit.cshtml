@@ -8,43 +8,49 @@
 }
 
 <h2>Edit</h2>
-@using (Html.BeginForm()){
-<table class="result">
-    <tr>
+@using (Html.BeginForm())
+{
+    <table class="result">
+        <tr>
 
             <th>
-                @Html.DisplayNameFor(m => m[0].NumberOfTricks)
+                @Html.DisplayNameFor(m => m[0].RoundNumber)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(m => m[0].TableNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(m => m[0].NS.PairNumber)
+               NS @Html.DisplayNameFor(m => m[0].NS.PairNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(m => m[0].EW.PairNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(m => m[0].ContractLevel)
-            </th>
-            <th>
-                @Html.DisplayNameFor(m => m[0].ContractDoubled)
-            </th>
-            <th>
-                @Html.DisplayNameFor(m => m[0].ContractColor)
+                EW @Html.DisplayNameFor(m => m[0].EW.PairNumber)
             </th>
             <th>
                 @Html.DisplayNameFor(m => m[0].Board.BoardNumber)
             </th>
             <th>
+                @Html.DisplayNameFor(m => m[0].ContractLevel)
+            </th>
+            
+
+            <th>
+                @Html.DisplayNameFor(m => m[0].ContractColor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m[0].ContractDoubled)
+            </th>
+
+            <th>
                 @Html.DisplayNameFor(m => m[0].PlayedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m[0].NumberOfTricks)
             </th>
             <th>
                 @Html.DisplayNameFor(m => m[0].ResultNsPoints)
             </th>
-            <th>
-                @Html.DisplayNameFor(m => m[0].RoundNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(m => m[0].TableNumber)
-            </th>
+            
             <th>
                 @Html.DisplayNameFor(m => m[0].ScoreNs)
             </th>
@@ -54,66 +60,69 @@
             <th>
                 @Html.DisplayNameFor(m => m[0].ResultNsPoints)
             </th>
-            <th>
-            </th>
-    </tr>
-
-    @for (int i = 0; i < @Model.Count(); i++)
-    {
-        <tr>
-            <td>
-                @Html.TextBoxFor(m => m[i].NumberOfTricks)
-            </td>
-            <td>
-                @Html.TextBoxFor(m => m[i].NS.PairNumber)
-            </td>
-            <td>
-                @Html.TextBoxFor(m => m[i].EW.PairNumber)
-            </td>
-            <td>
-                @Html.TextBoxFor(m => m[i].ContractLevel)
-            </td>
-            <td>
-                @Html.DropDownListFor(m => m[i].ContractDoubled, new SelectList(Enum.GetValues(typeof(ContractDoubled))))
-                
-            </td>
-            <td>
-                @Html.DropDownListFor(m => m[i].ContractColor, new SelectList(Enum.GetValues(typeof(ContractColors))))
-                
-            </td>
-            <td>
-                @Html.TextBoxFor(m => m[i].Board.BoardNumber)
-            </td>
-            <td>
-                @Html.DropDownListFor(m => m[i].PlayedBy, new SelectList(Enum.GetValues(typeof(NESW))))
-               
-            </td>
-            <td>
-                @Html.TextBoxFor(m => m[i].ResultNsPoints)
-            </td>
-            <td>
-                @Html.TextBoxFor(m => m[i].RoundNumber)
-            </td>
-            <td>
-                @Html.TextBoxFor(m => m[i].TableNumber)
-            </td>
-            <td>
-                @Html.TextBoxFor(m => m[i].ScoreNs)
-            </td>
-            <td>
-                @Html.TextBoxFor(m => m[i].ScoreEw)
-            </td>
-            <td>
-                @Html.TextBoxFor(m => m[i].ResultNsPoints)
-            </td>
-            <td>
-                @Html.HiddenFor(m => m[i].TournamentId)
-                @Html.HiddenFor(m => m[i].BoardId)
-                @Html.HiddenFor(m => m[i].Id)
-            </td>
+            <th></th>
         </tr>
-    }
-</table>
+
+        @for (int i = 0; i < @Model.Count(); i++)
+        {
+            <tr>
+                <td>
+                    @Html.EditorFor(m => m[i].RoundNumber)
+                </td>
+                <td>
+                    @Html.EditorFor(m => m[i].TableNumber)
+                </td>
+                <td>
+                    @Html.EditorFor(m => m[i].NS.PairNumber)
+                </td>
+                <td>
+                    @Html.EditorFor(m => m[i].EW.PairNumber)
+                </td>
+                
+                <td>
+                    @Html.EditorFor(m => m[i].Board.BoardNumber)
+                </td>
+                <td>
+                    @Html.EditorFor(m => m[i].ContractLevel)
+                    @*@Html.TextBoxFor(m => m[i].ContractLevel)*@
+                </td>
+                <td>
+                    @Html.DropDownListFor(m => m[i].ContractColor, new SelectList(Enum.GetValues(typeof(ContractColors)), @Model[i].ContractColor))
+
+                </td>
+                <td>
+                    @Html.DropDownListFor(m => m[i].ContractDoubled, new SelectList(Enum.GetValues(typeof(ContractDoubled)), @Model[i].ContractDoubled))
+
+                </td>
+
+                <td>
+                    @Html.DropDownListFor(m => m[i].PlayedBy, new SelectList(Enum.GetValues(typeof(NESW)), @Model[i].PlayedBy))
+                </td>
+                <td>
+                    @Html.EditorFor(m => m[i].NumberOfTricks)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m[i].ResultNsPoints)
+                </td>
+                
+                
+                <td>
+                    @Html.TextBoxFor(m => m[i].ScoreNs)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m[i].ScoreEw)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m[i].ResultNsPoints)
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[i].TournamentId)
+                    @Html.HiddenFor(m => m[i].BoardId)
+                    @Html.HiddenFor(m => m[i].Id)
+                </td>
+            </tr>
+        }
+    </table>
     
-<input type="submit" value="Zapisz"/>
+    <input type="submit" value="Zapisz" />
 }

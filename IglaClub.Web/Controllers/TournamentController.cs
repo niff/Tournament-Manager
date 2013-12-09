@@ -158,13 +158,20 @@ namespace IglaClub.Web.Controllers
         public ActionResult CalculateResults(long id)
         {
             tournamentManager.CalculateResults(id);
-            return RedirectToAction("Manage","Results", new { tournamentId = id });
+
+            
+            if (Request.UrlReferrer == null)
+                return RedirectToAction("Manage", "Tournament", new { tournamentId = id });
+            return Redirect(Request.UrlReferrer.ToString());
         }
 
         public ActionResult CalculateScore(long id)
         {
             tournamentManager.CalculateScore(id);
-            return RedirectToAction("Manage", "Results", new { tournamentId = id });
+            if (Request.UrlReferrer == null)
+                return RedirectToAction("Manage", "Results", new { tournamentId = id });
+            return Redirect(Request.UrlReferrer.ToString());
+            
         }
 
         [HttpPost]
@@ -183,13 +190,6 @@ namespace IglaClub.Web.Controllers
             tournamentManager.AddPair(tournamentId, user1, user2);
             return Json(new { success = true });
         }
-
-        //public ActionResult AddPair(long id)
-        //{
-        //    this.tournamentManager.AddPair(id, 1, 2);
-
-        //    return RedirectToAction("Manage", new { id });
-        //}
         
         public PartialViewResult Pairs(int tournamentId)
         {
@@ -214,8 +214,12 @@ namespace IglaClub.Web.Controllers
 
         public ActionResult GenerateNextRound(long tournamentId, bool withPairsRepeat)
         {
-            tournamentManager.GenerateNextRound(tournamentId, withPairsRepeat);
-            return RedirectToAction("Manage", new { id = tournamentId });
+            var status = tournamentManager.GenerateNextRound(tournamentId, withPairsRepeat);
+            //TODO: error message handling if(status.Ok == false)
+
+            if (Request.UrlReferrer == null)
+                return RedirectToAction("Manage", "Tournament", new { tournamentId = tournamentId });
+            return Redirect(Request.UrlReferrer.ToString());
         }
 
         public JsonResult AddUser(string name, string email)

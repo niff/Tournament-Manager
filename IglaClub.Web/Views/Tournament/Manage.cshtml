@@ -35,8 +35,8 @@
     <div class="row">
         <div class="col-md-6">
             @(Model.Tournament.TournamentStatus == TournamentStatus.Planned ?
-            Html.Action("Pairs", new { tournamentId = @Model.Tournament.Id }) :
-            Html.Action("PairsResults", "Results", new { tournamentId = @Model.Tournament.Id }))
+                Html.Action("Pairs", new { tournamentId = @Model.Tournament.Id }) :
+                Html.Action("PairsResults", "Results", new { tournamentId = @Model.Tournament.Id }))
         </div>
         @*<div class="col-md-2"></div>*@
         <div class="col-md-6 text-left action-pane">
@@ -75,8 +75,9 @@
 
             @if (Model.Tournament.TournamentStatus == TournamentStatus.Started)
             {
+                <br/>
+                @Html.Label("Round number: " + Model.Tournament.CurrentRound) <br/>
                 @Html.Label("Results left to complete round: " + Model.ResultsToComplete)
-                @Html.Label("Round number: " + Model.Tournament.CurrentRound)
             }
         </div>
     </div>

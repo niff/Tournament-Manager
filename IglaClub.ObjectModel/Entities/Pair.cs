@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
@@ -12,10 +13,13 @@ namespace IglaClub.ObjectModel.Entities
 
         public virtual Tournament Tournament { get; set; }
 
+        [DisplayName("Pair Number")]
         public int PairNumber { get; set; }
 
+        [DisplayName("Player 1")]
         public virtual User Player1 { get; set; }
 
+        [DisplayName("Player 2")]
         public virtual User Player2 { get; set; }
 
         public float Score { get; set; }

@@ -98,7 +98,7 @@ namespace IglaClub.TournamentManager
         public static void UpdatePointsPerBoard(Tournament tournament)
         {
             var resultsGroupedByBoards = tournament.Results
-                .Where(r=>r.ResultNsPoints != null)
+                .Where(r=>r.ResultNsPoints != null && r.PlayedBy != NESW.DirectorScore)
                 .GroupBy(r => r.Board.BoardNumber, r=>r, (key,g) => new { BoardId = key, Results = g.ToList()})
                 .ToList();
             foreach (var resultsGroupedByBoard in resultsGroupedByBoards)
@@ -119,6 +119,8 @@ namespace IglaClub.TournamentManager
         {
             foreach (var result in resultsGroupedByBoard)
             {
+            //    if(result.ResultNsPoints != null)
+            //        continue;
                 int? newScore = UpdateScoreInBoards(result, DealerIsVulnerable(result));
                 if (newScore == null) //that means the score was wrtitten witout the contract
                     continue;
@@ -132,6 +134,11 @@ namespace IglaClub.TournamentManager
 
             var total = (resultsGroupedByBoard.Count - 1) * 2;
             var currentMax = total;
+            if (resultsGroupedByBoard.Count == 1)
+            {
+                total = 2;
+                currentMax = 1;
+            }
 
             foreach (IGrouping<int?, Result> resultsWithTheSameScore in orderedResults)
             {
@@ -147,11 +154,10 @@ namespace IglaClub.TournamentManager
 
         public static int? UpdateScoreInBoards(Result result, bool dealerIsVulnerable)
         {
+            if (result.PlayedBy == NESW.PassedOut)
+                    return 0;
             if (result.ContractLevel == 0)
             {
-                if (result.PlayedBy == NESW.PassedOut)
-                    return 0;
-                else 
                     return null;
             }
             int score = 0;
@@ -205,7 +211,7 @@ namespace IglaClub.TournamentManager
                         score -= (numberOfUndertricks*100);
                     else
                     {
-                        score -= ((numberOfUndertricks-1) * 100 + 50) * doubled;
+                        score -= ((numberOfUndertricks-1) * 100 + 100) * doubled;
                         if (numberOfUndertricks > 3)
                             score -= ((numberOfUndertricks - 3)*doubled*50);
                     }
