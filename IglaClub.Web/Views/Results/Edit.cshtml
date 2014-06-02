@@ -87,7 +87,7 @@
                     @*@Html.TextBoxFor(m => m[i].ContractLevel)*@
                 </td>
                 <td>
-                    @Html.DropDownListFor(m => m[i].ContractColor, new SelectList(Enum.GetValues(typeof(ContractColors)), @Model[i].ContractColor))
+                    @Html.DropDownListFor(m => m[i].ContractColor, new SelectList(Enum.GetValues(typeof(ContractColors)), @Model[i].ContractColor), new object { data_image = "" })
 
                 </td>
                 <td>
