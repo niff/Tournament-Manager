@@ -46,6 +46,12 @@ textarea {
 button a, a:hover{
     color:white;
 }
+button a, a:hover{
+    color:white;
+}
+button.login a {
+color : black;
+}
 list-inline a, a:hover{
     color:blue;
 }
