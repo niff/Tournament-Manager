@@ -10,9 +10,9 @@ namespace IglaClub.Web.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
-            return RedirectToAction("Index","Tournament");
-            //return View();
+            //ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            //return RedirectToAction("Index","Tournament");
+            return View();
         }
 
         public ActionResult About()

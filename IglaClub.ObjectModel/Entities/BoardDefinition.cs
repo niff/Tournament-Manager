@@ -6,9 +6,9 @@ using IglaClub.ObjectModel.Enums;
 
 namespace IglaClub.ObjectModel.Entities
 {
-    public class BoardDefinition :BaseEntity
+    public class BoardDefinition : BaseEntity
     {
-        public NESW Dealer{ get; set; }
+        public NESW Dealer { get; set; }
 
         public Vulnerable Vulnerability { get; set; }
 
@@ -19,4 +19,5 @@ namespace IglaClub.ObjectModel.Entities
         public virtual IList<Card> South { get; set; }
         public virtual IList<Card> West { get; set; }
     }
+
 }

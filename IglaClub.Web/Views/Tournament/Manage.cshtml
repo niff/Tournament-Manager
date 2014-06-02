@@ -34,11 +34,19 @@
 <div class="">
     <div class="row">
         <div class="col-md-6">
+            
             @(Model.Tournament.TournamentStatus == TournamentStatus.Planned ?
-                Html.Action("Pairs", new { tournamentId = @Model.Tournament.Id }) :
-                Html.Action("PairsResults", "Results", new { tournamentId = @Model.Tournament.Id }))
+                  Html.Action("Pairs", new { tournamentId = @Model.Tournament.Id }) :
+                  Html.Action("PairsResults", "Results", new { tournamentId = @Model.Tournament.Id }))
+            
         </div>
-        @*<div class="col-md-2"></div>*@
+        <div class="col-md-6 text-right action-pane">
+            Roster:
+            @if (Model.Tournament.TournamentStatus == TournamentStatus.Started)
+            {
+                Html.Action("PairRoster", new {tournamentId = @Model.Tournament.Id});
+            }
+        </div>
         <div class="col-md-6 text-left action-pane">
             @if (Model.Tournament.TournamentStatus == TournamentStatus.Planned)
             {

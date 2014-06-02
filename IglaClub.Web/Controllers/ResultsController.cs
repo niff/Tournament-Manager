@@ -53,7 +53,10 @@ namespace IglaClub.Web.Controllers
                 }
 
                 if (results.Any())
-                    return RedirectToAction("Manage", new {results.FirstOrDefault().TournamentId});
+                {
+                    this.tournamentManager.CalculateResultsComplete(results[0].TournamentId);
+                    return RedirectToAction("Manage", new { results.FirstOrDefault().TournamentId });
+                }
             }
             return null;
         }

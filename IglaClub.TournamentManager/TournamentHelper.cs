@@ -167,7 +167,11 @@ namespace IglaClub.TournamentManager
             if (result.NumberOfTricks >= result.ContractLevel + 6)
             {
                 int pointsPerTrick = GetPointsPerTrick(result.ContractColor);
-                score = pointsPerTrick*(result.NumberOfTricks - 6)*doubled;
+                score = pointsPerTrick*(result.ContractLevel)*doubled;
+                if (doubled == 1)
+                    score += (result.NumberOfTricks - 6 - result.ContractLevel) * pointsPerTrick;
+                else
+                    score += (result.NumberOfTricks - 6 - result.ContractLevel) * 50 * doubled * (dealerIsVulnerable? 2:1);
                 int scoreForBonus = pointsPerTrick * result.ContractLevel * doubled;
                 if (result.ContractColor == ContractColors.NoTrump)
                 {
@@ -211,9 +215,10 @@ namespace IglaClub.TournamentManager
                         score -= (numberOfUndertricks*100);
                     else
                     {
-                        score -= ((numberOfUndertricks-1) * 100 + 100) * doubled;
-                        if (numberOfUndertricks > 3)
-                            score -= ((numberOfUndertricks - 3)*doubled*50);
+                        score -= 100 * doubled;
+
+                        score -= (numberOfUndertricks-1) * 150 * doubled;
+                        
                     }
 
                 }
@@ -222,7 +227,12 @@ namespace IglaClub.TournamentManager
                     if (doubled == 1)
                         score -= (numberOfUndertricks * 50);
                     else
-                        score -= ( (numberOfUndertricks -1) * 100  + 50) * doubled;
+                    {
+                        score -= 50 * doubled;
+                        score -= (numberOfUndertricks - 1) * 100 * doubled;
+                        if (numberOfUndertricks > 3)
+                            score -= ((numberOfUndertricks - 3) * doubled * 50);
+                    } 
                 }
                     
             }

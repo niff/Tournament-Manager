@@ -46,6 +46,9 @@ textarea {
 button a, a:hover{
     color:white;
 }
+list-inline a, a:hover{
+    color:blue;
+}
 .btn-small {
     height:25px;
     font-size:small;
