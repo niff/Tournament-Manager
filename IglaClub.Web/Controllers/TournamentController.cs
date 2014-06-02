@@ -13,6 +13,7 @@ using IglaClub.Web.Models.ViewModels;
 
 namespace IglaClub.Web.Controllers
 {
+    [Authorize]
     public class TournamentController : Controller
     {
         private readonly IglaClubDbContext db = new IglaClubDbContext();
@@ -21,12 +22,14 @@ namespace IglaClub.Web.Controllers
         private readonly PairRepository pairRepository;
         private readonly UserRepository userRepository;
         private readonly TournamentRepository tournamentRepository;
-
+        private readonly ResultRepository resultRepository;
+        
         public TournamentController()
         {
              pairRepository = new PairRepository(db);
              userRepository = new UserRepository(db);
              tournamentRepository = new TournamentRepository(db);
+             resultRepository = new ResultRepository(db);
         }
         
         //
@@ -155,6 +158,16 @@ namespace IglaClub.Web.Controllers
             return RedirectToAction("Manage", new {id});
         }
 
+        public ActionResult CalculateResultsComplete(long id)
+        {
+            tournamentManager.CalculateResultsComplete(id);
+
+            if (Request.UrlReferrer == null)
+                return RedirectToAction("Manage", "Tournament", new { tournamentId = id });
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
+
         public ActionResult CalculateResults(long id)
         {
             tournamentManager.CalculateResults(id);
@@ -200,6 +213,21 @@ namespace IglaClub.Web.Controllers
                     Tournament = db.Tournaments.Find(tournamentId)
                 };
             return PartialView("_TournamentParticipants", model);
+        }
+
+        public PartialViewResult PairRoster(int tournamentId)
+        {
+
+            var results = resultRepository.GetResultsFromCurrentRound(tournamentId);
+            var list = new List<PairRosterViewModel>();
+            foreach (var result in results)
+            {
+                if(list.Any(prvm=>prvm.TableNumber == result.TableNumber))
+                    continue;
+                list.Add(new PairRosterViewModel(){NsPair = result.NS, EwPair = result.EW, TableNumber = result.TableNumber, Section = 0});
+            }
+            
+            return PartialView("_PairRoster",list);
         }
 
         public JsonResult SearchUsers(long tournamentId, string phrase)

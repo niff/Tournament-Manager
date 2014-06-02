@@ -56,7 +56,7 @@ namespace IglaClub.TournamentManager
                 return new OperationStatus(false,"Tournament with id " + tournamentId + " not found");
             if (tournament.TournamentMovingType != TournamentMovingType.Cavendish)
                 return new OperationStatus(false,"Tournament with id " + tournamentId + " moving type is different than cavendish (cannot generate extra round)");;
-            if (tournament.Results.Any(r => r.ResultNsPoints == null))
+            if (tournament.Results.Any(r => r.ResultNsPoints == null && r.PlayedBy != NESW.DirectorScore))
                 return new OperationStatus(false, "Round is still not finished. " + tournament.Results.Count(r => r.ResultNsPoints == null) + " results not entered left.");
             IEnumerable<BoardInstance> boards = GenerateEmptyBoards(tournament);
             TournamentHelper.AddBoardsToTournament(tournament, boards);
@@ -128,6 +128,20 @@ namespace IglaClub.TournamentManager
             return new OperationStatus(true);
         }
 
+        public OperationStatus CalculateResultsComplete(long tournamentId)
+        {
+            Tournament tournament = db.Tournaments.Find(tournamentId);
+            if (tournament == null)
+            {
+                return new OperationStatus(false, "Tournament not found");
+            }
+            TournamentHelper.UpdateEachResultScore(tournament.Results);
+            TournamentHelper.UpdatePointsPerBoard(tournament);
+            TournamentHelper.UpdatePairsResultsInTournament(tournament);
+            db.SaveChanges();
+            return new OperationStatus(true);
+        }
+
         public OperationStatus RemoveLastRound(long tournamentId)
         {
             Tournament tournament = db.Tournaments.Find(tournamentId);
@@ -135,6 +149,7 @@ namespace IglaClub.TournamentManager
             foreach (var result in resultsToRemove)
             {
                 tournament.Results.Remove(result);
+                db.Results.Remove(result);
             }
             tournament.CurrentRound--;
             db.SaveChanges();
@@ -152,11 +167,6 @@ namespace IglaClub.TournamentManager
             return true;
         }
 
-        /// <summary>
-        /// Deletes result from db
-        /// </summary>
-        /// <param name="resultId"></param>
-        /// <returns>Tournament id which from result is deleted</returns>
         public long DeleteResult(long resultId)
         {
             Result result = db.Results.Find(resultId);

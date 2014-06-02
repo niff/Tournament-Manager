@@ -17,8 +17,10 @@ namespace IglaClub.Web.Views.Helpers
                         return string.Empty;
             }
         }
-        public static string GetStringForFinished(object score)
+        public static string GetStringForFinished(object score, NESW playedBy)
         {
+            if (playedBy == NESW.DirectorScore)
+                return "Ok";
             return score == null
                        ? ""
                        : "Ok";

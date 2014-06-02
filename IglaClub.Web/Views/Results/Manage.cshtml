@@ -12,10 +12,10 @@
     var grid = new WebGrid(Model.Results,rowsPerPage: 40);
 }
 
-@Html.ActionLink("Edytuj", "Edit", new {tournamentId = @Model.Tournament.Id})
+@Html.ActionLink("Edit", "Edit", new {tournamentId = @Model.Tournament.Id})
 
 @grid.GetHtml(columns: grid.Columns( 
-        grid.Column("ResultFinished",header: "Ok", format: @<text>@ResultHelper.GetStringForFinished(@item.ResultNsPoints)</text>),
+        grid.Column("ResultFinished",header: "Ok", format: @<text>@ResultHelper.GetStringForFinished(@item.ResultNsPoints, @item.PlayedBy)</text>),
         grid.Column("TableNumber",header: "Table Number", format: @<text>@item.TableNumber</text>),
         grid.Column("RoundNumber",header: "Round Number", format: @<text>@item.RoundNumber</text>),
         grid.Column("NsPairNumber",header: "Ns Pair Number", format: @<text>@item.Ns.PairNumber</text>),
@@ -29,17 +29,17 @@
         grid.Column("Vulnerable",header: "Vul", format: @<text>@item.Board.BoardDefinition.Vulnerability</text>),
         grid.Column("Remove",header: "Remove", format: @<text>@Html.ActionLink("Remove", "Delete", new { id = @item.Id })</text>),
         grid.Column("Result",header: "Result", format: @<text>@item.ResultNsPoints</text>),
-        grid.Column("ScoreNS",header: "Score NS", format: @<text>@item.ScoreNS</text>),
-        grid.Column("ScoreEW",header: "Score EW", format: @<text>@item.ScoreEW</text>)
+        grid.Column("ScoreNS",header: "Score NS", format: @<text>@item.ScoreNs</text>),
+        grid.Column("ScoreEW",header: "Score EW", format: @<text>@item.ScoreEw</text>)
         
         )
         ,rowStyle: "rowStyleOdd", alternatingRowStyle: "rowStyleEven" , headerStyle: "headerStyle"
 )
 
 <div>    @Html.ActionLink("Manage tournament", "Manage","Tournament",new { id = Model.Tournament.Id},null)  |  
-    @Html.ActionLink("Calculate score", "CalculateScore", "Tournament", new { id = Model.Tournament.Id },null)  |
-    @Html.ActionLink("Calculate results", "CalculateResults", "Tournament", new { id = Model.Tournament.Id },null) |
-    @Html.ActionLink("Remove last round", "RemoveLastRound", "Results", new { id = Model.Tournament.Id },null) |
-    @Html.ActionLink("Generate next round", "GenerateNextRound", "Tournament", new { tournamentId = Model.Tournament.Id, withPairsRepeat = false }, null)
+    @Html.ActionLink("Calculate results", "CalculateResultsComplete", "Tournament", new { id = Model.Tournament.Id },null) |
+    @Html.ActionLink("Generate next round - no pairs repeat", "GenerateNextRound", "Tournament", new { tournamentId = Model.Tournament.Id, withPairsRepeat = false }, null) |
+    @Html.ActionLink("Generate next round with pairs repeat", "GenerateNextRound", "Tournament", new { tournamentId = Model.Tournament.Id, withPairsRepeat = true }, null) |
+    @Html.ActionLink("Remove last round", "RemoveLastRound", "Results", new { id = Model.Tournament.Id }, null) 
 </div>
 

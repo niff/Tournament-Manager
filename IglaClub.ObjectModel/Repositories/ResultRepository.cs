@@ -14,9 +14,20 @@ namespace IglaClub.ObjectModel.Repositories
         {
         }
 
-        public List<Result> GetResults(long tournamentId, int roundNumber, int tableNumber)
+        //public List<Result> GetResults(long tournamentId, int roundNumber, int tableNumber)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public List<Result> GetResults(long tournamentId, int roundNumber)
+        //{
+        //    return db.Results.Where(r => r.Tournament.Id == tournamentId && r.RoundNumber == roundNumber).ToList();
+        //}
+
+        public List<Result> GetResultsFromCurrentRound(long tournamentId)
         {
-            throw new NotImplementedException();
+            var tournament = db.Tournaments.Find(tournamentId);
+            return tournament.Results.Where(r => r.RoundNumber == tournament.CurrentRound).ToList();
         }
 
         public List<Result> GetResults(long tournamentId)
