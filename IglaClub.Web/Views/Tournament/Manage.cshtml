@@ -28,7 +28,10 @@
         <button class="btn btn-info btn-small">
             <span class="glyphicon glyphicon-pencil"></span>
             @Html.ActionLink("Edit", "Edit", new { id = Model.Tournament.Id })</button>
-        
+        <button class="btn btn-info btn-small">
+            <span class="glyphicon glyphicon-remove nounderline"></span>
+            @Html.ActionLink("Delete", "Delete", new { id = Model.Tournament.Id })
+        </button>
         <br />
     </div>
 <div class="">
@@ -39,13 +42,6 @@
                   Html.Action("Pairs", new { tournamentId = @Model.Tournament.Id }) :
                   Html.Action("PairsResults", "Results", new { tournamentId = @Model.Tournament.Id }))
             
-        </div>
-        <div class="col-md-6 text-right action-pane">
-            Roster:
-            @if (Model.Tournament.TournamentStatus == TournamentStatus.Started)
-            {
-                Html.Action("PairRoster", new {tournamentId = @Model.Tournament.Id});
-            }
         </div>
         <div class="col-md-6 text-left action-pane">
             @if (Model.Tournament.TournamentStatus == TournamentStatus.Planned)
@@ -77,15 +73,19 @@
                 </button><br />
                 }
             }
-            <button class="btn btn-info btn-small">
-            <span class="glyphicon glyphicon-remove"></span>
-            @Html.ActionLink("Delete", "Delete", new { id = Model.Tournament.Id })</button>
+            
 
             @if (Model.Tournament.TournamentStatus == TournamentStatus.Started)
             {
                 <br/>
                 @Html.Label("Round number: " + Model.Tournament.CurrentRound) <br/>
                 @Html.Label("Results left to complete round: " + Model.ResultsToComplete)
+            }
+        </div>
+        <div class="col-md-6 action-pane">
+            @if (Model.Tournament.TournamentStatus == TournamentStatus.Started)
+            {
+                @Html.Action("PairRoster", new { tournamentId = @Model.Tournament.Id });
             }
         </div>
     </div>

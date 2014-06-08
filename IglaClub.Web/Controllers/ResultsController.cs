@@ -37,8 +37,9 @@ namespace IglaClub.Web.Controllers
 
         public ActionResult Edit(long tournamentId)
         {
-            var model = db.Tournaments.Find(tournamentId).Results.ToList();
-            return View(model);
+            var results = db.Tournaments.Find(tournamentId).Results.ToList();
+            results = results.OrderBy(r => r.Board.BoardNumber).ToList();
+            return View(results);
         }
 
         [HttpPost]
@@ -117,6 +118,13 @@ namespace IglaClub.Web.Controllers
             tournamentManager.GenerateNextRound(tournamentId, withPairsRepeat);
             return RedirectToAction("Manage", new { tournamentId });
         }
+
+        public ActionResult AddNewResult(long tournamentId)
+        {
+            tournamentManager.AddNewResult(tournamentId);
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
 
         public PartialViewResult PairsResults(int tournamentId)
         {

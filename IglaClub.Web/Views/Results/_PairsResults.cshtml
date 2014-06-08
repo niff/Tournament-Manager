@@ -6,7 +6,7 @@
     var pointsHeader = "Result";
     if (Model.TournamentScoringType == TournamentScoringType.Imps)
     {
-        pointsHeader += "(punkty)";
+        pointsHeader += "(MPs)";
     }
 }
     <p>Results</p>
@@ -45,8 +45,7 @@
                         {
                             
                             s = string.Format("{0:P} ({1}/{2})", 
-                                pairScore/
-                                maxPoints, 
+                                maxPoints == 0? 0 : pairScore/maxPoints, 
                                 pairScore, maxPoints);
                         }
                     

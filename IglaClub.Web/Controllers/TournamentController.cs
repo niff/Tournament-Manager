@@ -117,7 +117,7 @@ namespace IglaClub.Web.Controllers
             {
                 db.Entry(tournament).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Manage", tournament.Id);
             }
             return View(tournament);
         }
@@ -244,7 +244,8 @@ namespace IglaClub.Web.Controllers
         {
             var status = tournamentManager.GenerateNextRound(tournamentId, withPairsRepeat);
             //TODO: error message handling if(status.Ok == false)
-
+            if(status.Ok == false)
+                return Redirect(Request.UrlReferrer.ToString());
             if (Request.UrlReferrer == null)
                 return RedirectToAction("Manage", "Tournament", new { tournamentId = tournamentId });
             return Redirect(Request.UrlReferrer.ToString());

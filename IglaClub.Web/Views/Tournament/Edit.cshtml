@@ -4,15 +4,13 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Edit @Model.Name</h2>
 <div style="float: left">
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
 
         <fieldset>
-            <legend>Tournament</legend>
-
             <div class="editor-label">
                 @Html.LabelFor(model => model.Name)
             </div>
@@ -63,8 +61,9 @@
         @Html.ActionLink("Manage tournament", "Manage", new { id = Model.Id})
     </div>
 </div>
-@Html.Action("Pairs", new { tournamentId = @Model.Id} )
-
+<div style="float: left; margin-left: 10px;">
+    @Html.Action("Pairs", new { tournamentId = @Model.Id })
+</div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
