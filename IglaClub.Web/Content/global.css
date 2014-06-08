@@ -44,14 +44,12 @@ textarea {
         color:orangered;
     }
 button a, a:hover{
-    color:white;
-}
-button a, a:hover{
-    color:white;
+    color:inherit;
 }
 button.login a {
 color : black;
 }
+
 list-inline a, a:hover{
     color:blue;
 }

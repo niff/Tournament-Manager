@@ -12,6 +12,8 @@ namespace IglaClub.Web.Controllers
         {
             //ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
             //return RedirectToAction("Index","Tournament");
+            if (Request.IsAuthenticated)
+               return RedirectToAction("Index", "Tournament");
             return View();
         }
 
