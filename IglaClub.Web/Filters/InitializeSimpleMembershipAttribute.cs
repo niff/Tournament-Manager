@@ -25,11 +25,11 @@ namespace IglaClub.Web.Filters
         {
             public SimpleMembershipInitializer()
             {
-                Database.SetInitializer<UsersContext>(null);
+                Database.SetInitializer<IglaClubDbContext>(null);
 
                 try
                 {
-                    using (var context = new UsersContext())
+                    using (var context = new IglaClubDbContext())
                     {
                         if (!context.Database.Exists())
                         {

@@ -200,6 +200,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201308062055576_InitialCreate.cs" />
+    <Compile Include="Migrations\201308062055576_InitialCreate.Designer.cs">
+      <DependentUpon>201308062055576_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\IglaClubDbContext.cs" />
     <Compile Include="Models\ViewModels\PairRosterViewModel.cs" />
@@ -281,6 +286,8 @@
     <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="Properties\PublishProfiles\iglaclub - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\iglaclub - Web Deploy.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\flick\images\animated-overlay.gif" />
     <Content Include="Scripts\flick\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -364,7 +371,6 @@
     <Content Include="Views\Results\Edit.cshtml" />
     <Content Include="Views\Results\_PairsResults.cshtml" />
     <Content Include="Views\Tournament\_TournamentList.cshtml" />
-    <Content Include="Views\Tournament\_PairRoster.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -381,6 +387,11 @@
       <Project>{f812d401-7bf6-4251-a23d-bdebeba5f179}</Project>
       <Name>IglaClub.TournamentManager</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201308062055576_InitialCreate.resx">
+      <DependentUpon>201308062055576_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
