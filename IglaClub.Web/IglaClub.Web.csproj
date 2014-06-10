@@ -200,6 +200,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\_1_AddUser.cs" />
     <Compile Include="Migrations\201308062055576_InitialCreate.cs" />
     <Compile Include="Migrations\201308062055576_InitialCreate.Designer.cs">
       <DependentUpon>201308062055576_InitialCreate.cs</DependentUpon>
