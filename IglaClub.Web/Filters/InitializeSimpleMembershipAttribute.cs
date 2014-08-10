@@ -16,7 +16,7 @@ namespace IglaClub.Web.Filters
         private static bool _isInitialized;
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
+        {   
             // Ensure ASP.NET Simple Membership is initialized only once per app start
             LazyInitializer.EnsureInitialized(ref _initializer, ref _isInitialized, ref _initializerLock);
         }
@@ -38,7 +38,7 @@ namespace IglaClub.Web.Filters
                         }
                     }
 
-                    WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+                    WebSecurity.InitializeDatabaseConnection("IglaClubConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
                 }
                 catch (Exception ex)
                 {

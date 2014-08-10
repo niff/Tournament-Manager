@@ -9,7 +9,7 @@ namespace IglaClub.Web.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(IglaClub.Web.Models.IglaClubDbContext context)

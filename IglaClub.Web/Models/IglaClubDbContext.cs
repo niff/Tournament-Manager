@@ -1,4 +1,5 @@
-﻿using IglaClub.ObjectModel;
+﻿using System.Data.Entity.Migrations;
+using IglaClub.ObjectModel;
 using IglaClub.ObjectModel.Entities;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using IglaClub.ObjectModel.Enums;
+using IglaClub.Web.Migrations;
 
 namespace IglaClub.Web.Models
 {
@@ -18,6 +20,9 @@ namespace IglaClub.Web.Models
                 //    new IglaClubDbContextInitializer());
                 //System.Data.Entity.Database.SetInitializer(
                 //    new System.Data.Entity.MigrateDatabaseToLatestVersion<IglaClubWeb.Models.IglaClubDbContext,>());
+                Database.SetInitializer<IglaClubDbContext>(
+    new MigrateDatabaseToLatestVersion<IglaClubDbContext, Configuration>());
+Database.Initialize(false);
             }
 
             public DbSet<User> Users { get; set; }

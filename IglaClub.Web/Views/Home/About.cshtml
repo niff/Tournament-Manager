@@ -2,30 +2,40 @@
     ViewBag.Title = "About Igla Club";
 }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-    <h2>@ViewBag.Message</h2>
-</hgroup>
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+            <p>
+                If you are bridge enthusiast and you want to organize small tournaments on your own, 
+                or you are participating in those kind of events and you want to have a tool for better organize and analyze them, you're in the rigth place. 
+                If you are not, it is the best place to became one of us:)
+            </p>
+        </div>
+    </section>
+}
+<h3>How to use this page:</h3>
+<ol class="round">
+    <li class="one">
+        <h5>As bridge player</h5>
+        You can simply log in, and either find your local bridge club or look for a new one in your neighbourhood. <br />
+        You can subscribe to the tournaments in your clubs, check results, track history of your play. 
+    </li>
 
-<article>
-    <p>
-        Witamy na stronie służącej do prostego zarządzania turniejami. Pozwala ono stworzyć turniej który można poprowadzić wraz ze znajomymi.
-        Na razie wersja jest bardzo początkowa, pozwala na stworzenie tylko turnieju typu cavendish. 
-        Napisana jest tylko w języku angielskim (jak widać, ta strona jest wyjątkiem). 
-        Mam nadzieję, że jak najszybciej powstanie także w innych językach.
-    </p>
+    <li class="two">
+        <h5>As tournaments organizer/director</h5>
+        You can organize new tournament and let people to sign in on it. <br />
+        But, the most importart what you can do here: you can easily <b>manage your tournament</b>. <br />
+        Enter board results, generate standings, rosters, and everything else what is important for <b>tournament director</b>. 
+    </li>
 
-    <p>
-        W razie wszelkich niejasności proszę o kontakt. (bartlomiej.igla@gmail.com)
-    </p>
+    
+    <li class="three">
+        <h3>What now?</h3>
+        You should <a href="@Url.Action("Index","Tournament")"> log in or register</a>, and next go to the <a href="@Url.Action("Index","Tournament")">tournament list</a> and look for a new one or to create it.
 
-</article>
-
-<aside>
-    <h3>Dodatkowe opcje:</h3>
-    <ul>
-        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-        <li>@Html.ActionLink("About", "About", "Home")</li>
-        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-    </ul>
-</aside>
+</li>
+</ol>
