@@ -57,5 +57,9 @@ namespace IglaClub.ObjectModel.Repositories
             return matchedUsers;
         }
 
+       public User GetUserByName(string userName)
+        {
+            return db.Users.FirstOrDefault(u => string.Compare(u.Login, userName, true) == 0);
+        }
     }
 }

@@ -45,5 +45,16 @@ namespace IglaClub.ObjectModel.Repositories
         {
             return db.Tournaments.Where(t => t.TournamentStatus == Enums.TournamentStatus.Started);
         }
+
+        public bool UserIsTournamentOwner(string userName, long tournamentId)
+        {
+            var tournament = db.Tournaments.Find(tournamentId);
+            if (tournament == null || tournament.Owner == null || string.Compare(tournament.Owner.Login, userName, true) != 0)
+                return false;
+            return true;
+
+            
+            
+        }
     }
 }
