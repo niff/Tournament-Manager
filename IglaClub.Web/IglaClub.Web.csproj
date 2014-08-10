@@ -200,10 +200,25 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\_1_AddUser.cs" />
+    <Compile Include="Migrations\201407221921328_InitialMigrations.cs" />
+    <Compile Include="Migrations\201407221921328_InitialMigrations.Designer.cs">
+      <DependentUpon>201407221921328_InitialMigrations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407221928013_AddUser.cs" />
+    <Compile Include="Migrations\201407221928013_AddUser.Designer.cs">
+      <DependentUpon>201407221928013_AddUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201308062055576_InitialCreate.cs" />
     <Compile Include="Migrations\201308062055576_InitialCreate.Designer.cs">
       <DependentUpon>201308062055576_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407221931314_AddUser2.cs" />
+    <Compile Include="Migrations\201407221931314_AddUser2.Designer.cs">
+      <DependentUpon>201407221931314_AddUser2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407221934356_AddUser3.cs" />
+    <Compile Include="Migrations\201407221934356_AddUser3.Designer.cs">
+      <DependentUpon>201407221934356_AddUser3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
@@ -372,6 +387,7 @@
     <Content Include="Views\Results\Edit.cshtml" />
     <Content Include="Views\Results\_PairsResults.cshtml" />
     <Content Include="Views\Tournament\_TournamentList.cshtml" />
+    <Content Include="Views\Tournament\_PairRoster.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -392,6 +408,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201308062055576_InitialCreate.resx">
       <DependentUpon>201308062055576_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407221921328_InitialMigrations.resx">
+      <DependentUpon>201407221921328_InitialMigrations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407221928013_AddUser.resx">
+      <DependentUpon>201407221928013_AddUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407221931314_AddUser2.resx">
+      <DependentUpon>201407221931314_AddUser2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407221934356_AddUser3.resx">
+      <DependentUpon>201407221934356_AddUser3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

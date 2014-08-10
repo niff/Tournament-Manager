@@ -13,7 +13,7 @@ using IglaClub.Web.Models.ViewModels;
 
 namespace IglaClub.Web.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class TournamentController : Controller
     {
         private readonly IglaClubDbContext db = new IglaClubDbContext();
@@ -113,13 +113,13 @@ namespace IglaClub.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Tournament tournament)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(tournament).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Manage", tournament.Id);
-            }
-            return View(tournament);
+            if (!ModelState.IsValid) 
+                return View(tournament);
+            
+            db.Entry(tournament).State = EntityState.Modified;
+            db.SaveChanges();
+            //return RedirectToAction("Manage", "Tournament", new { tournamentId = id });
+            return RedirectToAction("Manage", new {tournamentId = tournament.Id});
         }
 
         //
