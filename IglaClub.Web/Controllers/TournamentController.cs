@@ -10,10 +10,11 @@ using IglaClub.ObjectModel.Enums;
 using IglaClub.ObjectModel.Repositories;
 using IglaClub.Web.Models;
 using IglaClub.Web.Models.ViewModels;
+using IglaClub.Web.Authorization;
 
 namespace IglaClub.Web.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class TournamentController : Controller
     {
         private readonly IglaClubDbContext db = new IglaClubDbContext();
@@ -34,6 +35,7 @@ namespace IglaClub.Web.Controllers
         
         //
         // GET: /Tournament/
+        
         public ActionResult Index()
         {
             return View(db.Tournaments.Include(t=>t.Pairs).OrderBy(t=>t.TournamentStatus).ToList());
@@ -42,6 +44,7 @@ namespace IglaClub.Web.Controllers
         //
         // GET: /Tournament/Manage/5
 
+        [TournamentOwner]
         public ActionResult Manage(long id = 0)
         {
             
@@ -86,7 +89,8 @@ namespace IglaClub.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                tournamentManager.Create(tournament);
+                //tournament.Owner = userRepository.GetUserByName(User.Identity.Name);
+                tournamentManager.Create(tournament, User.Identity.Name);
                 return RedirectToAction("Index");
             }
 

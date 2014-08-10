@@ -38,7 +38,7 @@ namespace IglaClub.Web.Filters
                         }
                     }
 
-                    WebSecurity.InitializeDatabaseConnection("IglaClubConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+                    WebSecurity.InitializeDatabaseConnection("IglaClubConnection", "Users", "Id", "Login", autoCreateTables: true);
                 }
                 catch (Exception ex)
                 {

@@ -173,12 +173,13 @@ namespace IglaClub.TournamentManager
             return new OperationStatus(true);
         }
 
-        public bool Create(Tournament tournament)
+        public bool Create(Tournament tournament, string userName)
         {
             if (tournament.Id != 0)
                 return false;
             tournament.TournamentStatus = TournamentStatus.Planned;
             tournament.CreationDate = DateTime.Now;
+            tournament.Owner = db.Users.FirstOrDefault(u => string.Compare(u.Login, userName, true) == 0);
             db.Tournaments.Add(tournament);
             db.SaveChanges();
             return true;

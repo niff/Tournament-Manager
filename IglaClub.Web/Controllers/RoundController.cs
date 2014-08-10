@@ -9,6 +9,7 @@ using IglaClub.Web.Models.ViewModels;
 
 namespace IglaClub.Web.Controllers
 {
+    [Authorize]
     public class RoundController : Controller
     {
         //

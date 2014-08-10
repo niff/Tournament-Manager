@@ -59,5 +59,7 @@ namespace IglaClub.ObjectModel.Entities
         [DisplayName("Finish Date")]
         public DateTime? FinishDate { get; set; }
 
+        [DisplayName("Created by")]
+        virtual public User Owner { get; set; }
      }
 }
