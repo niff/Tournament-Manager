@@ -17,6 +17,7 @@ namespace IglaClub.ObjectModel.Repositories
         {
             var user = new User
                 {
+                    Login = name,
                     Name = name,
                     Email = email
                 };
@@ -57,9 +58,14 @@ namespace IglaClub.ObjectModel.Repositories
             return matchedUsers;
         }
 
-       public User GetUserByName(string userName)
+        public User GetUserByName(string userName)
         {
             return db.Users.FirstOrDefault(u => string.Compare(u.Login, userName, true) == 0);
+        }
+
+        public List<User> GetAllUsers()
+        {
+            return db.Users.ToList();
         }
     }
 }
