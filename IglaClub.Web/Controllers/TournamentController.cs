@@ -4,17 +4,18 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Web.Http;
 using System.Web.Mvc;
 using IglaClub.ObjectModel.Entities;
 using IglaClub.ObjectModel.Enums;
 using IglaClub.ObjectModel.Repositories;
 using IglaClub.Web.Models;
 using IglaClub.Web.Models.ViewModels;
-using IglaClub.Web.Authorization;
+//using IglaClub.Web.Authorization;
 
 namespace IglaClub.Web.Controllers
 {
-    [Authorize]
+    [System.Web.Mvc.Authorize]
     public class TournamentController : Controller
     {
         private readonly IglaClubDbContext db = new IglaClubDbContext();
@@ -44,7 +45,7 @@ namespace IglaClub.Web.Controllers
         //
         // GET: /Tournament/Manage/5
 
-        [TournamentOwner]
+        //[TournamentOwner]
         public ActionResult Manage(long id = 0)
         {
             
@@ -83,7 +84,7 @@ namespace IglaClub.Web.Controllers
         //
         // POST: /Tournament/Create
 
-        [HttpPost]
+        [System.Web.Mvc.HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Tournament tournament)
         {
@@ -113,7 +114,7 @@ namespace IglaClub.Web.Controllers
         //
         // POST: /Tournament/Edit/5
 
-        [HttpPost]
+        [System.Web.Mvc.HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Tournament tournament)
         {
@@ -142,7 +143,7 @@ namespace IglaClub.Web.Controllers
         //
         // POST: /Tournament/Delete/5
 
-        [HttpPost, ActionName("Delete")]
+        [System.Web.Mvc.HttpPost, System.Web.Mvc.ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
@@ -191,7 +192,7 @@ namespace IglaClub.Web.Controllers
             
         }
 
-        [HttpPost]
+        [System.Web.Mvc.HttpPost]
         public ActionResult RemovePair(long tournamentId, long pairId)
         {
             Tournament tournament = db.Tournaments.Find(tournamentId);
@@ -201,7 +202,7 @@ namespace IglaClub.Web.Controllers
             return Json(new { success = true });
         }
 
-        [HttpPost]
+        [System.Web.Mvc.HttpPost]
         public ActionResult AddPair(int user1, int user2, int tournamentId)
         {
             tournamentManager.AddPair(tournamentId, user1, user2);
@@ -237,7 +238,7 @@ namespace IglaClub.Web.Controllers
         public JsonResult SearchUsers(long tournamentId, string phrase)
         {
             var result = userRepository.GetUsersByPhraseAndTournament(tournamentId, phrase)
-                .Select(u => new { u.Id, value = u.Name +" "+ u.Lastname  + ( (!String.IsNullOrWhiteSpace(u.Nickname) ) ? " (" + u.Nickname + ")" : "")})
+                .Select(u => new { u.Id, value = u.Name +" "+ u.Lastname  + ( (!String.IsNullOrWhiteSpace(u.Login) ) ? " (" + u.Login + ")" : "")})
                         .Take(10)
                         .ToArray();
             var jsonResult = Json(result, JsonRequestBehavior.AllowGet);
@@ -255,10 +256,11 @@ namespace IglaClub.Web.Controllers
             return Redirect(Request.UrlReferrer.ToString());
         }
 
-        public JsonResult AddUser(string name, string email)
+        public JsonResult AddUser(string name, string email, string password)
         {
             var id =  userRepository.Add(name, email);
-            return Json(id);
+            return Json(new {data = id, textStatus = "ASA"});
+            
         }
 
         public ActionResult MoveToNextRound(long tournamentid, bool withpairsrepeat)

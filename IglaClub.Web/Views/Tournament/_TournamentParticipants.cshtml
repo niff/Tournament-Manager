@@ -10,8 +10,8 @@
         }
         @foreach (var pair in @Model.PairsInTounament)
         {            
-            var p1Name = (pair.Player1 == null ? "Unknown" : pair.Player1.Name);
-            var p2Name = (pair.Player2 == null ? "Unknown" : pair.Player2.Name);
+            var p1Name = (pair.Player1 == null ? "Unknown" : pair.Player1.Name + " (" + pair.Player1.Login + ")");
+            var p2Name = (pair.Player2 == null ? "Unknown" : pair.Player2.Name + " (" + pair.Player2.Login + ")");
             <tr>
                 <td>@counter .</td>
                 <td>
@@ -52,7 +52,8 @@
     //global
     var whichUserInNewUserDialog = "";
     
-    $(document).ready(function() {
+    $(document).ready(function () {
+        $("#pairSearch1").focus();
         var url = function (request, response) {
             var idOfTriggeringElement = '#' + this.element.attr("id");
             $.getJSON("@Url.Action("SearchUsers")", { phrase: $(idOfTriggeringElement).val(), tournamentId: '@Model.Tournament.Id' },
@@ -72,59 +73,69 @@
     
         $(function () {
             $("#pairSearch1, #pairSearch2")
-            
                 .autocomplete({
                     source: url,
                     messages: {
                         noResults: '',
                         results: ''
                     },
-                    minLength:0,
-                    open: function (e, ui) {
+                    minLength: 0,
+                    open: function(e, ui) {
                         var idOfTriggeringElement = '#' + this.id;
                         var acData = $(idOfTriggeringElement).data('autocomplete');
-                        
+
                         acData
                             .menu
                             .element
                             .find('a.ui-corner-all')
-                            .each(function () {
-                               // if ($(this).val() != 0) {
-                                    var me = $(this);
-                                    var keywords = acData.term.split(' ').join('|');
-                                    me.html(me.text().replace(new RegExp("(" + keywords + ")", "gi"), '<b>$1</b>'));
-                               // }
+                            .each(function() {
+                                // if ($(this).val() != 0) {
+                                var me = $(this);
+                                var keywords = acData.term.split(' ').join('|');
+                                me.html(me.text().replace(new RegExp("(" + keywords + ")", "gi"), '<b>$1</b>'));
+                                // }
                             });
                     },
-                    select: function (event, ui) {
-                        //event.preventDefault();
+                    select: function(event, ui) {
+                        
+                        
                         if (ui.item.id != 0) {
                             var elem = this.id;
                             var sufix = elem.substr((elem.length - 1), 1);
                             var userId = "#user" + sufix;
                             if (ui.item) {
                                 $(userId).val(ui.item.id);
-
+                                
                             }
+                            
                         } else {
                             $("#dialog-form").dialog("open");
                             whichUserInNewUserDialog = '#' + this.id;
                             $('#name').val($(whichUserInNewUserDialog).val());
+                            $('#email').val($(whichUserInNewUserDialog).val());
+                            $('#password').val('');
                             return false;
                         }
                         $(this).autocomplete('close');
+                        $(this).focus();
                     },
-                    close: function(){
+                    focus: function(event, ui) {
+                        if (ui.item.value == "Dodaj...") {
+                            event.preventDefault();
+                            return;}
+                    },
+                    autoFocus: true,
+                    close: function() {
                         $(this).blur();
                     }
                 })
-                .focus(function () { $(this).autocomplete("search", ""); })
-                //.data("autocomplete")._renderItem = function (ul, item) {
-                //    var idOfTriggeringElement = '#' + this.id;
-                //    return $("<li>")
-                //        .append("<a href='#'>" + item.label  + "</a>")
-                //        .appendTo(ul);
-                //};
+                .focus(function() { $(this).autocomplete("search", ""); });
+            //.data("autocomplete")._renderItem = function (ul, item) {
+            //    var idOfTriggeringElement = '#' + this.id;
+            //    return $("<li>")
+            //        .append("<a href='#'>" + item.label  + "</a>")
+            //        .appendTo(ul);
+            //};
         });
 
         $('#pairSearchSubmit').on("click", function() {
@@ -161,7 +172,12 @@
             buttons: {
                 "Dodaj": function() {
                     //ajax : add user
-                    var newId = addUser($('#name').val(), $('#email').val());
+                    var newId = addUser($('#name').val(), $('#email').val(), $('#password').val());
+                    if (!$.isNumeric(newId))
+                    {
+                        alert("Error: " + newId);
+                        return;
+                    }
                     //fill hidden input with id, fill input with name if changed
                     var sufix = whichUserInNewUserDialog.substr((whichUserInNewUserDialog.length - 1), 1);
                     var idInputForFill = '#user' + sufix;
@@ -181,15 +197,21 @@
             }
         });
 
-        function addUser(name, email) {
+        function addUser(name, email, password) {
             return $.ajax({
                 url: "/Tournament/AddUser",
                 type: "POST",
-                data: { name: name, email: email },
+                data: { name: name, email: email, password: password },
                 async: false,
-                success: function (data) {  return data; }
+                success: addUserSuccess
             }).responseText;
             
+        }
+
+        function addUserSuccess(data, textStatus) {
+            if (textStatus != "")
+                return textStatus;
+            return data;
         }
     });
     
