@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
-using IglaClub.ObjectModel.Entities;
 using System.Data.Entity.Infrastructure;
+using IglaClub.ObjectModel.Entities;
 
 namespace IglaClub.ObjectModel
 {

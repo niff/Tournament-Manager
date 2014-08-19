@@ -171,24 +171,8 @@
             modal: true,
             buttons: {
                 "Dodaj": function() {
-                    //ajax : add user
-                    var newId = addUser($('#name').val(), $('#email').val(), $('#password').val());
-                    if (!$.isNumeric(newId))
-                    {
-                        alert("Error: " + newId);
-                        return;
-                    }
-                    //fill hidden input with id, fill input with name if changed
-                    var sufix = whichUserInNewUserDialog.substr((whichUserInNewUserDialog.length - 1), 1);
-                    var idInputForFill = '#user' + sufix;
-                    $(idInputForFill).val(newId);
-
-                    var nameInputForFill = whichUserInNewUserDialog;
-                    $(nameInputForFill).val($('#name').val());
-                    //if create, fill, then search again- > set hidden to null
-                    $(this).dialog("close");
-                    //clear dialog fields
-                },
+                    addUser($('#name').val(), $('#email').val(), $('#password').val());
+                                    },
                     "Anuluj": function() {
                         $( this ).dialog( "close" );
                     }
@@ -208,10 +192,22 @@
             
         }
 
-        function addUserSuccess(data, textStatus) {
-            if (textStatus != "")
-                return textStatus;
-            return data;
+        function addUserSuccess(reponse) {
+            if (reponse.ErrorStatus != "")
+            {
+                alert("Error: " + reponse.ErrorStatus);
+                return;
+                }
+            //fill hidden input with id, fill input with name if changed
+            var sufix = whichUserInNewUserDialog.substr((whichUserInNewUserDialog.length - 1), 1);
+            var idInputForFill = '#user' + sufix;
+            $(idInputForFill).val(reponse.Data);
+
+            var nameInputForFill = whichUserInNewUserDialog;
+            $(nameInputForFill).val($('#name').val());
+            //if create, fill, then search again- > set hidden to null
+            $("#dialog-form").dialog("close");
+            //clear dialog fields
         }
     });
     
