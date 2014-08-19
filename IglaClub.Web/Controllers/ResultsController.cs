@@ -53,6 +53,7 @@ namespace IglaClub.Web.Controllers
                 {
                     resultRepository.InsertOrUpdate(result);
                 }
+                this.resultRepository.SaveChanges();
 
                 if (results.Any())
                 {
