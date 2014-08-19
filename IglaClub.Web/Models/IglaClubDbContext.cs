@@ -1,12 +1,6 @@
-﻿using System.Data.Entity.Migrations;
+﻿using System.Data.Entity;
 using IglaClub.ObjectModel;
 using IglaClub.ObjectModel.Entities;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
-using IglaClub.ObjectModel.Enums;
 using IglaClub.Web.Migrations;
 
 namespace IglaClub.Web.Models

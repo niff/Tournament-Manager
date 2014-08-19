@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -258,8 +259,16 @@ namespace IglaClub.Web.Controllers
 
         public JsonResult AddUser(string name, string email, string password)
         {
-            var id =  userRepository.Add(name, email);
-            return Json(new {data = id, textStatus = "ASA"});
+            long id;
+            try
+            {
+                id =  userRepository.Add(name, email);
+            }
+            catch (SqlException sqlException)
+            {
+                return Json(new {data = -1, errorStatus = sqlException.Message});
+            }
+            return Json(new {Data = id, ErrorStatus = ""});
             
         }
 
