@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using IglaClub.ObjectModel.Entities;
 using IglaClub.ObjectModel.Enums;
 using IglaClub.ObjectModel.Repositories;
+using IglaClub.Web.Authorization;
 using IglaClub.Web.Models;
 using IglaClub.Web.Models.ViewModels;
 //using IglaClub.Web.Authorization;
@@ -46,7 +47,7 @@ namespace IglaClub.Web.Controllers
         //
         // GET: /Tournament/Manage/5
 
-        //[TournamentOwner]
+        [TournamentOwner]
         public ActionResult Manage(long id = 0)
         {
             
@@ -125,7 +126,7 @@ namespace IglaClub.Web.Controllers
             db.Entry(tournament).State = EntityState.Modified;
             db.SaveChanges();
             //return RedirectToAction("Manage", "Tournament", new { tournamentId = id });
-            return RedirectToAction("Manage", new {tournamentId = tournament.Id});
+            return RedirectToAction("Manage", new {tournament.Id});
         }
 
         //

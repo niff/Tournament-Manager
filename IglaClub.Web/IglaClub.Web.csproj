@@ -212,7 +212,9 @@
     <Content Include="Content\global.css" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Authorization\TournamentOwnerAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\ResultsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RoundController.cs" />
@@ -428,6 +430,7 @@
     <Content Include="Views\Results\_PairsResults.cshtml" />
     <Content Include="Views\Tournament\_TournamentList.cshtml" />
     <Content Include="Views\Tournament\_PairRoster.cshtml" />
+    <Content Include="Views\Errors\Error403.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
