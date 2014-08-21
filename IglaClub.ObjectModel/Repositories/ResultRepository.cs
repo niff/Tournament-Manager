@@ -34,7 +34,7 @@ namespace IglaClub.ObjectModel.Repositories
         {
             return db.Results.Where(r => r.Tournament.Id == tournamentId).ToList();
         }
-        public Dictionary<long, int> GetDictionaryPairNumberMaxPoints(int tournamentId)
+        public Dictionary<long, int> GetDictionaryPairNumberMaxPoints(long tournamentId)
         {
             var  res = new Dictionary<long, int>();
             var results = GetResults(tournamentId);

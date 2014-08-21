@@ -40,7 +40,7 @@
     </table>
     <div id="dialog-form" title="Utwórz użytkownika w systemie IglaClub">
         <form>
-            <label for="name">Nazwa</label><input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" />               
+            <label for="name">Login</label><input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" />               
             <label for="email">Email</label><input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all" />               
             <label for="password">Hasło</label><input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" />
         </form>
@@ -182,6 +182,10 @@
         });
 
         function addUser(name, email, password) {
+            if (name == '') {
+                alert("Name cannot be empty");
+                return;
+            }
             return $.ajax({
                 url: "/Tournament/AddUser",
                 type: "POST",

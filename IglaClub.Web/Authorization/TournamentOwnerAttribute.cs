@@ -30,12 +30,15 @@ namespace IglaClub.Web.Authorization
             //}
 
             var rd = httpContext.Request.RequestContext.RouteData;
-            var id = long.Parse(rd.Values["id"].ToString());
+
+            long id = 0;
+            if (rd.Values.ContainsKey("id"))
+                id = long.Parse(rd.Values["id"].ToString());
+            else if (rd.Values.ContainsKey("tournamentId"))
+                id = long.Parse(rd.Values["tournamentId"].ToString());
+
             if (id == 0)
-            {
-                // Now id was specified => we do not allow access
                 return false;
-            }
 
             return IsOwnerOfTournament(user.Identity.Name, id);
         }
