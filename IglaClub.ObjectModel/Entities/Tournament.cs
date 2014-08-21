@@ -11,12 +11,6 @@ namespace IglaClub.ObjectModel.Entities
 {
     public class Tournament : BaseEntity
     {
-        public Tournament()
-        {
-            //Pairs = new List<Pair>();
-            //Boards = new List<BoardInstance>();
-        }
-
         [Required(ErrorMessage="The name is required")]
         public string  Name { get; set; }
 

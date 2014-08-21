@@ -112,3 +112,7 @@ table.result {
 font-size: 1.5em;
 text-indent: 30PX;
  }
+
+.btn {
+    margin: 2px;
+}

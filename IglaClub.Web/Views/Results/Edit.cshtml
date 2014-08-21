@@ -83,7 +83,7 @@
                     @Html.EditorFor(m => m[i].Board.BoardNumber)
                 </td>
                 <td>
-                    @Html.EditorFor(m => m[i].ContractLevel)
+                    @Html.EditorFor(m => m[i].ContractLevel, new {type="number", min = "0", max = "7"})
                     @*@Html.TextBoxFor(m => m[i].ContractLevel)*@
                 </td>
                 <td>
@@ -105,7 +105,6 @@
                     @Html.TextBoxFor(m => m[i].ResultNsPoints)
                 </td>
                 
-                
                 <td>
                     @Html.TextBoxFor(m => m[i].ScoreNs)
                 </td>
@@ -114,6 +113,9 @@
                 </td>
                 <td>
                     @Html.TextBoxFor(m => m[i].ResultNsPoints)
+                </td>
+                <td>
+                    <a href="@Url.Action("Delete", new { id = Model[i].Id })" title="Remove"><span class="glyphicon glyphicon-remove"></span></a>
                 </td>
                 <td>
                     @Html.HiddenFor(m => m[i].TournamentId)

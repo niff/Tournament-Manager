@@ -12,30 +12,43 @@
     var grid = new WebGrid(Model.Results, rowsPerPage: 40);
 }
 <div>
-    <button class="btn btn-info btn-small">
-        @Html.ActionLink("Manage tournament", "Manage", "Tournament", new { id = Model.Tournament.Id }, null)
-    </button>
+    <a href="@Url.Action("Manage", "Tournament", new { id = Model.Tournament.Id })" 
+        class="btn btn-info btn-small">
+        Manage tournament
+    </a>
 
-    <button class="btn btn-info btn-small">
+    <a href="@Url.Action("Edit", new { tournamentId = @Model.Tournament.Id })"
+        class="btn btn-info btn-small">
         <span class="glyphicon glyphicon-pencil"></span>
-        @Html.ActionLink("Edit results", "Edit", new { tournamentId = @Model.Tournament.Id })
-    </button>
-    <button class="btn btn-info btn-small">
+        Edit results
+    </a>
+
+    <a href="@Url.Action("CalculateResultsComplete", "Tournament", new { id = Model.Tournament.Id })"
+        class="btn btn-info btn-small">
         <span class="glyphicon glyphicon-export"></span>
-        @Html.ActionLink("Calculate results", "CalculateResultsComplete", "Tournament", new { id = Model.Tournament.Id }, null)
-    </button>
-    <button class="btn btn-info btn-small">
+        Calculate results
+    </a>
+    
+    <a href="@Url.Action("CalculateResultsComplete", "Tournament", new { id = Model.Tournament.Id })" class="btn btn-info btn-small">
+        <span class="glyphicon glyphicon-export"></span>Calculate results
+    </a>
+
+    <a href="@Url.Action("GenerateNextRound", "Tournament", new { tournamentId = Model.Tournament.Id, withPairsRepeat = false })" 
+       class="btn btn-info btn-small">
         <span class="glyphicon glyphicon-circle-arrow-right"></span>
-        @Html.ActionLink("Generate next round - no pairs repeat", "GenerateNextRound", "Tournament", new { tournamentId = Model.Tournament.Id, withPairsRepeat = false }, null)
-    </button>
-    <button class="btn btn-info btn-small">
+        Generate next round - no pairs repeat
+    </a>
+    <a href="@Url.Action("GenerateNextRound", "Tournament", new { tournamentId = Model.Tournament.Id, withPairsRepeat = true })"
+       class="btn btn-info btn-small">
         <span class="glyphicon glyphicon-circle-arrow-right"></span>
-        @Html.ActionLink("Generate next round with pairs repeat", "GenerateNextRound", "Tournament", new { tournamentId = Model.Tournament.Id, withPairsRepeat = true }, null)
-    </button>
-    <button class="btn btn-info btn-small">
+        Generate next round with pairs repeat
+    </a>
+    <a href="@Url.Action("RemoveLastRound", "Results", new { tournamentId = Model.Tournament.Id })"
+       class="btn btn-info btn-small">
         <span class="glyphicon glyphicon-remove"></span>
-        @Html.ActionLink("Remove last round", "RemoveLastRound", "Results", new { id = Model.Tournament.Id }, null)
-    </button>
+       
+        Remove last round
+    </a>
 
 </div>
 
@@ -53,7 +66,7 @@
         grid.Column("PlayedBy",header: "Played by", format: @<text>@item.PlayedBy.ToString()</text>),
         grid.Column("NumberOfTricks",header: "Number of Tricks", format: @<text>@item.NumberOfTricks</text>),
         grid.Column("Vulnerable",header: "Vul", format: @<text>@item.Board.BoardDefinition.Vulnerability</text>),
-        grid.Column("Remove",header: "Remove", format: @<text>@Html.ActionLink("Remove", "Delete", new { id = @item.Id })</text>),
+        grid.Column("Remove",header: "Remove result", format: @<text><a href="@Url.Action("Delete", new { id = @item.Id })" title="Remove"><span class="glyphicon glyphicon-remove"></span></a></text>),
         grid.Column("Result",header: "Result", format: @<text>@item.ResultNsPoints</text>),
         grid.Column("ScoreNS",header: "Score NS", format: @<text>@item.ScoreNs</text>),
         grid.Column("ScoreEW",header: "Score EW", format: @<text>@item.ScoreEw</text>)

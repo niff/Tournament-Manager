@@ -12,7 +12,7 @@ namespace IglaClub.ObjectModel.Repositories
         {
         }
 
-        public List<Pair> GetPairsByTournament(int id)
+        public List<Pair> GetPairsByTournament(long id)
         {
             return db.Tournaments.Find(id).Pairs.ToList();
         }

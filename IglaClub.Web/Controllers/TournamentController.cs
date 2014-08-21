@@ -51,7 +51,10 @@ namespace IglaClub.Web.Controllers
         public ActionResult Manage(long id = 0)
         {
             
-            Tournament tournament = db.Tournaments.Include(t=>t.Pairs).FirstOrDefault(t=>t.Id == id);
+            Tournament tournament = db.Tournaments.
+                Include(t=>t.Pairs).
+                Include(t=>t.Owner).
+                FirstOrDefault(t=>t.Id == id);
             
             if (tournament == null)
             {

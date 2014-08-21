@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using IglaClub.ObjectModel.Entities;
 using IglaClub.ObjectModel.Repositories;
+using IglaClub.Web.Authorization;
 using IglaClub.Web.Models;
 using IglaClub.Web.Models.ViewModels;
 
@@ -43,6 +44,7 @@ namespace IglaClub.Web.Controllers
             return View(results);
         }
 
+      
         [HttpPost]
         public ActionResult Edit(List<Result> results)
         {
@@ -64,6 +66,7 @@ namespace IglaClub.Web.Controllers
             return null;
         }
 
+        [TournamentOwner]
         public ActionResult Manage(long tournamentId, string sort, string sortdir)
         {
             Tournament tournament = tournamentRepository.GetTournament(tournamentId);
@@ -100,6 +103,8 @@ namespace IglaClub.Web.Controllers
         public ActionResult DeleteConfirmed(long id)
         {
             long tournamentId = tournamentManager.DeleteResult(id);
+            if (Request.UrlReferrer != null) 
+                return Redirect(Request.UrlReferrer.ToString());
             return RedirectToAction("Manage", new { tournamentId});
         }
 
@@ -109,10 +114,10 @@ namespace IglaClub.Web.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult RemoveLastRound(long id)
+        public ActionResult RemoveLastRound(long tournamentId)
         {
-            tournamentManager.RemoveLastRound(id);
-            return RedirectToAction("Manage", new { tournamentId = id });
+            tournamentManager.RemoveLastRound(tournamentId);
+            return RedirectToAction("Manage", new {tournamentId });
         }
 
         public ActionResult GenerateNextRound(long tournamentId, bool withPairsRepeat)
@@ -124,11 +129,13 @@ namespace IglaClub.Web.Controllers
         public ActionResult AddNewResult(long tournamentId)
         {
             tournamentManager.AddNewResult(tournamentId);
-            return Redirect(Request.UrlReferrer.ToString());
+            if (Request.UrlReferrer != null) 
+                return Redirect(Request.UrlReferrer.ToString());
+            return RedirectToAction("Edit", new { tournamentId });
         }
 
 
-        public PartialViewResult PairsResults(int tournamentId)
+        public PartialViewResult PairsResults(long tournamentId)
         {
             var tournament = tournamentRepository.GetTournament(tournamentId);
             Dictionary<long, int> pairNumberMaxPoints = resultRepository.GetDictionaryPairNumberMaxPoints(tournamentId);

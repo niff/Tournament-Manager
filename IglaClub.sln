@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IglaClub.Web", "IglaClub.Web\IglaClub.Web.csproj", "{8F6E188A-5BB9-47FB-82DF-1CFBD5BDC9B8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IglaClub.ObjectModel", "IglaClub.ObjectModel\IglaClub.ObjectModel.csproj", "{C4EBBCD3-8501-4136-90EC-91870977B932}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IglaClub.TournamentManager", "IglaClub.TournamentManager\IglaClub.TournamentManager.csproj", "{F812D401-7BF6-4251-A23D-BDEBEBA5F179}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IglaClub.TournamentManager.Tests", "IglaClub.TournamentManager.Tests\IglaClub.TournamentManager.Tests.csproj", "{4FD2B85C-3696-4881-9BA3-3DB4CAE284C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +29,10 @@ Global
 		{F812D401-7BF6-4251-A23D-BDEBEBA5F179}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F812D401-7BF6-4251-A23D-BDEBEBA5F179}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F812D401-7BF6-4251-A23D-BDEBEBA5F179}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FD2B85C-3696-4881-9BA3-3DB4CAE284C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FD2B85C-3696-4881-9BA3-3DB4CAE284C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FD2B85C-3696-4881-9BA3-3DB4CAE284C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FD2B85C-3696-4881-9BA3-3DB4CAE284C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

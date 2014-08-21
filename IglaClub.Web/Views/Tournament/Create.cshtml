@@ -1,10 +1,12 @@
 ﻿@using IglaClub.ObjectModel.Enums
 @model IglaClub.ObjectModel.Entities.Tournament
 
+@Scripts.Render("~/bundles/DateTimepickerJs")
+@Styles.Render("~/Content/DateTimepickerCss")
+
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-    
     
         DateTime startDate = DateTime.Now.AddMinutes(-DateTime.Now.Minute).AddSeconds(-DateTime.Now.Second).AddHours(1);
     
@@ -68,7 +70,9 @@
 </div>
 
 @section Scripts {
-    
     @Scripts.Render("~/bundles/jqueryval")
 }
 
+<script>
+    jQuery('#datepicker').datetimepicker();
+</script>

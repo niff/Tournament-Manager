@@ -162,6 +162,8 @@ namespace IglaClub.TournamentManager
         public OperationStatus RemoveLastRound(long tournamentId)
         {
             Tournament tournament = db.Tournaments.Find(tournamentId);
+            if(tournament.CurrentRound < 1)
+                return new OperationStatus(false, "NoRoundsToRemove");
             var resultsToRemove= tournament.Results.Where(r => r.RoundNumber == tournament.CurrentRound).ToList();
             foreach (var result in resultsToRemove)
             {
