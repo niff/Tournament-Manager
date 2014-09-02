@@ -770,17 +770,22 @@ tr.pager td {
     text-align: center;
 }
 
-.headerStyle {
+/*.headerStyle {
     padding: 5px 15px;
     border: solid 1px;
     text-align: center;
 }
 
-    .headerStyle th {
+.headerStyle th {
         width: 30px;
         padding: 5px 5px;
         font-size: 0.8em;
-    }
+    }*/
+
+.resultsTable {
+    text-align: center;
+    font-style: normal;
+}
 
 .ui-menu-item {
     background-color: whitesmoke;

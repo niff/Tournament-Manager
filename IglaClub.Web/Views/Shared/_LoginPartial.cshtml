@@ -8,7 +8,18 @@
     </text>
 } else {
     <ul class="list-inline">
-        <li><button class="btn btn-default login">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</button></li>
-        <li><button class="btn btn-default login">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</button></li>
+
+        <li>
+            <a href="@Url.Action("Register","Account", new { id = "registerLink" })"
+               class="btn btn-default btn-group">
+                Register
+            </a>
+        </li>
+        <li>
+            <a href="@Url.Action("Login", "Account", new { id = "loginLink" })"
+               class="btn btn-default btn-group">
+               Log in
+            </a>
+        </li>
     </ul>
 }

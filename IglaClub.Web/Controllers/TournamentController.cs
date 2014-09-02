@@ -1,23 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Web;
-using System.Web.Http;
 using System.Web.Mvc;
 using IglaClub.ObjectModel.Entities;
-using IglaClub.ObjectModel.Enums;
 using IglaClub.ObjectModel.Repositories;
 using IglaClub.Web.Authorization;
 using IglaClub.Web.Models;
 using IglaClub.Web.Models.ViewModels;
-//using IglaClub.Web.Authorization;
 
 namespace IglaClub.Web.Controllers
 {
-    [System.Web.Mvc.Authorize]
+    [Authorize]
     public class TournamentController : Controller
     {
         private readonly IglaClubDbContext db = new IglaClubDbContext();
@@ -70,7 +65,13 @@ namespace IglaClub.Web.Controllers
 
         public ActionResult Details(long id = 0)
         {
-            Tournament tournament = db.Tournaments.Find(id);
+            Tournament tournament = db.Tournaments.
+                Include(t=>t.Pairs).
+                Include(t=>t.Owner).
+                FirstOrDefault(t=>t.Id == id);
+            
+            
+            //Tournament tournament = db.Tournaments.Find(id);
             if (tournament == null)
             {
                 return HttpNotFound();
@@ -89,7 +90,7 @@ namespace IglaClub.Web.Controllers
         //
         // POST: /Tournament/Create
 
-        [System.Web.Mvc.HttpPost]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Tournament tournament)
         {
@@ -119,7 +120,7 @@ namespace IglaClub.Web.Controllers
         //
         // POST: /Tournament/Edit/5
 
-        [System.Web.Mvc.HttpPost]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Tournament tournament)
         {
@@ -148,7 +149,7 @@ namespace IglaClub.Web.Controllers
         //
         // POST: /Tournament/Delete/5
 
-        [System.Web.Mvc.HttpPost, System.Web.Mvc.ActionName("Delete")]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
@@ -176,8 +177,7 @@ namespace IglaClub.Web.Controllers
                 return RedirectToAction("Manage", "Tournament", new { tournamentId = id });
             return Redirect(Request.UrlReferrer.ToString());
         }
-
-
+        
         public ActionResult CalculateResults(long id)
         {
             tournamentManager.CalculateResults(id);
@@ -197,7 +197,7 @@ namespace IglaClub.Web.Controllers
             
         }
 
-        [System.Web.Mvc.HttpPost]
+        [HttpPost]
         public ActionResult RemovePair(long tournamentId, long pairId)
         {
             Tournament tournament = db.Tournaments.Find(tournamentId);
@@ -207,7 +207,7 @@ namespace IglaClub.Web.Controllers
             return Json(new { success = true });
         }
 
-        [System.Web.Mvc.HttpPost]
+        [HttpPost]
         public ActionResult AddPair(int user1, int user2, int tournamentId)
         {
             tournamentManager.AddPair(tournamentId, user1, user2);
@@ -216,11 +216,14 @@ namespace IglaClub.Web.Controllers
         
         public PartialViewResult Pairs(int tournamentId)
         {
+            var currentUser = userRepository.GetUserByName(HttpContext.User.Identity.Name);
+            var tournament = this.tournamentRepository.GetTournamentWithPairsAndOwner(tournamentId);
             var model = new PairsViewModel
                 {
-                    PairsInTounament = pairRepository.GetPairsByTournament(tournamentId),
+                    PairsInTounament = tournament.Pairs.ToList(),
                     AvailableUsers = userRepository.GetAvailableUsersForTournament(tournamentId),
-                    Tournament = db.Tournaments.Find(tournamentId)
+                    Tournament = tournament,
+                    CurrentUser = currentUser
                 };
             return PartialView("_TournamentParticipants", model);
         }
@@ -240,16 +243,6 @@ namespace IglaClub.Web.Controllers
             return PartialView("_PairRoster",list);
         }
 
-        public JsonResult SearchUsers(long tournamentId, string phrase)
-        {
-            var result = userRepository.GetUsersByPhraseAndTournament(tournamentId, phrase)
-                .Select(u => new { u.Id, value = u.Name +" "+ u.Lastname  + ( (!String.IsNullOrWhiteSpace(u.Login) ) ? " (" + u.Login + ")" : "")})
-                        .Take(10)
-                        .ToArray();
-            var jsonResult = Json(result, JsonRequestBehavior.AllowGet);
-            return jsonResult;
-        }
-
         public ActionResult GenerateNextRound(long tournamentId, bool withPairsRepeat)
         {
             var status = tournamentManager.GenerateNextRound(tournamentId, withPairsRepeat);
@@ -259,6 +252,16 @@ namespace IglaClub.Web.Controllers
             if (Request.UrlReferrer == null)
                 return RedirectToAction("Manage", "Tournament", new { tournamentId = tournamentId });
             return Redirect(Request.UrlReferrer.ToString());
+        }
+        
+        public JsonResult SearchUsers(long tournamentId, string phrase)
+        {
+            var result = userRepository.GetUsersByPhraseAndTournament(tournamentId, phrase)
+                .Select(u => new { u.Id, value = u.Name +" "+ u.Lastname  + ( (!String.IsNullOrWhiteSpace(u.Login) ) ? " (" + u.Login + ")" : "")})
+                        .Take(10)
+                        .ToArray();
+            var jsonResult = Json(result, JsonRequestBehavior.AllowGet);
+            return jsonResult;
         }
 
         public JsonResult AddUser(string name, string email, string password)
@@ -286,7 +289,6 @@ namespace IglaClub.Web.Controllers
             return PartialView("_TournamentList", tournamentRepository.GetOncoming());
         }
 
-
         public PartialViewResult Past()
         {
             return PartialView("_TournamentList", tournamentRepository.GetPast());
@@ -296,5 +298,7 @@ namespace IglaClub.Web.Controllers
         {
             return PartialView("_TournamentList", tournamentRepository.GetOngoing());
         }
+
+       
     }
 }

@@ -1,0 +1,15 @@
+﻿@using IglaClub.ObjectModel.Tools
+@model IglaClub.Web.Models.ViewModels.RoundDetailsViewModel
+
+@{
+    ViewBag.Title = "Current round";
+}
+
+<h2>RoundDetails</h2>
+<span>Current round: @Model.Tournament.CurrentRound</span> <br/>
+<span>NS: @Model.NsPair</span><br />
+<span>EW: @Model.EwPair</span><br />
+@foreach (var result in Model.Results)
+{
+  <span>Board: @result.Board.BoardNumber, @ResultsParser.GetFormatResult(result)</span><br />
+}

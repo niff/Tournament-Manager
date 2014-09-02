@@ -1,4 +1,5 @@
 ﻿@using IglaClub.ObjectModel.Enums
+@using IglaClub.ObjectModel.Tools
 @model List<IglaClub.ObjectModel.Entities.Result>
 
 @{
@@ -30,17 +31,17 @@
                 @Html.DisplayNameFor(m => m[0].Board.BoardNumber)
             </th>
             <th>
+                @Html.Label("Short form")
+            </th>
+            <th>
                 @Html.DisplayNameFor(m => m[0].ContractLevel)
             </th>
-            
-
             <th>
                 @Html.DisplayNameFor(m => m[0].ContractColor)
             </th>
             <th>
                 @Html.DisplayNameFor(m => m[0].ContractDoubled)
             </th>
-
             <th>
                 @Html.DisplayNameFor(m => m[0].PlayedBy)
             </th>
@@ -83,8 +84,10 @@
                     @Html.EditorFor(m => m[i].Board.BoardNumber)
                 </td>
                 <td>
+                    @Html.TextBox("ShortScore["+i+"]","")
+                </td>
+                <td>
                     @Html.EditorFor(m => m[i].ContractLevel, new {type="number", min = "0", max = "7"})
-                    @*@Html.TextBoxFor(m => m[i].ContractLevel)*@
                 </td>
                 <td>
                     @Html.DropDownListFor(m => m[i].ContractColor, new SelectList(Enum.GetValues(typeof(ContractColors)), @Model[i].ContractColor), new { data_image = "" })
