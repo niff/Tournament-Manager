@@ -14,7 +14,15 @@ namespace IglaClub.ObjectModel.Repositories
         {
         }
 
-        public Tournament GetTournamentWithInclude(long id)
+        public Tournament GetTournamentWithPairsAndOwner(long id)
+        {
+            return db.Tournaments
+                            .Include(t => t.Owner)
+                            .Include(t => t.Pairs)
+                            .FirstOrDefault(t => t.Id == id);
+        }
+
+        public Tournament GetTournamentWithResultsBoardsPairs(long id)
         {
             return db.Tournaments
                             .Include(t => t.Results)
@@ -24,26 +32,35 @@ namespace IglaClub.ObjectModel.Repositories
                             .Include(t => t.Pairs)
                             .FirstOrDefault(t => t.Id == id);
         }
+
         public Tournament GetTournament(long id)
         {
             return db.Tournaments
                             .FirstOrDefault(t => t.Id == id);
         }
 
-
-        public IEnumerable<Tournament> GetOncoming()
+        public IList<Tournament> GetOncoming()
         {
-            return db.Tournaments.Where(t => t.TournamentStatus == Enums.TournamentStatus.Planned);
+            return db.Tournaments.Where(t => t.TournamentStatus == Enums.TournamentStatus.Planned)
+                .Include(t => t.Owner)
+                .Include(t => t.Pairs)
+                .ToList();
         }
 
-        public IEnumerable<Tournament> GetPast()
+        public IList<Tournament> GetPast()
         {
-            return db.Tournaments.Where(t => t.TournamentStatus == Enums.TournamentStatus.Finished);
+            return db.Tournaments.Where(t => t.TournamentStatus == Enums.TournamentStatus.Finished)
+                .Include(t=>t.Owner)
+                .Include(t => t.Pairs)
+                .ToList();
         }
 
-        public IEnumerable<Tournament> GetOngoing()
+        public IList<Tournament> GetOngoing()
         {
-            return db.Tournaments.Where(t => t.TournamentStatus == Enums.TournamentStatus.Started);
+            return db.Tournaments.Where(t => t.TournamentStatus == Enums.TournamentStatus.Started)
+                .Include(t=>t.Owner)
+                .Include(t => t.Pairs)
+                .ToList();
         }
 
         public bool UserIsTournamentOwner(string userName, long tournamentId)

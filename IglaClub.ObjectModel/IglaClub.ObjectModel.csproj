@@ -75,6 +75,7 @@
     <Compile Include="Repositories\TournamentRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Tools\CollectionHelper.cs" />
+    <Compile Include="Tools\ResultsParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

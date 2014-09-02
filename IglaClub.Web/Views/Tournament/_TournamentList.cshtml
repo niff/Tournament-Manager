@@ -1,54 +1,42 @@
-﻿@model IEnumerable<IglaClub.ObjectModel.Entities.Tournament>
+﻿@using IglaClub.ObjectModel.Entities
+@using IglaClub.ObjectModel.Enums
+@model IEnumerable<Tournament>
 
 
 <table class="tournamentsListTable table table-striped table-hover">
-@*    <tr>
-        <th class="headerStyle">
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th class="headerStyle">
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th class="headerStyle">
-            @Html.DisplayNameFor(model => model.BoardsInRound)
-        </th>
-        <th class="headerStyle">
-            @Html.DisplayNameFor(model => model.TournamentStatus)
-        </th>
-        <th class="headerStyle">
-            @Html.DisplayNameFor(model => model.CurrentRound)
-        </th >
-        <th class="headerStyle">Options</th>
-    </tr>*@
 
 @foreach (var item in Model) {
     var date = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("dd MMM yyyy") : "";
     var hour = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("HH:mm") : "";
     <tr>
         <td>
-            @*<a href="Manage/@item.Id">@Html.DisplayFor(modelItem => item.Name)</a>*@
-            @Html.ActionLink(item.Name, "Manage", "Tournament", new { id = @item.Id }, null)
+            @if (item.Owner != null && item.Owner.Login == HttpContext.Current.User.Identity.Name)
+            {
+                @Html.ActionLink(item.Name, "Manage", "Tournament", new { id = @item.Id }, null)
+            }
+            else
+            {
+                if(@item.TournamentStatus == TournamentStatus.Planned)
+                { @Html.ActionLink(item.Name, "Details", "Tournament", new { id = @item.Id }, null)}
+                else if (@item.TournamentStatus == TournamentStatus.Started)
+                {   @Html.ActionLink(item.Name, "RoundDetails", "Round", new {tournamentId = @item.Id}, null)};
+            }
+            
         </td>
         <td>
             @date
         </td><td>
-            @hour
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.BoardsInRound)
-        </td>
+                 @hour
+             </td>
         <td>
-            @Html.DisplayFor(modelItem => item.TournamentStatus)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CurrentRound)
-        </td>*@
-        @*<td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id }) |
-            @Html.ActionLink("Manage", "Manage", new { id=item.Id })
-        </td>*@
+            @{
+                var currentUserIsSubscribed = item.UserIsSubscribed(HttpContext.Current.User.Identity.Name);
+                if (currentUserIsSubscribed)
+                {
+                    <span class="glyphicon glyphicon-ok-circle"></span>
+                }
+            }
+            </td>
     </tr>
 }
 

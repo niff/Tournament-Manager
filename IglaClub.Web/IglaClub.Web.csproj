@@ -250,6 +250,7 @@
     <Compile Include="Models\ViewModels\PairRosterViewModel.cs" />
     <Compile Include="Models\ViewModels\PairsResultsViewModel.cs" />
     <Compile Include="Models\ViewModels\PairsViewModel.cs" />
+    <Compile Include="Models\ViewModels\RoundDetailsViewModel.cs" />
     <Compile Include="Models\ViewModels\RoundVm.cs" />
     <Compile Include="Models\ViewModels\TournamentResultsVm.cs" />
     <Compile Include="Models\ViewModels\TournamentManageVm.cs" />
@@ -433,6 +434,9 @@
     <Content Include="Views\Tournament\_TournamentList.cshtml" />
     <Content Include="Views\Tournament\_PairRoster.cshtml" />
     <Content Include="Views\Errors\Error403.cshtml" />
+    <Content Include="Views\Results\_ResultsList.cshtml" />
+    <Content Include="Views\Shared\_LayoutMobile.cshtml" />
+    <Content Include="Views\Round\RoundDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

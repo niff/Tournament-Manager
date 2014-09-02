@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,10 +15,18 @@ namespace IglaClub.ObjectModel.Repositories
         {
         }
 
-        //public List<Result> GetResults(long tournamentId, int roundNumber, int tableNumber)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public List<Result> GetResultsByRoundAndUser(long tournamentId, int roundNumber, long userId)
+        {
+            return db.Results.Where(r => r.TournamentId == tournamentId && r.RoundNumber == roundNumber &&
+                                         ((r.EW.Player1 != null && r.EW.Player1.Id == userId) ||
+                                          (r.EW.Player2 != null && r.EW.Player2.Id == userId) ||
+                                          (r.NS.Player1 != null && r.NS.Player1.Id == userId) ||
+                                          (r.NS.Player2 != null && r.NS.Player2.Id == userId)))
+                                          .Include(r=>r.NS)
+                                          .Include(r=>r.EW)
+                                          .Include(r=>r.Board)
+                                          .ToList();
+        }
 
         //public List<Result> GetResults(long tournamentId, int roundNumber)
         //{

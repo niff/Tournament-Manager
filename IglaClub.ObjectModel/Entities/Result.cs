@@ -10,22 +10,22 @@ namespace IglaClub.ObjectModel.Entities
 
         public virtual Pair EW { get; set; }
 
-        [DisplayName ("Contract Level")]
+        [DisplayName ("Level")]
         public int ContractLevel { get; set; }
 
-        [DisplayName("Contract Color")]
+        [DisplayName("Color")]
         public ContractColors ContractColor { get; set; }
 
-        [DisplayName("Contract Doubled")]
+        [DisplayName("Dbl")]
         public ContractDoubled ContractDoubled { get; set; }
 
         [DisplayName("Played By")]
         public NESW PlayedBy { get; set; }
 
-        [DisplayName("Number Of Tricks")]
+        [DisplayName("Tricks")]
         public int NumberOfTricks { get; set; }
 
-        [DisplayName("Result Ns Points")]
+        [DisplayName("Ns Score")]
         public int? ResultNsPoints { get; set; }
 
         public virtual BoardInstance Board { get; set; }
@@ -38,16 +38,16 @@ namespace IglaClub.ObjectModel.Entities
         [Column("Tournament_Id")]
         public long TournamentId { get; set; }
 
-        [DisplayName("Round Number")]
+        [DisplayName("Round")]
         public int RoundNumber { get; set; }
 
-        [DisplayName("Table Number")]
+        [DisplayName("Table")]
         public int TableNumber { get; set; }
 
-        [DisplayName("Score Ns")]
+        [DisplayName("Ns")]
         public float? ScoreNs { get; set; }
 
-        [DisplayName("Score Ew")]
+        [DisplayName("Ew")]
         public float? ScoreEw { get; set; }
     }
 }

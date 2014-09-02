@@ -1,36 +1,60 @@
-﻿@model IglaClub.ObjectModel.Entities.Tournament
+﻿@using IglaClub.ObjectModel.Enums
+@model IglaClub.ObjectModel.Entities.Tournament
 
 @{
     ViewBag.Title = "Details";
 }
+<link href="~/Content/themes/base/jquery.ui.autocomplete.css" rel="stylesheet" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" /> @*todo change to local*@
+<div class="">
+    <p>@Html.ActionLink("Tournaments", "Index") > Details</p>
+    <h3>@Model.Name</h3>
+</div>
 
-<h2>Details</h2>
+<div class="">
+    Tournament is <strong>@Model.TournamentStatus.ToString() </strong><br />
+    @if (Model.TournamentStatus == TournamentStatus.Planned && Model.PlannedStartDate != null)
+    {
+        <span>
+            <i class="small text-muted">and will start on</i> @Model.PlannedStartDate.Value.ToLongDateString()
+            <i class="small text-muted">at</i> @Model.PlannedStartDate.Value.ToShortTimeString()
+        </span>
+    }
+    @if (Model.TournamentStatus == TournamentStatus.Started && Model.StartDate != null)
+    {
+        <span>
+            <i class="small text-muted">and started on</i> @Model.StartDate.Value.ToLongDateString()
+            <i class="small text-muted">at</i> @Model.StartDate.Value.ToShortTimeString()
+        </span>
+    }
+    <div>
+        <i class="small text-muted">Tournament owner: </i> @Model.Owner.Name @Model.Owner.Lastname (@Model.Owner.Login)
+    </div>
 
-<fieldset>
-    <legend>Tournament</legend>
+    @if (@Model.Club != null)
+    {<div>
+        <i class="small text-muted">Club: </i> @Model.Club.Name
+    </div>
+    }
+</div>
+<div class="col-md-6">
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Name)
-    </div>
+    @(Model.TournamentStatus == TournamentStatus.Planned ?
+          Html.Action("Pairs", new { tournamentId = @Model.Id }) :
+          Html.Action("PairsResults", "Results", new { tournamentId = @Model.Id }))
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Description)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Description)
-    </div>
+</div>
+<div class="col-md-6 action-pane">
+    @if (Model.TournamentStatus == TournamentStatus.Planned)
+    {
+        @*<input type="text" name="partner" id="pairSearch1" />
+        <input type="hidden" class="hidden" id="user1" />
+        <input type="hidden" class="hidden" id="user2" value="1"/>*@
+        @*<button type="submit" class="subscribe btn btn-success btn-lg"><span class="glyphicon glyphicon-plus"></span>Subscribe</button>*@
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.BoardsInRound)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.BoardsInRound)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    }
+    else if (Model.TournamentStatus == TournamentStatus.Started)
+    {
+        @Html.Action("PairRoster", new { tournamentId = @Model.Id });
+    }
+</div>

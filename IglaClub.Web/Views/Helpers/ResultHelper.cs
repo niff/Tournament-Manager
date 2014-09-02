@@ -24,7 +24,7 @@ namespace IglaClub.Web.Views.Helpers
             return score == null
                        ? ""
                        : "Ok";
-            //: @"<img src=http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-8/16/Accept-icon.png>";
+            
         }
         public static string GetStringForColor(object score =null)
         {

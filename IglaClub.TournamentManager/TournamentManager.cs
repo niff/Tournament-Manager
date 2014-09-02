@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using IglaClub.ObjectModel;
 using IglaClub.ObjectModel.Entities;
 using IglaClub.ObjectModel.Enums;
-using IglaClub.ObjectModel.Tools;
 
 
 namespace IglaClub.TournamentManager

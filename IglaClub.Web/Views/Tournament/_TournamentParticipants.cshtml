@@ -1,4 +1,5 @@
-﻿@model IglaClub.Web.Models.ViewModels.PairsViewModel
+﻿@using System.Globalization
+@model IglaClub.Web.Models.ViewModels.PairsViewModel
 
 <link href="~/Content/themes/base/jquery.ui.autocomplete.css" rel="stylesheet" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" /> @*todo change to local*@
@@ -28,12 +29,23 @@
             counter++;
         }
         <tr>
+            @{
+                string currentUserId = string.Empty;
+                string currentUserLogin = string.Empty;
+                bool userSubscribed = Model.PairsInTounament.Any(p => p.Player1.Id == Model.CurrentUser.Id || p.Player2.Id == Model.CurrentUser.Id);
+                
+                if (Model.CurrentUser.Id != Model.Tournament.Owner.Id && !userSubscribed)
+                {
+                    currentUserId = Model.CurrentUser.Id.ToString(CultureInfo.InvariantCulture);
+                    currentUserLogin = Model.CurrentUser.Name + " (" + Model.CurrentUser.Login + ")";
+                }
+            }
             <td></td>
-            <td><input type="text" name="pairSearch1" id ="pairSearch1" /></td>
+            <td><input type="text" name="pairSearch1" id ="pairSearch1" value="@currentUserLogin"/></td>
             <td><input type="text" name="pairSearch2" id ="pairSearch2" /></td>
             <td class="hidden">
-                <input type="hidden" class="hidden user" id ="user1" />
-                <input type="hidden" class="hidden user" id ="user2" />
+                <input type="hidden" class="hidden user" id ="user1" value="@currentUserId"/>
+                <input type="hidden" class="hidden user" id="user2" />
             </td>
             <td><input type="submit" class="pairSearchSubmit btn btn-default btn-small" id ="pairSearchSubmit" value="Add" /></td>
         </tr>

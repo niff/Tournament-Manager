@@ -1,0 +1,147 @@
+﻿@using IglaClub.ObjectModel.Enums
+@using IglaClub.ObjectModel.Tools
+@using IglaClub.Web.Views.Helpers
+@model IEnumerable<IglaClub.ObjectModel.Entities.Result>
+
+@if (Model.Any())
+{
+    <table class="resultsTable table table-striped table-hover">
+        <tr class="headerStyle">
+            <th>
+                Finished
+            </th>
+            <th>
+                <a href="@Url.Action("Manage", new {tournamenId = Model.First().TournamentId, sort = "RoundNumber"})"> @Html.DisplayNameFor(model => model.RoundNumber)</a>
+            </th>
+            <th>
+                <a href="@Url.Action("Manage", new {tournamenId = Model.First().TournamentId, sort = "TableNumber"})"> @Html.DisplayNameFor(model => model.TableNumber)</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EW)
+            </th>
+            <th>
+                <a href="@Url.Action("Manage", new {tournamenId = Model.First().TournamentId, sort = "BoardNumber"})">Board</a>
+            </th>
+            <th>
+                Short score
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContractLevel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContractColor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContractDoubled)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlayedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberOfTricks)
+            </th>
+            <th>
+                Vul
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ResultNsPoints)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScoreNs)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScoreEw)
+            </th>
+            <th>
+
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @*@ResultHelper.GetStringForFinished(item.ResultNsPoints, item.PlayedBy)*@
+                    @if (item.PlayedBy == NESW.DirectorScore || item.ResultNsPoints.HasValue)
+                    {
+                        <span class="glyphicon glyphicon-ok-circle"></span>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoundNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TableNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NS.PairNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EW.PairNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Board.BoardNumber)
+                </td>
+                <td>
+                    @ResultsParser.GetFormatResult(item)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContractLevel)
+                </td>
+                <td>
+                    @Enum.GetName(typeof(ContractColors), item.ContractColor)
+                </td>
+                <td>
+                    @ResultHelper.GetStringForDoubledContract(item.ContractDoubled)
+                </td>
+                <td>
+                    @item.PlayedBy.ToString()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfTricks)
+                </td>
+                <td>
+                    @item.Board.BoardDefinition.Vulnerability
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ResultNsPoints)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ScoreNs)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ScoreEw)
+                </td>
+
+                <td>
+                    <a href="@Url.Action("Delete", new {id = @item.Id})" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+@*@grid.GetHtml(columns: grid.Columns(
+        grid.Column("ResultFinished", header: "Ok", format: @<text>@ResultHelper.GetStringForFinished(@item.ResultNsPoints, @item.PlayedBy)</text>),
+        grid.Column("TableNumber",header: "Table", format: @<text>@item.TableNumber</text>),
+        grid.Column("RoundNumber",header: "Round", format: @<text>@item.RoundNumber</text>),
+        grid.Column("NsPairNumber",header: "Ns", format: @<text>@item.Ns.PairNumber</text>),
+        grid.Column("EwPairNumber",header: "Ew", format: @<text>@item.Ew.PairNumber</text>),
+        grid.Column("BoardNumber",header: "Board", format: @<text>@item.Board.BoardNumber</text>),
+        grid.Column("ContractLevel",header: "Level", format: @<text>@item.ContractLevel.ToString()</text>),
+        grid.Column("ContractColor",header: "Color", format: @<text>@Enum.GetName(typeof(ContractColors), item.ContractColor)</text>),
+        grid.Column("IsDoubled",header: "Dbl", format: @<text>@ResultHelper.GetStringForDoubledContract(item.ContractDoubled)</text>),
+        grid.Column("PlayedBy",header: "Played by", format: @<text>@item.PlayedBy.ToString()</text>),
+        grid.Column("NumberOfTricks",header: "Tricks", format: @<text>@item.NumberOfTricks</text>),
+        grid.Column("Vulnerable",header: "Vul", format: @<text>@item.Board.BoardDefinition.Vulnerability</text>),
+        grid.Column("Remove",header: "Remove result", format: @<text><a href="@Url.Action("Delete", new { id = @item.Id })" title="Remove"><span class="glyphicon glyphicon-remove"></span></a></text>),
+        grid.Column("Result",header: "Result", format: @<text>@item.ResultNsPoints</text>),
+        grid.Column("ScoreNS",header: "Score NS", format: @<text>@item.ScoreNs</text>),
+        grid.Column("ScoreEW",header: "Score EW", format: @<text>@item.ScoreEw</text>)
+
+                                )
+                                , rowStyle: "rowStyleOdd", alternatingRowStyle: "rowStyleEven", headerStyle: "headerStyle"
+                        )*@

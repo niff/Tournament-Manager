@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - Igla Club</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+                @Scripts.Render("~/bundles/jquery")
+                @Scripts.Render("~/bundles/jqueryui")
+    </head>
+<body>
+    <div class="container">
+        <header>
+            <div class="row navbar navbar-inverse text-right text-primary">
+                <div class="col-xs-8">
+                    <nav>
+                        <ul class="nav nav-pills">
+                            <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-xs-4">
+                    @Html.Partial("_LoginPartial")
+
+                </div>
+            </div>
+            <div class="row">
+                <p>@Html.ActionLink("Igla Club", "Index", "Home")</p>
+            </div>
+
+            
+        </header>
+        <div class="row">
+            @RenderSection("featured", required: false)
+                @RenderBody()
+        </div>
+        <footer>
+        <div class="row text-center text-muted small">
+                <p>&copy; @DateTime.Now.Year - Igla Club - Created by <abbr title="The best company in the world">Purple IT</abbr>. All right reserved.</p>
+        </div></footer>
+
+        
+        @RenderSection("scripts", required: false)
+        </div>
+    </body>
+</html>

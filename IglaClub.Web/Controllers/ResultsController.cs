@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using IglaClub.ObjectModel.Entities;
 using IglaClub.ObjectModel.Repositories;
+using IglaClub.ObjectModel.Tools;
 using IglaClub.Web.Authorization;
 using IglaClub.Web.Models;
 using IglaClub.Web.Models.ViewModels;
@@ -48,11 +49,15 @@ namespace IglaClub.Web.Controllers
         [HttpPost]
         public ActionResult Edit(List<Result> results)
         {
-
+            
             if (results != null)
             {
-                foreach (var result in results)
+                for (int i = 0; i < results.Count; i++)
                 {
+                    var result = results[i];
+                    var parsedResult = ResultsParser.Parse(Request["ShortScore[" + i + "]"]);
+                    if (parsedResult != null)
+                        result = ResultsParser.UpdateResult(result, parsedResult);
                     resultRepository.InsertOrUpdate(result);
                 }
                 this.resultRepository.SaveChanges();
@@ -90,6 +95,7 @@ namespace IglaClub.Web.Controllers
             }
             return View(new TournamentResultsVm{Tournament = tournament, Results = results});
         }
+
 
         public ActionResult CreateEmpty(long tournamentId)
         {
@@ -134,6 +140,10 @@ namespace IglaClub.Web.Controllers
             return RedirectToAction("Edit", new { tournamentId });
         }
 
+        //public PartialViewResult _ResultsList(long tournamentId)
+        //{
+            
+        //}
 
         public PartialViewResult PairsResults(long tournamentId)
         {

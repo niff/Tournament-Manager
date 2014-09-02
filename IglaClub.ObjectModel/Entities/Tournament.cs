@@ -55,5 +55,12 @@ namespace IglaClub.ObjectModel.Entities
 
         [DisplayName("Created by")]
         virtual public User Owner { get; set; }
+
+        public bool UserIsSubscribed(string login)
+        {
+            if (this.Pairs == null)
+                return false;
+            return this.Pairs.Any(p => (p.Player1 != null && p.Player1.Login == login) || (p.Player2 != null && p.Player2.Login == login));
+        }
      }
 }
