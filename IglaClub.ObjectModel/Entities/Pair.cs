@@ -21,7 +21,7 @@ namespace IglaClub.ObjectModel.Entities
 
         public override string ToString()
         {
-            return (Player1 == null ? "Unknown" : Player1.Name) + " - " +(Player2 == null ? "Unknown" : Player2.Name);
+            return (Player1 == null ? "Unknown" : Player1.GetDisplayName()) + " - " + (Player2 == null ? "Unknown" : Player2.GetDisplayName());
         }
 
         

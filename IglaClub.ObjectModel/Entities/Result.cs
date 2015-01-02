@@ -49,5 +49,10 @@ namespace IglaClub.ObjectModel.Entities
 
         [DisplayName("Ew")]
         public float? ScoreEw { get; set; }
+
+        public override string ToString()
+        {
+            return "Ns: " + ScoreNs + ", Ew: " + ScoreEw;
+        }
     }
 }

@@ -121,7 +121,7 @@ namespace IglaClub.TournamentManager
             {
             //    if(result.ResultNsPoints != null)
             //        continue;
-                int? newScore = UpdateScoreInBoards(result, DealerIsVulnerable(result));
+                int? newScore = CalculateScoreInBoard(result, DealerIsVulnerable(result));
                 if (newScore == null) //that means the score was wrtitten witout the contract
                     continue;
                 result.ResultNsPoints = newScore;
@@ -152,7 +152,11 @@ namespace IglaClub.TournamentManager
             }
         }
 
-        public static int? UpdateScoreInBoards(Result result, bool dealerIsVulnerable)
+        public static int? CalculateScoreInBoard(Result result)
+        {
+            return CalculateScoreInBoard(result, DealerIsVulnerable(result));
+        }
+        public static int? CalculateScoreInBoard(Result result, bool dealerIsVulnerable)
         {
             if (result.PlayedBy == NESW.PassedOut)
                     return 0;
@@ -242,7 +246,7 @@ namespace IglaClub.TournamentManager
             return score;
         }
 
-        private static bool DealerIsVulnerable(Result result)
+        public static bool DealerIsVulnerable(Result result)
         {
             return result.Board.BoardDefinition.Vulnerability == Vulnerable.Both || 
                    (result.Board.BoardDefinition.Vulnerability ==Vulnerable.NS && (result.PlayedBy == NESW.North || result.PlayedBy == NESW.South))  ||

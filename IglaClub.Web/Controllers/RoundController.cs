@@ -13,8 +13,6 @@ namespace IglaClub.Web.Controllers
     [Authorize]
     public class RoundController : Controller
     {
-        //
-        // GET: /Round/
         private readonly IglaClubDbContext db = new IglaClubDbContext();
         private readonly TournamentManager.TournamentManager tournamentManager = new TournamentManager.TournamentManager(new IglaClubDbContext());
 
@@ -31,22 +29,14 @@ namespace IglaClub.Web.Controllers
             resultRepository = new ResultRepository(db);
         }
         
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
-
-        //public ActionResult Index(long tournamentId, int? tableNumber = null, int? roundNumber = null)
-        //{
-        //    //todo: not authorized check (i.e. pair is not playing here)
-        //    var roundVm = new RoundVm();
-        //    //return View();
-        //    throw new NotImplementedException();
-        //}
-
-        public ActionResult RoundDetails(long tournamentId)
+       public ActionResult RoundDetails(long tournamentId)
         {
             var currentUser = userRepository.GetUserByName(HttpContext.User.Identity.Name);
+            if(!this.tournamentRepository.UserIsSubscribedForTournament(currentUser.Login, tournamentId))
+            {
+                TempData["Message"] = "You are not subscribed for this tournament";
+                return RedirectToAction("Index", "Tournament");
+            }
             var tournament = this.tournamentRepository.Get<Tournament>(tournamentId);
             var results = this.resultRepository.GetResultsByRoundAndUser(tournamentId, tournament.CurrentRound,
                 currentUser.Id);

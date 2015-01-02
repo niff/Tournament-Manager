@@ -2,7 +2,8 @@
 @using IglaClub.ObjectModel.Enums
 @model IEnumerable<Tournament>
 
-
+@if (Model.Any())
+{
 <table class="tournamentsListTable table table-striped table-hover">
 
 @foreach (var item in Model) {
@@ -10,18 +11,17 @@
     var hour = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("HH:mm") : "";
     <tr>
         <td>
-            @if (item.Owner != null && item.Owner.Login == HttpContext.Current.User.Identity.Name)
-            {
-                @Html.ActionLink(item.Name, "Manage", "Tournament", new { id = @item.Id }, null)
-            }
-            else
-            {
+            @{
                 if(@item.TournamentStatus == TournamentStatus.Planned)
-                { @Html.ActionLink(item.Name, "Details", "Tournament", new { id = @item.Id }, null)}
+                    { @Html.ActionLink(item.Name, "Details", "Tournament", new { id = @item.Id }, null)}
                 else if (@item.TournamentStatus == TournamentStatus.Started)
-                {   @Html.ActionLink(item.Name, "RoundDetails", "Round", new {tournamentId = @item.Id}, null)};
-            }
-            
+                    {   @Html.ActionLink(item.Name, "RoundDetails", "Round", new {tournamentId = @item.Id}, null)};
+
+                if (item.Owner != null && item.Owner.Login == HttpContext.Current.User.Identity.Name)
+                {
+                    <span>@Html.ActionLink("(Manage)", "Manage", "Tournament", new { id = item.Id }, null) </span>
+                }
+}
         </td>
         <td>
             @date
@@ -33,7 +33,7 @@
                 var currentUserIsSubscribed = item.UserIsSubscribed(HttpContext.Current.User.Identity.Name);
                 if (currentUserIsSubscribed)
                 {
-                    <span class="glyphicon glyphicon-ok-circle"></span>
+                    <span class="glyphicon glyphicon-ok-circle" title="You are subscribed to this tournament"></span>
                 }
             }
             </td>
@@ -41,3 +41,8 @@
 }
 
 </table>
+}
+ else
+{
+    <i class="small text-muted">No tournaments to display</i>
+}

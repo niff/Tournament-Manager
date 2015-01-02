@@ -42,6 +42,10 @@ namespace IglaClub.ObjectModel.Tools
         {
             if (result.PlayedBy == NESW.Unavailable)
                 return "";
+            if (result.PlayedBy == NESW.PassedOut)
+                return "Passed out";
+            if (result.PlayedBy == NESW.DirectorScore)
+                return "Director score";
             var tricks = result.NumberOfTricks - result.ContractLevel - 6;
             var tricksString = tricks == 0 ? "=" : tricks.ToString("+#;-#;0");
             var doubledString = DoubledDictionary.First(kpv => kpv.Value == result.ContractDoubled).Key;
@@ -86,6 +90,12 @@ namespace IglaClub.ObjectModel.Tools
 
             return original;
         }
+
+        public static bool ResultIsEntered(Result result)
+        {
+            return result.PlayedBy == NESW.Unavailable;
+        }
+
         private static int ParseNumberOfTricks(string numberOfTricksString, int contractLevel)
         {
             var tricks = numberOfTricksString.StartsWith("=") ? 0 : int.Parse(numberOfTricksString);
@@ -106,5 +116,7 @@ namespace IglaClub.ObjectModel.Tools
         {
             return ColorsDictionary[colorString.ToUpperInvariant()];
         }
+
+
     }
 }

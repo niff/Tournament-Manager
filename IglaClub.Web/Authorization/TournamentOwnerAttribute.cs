@@ -45,7 +45,7 @@ namespace IglaClub.Web.Authorization
 
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
-            filterContext.HttpContext.Response.Redirect("/Errors/Error403");
+            filterContext.HttpContext.Response.Redirect("/Errors/Error403", true);
         }
 
         private bool IsOwnerOfTournament(string userName, long tournamentId)

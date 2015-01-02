@@ -29,6 +29,10 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabaseSettings>
+      <Objects>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -224,6 +228,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\NotificationService.cs" />
+    <Compile Include="Infrastructure\INotificationService.cs" />
     <Compile Include="Migrations\201407221921328_InitialMigrations.cs" />
     <Compile Include="Migrations\201407221921328_InitialMigrations.Designer.cs">
       <DependentUpon>201407221921328_InitialMigrations.cs</DependentUpon>
@@ -349,22 +355,6 @@
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\flick\images\animated-overlay.gif" />
-    <Content Include="Scripts\flick\images\ui-bg_flat_0_aaaaaa_40x100.png" />
-    <Content Include="Scripts\flick\images\ui-bg_flat_0_eeeeee_40x100.png" />
-    <Content Include="Scripts\flick\images\ui-bg_flat_55_ffffff_40x100.png" />
-    <Content Include="Scripts\flick\images\ui-bg_flat_75_ffffff_40x100.png" />
-    <Content Include="Scripts\flick\images\ui-bg_glass_65_ffffff_1x400.png" />
-    <Content Include="Scripts\flick\images\ui-bg_highlight-soft_100_f6f6f6_1x100.png" />
-    <Content Include="Scripts\flick\images\ui-bg_highlight-soft_25_0073ea_1x100.png" />
-    <Content Include="Scripts\flick\images\ui-bg_highlight-soft_50_dddddd_1x100.png" />
-    <Content Include="Scripts\flick\images\ui-icons_0073ea_256x240.png" />
-    <Content Include="Scripts\flick\images\ui-icons_454545_256x240.png" />
-    <Content Include="Scripts\flick\images\ui-icons_666666_256x240.png" />
-    <Content Include="Scripts\flick\images\ui-icons_ff0084_256x240.png" />
-    <Content Include="Scripts\flick\images\ui-icons_ffffff_256x240.png" />
-    <Content Include="Scripts\flick\jquery-ui-1.10.3.css" />
-    <Content Include="Scripts\flick\jquery-ui-1.10.3.min.css" />
     <None Include="Scripts\jquery-2.1.1-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.min.js" />
@@ -419,7 +409,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Tournament\Index.cshtml" />
     <Content Include="Views\Tournament\Details.cshtml" />
     <Content Include="Views\Tournament\Create.cshtml" />
@@ -437,6 +429,7 @@
     <Content Include="Views\Results\_ResultsList.cshtml" />
     <Content Include="Views\Shared\_LayoutMobile.cshtml" />
     <Content Include="Views\Round\RoundDetails.cshtml" />
+    <Content Include="Views\Results\EditResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

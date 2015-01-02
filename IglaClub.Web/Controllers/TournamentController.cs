@@ -9,6 +9,7 @@ using IglaClub.ObjectModel.Repositories;
 using IglaClub.Web.Authorization;
 using IglaClub.Web.Models;
 using IglaClub.Web.Models.ViewModels;
+using IglaClub.Web.Infrastructure;
 
 namespace IglaClub.Web.Controllers
 {
@@ -22,6 +23,8 @@ namespace IglaClub.Web.Controllers
         private readonly UserRepository userRepository;
         private readonly TournamentRepository tournamentRepository;
         private readonly ResultRepository resultRepository;
+
+        private readonly INotificationService notificationService;
         
         public TournamentController()
         {
@@ -29,6 +32,7 @@ namespace IglaClub.Web.Controllers
              userRepository = new UserRepository(db);
              tournamentRepository = new TournamentRepository(db);
              resultRepository = new ResultRepository(db);
+             notificationService = new NotificationService(TempData);
         }
         
         //
@@ -246,9 +250,11 @@ namespace IglaClub.Web.Controllers
         public ActionResult GenerateNextRound(long tournamentId, bool withPairsRepeat)
         {
             var status = tournamentManager.GenerateNextRound(tournamentId, withPairsRepeat);
-            //TODO: error message handling if(status.Ok == false)
-            if(status.Ok == false)
-                return Redirect(Request.UrlReferrer.ToString());
+
+            if (!status.Ok)
+            {
+                this.notificationService.DisplayMessage(status.ErrorMessage);
+            }
             if (Request.UrlReferrer == null)
                 return RedirectToAction("Manage", "Tournament", new { tournamentId = tournamentId });
             return Redirect(Request.UrlReferrer.ToString());

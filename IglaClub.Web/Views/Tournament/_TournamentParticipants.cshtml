@@ -11,10 +11,10 @@
         }
         @foreach (var pair in @Model.PairsInTounament)
         {            
-            var p1Name = (pair.Player1 == null ? "Unknown" : pair.Player1.Name + " (" + pair.Player1.Login + ")");
-            var p2Name = (pair.Player2 == null ? "Unknown" : pair.Player2.Name + " (" + pair.Player2.Login + ")");
+            var p1Name = (pair.Player1 == null ? "Unknown" : pair.Player1.GetDisplayName());
+            var p2Name = (pair.Player2 == null ? "Unknown" : pair.Player2.GetDisplayName());
             <tr>
-                <td>@counter .</td>
+                <td>@counter.</td>
                 <td>
                     @p1Name
                 </td>

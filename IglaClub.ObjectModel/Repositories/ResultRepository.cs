@@ -25,14 +25,10 @@ namespace IglaClub.ObjectModel.Repositories
                                           .Include(r=>r.NS)
                                           .Include(r=>r.EW)
                                           .Include(r=>r.Board)
+                                          .Include(r => r.Board.BoardDefinition)
                                           .ToList();
         }
-
-        //public List<Result> GetResults(long tournamentId, int roundNumber)
-        //{
-        //    return db.Results.Where(r => r.Tournament.Id == tournamentId && r.RoundNumber == roundNumber).ToList();
-        //}
-
+        
         public List<Result> GetResultsFromCurrentRound(long tournamentId)
         {
             var tournament = db.Tournaments.Find(tournamentId);
@@ -52,13 +48,18 @@ namespace IglaClub.ObjectModel.Repositories
                 long pairId = pair.Id;
                 int pairNumber = pair.PairNumber;
                 List<int> boardsPlayedByPair =
-                    results.Where(r => (r.ResultNsPoints != null && (r.NS.Id == pairId || r.EW.Id == pairId))).Select(r=>r.Board.BoardNumber).ToList();
+                    results.Where(r => (ResultIsFinished(r)) && (r.NS.Id == pairId || r.EW.Id == pairId)).Select(r => r.Board.BoardNumber).ToList();
                 var numberOfResults =
-                    results.Count(r => (r.ResultNsPoints != null) && boardsPlayedByPair.Contains(r.Board.BoardNumber));
+                    results.Count(r => (ResultIsFinished(r)) && boardsPlayedByPair.Contains(r.Board.BoardNumber));
                 var maxPoints = (numberOfResults - boardsPlayedByPair.Count)*2;
                 res.Add(pairNumber,maxPoints);
             }
             return res;
+        }
+
+        private static bool ResultIsFinished(Result r)
+        {
+            return r.ResultNsPoints != null || r.PlayedBy == Enums.NESW.PassedOut || r.PlayedBy == Enums.NESW.DirectorScore;
         }
 
         

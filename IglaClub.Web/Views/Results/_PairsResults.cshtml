@@ -17,8 +17,8 @@
         </tr>
         @for (int i = 0; i < Model.PairsInTounament.Count; i++)
         {
-            var p1Name = (Model.PairsInTounament[i].Player1 == null ? "Unknown" : Model.PairsInTounament[i].Player1.Name);
-            var p2Name = (Model.PairsInTounament[i].Player2 == null ? "Unknown" : Model.PairsInTounament[i].Player2.Name);
+            var p1Name = (Model.PairsInTounament[i].Player1 == null ? "Unknown" : Model.PairsInTounament[i].Player1.GetDisplayName());
+            var p2Name = (Model.PairsInTounament[i].Player2 == null ? "Unknown" : Model.PairsInTounament[i].Player2.GetDisplayName());
             int maxPoints = Model.PairNumberMaxPoints.FirstOrDefault(p => p.Key == Model.PairsInTounament[i].PairNumber).Value;
             float pairScore = Model.PairsInTounament[i].Score;
             //var rank = i + 1;

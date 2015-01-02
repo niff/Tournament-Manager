@@ -84,7 +84,7 @@
                     @Html.EditorFor(m => m[i].Board.BoardNumber)
                 </td>
                 <td>
-                    @Html.TextBox("ShortScore["+i+"]","")
+                    @Html.TextBox("ShortScore["+i+"]","",new {Title = "[Level][Color][double][dealer][result]"})
                 </td>
                 <td>
                     @Html.EditorFor(m => m[i].ContractLevel, new {type="number", min = "0", max = "7"})
@@ -128,11 +128,16 @@
             </tr>
         }
     </table>
-        <input type="submit" value="Save" class="btn btn-info btn-small" />
+    <input type="submit" value="Save" class="btn btn-info btn-small" />
+            
+        
     
     <button class="btn btn-info btn-small">
         <span class="glyphicon glyphicon-plus-sign"></span>
         @Html.ActionLink("Add new result", "AddNewResult", "Results", new { tournamentId = Model[0].TournamentId}, null)
     </button>
-    
+    <button class="btn btn-info btn-small">
+        <span class="glyphicon glyphicon-arrow-left"></span>
+        @Html.ActionLink("Back", "Manage", "Results", new { tournamentId = Model[0].TournamentId}, null)
+    </button>
 }

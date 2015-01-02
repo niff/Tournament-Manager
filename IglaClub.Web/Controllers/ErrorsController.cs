@@ -18,5 +18,11 @@ namespace IglaClub.Web.Controllers
             return View();
         }
 
+        public ActionResult Error404()
+        {
+            ViewBag.ErrorMessage = "Item not found.";
+            ViewBag.ReffererUrl = Request.UrlReferrer;
+            return View();
+        }
     }
 }
