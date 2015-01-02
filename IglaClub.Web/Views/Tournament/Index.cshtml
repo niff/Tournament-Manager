@@ -1,24 +1,25 @@
 ﻿@model IEnumerable<IglaClub.ObjectModel.Entities.Tournament>
 
+<h2 class="center-block">Tournaments</h2>
 
-<div class="row well">
-    @Html.ActionLink("Add tournament", "Create") 
-    @*| 
-    @Html.ActionLink("Users", "Create") | 
-    @Html.ActionLink("Settings", "Create")*@ 
-</div>
+<a href="@Url.Action("Create")"
+   class="btn btn-info btn-small">
+    <span class="glyphicon glyphicon-plus-sign"></span>
+    Add tournament
+</a>
+
 
 <div class="row">
     <div class="col-xs-4 oncoming">
-        <h5>Oncoming</h5>
+        <h3>Oncoming</h3>
         @Html.Action("Oncoming")
     </div>
     <div class="col-xs-4 ongoing">
-        <p>Ongoing</p>
-        @Html.Action("Ongoing")
-    </div>
+        <h3>Ongoing</h3>
+            @Html.Action("Ongoing")
+</div>
     <div class="col-xs-4 past">
-        <p>Past</p>
+        <h3>Past</h3>
         @Html.Action("Past")
     </div>
     

@@ -24,7 +24,7 @@
                 <i class="small text-muted">at</i> @Model.Tournament.StartDate.Value.ToShortTimeString()</span>
         }
         <div>
-            <i class="small text-muted">Tournament owner: </i> @Model.Tournament.Owner.Name @Model.Tournament.Owner.Lastname (@Model.Tournament.Owner.Login)
+            <i class="small text-muted">Tournament owner: </i> @Model.Tournament.Owner.GetDisplayName()
         </div>
         
             @if (@Model.Tournament.Club != null)

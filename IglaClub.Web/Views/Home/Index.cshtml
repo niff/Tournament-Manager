@@ -1,72 +1,55 @@
 ﻿@{
     ViewBag.Title = "Hello";
 }
-@*@section featured {
-    <section class="featured">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>@ViewBag.Title.</h1>
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
-            <p>
-                If you are bridge enthusiast and you want to organize small tournaments on your own, 
-                or you are participating in those kind of events and you want to have a tool for better organize and analyze them, you're in the rigth place. 
-                If you are not, it is the best place to became one of us:)
-            </p>
-        </div>
-    </section>
-}
 
-<h3>Don't hesitate and:</h3>
-<ul class="round">
-    <li class="one">
-        Create your bridge tournament
-    </li>
-    <li class="two">
-        Find existing one in your area
-    </li>
-</ul>*@
 <style type="text/css"></style>
-<p class="home-text">
-    If you are bridge enthusiast and you want to organize small tournaments on your own,
-    or you are participating in those kind of events and you want to have a tool for better organize and analyze them, you're in the rigth place.
-    If you are not, it is the best place to became one of us:)
-</p>
 
-<div class="row">
-    <div class="col-sm-6 col-md-4">
+<div class="row center-block" style=" margin:0 auto;">
+    <div class="col-md-4 center-block">
         <div class="thumbnail">
 
             <img src="~/Content/img/1408214416_file_add.png" />
             <div class="caption">
                 <h3>Create your tournament</h3>
-                <p>Create your tournament</p>
-                <p><a href="#" class="btn btn-primary" role="button">See more...</a> <a href="#" class="btn btn-default" role="button">Create a tournament</a></p>
+                <p>and invite your friends!</p>
+                <p>
+                    <a href="@Url.Action("About","Home")" class="btn btn-primary" role="button">See more...</a> 
+                    <a href="@Url.Action("Create", "Tournament")" class="btn btn-default" role="button">Create a tournament</a>
+                </p>
             </div>
         </div>
     </div>
 
-    <div class="col-sm-6 col-md-4">
+    <div class="col-md-4 center-block">
         <div class="thumbnail">
 
             <img src="~/Content/img/1408214039_search.png" />
             <div class="caption">
                 <h3>Find a tournament...</h3>
                 <p>... and sign up!</p>
-                <p><a href="#" class="btn btn-primary" role="button">See more...</a> <a href="@Url.Action("Create","Tournament")" class="btn btn-default" role="button">Find a tournament</a></p>
+                <p>
+                    <a href="@Url.Action("About","Home")" class="btn btn-primary" role="button">See more...</a> 
+                    <a href="@Url.Action("Index","Tournament")" class="btn btn-default" role="button">Find a tournament</a>
+                </p>
             </div>
         </div>
     </div>
 
-    <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
+    @*<div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
 
-            <img src="~/Content/img/1408214349_folder.png" />
-            <div class="caption">
-                      <h3>Review your results</h3>
-                      <p>Review your results</p>
-                      <p><a href="#" class="btn btn-primary" role="button">See more...</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                  </div>
-        </div>
-    </div>
+                <img src="~/Content/img/1408214349_folder.png" />
+                <div class="caption">
+                          <h3>Review your results</h3>
+                          <p>Review your results</p>
+                          <p><a href="#" class="btn btn-primary" role="button">See more...</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                      </div>
+            </div>
+        </div>*@
+
 </div>
+<p class="home-text">
+    If you are bridge enthusiast and you want to organize small tournaments on your own,
+    or you are participating in those kind of events and you want to have a tool for better organize and analyze them, you're in the rigth place.
+    If you are not, it is the best place to became one of us:)
+</p>

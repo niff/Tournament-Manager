@@ -1,15 +1,54 @@
-﻿@using IglaClub.ObjectModel.Tools
+﻿@using IglaClub.ObjectModel.Tools;
+@using IglaClub.TournamentManager;
 @model IglaClub.Web.Models.ViewModels.RoundDetailsViewModel
 
 @{
     ViewBag.Title = "Current round";
 }
+<h2>Round @Model.Tournament.CurrentRound</h2>
 
-<h2>RoundDetails</h2>
-<span>Current round: @Model.Tournament.CurrentRound</span> <br/>
-<span>NS: @Model.NsPair</span><br />
-<span>EW: @Model.EwPair</span><br />
-@foreach (var result in Model.Results)
+@if (@Model.Results.Any())
 {
-  <span>Board: @result.Board.BoardNumber, @ResultsParser.GetFormatResult(result)</span><br />
+    <div class="panel-group">
+        <h4>Table: @Model.Results.First().TableNumber</h4>
+        <span><b>NS:</b> @Model.NsPair (@Model.NsPair.PairNumber)</span><br />
+        <span><b>EW:</b> @Model.EwPair (@Model.EwPair.PairNumber)</span><br />
+    </div>
+    <br />
+    <div class="col-xs-3">
+        <table class="table table-striped table-hover text-left">
+            <tr>
+                <th>Board</th>
+                <th>Result</th>
+                <th>Score</th>
+                <th>Action</th>
+            </tr>
+
+            @foreach (var result in Model.Results)
+            {
+                <tr>
+                    <td>
+                        @result.Board.BoardNumber
+                    </td>
+                    <td>
+                        @ResultsParser.GetFormatResult(result)
+                    </td>
+                    <td>
+                        @result.ResultNsPoints
+                    </td>
+                    <td>
+                        <a href="@Url.Action("EditResult","Results", new { resultId = result.Id })"
+                           class="btn btn-info btn-small">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                            Edit
+                        </a>
+                    </td>
+               </tr>
+            }
+        </table>
+    </div>
+}
+else
+{
+    <span>No boards on this round are yet available</span>
 }

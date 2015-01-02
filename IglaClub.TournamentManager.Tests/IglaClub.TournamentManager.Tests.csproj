@@ -52,11 +52,16 @@
   <ItemGroup>
     <Compile Include="ResultParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TournamentHelperTests\UpdateScoreInBoardsMethod.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IglaClub.ObjectModel\IglaClub.ObjectModel.csproj">
       <Project>{C4EBBCD3-8501-4136-90EC-91870977B932}</Project>
       <Name>IglaClub.ObjectModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IglaClub.TournamentManager\IglaClub.TournamentManager.csproj">
+      <Project>{f812d401-7bf6-4251-a23d-bdebeba5f179}</Project>
+      <Name>IglaClub.TournamentManager</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

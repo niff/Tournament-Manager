@@ -37,7 +37,7 @@ namespace IglaClub.TournamentManager
             IEnumerable<Result> results = TournamentHelper.GenerateInitialSittingPosition(tournament);
             TournamentHelper.AddResultsToTournament(tournament, results);
             
-            tournament.CurrentRound = 1;
+            tournament.CurrentRound = 0;
             tournament.TournamentStatus = TournamentStatus.Started;
             tournament.StartDate = DateTime.Now;
             db.SaveChanges();
@@ -52,7 +52,7 @@ namespace IglaClub.TournamentManager
             if (tournament.TournamentMovingType != TournamentMovingType.Cavendish)
                 return new OperationStatus(false,"Tournament with id " + tournamentId + " moving type is different than cavendish (cannot generate extra round)");;
             if (tournament.Results.Any(r => r.ResultNsPoints == null && r.PlayedBy != NESW.DirectorScore))
-                return new OperationStatus(false, "Round is still not finished. " + tournament.Results.Count(r => r.ResultNsPoints == null) + " results not entered left.");
+                return new OperationStatus(false, "Round is still not finished. " + tournament.Results.Count(r => r.ResultNsPoints == null) + " results are not entered.");
             IEnumerable<BoardInstance> boards = GenerateEmptyBoards(tournament);
             TournamentHelper.AddBoardsToTournament(tournament, boards);
 

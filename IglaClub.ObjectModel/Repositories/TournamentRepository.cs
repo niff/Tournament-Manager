@@ -73,5 +73,16 @@ namespace IglaClub.ObjectModel.Repositories
             
             
         }
+
+        public bool UserIsSubscribedForTournament(string userName, long tournamentId)
+        {
+            var tournament = db.Tournaments.Find(tournamentId);
+            if (tournament == null || tournament.Pairs == null)
+                return false;
+            return tournament.Pairs.Any(p => p.Player1.Login == userName || p.Player2.Login == userName);
+
+
+
+        }
     }
 }

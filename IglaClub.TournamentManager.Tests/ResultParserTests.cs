@@ -74,6 +74,17 @@ namespace IglaClub.TournamentManager.Tests
                 CompareResults(expected, result);
             }
 
+            [TestMethod]
+            public void TwoClubsRedoubledPlusOne()
+            {
+
+                var expected = CreateNewResult(2, ContractColors.Club, 9, ContractDoubled.Redoubled, NESW.North);
+
+                var result = ResultsParser.Parse("2cxxN+1");
+
+                CompareResults(expected, result);
+            }
+            
         }
 
         [TestClass]
@@ -112,6 +123,25 @@ namespace IglaClub.TournamentManager.Tests
                 Assert.AreEqual("7NTx S -2", result);
             }
 
+            [TestMethod]
+            public void PassedOut()
+            {
+                var data = CreateNewResult(7, ContractColors.NoTrump, 11, ContractDoubled.Doubled, NESW.PassedOut);
+
+                var result = ResultsParser.GetFormatResult(data);
+
+                Assert.AreEqual("Passed out", result);
+            }
+
+            [TestMethod]
+            public void DirectorScore()
+            {
+                var data = CreateNewResult(7, ContractColors.NoTrump, 11, ContractDoubled.Doubled, NESW.DirectorScore);
+
+                var result = ResultsParser.GetFormatResult(data);
+
+                Assert.AreEqual("Director score", result);
+            }
         }
 
         private static Result CreateNewResult(int level, ContractColors contractColors,

@@ -11,6 +11,7 @@ using IglaClub.ObjectModel.Tools;
 using IglaClub.Web.Authorization;
 using IglaClub.Web.Models;
 using IglaClub.Web.Models.ViewModels;
+using IglaClub.TournamentManager;
 
 namespace IglaClub.Web.Controllers
 {
@@ -24,6 +25,7 @@ namespace IglaClub.Web.Controllers
         private readonly UserRepository userRepository;
         private readonly ResultRepository resultRepository;
         private readonly TournamentRepository tournamentRepository;
+        private const string _itemNotFound = "Tournament not found.";
 
         public ResultsController()
         {
@@ -41,11 +43,10 @@ namespace IglaClub.Web.Controllers
         public ActionResult Edit(long tournamentId)
         {
             var results = db.Tournaments.Find(tournamentId).Results.ToList();
-            results = results.OrderBy(r => r.Board.BoardNumber).ToList();
+            results = results.OrderBy(r => r.Board.BoardNumber).ThenBy(r => r.TableNumber).ToList();
             return View(results);
         }
-
-      
+              
         [HttpPost]
         public ActionResult Edit(List<Result> results)
         {
@@ -71,15 +72,38 @@ namespace IglaClub.Web.Controllers
             return null;
         }
 
+        public ActionResult EditResult(long resultId)
+        {
+            var result = db.Results.Find(resultId);
+            return View(result);
+        }
+
+        [HttpPost]
+        public ActionResult EditResult(Result result)
+        {
+
+           var parsedResult = ResultsParser.Parse(Request["ShortScore"]);
+           if (parsedResult != null)
+                result = ResultsParser.UpdateResult(result, parsedResult);
+           var board = this.resultRepository.Get<BoardInstance>(result.BoardId);
+           result.Board = board;
+           result.ResultNsPoints = TournamentHelper.CalculateScoreInBoard(result);
+           resultRepository.InsertOrUpdate(result);
+           this.resultRepository.SaveChanges();
+           return RedirectToAction("RoundDetails","Round", new { result.TournamentId });
+        }
+
         [TournamentOwner]
         public ActionResult Manage(long tournamentId, string sort, string sortdir)
         {
             Tournament tournament = tournamentRepository.GetTournament(tournamentId);
+            if (tournament == null)
+                return Content(_itemNotFound);
             List<Result> results = tournament.Results.ToList();
             if (!string.IsNullOrEmpty(sort))
             {
-                switch (sort)
-                {
+               switch (sort)
+               { 
                     case "BoardNumber":
                         results = tournament.Results.OrderBy(r => r.Board.BoardNumber).ToList();
                         break;
@@ -87,7 +111,7 @@ namespace IglaClub.Web.Controllers
                         results = tournament.Results.OrderBy(r => r.TableNumber).ToList();
                         break;
                     default:
-                        results = tournament.Results.OrderBy(r => r.RoundNumber).ToList();
+                        results = tournament.Results.OrderBy(r => r.Board.BoardNumber).OrderBy(r => r.RoundNumber).ToList();
                         break;
                 }
                 if (sortdir == "DESC")
@@ -95,7 +119,6 @@ namespace IglaClub.Web.Controllers
             }
             return View(new TournamentResultsVm{Tournament = tournament, Results = results});
         }
-
 
         public ActionResult CreateEmpty(long tournamentId)
         {
@@ -139,11 +162,6 @@ namespace IglaClub.Web.Controllers
                 return Redirect(Request.UrlReferrer.ToString());
             return RedirectToAction("Edit", new { tournamentId });
         }
-
-        //public PartialViewResult _ResultsList(long tournamentId)
-        //{
-            
-        //}
 
         public PartialViewResult PairsResults(long tournamentId)
         {

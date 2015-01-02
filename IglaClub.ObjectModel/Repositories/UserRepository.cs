@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IglaClub.ObjectModel.Entities;
+using System.Data.SqlClient;
 
 namespace IglaClub.ObjectModel.Repositories
 {
@@ -18,6 +19,7 @@ namespace IglaClub.ObjectModel.Repositories
             var user = new User
                 {
                     Login = name,
+                    Nickname = name,
                     Name = name,
                     Email = email
                 };
