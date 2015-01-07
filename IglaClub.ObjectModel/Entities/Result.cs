@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using IglaClub.ObjectModel.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace IglaClub.ObjectModel.Entities
 {
@@ -11,6 +12,7 @@ namespace IglaClub.ObjectModel.Entities
         public virtual Pair EW { get; set; }
 
         [DisplayName ("Level")]
+        [Range(0, 7, ErrorMessage = "Level must be between 1 and 7")]
         public int ContractLevel { get; set; }
 
         [DisplayName("Color")]
@@ -23,6 +25,7 @@ namespace IglaClub.ObjectModel.Entities
         public NESW PlayedBy { get; set; }
 
         [DisplayName("Tricks")]
+        [Range(0, 13, ErrorMessage = "Number of tricks must be between 0 and 13")]
         public int NumberOfTricks { get; set; }
 
         [DisplayName("Ns Score")]

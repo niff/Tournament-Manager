@@ -50,7 +50,9 @@ namespace IglaClub.Web.Controllers
         [HttpPost]
         public ActionResult Edit(List<Result> results)
         {
-            
+            if (!ModelState.IsValid)
+                return View(results);
+
             if (results != null)
             {
                 for (int i = 0; i < results.Count; i++)
@@ -81,16 +83,19 @@ namespace IglaClub.Web.Controllers
         [HttpPost]
         public ActionResult EditResult(Result result)
         {
-
-           var parsedResult = ResultsParser.Parse(Request["ShortScore"]);
-           if (parsedResult != null)
-                result = ResultsParser.UpdateResult(result, parsedResult);
-           var board = this.resultRepository.Get<BoardInstance>(result.BoardId);
-           result.Board = board;
-           result.ResultNsPoints = TournamentHelper.CalculateScoreInBoard(result);
-           resultRepository.InsertOrUpdate(result);
-           this.resultRepository.SaveChanges();
-           return RedirectToAction("RoundDetails","Round", new { result.TournamentId });
+            if (ModelState.IsValid)
+            {
+                var parsedResult = ResultsParser.Parse(Request["ShortScore"]);
+                if (parsedResult != null)
+                    result = ResultsParser.UpdateResult(result, parsedResult);
+                var board = this.resultRepository.Get<BoardInstance>(result.BoardId);
+                result.Board = board;
+                result.ResultNsPoints = TournamentHelper.CalculateScoreInBoard(result);
+                resultRepository.InsertOrUpdate(result);
+                this.resultRepository.SaveChanges();
+                return RedirectToAction("RoundDetails", "Round", new { result.TournamentId });
+            }
+            return View(result);
         }
 
         [TournamentOwner]
@@ -177,5 +182,6 @@ namespace IglaClub.Web.Controllers
 
             return PartialView("_PairsResults", pairsResultsViewModel);
         }
+
     }
 }

@@ -7,30 +7,35 @@
 <h2>Tournament "@Model.Tournament.Name" results</h2>
 @{
     var grid = new WebGrid(Model.Results, rowsPerPage: 40);
+    //TODO: filter by round
+    //var roundsList = Model.Results.Select(r => r.RoundNumber).Distinct().Select(rn=>new SelectListItem(){Text = rn.ToString(), Value = rn.ToString()}).ToList();
+    //roundsList.Insert(0, new SelectListItem() { Text = "All rounds", Value = "-1" });
 }
-<div>
-    <a href="@Url.Action("Manage", "Tournament", new { id = Model.Tournament.Id })" 
-        class="btn btn-info btn-small">
+@*Round number: @Html.DropDownList("RoundNumberDD", roundsList, new {@class = "roundChooser"})*@
+
+<div class="defaultMargin">
+    <a href="@Url.Action("Manage", "Tournament", new { id = Model.Tournament.Id })"
+       class="btn btn-info btn-small">
         Manage tournament
     </a>
 
     <a href="@Url.Action("Edit", new { tournamentId = @Model.Tournament.Id })"
-        class="btn btn-info btn-small">
+       class="btn btn-info btn-small">
         <span class="glyphicon glyphicon-pencil"></span>
         Edit results
     </a>
 
     <a href="@Url.Action("CalculateResultsComplete", "Tournament", new { id = Model.Tournament.Id })"
-        class="btn btn-info btn-small">
+       class="btn btn-info btn-small">
         <span class="glyphicon glyphicon-export"></span>
         Calculate results
     </a>
-    
+
     <a href="@Url.Action("CalculateResultsComplete", "Tournament", new { id = Model.Tournament.Id })" class="btn btn-info btn-small">
         <span class="glyphicon glyphicon-export"></span>Calculate results
     </a>
 
-    <a href="@Url.Action("GenerateNextRound", "Tournament", new { tournamentId = Model.Tournament.Id, withPairsRepeat = false })" 
+    <a href="@Url.Action("GenerateNextRound", "Tournament", new { tournamentId = Model.Tournament.Id, withPairsRepeat = false })"
        class="btn btn-info btn-small">
         <span class="glyphicon glyphicon-circle-arrow-right"></span>
         Generate next round - no pairs repeat
@@ -41,15 +46,15 @@
         Generate next round with pairs repeat
     </a>
     <a href="@Url.Action("RemoveLastRound", "Results", new { tournamentId = Model.Tournament.Id })"
-       class="btn btn-info btn-small">
+       class="btn btn-info btn-small" title="Remove whole last round, all results">
         <span class="glyphicon glyphicon-remove"></span>
-       
+
         Remove last round
     </a>
 
 </div>
 
+<div id=""> 
+    @Html.Partial("_ResultsList", Model.Results)
+</div>
 
-
-
-@Html.Partial("_ResultsList", Model.Results)

@@ -11,6 +11,10 @@
 <h2>Edit</h2>
 @using (Html.BeginForm())
 {
+    <div class="field-validation-error defaultMargin">
+            @Html.ValidationSummary()
+    </div>
+    
     <table class="result">
         <tr>
 
@@ -84,7 +88,7 @@
                     @Html.EditorFor(m => m[i].Board.BoardNumber)
                 </td>
                 <td>
-                    @Html.TextBox("ShortScore["+i+"]","",new {Title = "[Level][Color][double][dealer][result]"})
+                    @Html.TextBox("ShortScore["+i+"]","",new {Title = "[Level][Color][double][dealer][result] \r\n i.e. 3HxE-1, 3C N="})
                 </td>
                 <td>
                     @Html.EditorFor(m => m[i].ContractLevel, new {type="number", min = "0", max = "7"})
