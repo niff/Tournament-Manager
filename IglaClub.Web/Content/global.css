@@ -117,3 +117,11 @@ text-indent: 30PX;
     margin: 2px;
 }
 
+.defaultMargin {
+    margin: 15px;
+}
+
+.roundChooser{
+    width: 100px;
+}
+
