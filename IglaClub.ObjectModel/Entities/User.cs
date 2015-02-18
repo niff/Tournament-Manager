@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Data;
-using System.Linq;
-using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IglaClub.ObjectModel.Entities
 {
@@ -18,20 +15,28 @@ namespace IglaClub.ObjectModel.Entities
         [MaxLength(100)]
         public string Nickname { get; set; }
 
+        [Index(IsUnique = true)]
+        [Required(ErrorMessage = "Login is required")]
         [MaxLength(100)]
         public string Login { get; set; }
-        
+
+        [Index(IsUnique = true)]
+        [Required(ErrorMessage = "Email is required")]
         public string Email { get; set; }
 
         public virtual IList<Club> Clubs { get; set; }
         
         public string GetDisplayName()
         {
-            if (this == null)
-                return string.Empty;
             if(!string.IsNullOrEmpty(this.Nickname))
                 return this.Nickname;
             return this.Login;
         }
+
+        public string DisplayName
+        {
+            get { return GetDisplayName(); }
+        }
+
     }
 }

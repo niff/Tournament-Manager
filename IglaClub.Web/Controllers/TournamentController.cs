@@ -285,6 +285,17 @@ namespace IglaClub.Web.Controllers
             
         }
 
+        [HttpPost]
+        public ActionResult Add(PairsViewModel pairsViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                userRepository.Add(pairsViewModel.NewUser.Login, pairsViewModel.NewUser.Email);
+            }
+
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
         public ActionResult MoveToNextRound(long tournamentid, bool withpairsrepeat)
         {
             throw new NotImplementedException();
@@ -305,6 +316,12 @@ namespace IglaClub.Web.Controllers
             return PartialView("_TournamentList", tournamentRepository.GetOngoing());
         }
 
-       
+
+        public PartialViewResult QuickAdd(User user)
+        {
+            userRepository.Add(user.Login, user.Email);
+            //return RedirectToRoute(Request.UrlReferrer);
+            return PartialView("_QuickAddUser");
+        }
     }
 }
