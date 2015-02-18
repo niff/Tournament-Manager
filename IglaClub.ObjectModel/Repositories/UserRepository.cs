@@ -14,18 +14,27 @@ namespace IglaClub.ObjectModel.Repositories
         {
         }
 
-        public long Add(string name, string email)
+        public long Add(string login, string email)
         {
             var user = new User
                 {
-                    Login = name,
-                    Nickname = name,
-                    Name = name,
+                    Login = login,
+                    Nickname = login,
+                    Name = login,
                     Email = email
                 };
             db.Users.Add(user);
             db.SaveChanges();
             return user.Id;
+        }
+
+        public bool EmailExistInDataBase(string email)
+        {
+            return db.Users.Any(u => u.Email == email);
+        }
+        public bool UserExistInDataBase(string userName)
+        {
+            return db.Users.Any(u => u.Name == userName);
         }
 
         public List<User> GetAvailableUsersForTournament(long tournamentId)

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using IglaClub.ObjectModel.Entities;
 
 namespace IglaClub.Web.Models.ViewModels
@@ -12,6 +9,8 @@ namespace IglaClub.Web.Models.ViewModels
         public List<Pair> PairsInTounament { get; set; }
         public List<User> AvailableUsers { get; set; }
         public User CurrentUser { get; set; }
+
+        public User NewUser { get; set; }
     }
     
 }
