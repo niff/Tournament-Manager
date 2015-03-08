@@ -1,5 +1,4 @@
 ﻿@using System.Globalization
-@using IglaClub.ObjectModel.Entities
 @model IglaClub.Web.Models.ViewModels.PairsViewModel
 
 <link href="~/Content/themes/base/jquery.ui.autocomplete.css" rel="stylesheet" />
@@ -57,9 +56,9 @@
             <label for="password">Hasło</label><input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" />
         </form>
     </div>*@
+    @Html.Partial("_QuickAddUser")
 </div>
 
-@Html.Partial("_QuickAddUser", new User() )
 
 <script>
     $(document).ready(function() {
@@ -89,7 +88,7 @@
         });
     });
 
-     function removePair(tId, pairId) {
+    function removePair(tId, pairId) {
         $('.removePairLink').attr('href','');
         $.ajax({
             url: "/Tournament/RemovePair",
