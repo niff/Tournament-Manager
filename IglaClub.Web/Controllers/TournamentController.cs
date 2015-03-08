@@ -317,11 +317,13 @@ namespace IglaClub.Web.Controllers
         }
 
 
-        public PartialViewResult QuickAdd(User user)
+
+        [HttpPost]
+        public void QuickAddUser(string name, string email)
         {
-            userRepository.Add(user.Login, user.Email);
+            userRepository.Add(name, email);
             //return RedirectToRoute(Request.UrlReferrer);
-            return PartialView("_QuickAddUser");
+            //return View("_QuickAddUser");
         }
     }
 }
