@@ -417,7 +417,7 @@
     <Content Include="Views\Tournament\Edit.cshtml" />
     <Content Include="Views\Tournament\Delete.cshtml" />
     <Content Include="Views\Tournament\Manage.cshtml" />
-    <Content Include="Views\Tournament\_TournamentParticipants.cshtml" />
+    <Content Include="Views\Tournament\_TournamentParticipantsEdit.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Results\Manage.cshtml" />
     <Content Include="Views\Results\Edit.cshtml" />
@@ -432,6 +432,7 @@
     <Content Include="Views\Tournament\_TournamentParticipantsJsBackup.cshtml" />
     <Content Include="Views\Account\Add.cshtml" />
     <Content Include="Views\Tournament\_QuickAddUser.cshtml" />
+    <Content Include="Views\Tournament\_PairsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

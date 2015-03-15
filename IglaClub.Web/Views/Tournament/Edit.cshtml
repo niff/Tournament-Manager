@@ -63,7 +63,7 @@
     </div>
 </div>
 <div style="float: left; margin-left: 10px;">
-    @Html.Action("Pairs", new { tournamentId = @Model.Id })
+    @Html.Action("TournamentParticipantsEdit", new { tournamentId = @Model.Id })
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

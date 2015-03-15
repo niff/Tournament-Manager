@@ -49,7 +49,7 @@
         <div class="col-md-6">
             
             @(Model.Tournament.TournamentStatus == TournamentStatus.Planned ?
-                  Html.Action("Pairs", new { tournamentId = @Model.Tournament.Id }) :
+                  Html.Action("TournamentParticipantsEdit", new { tournamentId = @Model.Tournament.Id }) :
                   Html.Action("PairsResults", "Results", new { tournamentId = @Model.Tournament.Id }))
             
         </div>
@@ -62,7 +62,9 @@
             }
             @if (Model.Tournament.TournamentStatus == TournamentStatus.Started)
             {
-                @Html.ActionLink("Manage results", "Manage", "Results", new { tournamentId = Model.Tournament.Id }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Manage results", "Manage", "Results", 
+                                new { tournamentId = Model.Tournament.Id },
+                                new { @class = "btn btn-primary", title = "Manage current results: change placing, change scores." })
                 <br />
 
                 @Html.ActionLink("Calculate results", "CalculateResults", new { id = Model.Tournament.Id }, new { @class = "btn btn-primary" })
@@ -72,7 +74,8 @@
                 {
 
                     @Html.ActionLink("Generate next round", "GenerateNextRound",
-                             new { tournamentId = Model.Tournament.Id, withPairsRepeat = false }, new { @class = "btn btn-primary" })
+                             new { tournamentId = Model.Tournament.Id, withPairsRepeat = false }, 
+                             new { @class = "btn btn-primary", title = "Generate boards and placing for the next round." })
                     <br />
                 }
                 else

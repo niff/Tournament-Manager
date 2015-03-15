@@ -39,9 +39,16 @@
 </div>
 <div class="col-md-6">
 
-    @(Model.TournamentStatus == TournamentStatus.Planned ?
-          Html.Action("Pairs", new { tournamentId = @Model.Id }) :
-          Html.Action("PairsResults", "Results", new { tournamentId = @Model.Id }))
+    @if (Model.TournamentStatus != TournamentStatus.Planned)
+    {
+        @Html.Action("PairsResults", "Results", new {tournamentId = @Model.Id})
+    }
+    else
+    {
+        @Html.Action("PairsList", "Tournament", new {tournamentId = @Model.Id})
+    }
+    
+          
 
 </div>
 <div class="col-md-6 action-pane">
