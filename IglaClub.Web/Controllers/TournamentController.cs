@@ -88,7 +88,9 @@ namespace IglaClub.Web.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            var tournament = new Tournament();
+            tournament.BoardsInRound = 2;
+            return View(tournament);
         }
 
         //

@@ -68,7 +68,8 @@ list-inline a, a:hover{
 border: 1px solid rgb(218, 218, 218);
 padding: 10px;
 box-shadow: rgb(240, 240, 240) 5px 5px;
-margin:10px 0;
+/*margin:10px 0;*/
+    max-width: 500px;
 }
 footer {
     margin:20px;
@@ -78,8 +79,8 @@ footer {
 }
 
 .action-pane button {
-    margin-bottom: 8px;
-    width: 180px;
+    margin: 10px 10px 10px 10px;
+    max-width: 500px;
 }
 
 /*------------results-----------------*/
@@ -129,5 +130,9 @@ text-indent: 30PX;
 
 .roundChooser{
     width: 100px;
+}
+
+.tournamentShortInfo {
+    max-width: 500px;
 }
 

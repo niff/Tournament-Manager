@@ -8,7 +8,7 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
     
-        DateTime startDate = DateTime.Now.AddMinutes(-DateTime.Now.Minute).AddSeconds(-DateTime.Now.Second).AddHours(1);
+    DateTime startDate = DateTime.Now.AddMinutes(-DateTime.Now.Minute).AddSeconds(-DateTime.Now.Second).AddHours(1);
     
     <fieldset style="width: 300px">
         <legend>Add new tournament</legend>
