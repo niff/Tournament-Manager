@@ -428,12 +428,15 @@
     <Content Include="Views\Results\_ResultsList.cshtml" />
     <Content Include="Views\Shared\_LayoutMobile.cshtml" />
     <Content Include="Views\Round\RoundDetails.cshtml" />
-    <Content Include="Views\Results\EditResult.cshtml" />
     <Content Include="Views\Tournament\_TournamentParticipantsJsBackup.cshtml" />
     <Content Include="Views\Account\Add.cshtml" />
     <Content Include="Views\Tournament\_QuickAddUser.cshtml" />
     <Content Include="Views\Tournament\_PairsList.cshtml" />
     <Content Include="Views\Tournament\_TournamentShortInfo.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Results\EditResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
