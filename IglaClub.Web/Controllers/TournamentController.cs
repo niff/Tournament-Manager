@@ -111,6 +111,7 @@ namespace IglaClub.Web.Controllers
         //
         // GET: /Tournament/Edit/5
 
+        [TournamentOwner]
         public ActionResult Edit(long id = 0)
         {
             Tournament tournament = db.Tournaments.Find(id);
@@ -212,25 +213,38 @@ namespace IglaClub.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddPair(int user1, int user2, int tournamentId)
+        public ActionResult AddPair(int user1, int user2, long tournamentId)
         {
             tournamentManager.AddPair(tournamentId, user1, user2);
             return Json(new { success = true });
         }
         
-        public PartialViewResult Pairs(int tournamentId)
+        public PartialViewResult TournamentParticipantsEdit(long tournamentId)
+        {
+            var model = CreatePairsViewModel(tournamentId);
+            return PartialView("_TournamentParticipantsEdit", model);
+        }
+
+        public PartialViewResult PairsList(long tournamentId)
+        {
+            var model = CreatePairsViewModel(tournamentId);
+            return PartialView("_PairsList", model);
+        }
+
+        private PairsViewModel CreatePairsViewModel(long tournamentId)
         {
             var currentUser = userRepository.GetUserByName(HttpContext.User.Identity.Name);
             var tournament = this.tournamentRepository.GetTournamentWithPairsAndOwner(tournamentId);
             var model = new PairsViewModel
-                {
-                    PairsInTounament = tournament.Pairs.ToList(),
-                    AvailableUsers = userRepository.GetAvailableUsersForTournament(tournamentId),
-                    Tournament = tournament,
-                    CurrentUser = currentUser
-                };
-            return PartialView("_TournamentParticipants", model);
+            {
+                PairsInTounament = tournament.Pairs.ToList(),
+                AvailableUsers = userRepository.GetAvailableUsersForTournament(tournamentId),
+                Tournament = tournament,
+                CurrentUser = currentUser
+            };
+            return model;
         }
+
 
         public PartialViewResult PairRoster(int tournamentId)
         {
