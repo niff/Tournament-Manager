@@ -4,45 +4,47 @@
 
 @if (Model.Any())
 {
-<table class="tournamentsListTable table table-striped table-hover">
+    <table class="tournamentsListTable table table-striped table-hover">
 
-@foreach (var item in Model) {
-    var date = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("dd MMM yyyy") : "";
-    var hour = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("HH:mm") : "";
-    <tr>
-        <td>
-            @{
-                if(@item.TournamentStatus == TournamentStatus.Planned)
-                    { @Html.ActionLink(item.Name, "Details", "Tournament", new { id = @item.Id }, null)}
-                else if (@item.TournamentStatus == TournamentStatus.Started)
-                    {   @Html.ActionLink(item.Name, "RoundDetails", "Round", new {tournamentId = @item.Id}, null)};
+        @foreach (var item in Model)
+        {
+            var date = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("dd MMM yyyy") : "";
+            var hour = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("HH:mm") : "";
+            <tr>
+                <td>
+                    @{
+            if (@item.TournamentStatus == TournamentStatus.Planned)
+            { @Html.ActionLink(item.Name, "Details", "Tournament", new { id = @item.Id }, null)}
+            else if (@item.TournamentStatus == TournamentStatus.Started)
+            {   @Html.ActionLink(item.Name, "RoundDetails", "Round", new { tournamentId = @item.Id }, null)};
 
-                if (item.Owner != null && item.Owner.Login == HttpContext.Current.User.Identity.Name)
-                {
-                    <span>@Html.ActionLink("(Manage)", "Manage", "Tournament", new { id = item.Id }, null) </span>
-                }
-}
-        </td>
-        <td>
-            @date
-        </td><td>
-                 @hour
-             </td>
-        <td>
-            @{
-                var currentUserIsSubscribed = item.UserIsSubscribed(HttpContext.Current.User.Identity.Name);
-                if (currentUserIsSubscribed)
-                {
-                    <span class="glyphicon glyphicon-ok-circle" title="You are subscribed to this tournament"></span>
-                }
+            if (item.Owner != null && item.Owner.Login == HttpContext.Current.User.Identity.Name)
+            {
+                <span>@Html.ActionLink("(Manage)", "Manage", "Tournament", new { id = item.Id }, null) </span>
             }
-            </td>
-    </tr>
-}
+                    }
+                </td>
+                <td style="width: 100px">
+                    @date
+                </td>
+                <td style="width: 50px">
+                    @hour
+                </td>
+                <td style="width: 20px">
+                    @{
+            var currentUserIsSubscribed = item.UserIsSubscribed(HttpContext.Current.User.Identity.Name);
+            if (currentUserIsSubscribed)
+            {
+                <span class="glyphicon glyphicon-ok-circle" title="You are subscribed to this tournament"></span>
+            }
+                    }
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
 }
- else
+else
 {
     <i class="small text-muted">No tournaments to display</i>
 }

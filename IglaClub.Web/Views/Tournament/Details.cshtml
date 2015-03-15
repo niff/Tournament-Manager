@@ -11,33 +11,9 @@
     <h3>@Model.Name</h3>
 </div>
 
-<div class="">
-    Tournament is <strong>@Model.TournamentStatus.ToString() </strong><br />
-    @if (Model.TournamentStatus == TournamentStatus.Planned && Model.PlannedStartDate != null)
-    {
-        <span>
-            <i class="small text-muted">and will start on</i> @Model.PlannedStartDate.Value.ToLongDateString()
-            <i class="small text-muted">at</i> @Model.PlannedStartDate.Value.ToShortTimeString()
-        </span>
-    }
-    @if (Model.TournamentStatus == TournamentStatus.Started && Model.StartDate != null)
-    {
-        <span>
-            <i class="small text-muted">and started on</i> @Model.StartDate.Value.ToLongDateString()
-            <i class="small text-muted">at</i> @Model.StartDate.Value.ToShortTimeString()
-        </span>
-    }
-    <div>
-        <i class="small text-muted">Tournament owner: </i> @Model.Owner.GetDisplayName()
-    </div>
+@Html.Partial("_TournamentShortInfo", Model)
 
-    @if (@Model.Club != null)
-    {<div>
-        <i class="small text-muted">Club: </i> @Model.Club.Name
-    </div>
-    }
-</div>
-<div class="col-md-6">
+<div class="">
 
     @if (Model.TournamentStatus != TournamentStatus.Planned)
     {
@@ -52,15 +28,7 @@
 
 </div>
 <div class="col-md-6 action-pane">
-    @if (Model.TournamentStatus == TournamentStatus.Planned)
-    {
-        @*<input type="text" name="partner" id="pairSearch1" />
-        <input type="hidden" class="hidden" id="user1" />
-        <input type="hidden" class="hidden" id="user2" value="1"/>*@
-        @*<button type="submit" class="subscribe btn btn-success btn-lg"><span class="glyphicon glyphicon-plus"></span>Subscribe</button>*@
-
-    }
-    else if (Model.TournamentStatus == TournamentStatus.Started)
+    @if (Model.TournamentStatus == TournamentStatus.Started)
     {
         @Html.Action("PairRoster", new { tournamentId = @Model.Id });
     }

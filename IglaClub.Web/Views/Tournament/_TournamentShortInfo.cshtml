@@ -1,0 +1,33 @@
+﻿@using IglaClub.ObjectModel.Enums
+@model IglaClub.ObjectModel.Entities.Tournament
+
+<div class="tournamentShortInfo">
+    Tournament is <strong>@Model.TournamentStatus.ToString() </strong><br />
+    @if (Model.TournamentStatus == TournamentStatus.Planned && Model.PlannedStartDate != null)
+    {
+        <span>
+            <i class="small text-muted">and will start on</i> @Model.PlannedStartDate.Value.ToLongDateString()
+            <i class="small text-muted">at</i> @Model.PlannedStartDate.Value.ToShortTimeString()
+        </span>
+    }
+    @if (Model.TournamentStatus == TournamentStatus.Started && Model.StartDate != null)
+    {
+        <span>
+            <i class="small text-muted">and started on</i> @Model.StartDate.Value.ToLongDateString()
+            <i class="small text-muted">at</i> @Model.StartDate.Value.ToShortTimeString()
+        </span>
+    }
+    <div>
+        <i class="small text-muted">Tournament owner: </i> @Model.Owner.DisplayName
+    </div>
+    <div>
+        <i class="small text-muted">Description: </i> <i>@Model.Description</i> 
+    </div>
+
+    @if (@Model.Club != null)
+    {<div>
+        <i class="small text-muted">Club: </i> @Model.Club.Name
+    </div>
+    }
+
+</div>

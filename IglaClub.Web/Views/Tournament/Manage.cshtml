@@ -3,107 +3,95 @@
 
 @{
     ViewBag.Title = "Manage tournament " + Model.Tournament.Name;
-    
 }
 
-
-    <div class="">
-        <p>@Html.ActionLink("Tournaments", "Index") > Manage tournament</p>
-        <h3>@Model.Tournament.Name</h3>
-    </div>
-    <div class="">
-        Tournament is <strong>@Model.Tournament.TournamentStatus.ToString() </strong><br />
-        @if (Model.Tournament.TournamentStatus == TournamentStatus.Planned && Model.Tournament.PlannedStartDate != null)
-        {
-            <span><i class="small text-muted">and will start on</i> @Model.Tournament.PlannedStartDate.Value.ToLongDateString() 
-                <i class="small text-muted">at</i> @Model.Tournament.PlannedStartDate.Value.ToShortTimeString()</span>
-        }
-        @if (Model.Tournament.TournamentStatus == TournamentStatus.Started && Model.Tournament.StartDate != null)
-        {
-            <span><i class="small text-muted">and started on</i> @Model.Tournament.StartDate.Value.ToLongDateString() 
-                <i class="small text-muted">at</i> @Model.Tournament.StartDate.Value.ToShortTimeString()</span>
-        }
-        <div>
-            <i class="small text-muted">Tournament owner: </i> @Model.Tournament.Owner.GetDisplayName()
-        </div>
-        
-            @if (@Model.Tournament.Club != null)
-            {<div>
-                <i class="small text-muted">Club: </i> @Model.Tournament.Club.Name
-            </div>
-            }
-    
-        <a href="@Url.Action("Edit", new { id = Model.Tournament.Id })" class="btn btn-info btn-small">
-            <span class="glyphicon glyphicon-pencil"></span>
-            Edit
-        </a>
-        <a href="@Url.Action("Delete", new { id = Model.Tournament.Id })"
-           class="btn btn-info btn-small">
-            <span class="glyphicon glyphicon-remove"></span>
-            Delete
-        </a>
-        <br />
-    </div>
 <div class="">
+    <p>@Html.ActionLink("Tournaments", "Index") > Manage tournament</p>
+    <h3>@Model.Tournament.Name</h3>
+</div>
+<div class="table">
     <div class="row">
         <div class="col-md-6">
-            
-            @(Model.Tournament.TournamentStatus == TournamentStatus.Planned ?
-                  Html.Action("TournamentParticipantsEdit", new { tournamentId = @Model.Tournament.Id }) :
-                  Html.Action("PairsResults", "Results", new { tournamentId = @Model.Tournament.Id }))
-            
+            @Html.Partial("_TournamentShortInfo", Model.Tournament)
+            <a href="@Url.Action("Edit", new { id = Model.Tournament.Id })" class="btn btn-info btn-small">
+                <span class="glyphicon glyphicon-pencil"></span>
+                Edit
+            </a>
+            <a href="@Url.Action("Delete", new { id = Model.Tournament.Id })"
+               class="btn btn-info btn-small">
+                <span class="glyphicon glyphicon-remove"></span>
+                Delete
+            </a>
         </div>
-        <div class="col-md-6 text-left action-pane">
+    </div>
+    <br />
+    <div class="row action-pane">
+        <div class="col-md-6">
             @if (Model.Tournament.TournamentStatus == TournamentStatus.Planned)
             {
-                
-                    @Html.ActionLink("Start Tournament", "Start", new { id = Model.Tournament.Id }, new { @class = "btn btn-primary" })
-                <br />
+                @Html.ActionLink("Start Tournament", "Start", new { id = Model.Tournament.Id }, new { @class = "btn btn-info" })
             }
             @if (Model.Tournament.TournamentStatus == TournamentStatus.Started)
             {
-                @Html.ActionLink("Manage results", "Manage", "Results", 
-                                new { tournamentId = Model.Tournament.Id },
-                                new { @class = "btn btn-primary", title = "Manage current results: change placing, change scores." })
-                <br />
+                @Html.ActionLink("Manage results", "Manage", "Results",
+                    new { tournamentId = Model.Tournament.Id },
+                    new { @class = "btn btn-info", title = "Manage current results: change placing, add/change scores - essential of the tournament directing." })
 
-                @Html.ActionLink("Calculate results", "CalculateResults", new { id = Model.Tournament.Id }, new { @class = "btn btn-primary" })
-                <br />
-                
+                @Html.ActionLink("Refresh results", "CalculateResults",
+                    new { id = Model.Tournament.Id },
+                    new { @class = "btn btn-info" })
+
                 if (Model.Tournament.TournamentMovingType == TournamentMovingType.Cavendish)
                 {
-
                     @Html.ActionLink("Generate next round", "GenerateNextRound",
-                             new { tournamentId = Model.Tournament.Id, withPairsRepeat = false }, 
-                             new { @class = "btn btn-primary", title = "Generate boards and placing for the next round." })
-                    <br />
+                        new { tournamentId = Model.Tournament.Id, withPairsRepeat = false },
+                        new { @class = "btn btn-info", title = "If everything is ok, generate boards and placing for the next round." })
                 }
                 else
                 {
-                    
+
                     @Html.ActionLink("Move to the next round", "MoveToNextRound",
-                         new { tournamentId = Model.Tournament.Id, withPairsRepeat = false }, new { @class = "btn btn-primary" })
-                    <br />
+                        new { tournamentId = Model.Tournament.Id, withPairsRepeat = false },
+                        new { @class = "btn btn-info" })
                 }
 
             }
-            
 
-            @if (Model.Tournament.TournamentStatus == TournamentStatus.Started)
-            {
-                <br/>
-                @Html.Label("Round number: " + Model.Tournament.CurrentRound) <br/>
-                
-                var resultsLeftClass = Model.ResultsToComplete == 0 ? "text-success" : "text-danger";
-                @Html.Label("Results left to complete round: " + Model.ResultsToComplete, new {@class = resultsLeftClass})
-                
-            }
-        </div>
-        <div class="col-md-6 action-pane">
-            @if (Model.Tournament.TournamentStatus == TournamentStatus.Started)
-            {
-                @Html.Action("PairRoster", new { tournamentId = @Model.Tournament.Id });
-            }
         </div>
     </div>
+    @if (Model.Tournament.TournamentStatus == TournamentStatus.Started)
+    {
+        <div class="row">
+            <div class="col-md-6">
+                @Html.Label("Round number: " + Model.Tournament.CurrentRound) <br />
+
+                @{ var resultsLeftClass = Model.ResultsToComplete == 0 ? "text-success" : "text-danger"; }
+                @Html.Label("Results left to complete round: " + Model.ResultsToComplete, new { @class = resultsLeftClass })
+            </div>
+
+        </div>
+    }
+
+    <div class="row">
+        @if (Model.Tournament.TournamentStatus == TournamentStatus.Planned)
+        {
+            <div class="col-md-6 action-pane">
+                @Html.Action("TournamentParticipantsEdit", new { tournamentId = @Model.Tournament.Id })
+            </div>
+        }
+
+
+        @if (Model.Tournament.TournamentStatus == TournamentStatus.Started)
+        {
+            <div class="col-md-6 action-pane">
+                @Html.Action("PairRoster", new { tournamentId = @Model.Tournament.Id })
+            </div>
+            <div class="col-md-6 action-pane">
+                @Html.Action("PairsResults", "Results", new { tournamentId = @Model.Tournament.Id })
+            </div>
+        }
+    </div>
+
 </div>
+
+
