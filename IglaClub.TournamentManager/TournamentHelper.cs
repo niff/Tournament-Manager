@@ -160,6 +160,8 @@ namespace IglaClub.TournamentManager
         {
             if (result.PlayedBy == NESW.PassedOut)
                     return 0;
+            if (result.PlayedBy == NESW.Unavailable || result.PlayedBy == NESW.DirectorScore)
+                return null;
             if (result.ContractLevel == 0)
             {
                     return null;

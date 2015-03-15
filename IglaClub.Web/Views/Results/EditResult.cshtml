@@ -1,0 +1,108 @@
+﻿@using IglaClub.ObjectModel.Enums
+@model IglaClub.ObjectModel.Entities.Result
+
+<h2>Edit result for board number @Model.Board.BoardNumber</h2>
+@using (Html.BeginForm())
+{
+    <div class="field-validation-error defaultMargin">
+        @Html.ValidationSummary()
+    </div>
+
+    <table class="result">
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.RoundNumber):</td>
+            <td>
+                @Model.RoundNumber
+            @Html.HiddenFor(m => m.RoundNumber)
+        </td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(m => m.TableNumber):</td>
+        <td>
+            @Model.TableNumber
+        @Html.HiddenFor(m => m.TableNumber)
+    </td>
+</tr>
+<tr>
+    <td>NS:</td>
+    <td>
+        @Model.NS.PairNumber
+    @Html.HiddenFor(m => m.NS.PairNumber)
+</td>
+</tr>
+<tr>
+    <td>EW:</td>
+    <td>
+        @Model.EW.PairNumber
+    @Html.HiddenFor(m => m.EW.PairNumber)
+</td>
+</tr>
+<tr>
+    <td>Board:</td>
+    <td>
+        @Model.Board.BoardNumber
+    @Html.HiddenFor(m => m.Board.BoardNumber)
+</td>
+</tr>
+
+</table>
+    <table class="result">
+        <tr>
+            <th>
+                @Html.Label("Short form")
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.ContractLevel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.ContractColor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.ContractDoubled)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.PlayedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.NumberOfTricks)
+            </th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>
+                @Html.TextBox("ShortScore", "", new { Title = "[Level][Color][double][dealer][result] \r\n i.e. 3HxE-1, 3C N=" })
+            </td>
+            <td>
+                @Html.EditorFor(m => m.ContractLevel, new { type = "number", min = "0", max = "7" })
+            </td>
+            <td>
+                @Html.DropDownListFor(m => m.ContractColor, new SelectList(Enum.GetValues(typeof(ContractColors)), @Model.ContractColor), new { data_image = "" })
+
+            </td>
+            <td>
+                @Html.DropDownListFor(m => m.ContractDoubled, new SelectList(Enum.GetValues(typeof(ContractDoubled)), @Model.ContractDoubled))
+
+            </td>
+
+            <td>
+                @Html.DropDownListFor(m => m.PlayedBy, new SelectList(Enum.GetValues(typeof(NESW)), @Model.PlayedBy))
+            </td>
+            <td>
+                @Html.EditorFor(m => m.NumberOfTricks)
+            </td>
+            <td>
+                @Html.HiddenFor(m => m.TournamentId)
+                @Html.HiddenFor(m => m.BoardId)
+                @Html.HiddenFor(m => m.Id)
+                @Html.HiddenFor(m => m.ResultNsPoints)
+                @Html.HiddenFor(m => m.ScoreEw)
+                @Html.HiddenFor(m => m.ScoreNs)
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="Save" class="btn btn-info btn-small" />
+    <button class="btn btn-info btn-small">
+        <span class="glyphicon glyphicon-arrow-left"></span>
+        @Html.ActionLink("Back", "RoundDetails", "Round", new { tournamentId = Model.TournamentId }, null)
+    </button>
+}
