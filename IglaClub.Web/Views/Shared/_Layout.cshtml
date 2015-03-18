@@ -45,12 +45,17 @@
             </div>
             
             
-                <footer>
-            <div class="row text-center text-muted small">
-                <p>&copy; @DateTime.Now.Year - Igla Club - Created by
-                    <abbr title="bartlomiej.igla@gmail.com">Bartlomiej Igla</abbr>. All rights reserved.</p>
-            </div>
-        </footer>
+            <footer>
+                <div class="footer-menu">
+                                <span>@Html.ActionLink("Home", "Index", "Home")</span> |
+                                <span>@Html.ActionLink("About", "About", "Home")</span>|
+                                <span>@Html.ActionLink("Contact", "Contact", "Home")</span>
+                            </div>
+                <div class="row text-center text-muted small">
+                    <p>&copy; @DateTime.Now.Year - Igla Club - Created by
+                        <abbr title="bartlomiej.igla@gmail.com">Bartlomiej Igla</abbr>. All rights reserved.</p>
+                </div>
+            </footer>
            
         
             @RenderSection("scripts", required: false)

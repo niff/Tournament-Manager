@@ -8,6 +8,9 @@ height: 100%;
 body {
     font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif;
 }
+.wrapper {
+    min-height: 350px;
+}
 
 input:not([type="submit"]):not([type="button"]):not([type="checkbox"]), select, textarea {
         background-color: #ffffff;
@@ -252,11 +255,25 @@ margin-right: 6px;
 footer {
   background: -webkit-linear-gradient( left,white 1%, rgb(223, 223, 223) 50%, white 100%);
     padding: 20px;
+    position: absolute;
     left: 0;
     bottom: 0;
-    height: 70px;
-    width: 95%;
-    overflow:hidden;
-    margin-top: 30px;
+    height: 80px;
+    width: 100%;
+    overflow:no-display;
   border-top: 1px solid rgb(224, 224, 224);
+}
+
+.footer-menu {
+    color: gray;
+    font-size: medium;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.footer-menu a{
+    color: gray;
+}
+
+.footer-menu a:hover{
+    color: rgb(20, 51, 131);
 }
