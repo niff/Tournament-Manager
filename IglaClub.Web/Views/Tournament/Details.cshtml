@@ -6,25 +6,20 @@
 }
 <link href="~/Content/themes/base/jquery.ui.autocomplete.css" rel="stylesheet" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" /> @*todo change to local*@
-<div class="">
+<div>
     <p>@Html.ActionLink("Tournaments", "Index") > Details</p>
-    <h3>@Model.Name</h3>
+    <span class="medium-header">@Model.Name</span>
 </div>
 
-@Html.Partial("_TournamentShortInfo", Model)
-
-<div class="">
-
-    @if (Model.TournamentStatus != TournamentStatus.Planned)
-    {
-        @Html.Action("PairsResults", "Results", new {tournamentId = @Model.Id})
-    }
-    else
-    {
-        @Html.Action("PairsList", "Tournament", new {tournamentId = @Model.Id})
-    }
-    
-          
+<div class="row">
+    <div class="col-md-6">       
+        @Html.Partial("_TournamentShortInfo", Model)
+    </div>
+    <div class="col-md-6">
+        @(Model.TournamentStatus != TournamentStatus.Planned ? 
+        Html.Action("PairsResults", "Results", new {tournamentId = @Model.Id}) : 
+        Html.Action("PairsList", "Tournament", new {tournamentId = @Model.Id}))
+    </div>
 
 </div>
 <div class="col-md-6 action-pane">

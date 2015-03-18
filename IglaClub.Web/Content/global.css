@@ -1,4 +1,11 @@
-﻿body {
+﻿* {
+margin: 0;
+}
+html, body {
+height: 100%;
+}
+
+body {
     font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif;
 }
 
@@ -43,7 +50,9 @@ input:not([type="submit"]):not([type="button"]):not([type="checkbox"]), select, 
 .fullWidthInput input[type="text"], input[type="number"], input[type="email"], select, textarea{
     width: 100%;
 }
-
+fieldset.create-tournament input, fieldset.create-tournament textarea, fieldset.create-tournament select{
+    width: 350px !important;
+}
 
 textarea {
     -webkit-appearance:textarea;
@@ -75,9 +84,7 @@ box-shadow: rgb(240, 240, 240) 5px 5px;
 /*margin:10px 0;*/
     max-width: 500px;
 }
-footer {
-    margin:20px;
-}
+
 .pairs input[type="text"] {
     width:80px;
 }
@@ -138,6 +145,12 @@ text-indent: 30PX;
 
 .tournamentShortInfo {
     max-width: 500px;
+    margin-bottom: 15px;
+    line-height: 2em;
+}
+.tournamentShortInfo .descr-label {
+    color: rgb(25, 56, 113);
+    font-weight: bold;
 }
 .shadow-gradient-block {
     background: -webkit-linear-gradient(top, #f5f5f5 0%,#efefef 100%);
@@ -150,7 +163,7 @@ text-indent: 30PX;
     padding: 25px;
     text-align: center;
 }
-fieldset{
+fieldset.login{
 margin: auto;
 width: 270px;
 
@@ -186,6 +199,12 @@ ul.validation-summary-errors {
 span.big-header {
     font-size: 38px;
     color: rgb(37, 87, 179);
+    line-height: 2em;
+}
+span.medium-header {
+    font-size: 28px;
+    color: rgb(37, 87, 179);
+    line-height: 2em;
 }
 
 
@@ -201,4 +220,43 @@ margin-right: 6px;
 
 .indent100 {
     margin-left: 100px;
+}
+.indent30 {
+    margin-left: 30px;
+}
+.lineheight5em {
+    line-height: 5em;
+}
+
+.tournament-status {
+    border-radius: 1em;
+  font-size: 1em;
+  padding: 5px 5px 8px 8px;
+  color: white;
+  font-weight: bold;
+  margin-left: 2px;
+}
+.tournament-status.planned {
+    background-color:#5cba30
+}
+.tournament-status.ongoing {
+    background-color: orangered;
+}
+.tournament-status.past {
+    background-color: darkgray;
+}
+.edit-button {
+    margin-left: 10px;
+}
+
+footer {
+  background: -webkit-linear-gradient( left,white 1%, rgb(223, 223, 223) 50%, white 100%);
+    padding: 20px;
+    left: 0;
+    bottom: 0;
+    height: 70px;
+    width: 95%;
+    overflow:hidden;
+    margin-top: 30px;
+  border-top: 1px solid rgb(224, 224, 224);
 }

@@ -1,5 +1,6 @@
 ﻿@using IglaClub.ObjectModel.Entities
 @using IglaClub.ObjectModel.Enums
+@using IglaClub.Web.Helpers.Html
 @model IEnumerable<Tournament>
 
 @if (Model.Any())
@@ -13,19 +14,26 @@
             <tr>
                 <td>
                     @{
-            if (@item.TournamentStatus == TournamentStatus.Planned)
-            { @Html.ActionLink(item.Name, "Details", "Tournament", new { id = @item.Id }, null)}
+            if (@item.TournamentStatus == TournamentStatus.Planned || @item.TournamentStatus == TournamentStatus.Finished)
+            { 
+                @Html.ActionLink(item.Name, "Details", "Tournament", new { id = @item.Id }, null)
+            }
             else if (@item.TournamentStatus == TournamentStatus.Started)
-            {   @Html.ActionLink(item.Name, "RoundDetails", "Round", new { tournamentId = @item.Id }, null)};
+            {
+                @Html.ActionLink(item.Name, "RoundDetails", "Round", new {tournamentId = @item.Id}, null)
+            }
 
             if (item.Owner != null && item.Owner.Login == HttpContext.Current.User.Identity.Name)
             {
-                <span>@Html.ActionLink("(Manage)", "Manage", "Tournament", new { id = item.Id }, null) </span>
+                        <span class="edit-button"><a href="@Url.Action("Manage", "Tournament", new { id = item.Id }, null)"><i class="glyphicon glyphicon-pencil"></i></a></span>
             }
                     }
                 </td>
                 <td style="width: 100px">
-                    @date
+                    @if(item.PlannedStartDate != null)
+                    {
+                        <span>@DateHelper.DaysLeftToDate((DateTime) item.PlannedStartDate)</span>
+                    }
                 </td>
                 <td style="width: 50px">
                     @hour
@@ -35,7 +43,7 @@
             var currentUserIsSubscribed = item.UserIsSubscribed(HttpContext.Current.User.Identity.Name);
             if (currentUserIsSubscribed)
             {
-                <span class="glyphicon glyphicon-ok-circle" title="You are subscribed to this tournament"></span>
+                        <span class="glyphicon glyphicon-ok-circle" title="You are subscribed to this tournament"></span>
             }
                     }
                 </td>

@@ -1,32 +1,36 @@
 ﻿@using IglaClub.ObjectModel.Enums
 @model IglaClub.ObjectModel.Entities.Tournament
-
+@{
+    var status = @Model.TournamentStatus;
+    var statusLabelClass = status == TournamentStatus.Planned ? "planned" : (status == TournamentStatus.Started ? "ongoing" :
+    "past"); 
+}
 <div class="tournamentShortInfo">
-    Tournament is <strong>@Model.TournamentStatus.ToString() </strong><br />
+    <span class="tournament-status @statusLabelClass">@Model.TournamentStatus.ToString() </span><br />
     @if (Model.TournamentStatus == TournamentStatus.Planned && Model.PlannedStartDate != null)
     {
         <span>
-            <i class="small text-muted">and will start on</i> @Model.PlannedStartDate.Value.ToLongDateString()
-            <i class="small text-muted">at</i> @Model.PlannedStartDate.Value.ToShortTimeString()
+            <span class="descr-label">and will start on</span> @Model.PlannedStartDate.Value.ToLongDateString()
+            <span class="descr-label">at</span> @Model.PlannedStartDate.Value.ToShortTimeString()
         </span>
     }
     @if (Model.TournamentStatus == TournamentStatus.Started && Model.StartDate != null)
     {
         <span>
-            <i class="small text-muted">and started on</i> @Model.StartDate.Value.ToLongDateString()
-            <i class="small text-muted">at</i> @Model.StartDate.Value.ToShortTimeString()
+            <span class="descr-label">and started on</span> @Model.StartDate.Value.ToLongDateString()
+            <span class="descr-label">at</span> @Model.StartDate.Value.ToShortTimeString()
         </span>
     }
     <div>
-        <i class="small text-muted">Tournament owner: </i> @Model.Owner.DisplayName
+        <span class="descr-label">Tournament owner: </span> @Model.Owner.DisplayName
     </div>
     <div>
-        <i class="small text-muted">Description: </i> <i>@Model.Description</i> 
+        <span class="descr-label">Description: </span> <br/>@Model.Description
     </div>
 
     @if (@Model.Club != null)
     {<div>
-        <i class="small text-muted">Club: </i> @Model.Club.Name
+        <span class="descr-label">Club: </span> @Model.Club.Name
     </div>
     }
 

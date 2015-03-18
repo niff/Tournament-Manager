@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Policy;
 using System.Transactions;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using DotNetOpenAuth.AspNet;
-using IglaClub.ObjectModel.Entities;
-using IglaClub.ObjectModel.Repositories;
-using IglaClub.Web.Models.ViewModels;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using IglaClub.Web.Filters;
@@ -18,7 +13,7 @@ using IglaClub.Web.Models;
 namespace IglaClub.Web.Controllers
 {
     [Authorize]
-    //[InitializeSimpleMembership]
+    [InitializeSimpleMembership]
     public class AccountController : Controller
     {
         //

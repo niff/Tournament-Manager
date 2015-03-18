@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using IglaClub.ObjectModel.Entities;
+using IglaClub.ObjectModel.Enums;
 
 namespace IglaClub.ObjectModel.Repositories
 {
@@ -41,25 +43,29 @@ namespace IglaClub.ObjectModel.Repositories
 
         public IList<Tournament> GetOncoming()
         {
-            return db.Tournaments.Where(t => t.TournamentStatus == Enums.TournamentStatus.Planned)
-                .Include(t => t.Owner)
-                .Include(t => t.Pairs)
+            DateTime dateTime = DateTime.Today.AddDays(-1);
+            return db.Tournaments.Where(t => t.PlannedStartDate >= dateTime && t.TournamentStatus != TournamentStatus.Started)
+                //.Include(t => t.Owner)
+                //.Include(t => t.Pairs)
+                .OrderBy(x => x.PlannedStartDate)
                 .ToList();
         }
 
         public IList<Tournament> GetPast()
         {
-            return db.Tournaments.Where(t => t.TournamentStatus == Enums.TournamentStatus.Finished)
-                .Include(t=>t.Owner)
-                .Include(t => t.Pairs)
+            return db.Tournaments.Where(t => t.PlannedStartDate < DateTime.Today && t.TournamentStatus == TournamentStatus.Finished)
+                //.Include(t=>t.Owner)
+                //.Include(t => t.Pairs)
+                .OrderByDescending(x => x.PlannedStartDate)
                 .ToList();
         }
 
         public IList<Tournament> GetOngoing()
         {
-            return db.Tournaments.Where(t => t.TournamentStatus == Enums.TournamentStatus.Started)
-                .Include(t=>t.Owner)
-                .Include(t => t.Pairs)
+            return db.Tournaments.Where(t => t.TournamentStatus == TournamentStatus.Started)
+               // .Include(t=>t.Owner)
+                //.Include(t => t.Pairs)
+                .OrderByDescending(x => x.TournamentStatus).ThenBy(x => x.PlannedStartDate)
                 .ToList();
         }
 

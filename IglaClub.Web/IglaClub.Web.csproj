@@ -228,6 +228,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Html\DateHelper.cs" />
     <Compile Include="Infrastructure\NotificationService.cs" />
     <Compile Include="Infrastructure\INotificationService.cs" />
     <Compile Include="Migrations\201407221921328_InitialMigrations.cs" />

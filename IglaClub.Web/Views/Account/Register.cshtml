@@ -6,7 +6,7 @@
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
 
-    <fieldset>
+    <fieldset class="login">
         <legend>Sign-in!</legend>
             @Html.ValidationSummary()
         <div class="editor-label">

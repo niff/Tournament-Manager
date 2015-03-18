@@ -11,45 +11,51 @@
                 @Scripts.Render("~/bundles/jquery")
                 @Scripts.Render("~/bundles/jqueryui")
     </head>
-<body>
-    <div class="container">
-        <header>
-            <div class="row navbar navbar-inverse text-right text-primary">
-                <div class="col-xs-8">
-                    <nav>
-                        <ul class="nav nav-pills">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="col-xs-4">
-                    @Html.Partial("_LoginPartial")
+    <body>
+        <div class="container">
+            <header>
+                <div class="row navbar navbar-inverse text-right text-primary">
+                    <div class="col-xs-8">
+                        <nav>
+                            <ul class="nav nav-pills">
+                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                <li>@Html.ActionLink("About", "About", "Home")</li>
+                                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.Partial("_LoginPartial")
 
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <a href="@Url.Action("Index", "Home")"><img src="http://i1.tribune.com.pk/wp-content/uploads/2013/06/561442-Bridge-1370892615-258-640x480.jpg" style="width:100%; height:100px; opacity:0.5;border-radius: 10px; "/></a>
-            </div>
-            @{var message = TempData["Message"]; }
-            @if (message != null && message is string)
-            {
-                <div class="alert-info">@message </div>
-            }
+                <div class="row">
+                    <a href="@Url.Action("Index", "Home")"><img src="http://i1.tribune.com.pk/wp-content/uploads/2013/06/561442-Bridge-1370892615-258-640x480.jpg" style="width:100%; height:100px; opacity:0.5;border-radius: 10px; "/></a>
+                </div>
+                @{var message = TempData["Message"]; }
+                @if (message != null && message is string)
+                {
+                    <div class="alert-info">@message </div>
+                }
             
-        </header>
-        <div class="row">
-            @RenderSection("featured", required: false)
+            </header>
+            <div class="row wrapper">
+                @RenderSection("featured", required: false)
                 @RenderBody()
-        </div>
-        <footer>
-        <div class="row text-center text-muted small">
-                <p>&copy; @DateTime.Now.Year - Igla Club - Created by <abbr title="bartlomiej.igla@gmail.com">Bartlomiej Igla</abbr>. All rights reserved.</p>
-        </div></footer>
-
+            </div>
+            
+            
+                <footer>
+            <div class="row text-center text-muted small">
+                <p>&copy; @DateTime.Now.Year - Igla Club - Created by
+                    <abbr title="bartlomiej.igla@gmail.com">Bartlomiej Igla</abbr>. All rights reserved.</p>
+            </div>
+        </footer>
+           
         
-        @RenderSection("scripts", required: false)
+            @RenderSection("scripts", required: false)
         </div>
     </body>
+    
+
 </html>
