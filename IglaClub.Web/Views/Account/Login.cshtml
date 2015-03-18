@@ -4,17 +4,13 @@
     ViewBag.Title = "Log in";
 }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title</h1>
-</hgroup>
-
 <section id="loginForm">
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
 
     <fieldset>
-
+        <legend>Log in</legend>
+         @Html.ValidationSummary(true)
         <div class="editor-label">
             @Html.LabelFor(model => model.UserName)
         </div>
@@ -33,14 +29,14 @@
             @Html.LabelFor(model => model.RememberMe)
         </div>
         <p>
-            <button type="submit" class="btn btn-success btn-lg"><i class="glyphicon glyphicon-circle-arrow-right"></i> Log in</button>
+            <button type="submit" class="btn btn-success btn-lg"><i class="glyphicon glyphicon-circle-arrow-right"></i>Log in</button>
+        </p>
+        <p>
+            or @Html.ActionLink("register", "Register"), if you don't have an account.
         </p>
     </fieldset>
     <br />
-    <p>
-        
-        @Html.ActionLink("Register", "Register") if you don't have an account.
-    </p>
+
 }
 </section>
 

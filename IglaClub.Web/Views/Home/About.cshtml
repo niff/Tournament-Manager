@@ -5,10 +5,6 @@
 @section featured {
     <section class="featured">
         <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>@ViewBag.Title.</h1>
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
             <p>
                 If you are bridge enthusiast and you want to organize small tournaments on your own, 
                 or you are participating in those kind of events and you want to have a tool for better organize and analyze them, you're in the rigth place. 
@@ -18,7 +14,7 @@
     </section>
 }
 <h3>How to use this page:</h3>
-<ol class="round">
+<ul class="round">
     <li class="one">
         <h5>As bridge player</h5>
         You can simply log in, and either find your local bridge club or look for a new one in your neighbourhood. <br />
@@ -38,4 +34,4 @@
         You should <a href="@Url.Action("Index","Tournament")"> log in or register</a>, and next go to the <a href="@Url.Action("Index","Tournament")">tournament list</a> and look for a new one or to create it.
 
 </li>
-</ol>
+</ul>
