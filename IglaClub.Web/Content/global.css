@@ -195,6 +195,10 @@ span.big-header {
     font-weight: bold;
 }
 
-.about > .content{
+.glyphicon:empty {
+margin-right: 6px;
+}
+
+.indent100 {
     margin-left: 100px;
 }
