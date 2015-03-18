@@ -1,7 +1,6 @@
 ﻿using System.Data.Entity;
 using IglaClub.ObjectModel;
 using IglaClub.ObjectModel.Entities;
-using IglaClub.Web.Migrations;
 
 namespace IglaClub.Web.Models
 {

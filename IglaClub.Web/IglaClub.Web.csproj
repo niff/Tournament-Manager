@@ -231,25 +231,13 @@
     <Compile Include="Helpers\Html\DateHelper.cs" />
     <Compile Include="Infrastructure\NotificationService.cs" />
     <Compile Include="Infrastructure\INotificationService.cs" />
-    <Compile Include="Migrations\201407221921328_InitialMigrations.cs" />
-    <Compile Include="Migrations\201407221921328_InitialMigrations.Designer.cs">
-      <DependentUpon>201407221921328_InitialMigrations.cs</DependentUpon>
+    <Compile Include="Migrations\201503182226231_InitialSchema.cs" />
+    <Compile Include="Migrations\201503182226231_InitialSchema.Designer.cs">
+      <DependentUpon>201503182226231_InitialSchema.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201407221928013_AddUser.cs" />
-    <Compile Include="Migrations\201407221928013_AddUser.Designer.cs">
-      <DependentUpon>201407221928013_AddUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201308062055576_InitialCreate.cs" />
-    <Compile Include="Migrations\201308062055576_InitialCreate.Designer.cs">
-      <DependentUpon>201308062055576_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201407221931314_AddUser2.cs" />
-    <Compile Include="Migrations\201407221931314_AddUser2.Designer.cs">
-      <DependentUpon>201407221931314_AddUser2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201407221934356_AddUser3.cs" />
-    <Compile Include="Migrations\201407221934356_AddUser3.Designer.cs">
-      <DependentUpon>201407221934356_AddUser3.cs</DependentUpon>
+    <Compile Include="Migrations\201503182228032_newTournament.cs" />
+    <Compile Include="Migrations\201503182228032_newTournament.Designer.cs">
+      <DependentUpon>201503182228032_newTournament.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
@@ -458,20 +446,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201308062055576_InitialCreate.resx">
-      <DependentUpon>201308062055576_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201503182226231_InitialSchema.resx">
+      <DependentUpon>201503182226231_InitialSchema.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201407221921328_InitialMigrations.resx">
-      <DependentUpon>201407221921328_InitialMigrations.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201407221928013_AddUser.resx">
-      <DependentUpon>201407221928013_AddUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201407221931314_AddUser2.resx">
-      <DependentUpon>201407221931314_AddUser2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201407221934356_AddUser3.resx">
-      <DependentUpon>201407221934356_AddUser3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201503182228032_newTournament.resx">
+      <DependentUpon>201503182228032_newTournament.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
