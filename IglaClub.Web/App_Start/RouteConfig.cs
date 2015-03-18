@@ -8,18 +8,18 @@ namespace IglaClub.Web
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-            
-            routes.MapRoute(
-                name: "DefaultWithTournament",
-                url: "Results/{action}/{tournamentId}",
-                defaults: new { controller = "Results", action = "Manage", tournamentId = UrlParameter.Optional }
-            );
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                name: "DefaultWithTournament",
+                url: "Results/{action}/{tournamentId}",
+                defaults: new { controller = "Results", action = "Manage", tournamentId = UrlParameter.Optional }
+            );
+
 
             
         }

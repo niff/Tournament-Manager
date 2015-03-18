@@ -135,4 +135,14 @@ text-indent: 30PX;
 .tournamentShortInfo {
     max-width: 500px;
 }
-
+.shadow-gradient-block {
+    background: -webkit-linear-gradient(top, #f5f5f5 0%,#efefef 100%);
+    border-radius: 7px;
+    border: 1px solid #d8d8d8;
+    box-shadow: 0px 0px 1px 1px white inset, 0px 33px 40px -38px #000;
+    height: auto;
+    max-width: 100%;
+    margin: 15px 0;
+    padding: 25px;
+    text-align: center;
+}
