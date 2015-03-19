@@ -15,28 +15,43 @@
     <body>
         <div class="container">
             <header>
-                <div class="row navbar navbar-inverse text-right text-primary">
-                    <div class="col-xs-8">
+                <div class="row navbar navbar-custom text-right text-primary">
+                    <div class="col-xs-8 max-height">
                         <nav>
-                            <ul class="nav nav-pills">
-                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                                <li>@Html.ActionLink("About", "About", "Home")</li>
-                                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                            </ul>
+                            <div class="navbar-header">
+                                <div class="btn-group">
+                                <button type="button" class="button-custom-menu dropdown-toggle"
+                                        data-toggle="dropdown" aria-expanded="false" id="menuPlay">
+                                    Play
+                                    <span class="caret caret-custom-menu"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="menuPlay">
+                                    <li><a href="@Url.Action("Edit", "Account")">Tournaments</a></li>
+                                    <li><a href="@Url.Action("Manage", "Account")">Results</a></li>
+                                </ul></div>
+                                <div class="btn-group">
+                                <button type="button" class="button-custom-menu dropdown-toggle"
+                                        data-toggle="dropdown" aria-expanded="false" id="menuOrg">
+                                    Organize
+                                    <span class="caret caret-custom-menu"></span>
+                                </button>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="menuOrg">
+                                        <li><a href="@Url.Action("Edit", "Account")">My tournaments</a></li>
+                                        <li><a href="@Url.Action("Manage", "Account")">My clubs</a></li>
+                                    </ul>
+                                    </div>
+                            </div>
                         </nav>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-xs-4 max-height">
                         @Html.Partial("_LoginPartial")
-
                     </div>
                 </div>
-                <div class="row logo">
-                    @*<a href="@Url.Action("Index", "Home")"><img src="http://i1.tribune.com.pk/wp-content/uploads/2013/06/561442-Bridge-1370892615-258-640x480.jpg" style="width:100%; height:100px; opacity:0.5;border-radius: 10px; "/></a>*@
-                </div>
+             @*   <div class="row logo"> </div>*@
                 @{var message = TempData["Message"]; }
                 @if (message != null && message is string)
                 {
-                    <div class="alert-info">@message </div>
+                    <div class="alert alert-info">@message </div>
                 }
             
             </header>
