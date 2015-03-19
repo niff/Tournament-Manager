@@ -341,5 +341,26 @@ namespace IglaClub.Web.Controllers
             //return RedirectToRoute(Request.UrlReferrer);
             //return View("_QuickAddUser");
         }
+
+        public ActionResult MyTournamentsToPlay()
+        {
+            var model = tournamentRepository.GetTournamentsToPlayForUser(User.Identity.Name);
+            ViewBag.Title = "Tournaments that you are subscribed to";
+            return View("TournamentsListWrapper",model);
+        }
+
+        public ActionResult AvailableTournaments()
+        {
+            var model = tournamentRepository.GetOncoming();
+            ViewBag.Title = "Other torunaments";
+            return View("TournamentsListWrapper",model);
+        }
+
+        public ActionResult MyOrganizedTournaments()
+        {
+            var model = tournamentRepository.GetPast();
+            ViewBag.Title = "Tournaments created by you";
+            return View("TournamentsListWrapper",model);
+        }
     }
 }

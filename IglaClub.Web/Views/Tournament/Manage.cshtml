@@ -7,24 +7,19 @@
 
 <div class="">
     <p>@Html.ActionLink("Tournaments", "Index") > Manage tournament</p>
-    <h3>@Model.Tournament.Name</h3>
+
+    <span class="medium-header">@Model.Tournament.Name</span>
+    <span class="tournemanet-quick-edit"><a href="@Url.Action("Edit", new { id = Model.Tournament.Id })" class="btn btn-info btn-small">
+        <span class="glyphicon glyphicon-pencil"></span>Edit</a>
+        <a href="@Url.Action("Delete", new { id = Model.Tournament.Id })" class="btn btn-info btn-small">
+            <span class="glyphicon glyphicon-remove"></span>Delete</a></span>
 </div>
-<div class="table">
+<div class="tournament-manage-area">
     <div class="row">
         <div class="col-md-6">
             @Html.Partial("_TournamentShortInfo", Model.Tournament)
-            <a href="@Url.Action("Edit", new { id = Model.Tournament.Id })" class="btn btn-info btn-small">
-                <span class="glyphicon glyphicon-pencil"></span>
-                Edit
-            </a>
-            <a href="@Url.Action("Delete", new { id = Model.Tournament.Id })"
-               class="btn btn-info btn-small">
-                <span class="glyphicon glyphicon-remove"></span>
-                Delete
-            </a>
         </div>
     </div>
-    <br />
     <div class="row action-pane">
         <div class="col-md-6">
             @if (Model.Tournament.TournamentStatus == TournamentStatus.Planned)
@@ -76,7 +71,9 @@
         @if (Model.Tournament.TournamentStatus == TournamentStatus.Planned)
         {
             <div class="col-md-6 action-pane">
+                <div class="pairs" id="participantsDiv">
                 @Html.Action("TournamentParticipantsEdit", new { tournamentId = @Model.Tournament.Id })
+            </div>
             </div>
         }
 

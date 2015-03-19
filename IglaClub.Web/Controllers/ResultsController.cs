@@ -183,5 +183,9 @@ namespace IglaClub.Web.Controllers
             return PartialView("_PairsResults", pairsResultsViewModel);
         }
 
+        public ActionResult MyResults()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

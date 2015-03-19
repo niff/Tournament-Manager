@@ -6,32 +6,36 @@
     "past"); 
 }
 <div class="tournamentShortInfo">
-    <span class="tournament-status @statusLabelClass">@Model.TournamentStatus.ToString() </span><br />
+    @* <span class="tournament-status @statusLabelClass">@Model.TournamentStatus.ToString() </span><br />*@
+
+    @if (@Model.Club != null)
+    {
+        <span class="descr-label">in </span> @Model.Club.Name @:, 
+    }
     @if (Model.TournamentStatus == TournamentStatus.Planned && Model.PlannedStartDate != null)
     {
         <span>
-            <span class="descr-label">and will start on</span> @Model.PlannedStartDate.Value.ToLongDateString()
+            <span class="descr-label">will start on</span> @Model.PlannedStartDate.Value.ToLongDateString()
             <span class="descr-label">at</span> @Model.PlannedStartDate.Value.ToShortTimeString()
         </span>
     }
     @if (Model.TournamentStatus == TournamentStatus.Started && Model.StartDate != null)
     {
         <span>
-            <span class="descr-label">and started on</span> @Model.StartDate.Value.ToLongDateString()
+            <span class="descr-label">started on</span> @Model.StartDate.Value.ToLongDateString()
             <span class="descr-label">at</span> @Model.StartDate.Value.ToShortTimeString()
         </span>
     }
+    <a class="btn" data-toggle="collapse" data-target="#viewdetails">Show details &raquo;</a>
+    <div id="viewdetails" class="collapse" >
     <div>
-        <span class="descr-label">Tournament owner: </span> @Model.Owner.DisplayName
+        <span class="descr-label">tournament owner: </span> @Model.Owner.DisplayName
     </div>
-    <div>
-        <span class="descr-label">Description: </span> <br/>@Model.Description
-    </div>
+        <div>
+            <span class="descr-label">description: </span> <br/>@Model.Description
+        </div>
+        </div>
 
-    @if (@Model.Club != null)
-    {<div>
-        <span class="descr-label">Club: </span> @Model.Club.Name
-    </div>
-    }
+    
 
 </div>

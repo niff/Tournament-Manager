@@ -25,11 +25,11 @@
 
             if (item.Owner != null && item.Owner.Login == HttpContext.Current.User.Identity.Name)
             {
-                        <span class="edit-button"><a href="@Url.Action("Manage", "Tournament", new { id = item.Id }, null)"><i class="glyphicon glyphicon-pencil"></i></a></span>
+                        <span class="edit-button"><a href="@Url.Action("Manage", "Tournament", new { id = item.Id }, null)"><i class="glyphicon glyphicon-pencil"></i>Edit</a></span>
             }
                     }
                 </td>
-                <td style="width: 100px">
+                <td style="width: 90px">
                     @if(item.PlannedStartDate != null)
                     {
                         <span>@DateHelper.DaysLeftToDate((DateTime) item.PlannedStartDate)</span>
@@ -43,7 +43,11 @@
             var currentUserIsSubscribed = item.UserIsSubscribed(HttpContext.Current.User.Identity.Name);
             if (currentUserIsSubscribed)
             {
-                        <span class="glyphicon glyphicon-ok-circle" title="You are subscribed to this tournament"></span>
+                <span class="glyphicon glyphicon-ok-circle" title="You are subscribed to this tournament"></span>
+            }
+            else
+            {
+                <a href="#"><i class="glyphicon glyphicon-plus"></i>Join</a>
             }
                     }
                 </td>
@@ -54,5 +58,5 @@
 }
 else
 {
-    <i class="small text-muted">No tournaments to display</i>
+    <p><i class="small text-muted">No tournaments to display</i></p>
 }

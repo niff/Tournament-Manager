@@ -1,10 +1,9 @@
-﻿@using System.Globalization
-@model IglaClub.Web.Models.ViewModels.PairsViewModel
+﻿@model IglaClub.Web.Models.ViewModels.PairsViewModel
 
 <link href="~/Content/themes/base/jquery.ui.autocomplete.css" rel="stylesheet" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" /> @*todo change to local*@
-<div class="pairs" id="participantsDiv">
-    <p>Pairs list (@Model.PairsInTounament.Count):</p>
+
+    <p>Pairs list <span class="badge">@Model.PairsInTounament.Count</span></p>
     <table class="table table-striped table-hover">
         @{
             var counter = 1;
@@ -40,7 +39,6 @@
     </table>
     
     @Html.Partial("_QuickAddUser")
-</div>
 
 
 <script>

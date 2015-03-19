@@ -87,5 +87,14 @@ namespace IglaClub.ObjectModel.Repositories
                 return false;
             return tournament.Pairs.Any(p => p.Player1.Login == userName || p.Player2.Login == userName);
         }
+
+        public IList<Tournament> GetTournamentsToPlayForUser(string name)
+        {
+            var res = from t in db.Tournaments
+                      join p in db.Pairs on t.Id equals p.Tournament.Id
+                      where p.Player1.Login == name || p.Player2.Login == name
+                      select t;
+            return res.ToList();
+        }
     }
 }

@@ -217,6 +217,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\global.css" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\ClubsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Authorization\TournamentOwnerAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -426,6 +427,7 @@
     </Content>
     <Content Include="Views\Results\EditResult.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Tournament\TournamentsListWrapper.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

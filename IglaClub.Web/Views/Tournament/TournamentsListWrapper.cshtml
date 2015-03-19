@@ -1,0 +1,10 @@
+﻿@model System.Collections.Generic.IList<IglaClub.ObjectModel.Entities.Tournament>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+<span class="medium-header">@ViewBag.Title</span>
+
+@Html.Partial("_TournamentList", @Model)
