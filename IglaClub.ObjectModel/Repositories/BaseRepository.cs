@@ -33,7 +33,6 @@ namespace IglaClub.ObjectModel.Repositories
                 var targetDbSet = GetDbSet<T>();
                 updatedEntity = targetDbSet.Add(entity);
             }
-            
             return updatedEntity;
         }
 

@@ -74,5 +74,11 @@ namespace IglaClub.ObjectModel.Repositories
         {
             return db.Users.ToList();
         }
+
+        public void InsertOrUpdate(User user)
+        {
+            base.InsertOrUpdate(user);
+            db.SaveChanges();
+        }
     }
 }

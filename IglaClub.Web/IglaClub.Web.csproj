@@ -203,6 +203,7 @@
     <Content Include="Content\img\1408214351_folder.png" />
     <Content Include="Content\img\1408214416_file_add.png" />
     <Content Include="Content\img\1408214423_file_add.png" />
+    <Content Include="Content\img\logo.jpg" />
     <Content Include="Content\jquery.datetimepicker.css" />
     <Content Include="Content\themes\1408214039_search.png" />
     <Content Include="Content\themes\1408214055_search.png" />
@@ -426,6 +427,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Results\EditResult.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

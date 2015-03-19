@@ -5,6 +5,8 @@ using System.Transactions;
 using System.Web.Mvc;
 using System.Web.Security;
 using DotNetOpenAuth.AspNet;
+using IglaClub.ObjectModel.Entities;
+using IglaClub.ObjectModel.Repositories;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using IglaClub.Web.Filters;
@@ -16,6 +18,15 @@ namespace IglaClub.Web.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+
+        private readonly IglaClubDbContext db = new IglaClubDbContext();
+        private readonly UserRepository userRepository;
+
+
+        public AccountController()
+        {
+            userRepository = new UserRepository(db);
+        }
         //
         // GET: /Account/Login 
 
@@ -122,6 +133,19 @@ namespace IglaClub.Web.Controllers
             return RedirectToAction("Manage", new { Message = message });
         }
 
+        public ActionResult Edit()
+        {
+            var model = userRepository.GetUserByName(User.Identity.Name);
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public ActionResult Edit(User model)
+        {
+            userRepository.InsertOrUpdate(model);
+            return View(model);
+        }
         //
         // GET: /Account/Manage
 

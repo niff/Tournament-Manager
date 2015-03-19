@@ -2,17 +2,18 @@
 @{
     ViewBag.Title = "Manage Account";
 }
-
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-</hgroup>
-
 <p class="message-success">@ViewBag.StatusMessage</p>
 
-<p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
-
-@*TODO: Edycja wszystkiego!! Hasla, maila, imie nazwisko*@
-@if (ViewBag.HasLocalPassword)
+<div class="row">
+    @*    <div class="col-md-2">
+        <div class="btn-group-vertical" role="group" aria-label="...">
+  <button type="button" class="btn btn-default">Profile details</button>
+  <button type="button" class="btn btn-default">Change password</button>
+  <button type="button" class="btn btn-default">Settings</button>
+</div>
+    </div>*@
+    <div class="col-md-10">
+        @if (ViewBag.HasLocalPassword)
 {
     @Html.Partial("_ChangePasswordPartial")
 }
@@ -20,6 +21,11 @@ else
 { 
     @Html.Partial("_SetPasswordPartial")
 }
+
+    </div>
+</div>
+
+@*TODO: Edycja wszystkiego!! Hasla, maila, imie nazwisko*@
 
 @*<section id="externalLogins">
     @Html.Action("RemoveExternalLogins")
