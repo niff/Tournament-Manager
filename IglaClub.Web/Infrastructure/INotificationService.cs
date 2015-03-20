@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IglaClub.Web.Infrastructure
+﻿namespace IglaClub.Web.Infrastructure
 {
     interface INotificationService
     {
-        void DisplayMessage(string message);
+        void DisplayMessage(string message, NotificationType type = NotificationType.Info);
     }
 }

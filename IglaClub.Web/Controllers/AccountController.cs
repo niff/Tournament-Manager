@@ -7,6 +7,7 @@ using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using IglaClub.ObjectModel.Entities;
 using IglaClub.ObjectModel.Repositories;
+using IglaClub.Web.Infrastructure;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using IglaClub.Web.Filters;
@@ -21,11 +22,13 @@ namespace IglaClub.Web.Controllers
 
         private readonly IglaClubDbContext db = new IglaClubDbContext();
         private readonly UserRepository userRepository;
+        private INotificationService notificationService;
 
 
         public AccountController()
         {
             userRepository = new UserRepository(db);
+            notificationService = new NotificationService(TempData);
         }
         //
         // GET: /Account/Login 
@@ -144,6 +147,7 @@ namespace IglaClub.Web.Controllers
         public ActionResult Edit(User model)
         {
             userRepository.InsertOrUpdate(model);
+            notificationService.DisplayMessage("Saved successfully", NotificationType.Success);
             return View(model);
         }
         //

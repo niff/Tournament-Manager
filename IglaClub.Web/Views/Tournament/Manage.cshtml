@@ -4,11 +4,18 @@
 @{
     ViewBag.Title = "Manage tournament " + Model.Tournament.Name;
 }
-
+@{
+    var status = @Model.Tournament.TournamentStatus;
+    var statusLabelClass = status == TournamentStatus.Planned ? "planned" : (status == TournamentStatus.Started ? "ongoing" :
+    "past");
+    var statusLabel = status == TournamentStatus.Planned ? "not started" : (status == TournamentStatus.Started ? "started" :
+    "finished"); 
+}
 <div class="">
     <p>@Html.ActionLink("Tournaments", "Index") > Manage tournament</p>
 
-    <span class="medium-header">@Model.Tournament.Name</span>
+    <span class="medium-header">
+     <span class="tournament-status @statusLabelClass">@statusLabel</span>@Model.Tournament.Name</span>
     <span class="tournemanet-quick-edit"><a href="@Url.Action("Edit", new { id = Model.Tournament.Id })" class="btn btn-info btn-small">
         <span class="glyphicon glyphicon-pencil"></span>Edit</a>
         <a href="@Url.Action("Delete", new { id = Model.Tournament.Id })" class="btn btn-info btn-small">
@@ -72,9 +79,12 @@
         {
             <div class="col-md-6 action-pane">
                 <div class="pairs" id="participantsDiv">
-                @Html.Action("TournamentParticipantsEdit", new { tournamentId = @Model.Tournament.Id })
+                    @Html.Action("TournamentParticipantsEdit", new { tournamentId = @Model.Tournament.Id })
+                </div>
+                
+            @Html.Partial("_QuickAddUser")
             </div>
-            </div>
+            
         }
 
 

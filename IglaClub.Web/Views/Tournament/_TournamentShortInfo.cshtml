@@ -1,13 +1,7 @@
 ﻿@using IglaClub.ObjectModel.Enums
 @model IglaClub.ObjectModel.Entities.Tournament
-@{
-    var status = @Model.TournamentStatus;
-    var statusLabelClass = status == TournamentStatus.Planned ? "planned" : (status == TournamentStatus.Started ? "ongoing" :
-    "past"); 
-}
-<div class="tournamentShortInfo">
-    @* <span class="tournament-status @statusLabelClass">@Model.TournamentStatus.ToString() </span><br />*@
 
+<div class="tournamentShortInfo">
     @if (@Model.Club != null)
     {
         <span class="descr-label">in </span> @Model.Club.Name @:, 

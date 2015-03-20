@@ -16,9 +16,16 @@
         @Html.Partial("_TournamentShortInfo", Model)
     </div>
     <div class="col-md-6">
-        @(Model.TournamentStatus != TournamentStatus.Planned ? 
-        Html.Action("PairsResults", "Results", new {tournamentId = @Model.Id}) : 
-        Html.Action("PairsList", "Tournament", new {tournamentId = @Model.Id}))
+        @if (Model.TournamentStatus != TournamentStatus.Planned)
+        {
+            @Html.Action("PairsResults", "Results", new { tournamentId = @Model.Id }) 
+        }
+        else
+        {
+            @:<div class="pairs" id="participantsDiv">
+                @Html.Action("PairsList", "Tournament", new { tournamentId = @Model.Id })
+            @:</div>
+        }
     </div>
 
 </div>

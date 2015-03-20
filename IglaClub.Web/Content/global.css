@@ -116,6 +116,7 @@ padding: 10px;
 box-shadow: rgb(240, 240, 240) 5px 5px;
 /*margin:10px 0;*/
     max-width: 500px;
+    margin-bottom: 15px;
 }
 
 .pairs input[type="text"] {
@@ -186,9 +187,17 @@ text-indent: 30PX;
 .tournemanet-quick-edit {
       line-height: 2em;
   vertical-align: text-bottom;
+    margin-left: 10px;
+}
+.tournemanet-quick-edit a {
+    padding-right: 10px;
 }
 .tournament-manage-area > div {
     padding-left: 0;
+}
+
+.quick-user-add {
+    border: 1px solid silver;
 }
 .shadow-gradient-block {
     background: -webkit-linear-gradient(top, #f5f5f5 0%,#efefef 100%);
@@ -273,12 +282,15 @@ margin-right: 6px;
   color: white;
   font-weight: bold;
   margin-left: 2px;
+  font-size: medium;
+  vertical-align: bottom;
+  margin-right: 10px;
 }
 .tournament-status.planned {
-    background-color:#5cba30
+    background-color: #3094e1;
 }
 .tournament-status.ongoing {
-    background-color: orangered;
+    background-color: #5cba30;
 }
 .tournament-status.past {
     background-color: darkgray;

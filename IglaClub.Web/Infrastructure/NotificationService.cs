@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace IglaClub.Web.Infrastructure
 {
@@ -13,9 +9,18 @@ namespace IglaClub.Web.Infrastructure
         {
             this.TempData = tempData;
         }
-        public void DisplayMessage(string message)
+        public void DisplayMessage(string message, NotificationType type = NotificationType.Info)
         {
             this.TempData["Message"] = message;
+            this.TempData["MessageType"] = type;
         }
+    }
+
+    public enum NotificationType
+    {
+        Success,
+        Info,
+        Warning,
+        Danger
     }
 }
