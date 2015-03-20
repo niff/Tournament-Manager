@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web.Mvc;
 using IglaClub.ObjectModel.Entities;
+using IglaClub.ObjectModel.Enums;
 using IglaClub.ObjectModel.Repositories;
 using IglaClub.Web.Authorization;
 using IglaClub.Web.Models;
@@ -101,6 +102,12 @@ namespace IglaClub.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (tournament.TournamentMovingType != TournamentMovingType.Cavendish)
+                {
+                    notificationService.DisplayError("We are very sorry, but only cavendish type is supported by now :(");
+                    return View(tournament);
+                }
+                
                 //tournament.Owner = userRepository.GetUserByName(User.Identity.Name);
                 var coordinates = Request.Form["coords"];
                 tournament.Coordinates = coordinates;
@@ -134,7 +141,12 @@ namespace IglaClub.Web.Controllers
         {
             if (!ModelState.IsValid) 
                 return View(tournament);
-
+            if (tournament.TournamentMovingType != TournamentMovingType.Cavendish)
+            {
+                notificationService.DisplayError("We are very sorry, but only cavendish type is supported by now :(");
+                return View(tournament);
+            }
+            
             var coordinates = Request.Form["coords"];
             tournament.Coordinates = coordinates;
             db.Entry(tournament).State = EntityState.Modified;
@@ -272,10 +284,10 @@ namespace IglaClub.Web.Controllers
 
             if (!status.Ok)
             {
-                this.notificationService.DisplayMessage(status.ErrorMessage);
+                this.notificationService.DisplayMessage(status.ErrorMessage, NotificationType.Warning);
             }
             if (Request.UrlReferrer == null)
-                return RedirectToAction("Manage", "Tournament", new { tournamentId = tournamentId });
+                return RedirectToAction("Manage", "Tournament", new {tournamentId });
             return Redirect(Request.UrlReferrer.ToString());
         }
         

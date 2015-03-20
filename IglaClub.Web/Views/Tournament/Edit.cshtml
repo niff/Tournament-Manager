@@ -1,4 +1,5 @@
-﻿@model IglaClub.ObjectModel.Entities.Tournament
+﻿@using IglaClub.ObjectModel.Enums
+@model IglaClub.ObjectModel.Entities.Tournament
 
 @{
     ViewBag.Title = "Edit";
@@ -41,6 +42,28 @@
                 @Html.TextBoxFor(model => model.PlannedStartDate, new { id = "datepicker" })
                 @Html.ValidationMessageFor(model => model.PlannedStartDate)
             </div>
+            @if (Model.TournamentStatus == TournamentStatus.Planned)
+            {
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.TournamentScoringType)
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(model => model.TournamentScoringType, new SelectList(Enum.GetValues(typeof (TournamentScoringType))))
+                    @Html.ValidationMessageFor(model => model.TournamentScoringType)
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.TournamentMovingType)
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(model => model.TournamentMovingType, new SelectList(Enum.GetValues(typeof (TournamentMovingType))))
+                    @Html.ValidationMessageFor(model => model.TournamentMovingType)
+                </div>
+            }
+            else
+            {
+                @Html.HiddenFor(model => model.TournamentScoringType)
+                @Html.HiddenFor(model => model.TournamentMovingType)
+            }
                             <div class="editor-label">
             @Html.LabelFor(model => model.Address)
         </div>

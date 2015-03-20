@@ -16,6 +16,7 @@
 
     <span class="medium-header">
      <span class="tournament-status @statusLabelClass">@statusLabel</span>@Model.Tournament.Name</span>
+    @*todo: zmniejszyć i przesunąć gdzies, po starcie edit jest malo wazne, delete tez tylko na nieudany start*@
     <span class="tournemanet-quick-edit"><a href="@Url.Action("Edit", new { id = Model.Tournament.Id })" class="btn btn-info btn-small">
         <span class="glyphicon glyphicon-pencil"></span>Edit</a>
         <a href="@Url.Action("Delete", new { id = Model.Tournament.Id })" class="btn btn-info btn-small">

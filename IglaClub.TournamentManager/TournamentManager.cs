@@ -37,7 +37,7 @@ namespace IglaClub.TournamentManager
             IEnumerable<Result> results = TournamentHelper.GenerateInitialSittingPosition(tournament);
             TournamentHelper.AddResultsToTournament(tournament, results);
             
-            tournament.CurrentRound = 0;
+            tournament.CurrentRound = 1;
             tournament.TournamentStatus = TournamentStatus.Started;
             tournament.StartDate = DateTime.Now;
             db.SaveChanges();
@@ -176,7 +176,7 @@ namespace IglaClub.TournamentManager
                 return false;
             tournament.TournamentStatus = TournamentStatus.Planned;
             tournament.CreationDate = DateTime.Now;
-            tournament.Owner = db.Users.FirstOrDefault(u => string.Compare(u.Login, userName, true) == 0);
+            tournament.Owner = db.Users.FirstOrDefault(u => String.Compare(u.Login, userName, StringComparison.OrdinalIgnoreCase) == 0);
             db.Tournaments.Add(tournament);
             db.SaveChanges();
             return true;
