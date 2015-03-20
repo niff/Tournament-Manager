@@ -25,20 +25,32 @@
                                     Play
                                     <span class="caret caret-custom-menu"></span>
                                 </button>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="menuPlay">
+                                <ul class="dropdown-menu main-menu" role="menu" aria-labelledby="menuPlay">
                                     <li><a href="@Url.Action("MyTournamentsToPlay", "Tournament")">My Tournaments</a></li>
                                     <li><a href="@Url.Action("AvailableTournaments", "Tournament")">Tournaments in near</a></li>
                                     <li><a href="@Url.Action("MyResults", "Results")">My Results</a></li>
                                 </ul></div>
                                 <div class="btn-group">
-                                <button type="button" class="button-custom-menu dropdown-toggle"
-                                        data-toggle="dropdown" aria-expanded="false" id="menuOrg">
-                                    Organize
-                                    <span class="caret caret-custom-menu"></span>
-                                </button>
-                                    <ul class="dropdown-menu" role="menu" aria-labelledby="menuOrg">
+                                    <button type="button" class="button-custom-menu dropdown-toggle"
+                                            data-toggle="dropdown" aria-expanded="false" id="menuOrg">
+                                        Organize
+                                        <span class="caret caret-custom-menu"></span>
+                                    </button>
+                                    <ul class="dropdown-menu main-menu" role="menu" aria-labelledby="menuOrg">
                                         <li><a href="@Url.Action("MyOrganizedTournaments", "Tournament")">My tournaments</a></li>
                                         <li><a href="@Url.Action("MyClubs", "Clubs")">My clubs</a></li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="btn-group">
+                                <button type="button" class="button-custom-menu dropdown-toggle"
+                                        data-toggle="dropdown" aria-expanded="false" id="menuBrowse">
+                                    Browse
+                                    <span class="caret caret-custom-menu"></span>
+                                </button>
+                                    <ul class="dropdown-menu main-menu" role="menu" aria-labelledby="menuBrowse">
+                                        <li><a href="@Url.Action("AllTournamentsMap", "Tournament")">All tournaments</a></li>
+                                        <li><a href="@Url.Action("MyClubs", "Clubs")">Players</a></li>
                                     </ul>
                                     </div>
                             </div>

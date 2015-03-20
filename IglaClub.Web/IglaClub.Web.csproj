@@ -429,6 +429,7 @@
     <Content Include="Views\Results\EditResult.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Tournament\TournamentsListWrapper.cshtml" />
+    <Content Include="Views\Tournament\AllTournamentsMap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

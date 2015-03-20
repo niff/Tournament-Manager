@@ -362,5 +362,10 @@ namespace IglaClub.Web.Controllers
             ViewBag.Title = "Tournaments created by you";
             return View("TournamentsListWrapper",model);
         }
+
+        public ActionResult AllTournamentsMap()
+        {
+            return View();
+        }
     }
 }
