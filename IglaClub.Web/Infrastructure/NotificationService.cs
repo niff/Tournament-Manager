@@ -14,6 +14,11 @@ namespace IglaClub.Web.Infrastructure
             this.TempData["Message"] = message;
             this.TempData["MessageType"] = type;
         }
+
+        public void DisplayError(string message)
+        {
+            DisplayMessage(message, NotificationType.Danger);
+        }
     }
 
     public enum NotificationType

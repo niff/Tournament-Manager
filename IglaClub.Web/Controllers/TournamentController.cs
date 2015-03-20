@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web.Mvc;
 using IglaClub.ObjectModel.Entities;
+using IglaClub.ObjectModel.Enums;
 using IglaClub.ObjectModel.Repositories;
 using IglaClub.Web.Authorization;
 using IglaClub.Web.Models;
@@ -102,7 +103,12 @@ namespace IglaClub.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                //tournament.Owner = userRepository.GetUserByName(User.Identity.Name);
+                if (tournament.TournamentMovingType != TournamentMovingType.Cavendish)
+                {
+                    notificationService.DisplayError("We are very sorry, but only cavendish type is supported by now :(");
+                    return View(tournament);
+                }
+                
                 tournamentManager.Create(tournament, User.Identity.Name);
                 return RedirectToAction("Index");
             }

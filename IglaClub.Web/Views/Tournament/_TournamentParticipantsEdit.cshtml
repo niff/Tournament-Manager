@@ -46,11 +46,11 @@
             var user1 = $('#user1').val();
             var user2 = $('#user2').val();
             if (user1 == '' || user2 == '') {
-                alert("Nie wybrano użytkownika bądź jest nieprawidłowy");
+                alert("User is not chosen");
                 return false;
             }
             if (user1 == user2) {
-                alert("Wybierz dwóch różnych użytkowników");
+                alert("Choose two different users");
                 return false;
             }
             $.ajax({
