@@ -57,6 +57,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Device" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -231,7 +232,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\GeoCoordinateUtility.cs" />
     <Compile Include="Helpers\Html\DateHelper.cs" />
+    <Compile Include="Helpers\Html\GoogleMapRenderer.cs" />
     <Compile Include="Infrastructure\NotificationService.cs" />
     <Compile Include="Infrastructure\INotificationService.cs" />
     <Compile Include="Migrations\201503182226231_InitialSchema.cs" />
@@ -339,10 +342,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Clubs\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Clubs\Details.cshtml" />
     <None Include="Properties\PublishProfiles\iglaclub - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\iglaclub - Web Deploy.pubxml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\gmap-plugin.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />

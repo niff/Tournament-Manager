@@ -1,12 +1,43 @@
 ﻿using System.Web.Mvc;
+using IglaClub.ObjectModel.Entities;
+using IglaClub.ObjectModel.Repositories;
+using IglaClub.Web.Models;
 
 namespace IglaClub.Web.Areas.Admin.Controllers
 {
     public class ClubsController : Controller
     {
+        private readonly IglaClubDbContext db = new IglaClubDbContext();
+        private readonly ClubRepository clubRepository;
+
+        public ClubsController()
+        {
+            clubRepository = new ClubRepository(db);
+        }
+
         public ActionResult MyClubs()
         {
-            throw new System.NotImplementedException();
+            return View();
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Club club)
+        {
+            var coordinates = Request.Form["coords"];
+            club.Coordinates = coordinates;
+            clubRepository.Add(club);
+            return View();
+        }
+
+        public ActionResult Details(int id)
+        {
+            var club = clubRepository.Get<Club>(id);
+            return View(club);
         }
     }
 }
