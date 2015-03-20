@@ -37,7 +37,7 @@ namespace IglaClub.TournamentManager
             IEnumerable<Result> results = TournamentHelper.GenerateInitialSittingPosition(tournament);
             TournamentHelper.AddResultsToTournament(tournament, results);
             
-            tournament.CurrentRound = 0;
+            tournament.CurrentRound = 1;
             tournament.TournamentStatus = TournamentStatus.Started;
             tournament.StartDate = DateTime.Now;
             db.SaveChanges();

@@ -139,7 +139,12 @@ namespace IglaClub.Web.Controllers
         {
             if (!ModelState.IsValid) 
                 return View(tournament);
-            
+            if (tournament.TournamentMovingType != TournamentMovingType.Cavendish)
+            {
+                notificationService.DisplayError("We are very sorry, but only cavendish type is supported by now :(");
+                return View(tournament);
+            }
+                
             db.Entry(tournament).State = EntityState.Modified;
             db.SaveChanges();
             //return RedirectToAction("Manage", "Tournament", new { tournamentId = id });
@@ -275,10 +280,10 @@ namespace IglaClub.Web.Controllers
 
             if (!status.Ok)
             {
-                this.notificationService.DisplayMessage(status.ErrorMessage);
+                this.notificationService.DisplayMessage(status.ErrorMessage, NotificationType.Warning);
             }
             if (Request.UrlReferrer == null)
-                return RedirectToAction("Manage", "Tournament", new { tournamentId = tournamentId });
+                return RedirectToAction("Manage", "Tournament", new {tournamentId });
             return Redirect(Request.UrlReferrer.ToString());
         }
         

@@ -18,29 +18,23 @@ namespace IglaClub.Web.Authorization
             var authorized = base.AuthorizeCore(httpContext);
             if (!authorized)
             {
-                // The user is not authenticated
                 return false;
             }
 
             var user = httpContext.User;
-            //if (user.IsInRole("Admin"))
-            //{
-            //    // Administrator => let him in
-            //    return true;
-            //}
-
+            
             var rd = httpContext.Request.RequestContext.RouteData;
 
-            long id = 0;
+            long tournamentId = 0;
             if (rd.Values.ContainsKey("id"))
-                id = long.Parse(rd.Values["id"].ToString());
+                tournamentId = long.Parse(rd.Values["id"].ToString());
             else if (rd.Values.ContainsKey("tournamentId"))
-                id = long.Parse(rd.Values["tournamentId"].ToString());
+                tournamentId = long.Parse(rd.Values["tournamentId"].ToString());
 
-            if (id == 0)
+            if (tournamentId == 0)
                 return false;
 
-            return IsOwnerOfTournament(user.Identity.Name, id);
+            return IsOwnerOfTournament(user.Identity.Name, tournamentId);
         }
 
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
