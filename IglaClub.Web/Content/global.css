@@ -331,7 +331,12 @@ footer {
 .footer-menu a:hover{
     color: rgb(20, 51, 131);
 }
-
+.display-label {
+    margin-top: 5px;
+}
+.form-wrapper {
+    max-width: 400px;
+}
 
 
 

@@ -1,0 +1,62 @@
+﻿@model IglaClub.ObjectModel.Entities.Club
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="form-wrapper">
+<fieldset>
+    <legend>Club</legend>
+
+    <div class="display-label">
+         @Html.LabelFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.LabelFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+@*    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Coordinates)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Coordinates)
+    </div>*@
+
+    <div class="display-label">
+         @Html.LabelFor(model => model.Address)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Address)
+    </div>
+    
+    <label>Location on map</label>
+        <div id="map-canvas"></div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+    </div>
+<style>
+    #map-canvas {
+        height: 150px;
+        width: 300px;
+    }
+</style>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+<script src="~/Scripts/gmap-plugin.js"></script>
+<script>
+    $(document).ready(function () {
+        var options = {
+            coordinates: '@Model.Coordinates'
+        };
+        $("#map-canvas").initializeMap(options);
+    });
+</script>
