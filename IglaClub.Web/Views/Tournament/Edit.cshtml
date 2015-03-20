@@ -41,7 +41,15 @@
                 @Html.TextBoxFor(model => model.PlannedStartDate, new { id = "datepicker" })
                 @Html.ValidationMessageFor(model => model.PlannedStartDate)
             </div>
-
+                            <div class="editor-label">
+            @Html.LabelFor(model => model.Address)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Address)
+            @Html.ValidationMessageFor(model => model.Address)
+        </div>
+    <label>Location on map</label>
+        <div id="map-canvas"></div>
             @Html.HiddenFor(model => model.Id)
             @Html.HiddenFor(model => model.StartDate)
             
