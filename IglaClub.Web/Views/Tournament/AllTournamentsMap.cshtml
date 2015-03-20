@@ -21,6 +21,21 @@
                 zoom: 13,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             });
+            var marker = new google.maps.Marker
+            (
+                {
+                    position: new google.maps.LatLng(50.07139, 19.99833),
+                    map: map,
+                    title: 'Click me'
+                }
+            );
+            var infowindow = new google.maps.InfoWindow({
+                content: 'Location info: Kraków Nowa Huta<br/>Date: 19/03/2015 19:00<br/>Pairs: 26'
+            });
+            google.maps.event.addListener(marker, 'click', function () {
+                // Calling the open method of the infoWindow 
+                infowindow.open(map, marker);
+            });
         }
 
         google.maps.event.addDomListener(window, 'load', init);
