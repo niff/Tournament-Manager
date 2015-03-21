@@ -22,7 +22,7 @@ namespace IglaClub.Web.Controllers
 
         private readonly IglaClubDbContext db = new IglaClubDbContext();
         private readonly UserRepository userRepository;
-        private INotificationService notificationService;
+        private readonly INotificationService notificationService;
 
 
         public AccountController()

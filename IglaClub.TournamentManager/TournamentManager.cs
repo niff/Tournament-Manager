@@ -4,6 +4,7 @@ using System.Linq;
 using IglaClub.ObjectModel;
 using IglaClub.ObjectModel.Entities;
 using IglaClub.ObjectModel.Enums;
+using IglaClub.ObjectModel.Exceptions;
 
 
 namespace IglaClub.TournamentManager
@@ -47,12 +48,21 @@ namespace IglaClub.TournamentManager
         public OperationStatus GenerateNextRound(long tournamentId, bool withPairRepeats)
         {
             Tournament tournament = db.Tournaments.Find(tournamentId);
-            if (tournament == null) 
+
+            if (tournament == null)
+            {
                 return new OperationStatus(false,"Tournament with id " + tournamentId + " not found");
+            }
+            
             if (tournament.TournamentMovingType != TournamentMovingType.Cavendish)
                 return new OperationStatus(false,"Tournament with id " + tournamentId + " moving type is different than cavendish (cannot generate extra round)");;
-            if (tournament.Results.Any(r => r.ResultNsPoints == null && r.PlayedBy != NESW.DirectorScore))
-                return new OperationStatus(false, "Round is still not finished. " + tournament.Results.Count(r => r.ResultNsPoints == null) + " results are not entered.");
+            
+            var notFinishedBoardsInRoundCount = tournament.Results.Count(r => r.ResultNsPoints == null && r.PlayedBy != NESW.DirectorScore && r.RoundNumber == tournament.CurrentRound);
+            if (notFinishedBoardsInRoundCount > 0)
+            {
+                return new OperationStatus(false, "Round is still not finished. " + notFinishedBoardsInRoundCount + " results are not entered.");
+            }
+
             IEnumerable<BoardInstance> boards = GenerateEmptyBoards(tournament);
             TournamentHelper.AddBoardsToTournament(tournament, boards);
 

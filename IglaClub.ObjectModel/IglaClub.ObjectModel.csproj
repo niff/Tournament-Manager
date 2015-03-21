@@ -67,6 +67,7 @@
     <Compile Include="Enums\NESW.cs" />
     <Compile Include="Enums\TournamentScoringType.cs" />
     <Compile Include="Enums\Vulnerable.cs" />
+    <Compile Include="Exceptions\OperationException.cs" />
     <Compile Include="IIglaClubDbContext.cs" />
     <Compile Include="OperationStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
