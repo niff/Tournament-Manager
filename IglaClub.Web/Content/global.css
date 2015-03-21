@@ -161,8 +161,8 @@ table.result {
 }
 
 .home-text {
-     padding: 50px;
-font-size: 1.5em;
+     padding: 15px;
+font-size: 20px;
 text-indent: 30PX;
  }
 
@@ -207,9 +207,12 @@ text-indent: 30PX;
     box-shadow: 0px 0px 1px 1px white inset, 0px 33px 40px -38px #000;
     height: auto;
     max-width: 100%;
-    margin: 15px 0;
+    margin: 15px 15px;
     padding: 25px;
     text-align: center;
+}
+.shadow-gradient-block img{
+    width: 82px;
 }
 fieldset.login{
 margin: auto;
@@ -355,9 +358,11 @@ footer {
 /**-------------------BOOTSTRAP IMPROVEMENTS--------------------*/
 
 .navbar-custom {
-  background-color: #728ebb;
-    height: 100%;
+    background: url(img/logo.jpg) no-repeat 0px -335px;
+  background-size: cover;
+  height: 100%;
   margin: 0 0 20px 0;
+  border-radius: 8px;
 }
 .navbar-custom .navbar-brand {
   color: #ecf0f1;
@@ -452,6 +457,10 @@ footer {
   background-color: rgba(91, 112, 158, 1);
   font-weight: bolder;
   color: white;
+}
+
+.navbar-custom .login-partial ul.list-inline {
+    margin-bottom: 0;
 }
 .caret-black {
   border-top-color: #2C2C2C !important;
