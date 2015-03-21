@@ -1,43 +1,30 @@
 ﻿using IglaClub.ObjectModel.Repositories;
 using IglaClub.Web.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
 
 namespace IglaClub.Web.Authorization
 {
-    public class TournamentOwnerAttribute : AuthorizeAttribute
+    public class TournamentOwnerAttribute : ActionFilterAttribute
     {
         private readonly IglaClubDbContext db = new IglaClubDbContext();
 
-        protected override bool AuthorizeCore(HttpContextBase httpContext)
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var authorized = base.AuthorizeCore(httpContext);
-            if (!authorized)
-            {
-                return false;
-            }
-
-            var user = httpContext.User;
-            
-            var rd = httpContext.Request.RequestContext.RouteData;
+            base.OnActionExecuting(filterContext);
 
             long tournamentId = 0;
-            if (rd.Values.ContainsKey("id"))
-                tournamentId = long.Parse(rd.Values["id"].ToString());
-            else if (rd.Values.ContainsKey("tournamentId"))
-                tournamentId = long.Parse(rd.Values["tournamentId"].ToString());
+            if (filterContext.ActionParameters.ContainsKey("tournamentId"))
+                tournamentId = long.Parse(filterContext.ActionParameters["tournamentId"].ToString());
+            else if (filterContext.ActionParameters.ContainsKey("id"))
+                tournamentId = long.Parse(filterContext.ActionParameters["id"].ToString());
+           
+            string username = filterContext.HttpContext.User.Identity.Name;
 
-            if (tournamentId == 0)
-                return false;
-
-            return IsOwnerOfTournament(user.Identity.Name, tournamentId);
+            if (tournamentId == 0 || !IsOwnerOfTournament(username, tournamentId))
+                HandleUnauthorizedRequest(filterContext);
         }
 
-        protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
+        private void HandleUnauthorizedRequest(ActionExecutingContext filterContext)
         {
             filterContext.HttpContext.Response.Redirect("/Errors/Error403", true);
         }
