@@ -14,5 +14,11 @@ namespace IglaClub.ObjectModel.Repositories
             base.InsertOrUpdate(club);
             SaveChanges();
         }
+
+        public void Update(Club club)
+        {
+            base.InsertOrUpdate(club);
+            SaveChanges();
+        }
     }
 }

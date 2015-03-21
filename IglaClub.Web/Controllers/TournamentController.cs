@@ -89,8 +89,7 @@ namespace IglaClub.Web.Controllers
 
         public ActionResult Create()
         {
-            var tournament = new Tournament();
-            tournament.BoardsInRound = 2;
+            var tournament = new Tournament {BoardsInRound = 2};
             return View(tournament);
         }
 
@@ -109,6 +108,9 @@ namespace IglaClub.Web.Controllers
                     return View(tournament);
                 }
                 
+                //tournament.Owner = userRepository.GetUserByName(User.Identity.Name);
+                var coordinates = Request.Form["coords"];
+                tournament.Coordinates = coordinates;
                 tournamentManager.Create(tournament, User.Identity.Name);
                 return RedirectToAction("Index");
             }
@@ -144,7 +146,9 @@ namespace IglaClub.Web.Controllers
                 notificationService.DisplayError("We are very sorry, but only cavendish type is supported by now :(");
                 return View(tournament);
             }
-                
+            
+            var coordinates = Request.Form["coords"];
+            tournament.Coordinates = coordinates;
             db.Entry(tournament).State = EntityState.Modified;
             db.SaveChanges();
             //return RedirectToAction("Manage", "Tournament", new { tournamentId = id });

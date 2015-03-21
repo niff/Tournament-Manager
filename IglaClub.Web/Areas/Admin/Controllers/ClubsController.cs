@@ -34,6 +34,21 @@ namespace IglaClub.Web.Areas.Admin.Controllers
             return View();
         }
 
+        public ActionResult Edit(int id)
+        {
+            var club = clubRepository.Get<Club>(id);
+            return View(club);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Club club)
+        {
+            var coordinates = Request.Form["coords"];
+            club.Coordinates = coordinates;
+            clubRepository.Update(club);
+            return View("Details", club);
+        }
+
         public ActionResult Details(int id)
         {
             var club = clubRepository.Get<Club>(id);

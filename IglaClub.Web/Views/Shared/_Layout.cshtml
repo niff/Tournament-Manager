@@ -26,8 +26,8 @@
                                     <span class="caret caret-custom-menu"></span>
                                 </button>
                                 <ul class="dropdown-menu main-menu" role="menu" aria-labelledby="menuPlay">
-                                    <li><a href="@Url.Action("MyTournamentsToPlay", "Tournament")">My Tournaments</a></li>
-                                    <li><a href="@Url.Action("AvailableTournaments", "Tournament")">Tournaments in near</a></li>
+                                    <li><a href="@Url.Action("MyTournamentsToPlay", "Tournament", new { area = "" }, null)">My Tournaments</a></li>
+                                    <li><a href="@Url.Action("AvailableTournaments", "Tournament", new { area = "" }, null)">Tournaments in near</a></li>
                                     <li><a href="@Url.Action("MyResults", "Results")">My Results</a></li>
                                 </ul></div>
                                 <div class="btn-group">
@@ -37,8 +37,8 @@
                                         <span class="caret caret-custom-menu"></span>
                                     </button>
                                     <ul class="dropdown-menu main-menu" role="menu" aria-labelledby="menuOrg">
-                                        <li><a href="@Url.Action("MyOrganizedTournaments", "Tournament")">My tournaments</a></li>
-                                        <li><a href="@Url.Action("MyClubs", "Clubs")">My clubs</a></li>
+                                        <li><a href="@Url.Action("MyOrganizedTournaments", "Tournament", new { area = "" }, null)">My tournaments</a></li>
+                                        <li><a href="@Url.Action("MyClubs", "Clubs", new { area = "" }, null)">My clubs</a></li>
                                     </ul>
                                 </div>
                                 
@@ -49,8 +49,8 @@
                                     <span class="caret caret-custom-menu"></span>
                                 </button>
                                     <ul class="dropdown-menu main-menu" role="menu" aria-labelledby="menuBrowse">
-                                        <li><a href="@Url.Action("AllTournamentsMap", "Tournament")">All tournaments</a></li>
-                                        <li><a href="@Url.Action("MyClubs", "Clubs")">Players</a></li>
+                                        <li><a href="@Url.Action("AllTournamentsMap", "Tournament", new { area = "" }, null)">All tournaments</a></li>
+                                        <li><a href="@Url.Action("MyClubs", "Clubs", new { area = "" }, null)">Players</a></li>
                                     </ul>
                                     </div>
                             </div>
@@ -89,9 +89,9 @@
         
             <footer>
                 <div class="footer-menu">
-                                <span>@Html.ActionLink("Home", "Index", "Home")</span> |
-                                <span>@Html.ActionLink("About", "About", "Home")</span>|
-                                <span>@Html.ActionLink("Contact", "Contact", "Home")</span>
+                                <span>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</span> |
+                                <span>@Html.ActionLink("About", "About", "Home", new { area = "" }, null)</span>|
+                                <span>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, null)</span>
                             </div>
                 <div class="row text-center text-muted small">
                     <p>&copy; @DateTime.Now.Year - Igla Club - Created by

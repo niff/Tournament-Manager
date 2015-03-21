@@ -1,5 +1,4 @@
-﻿
-(function($) {
+﻿(function($) {
     $.fn.initializeMap = function(params) {
         var mapCanvasId = $(this).attr("id");
         var options = params;

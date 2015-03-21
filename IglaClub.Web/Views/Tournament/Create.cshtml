@@ -58,7 +58,15 @@
             @Html.TextBoxFor(model => model.PlannedStartDate, new { @Value = startDate, id = "datepicker" })
             @Html.ValidationMessageFor(model => model.PlannedStartDate)
         </div>
-
+                <div class="editor-label">
+            @Html.LabelFor(model => model.Address)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Address, new {@placeholder = "Search address"})
+            @Html.ValidationMessageFor(model => model.Address)
+        </div>
+    <label>Location on map</label>
+        <div id="map-canvas"></div>
         <p>
             <button type="submit" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus"></span> Create</button>
         </p>
@@ -69,10 +77,20 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-@section Scripts {
+@*@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
+}*@
 
 <script>
     jQuery('#datepicker').datetimepicker();
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+<script src="~/Scripts/gmap-plugin.js"></script>
+<script>
+    $(document).ready(function () {
+        var options = {
+            coordinates: '( 50.06139,19.93833)'
+        };
+        $("#map-canvas").initializeMap(options);
+    });
 </script>

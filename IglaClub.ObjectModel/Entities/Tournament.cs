@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Web;
 using IglaClub.ObjectModel.Enums;
 
 namespace IglaClub.ObjectModel.Entities
@@ -56,6 +54,10 @@ namespace IglaClub.ObjectModel.Entities
 
         [DisplayName("Created by")]
         virtual public User Owner { get; set; }
+
+        public string Coordinates { get; set; }
+
+        public string Address { get; set; }
 
         public bool UserIsSubscribed(string login)
         {
