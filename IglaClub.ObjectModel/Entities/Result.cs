@@ -55,7 +55,9 @@ namespace IglaClub.ObjectModel.Entities
 
         public override string ToString()
         {
-            return "Ns: " + ScoreNs + ", Ew: " + ScoreEw;
+            var nsName = NS != null ? NS.ToString() :string.Empty;
+            var ewName = EW != null ? EW.ToString() :string.Empty;
+            return string.Format("Ns({2}): {0}, Ew({3}): {1}", ScoreNs, ScoreEw, nsName, ewName);
         }
     }
 }

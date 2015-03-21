@@ -353,12 +353,12 @@ namespace IglaClub.Web.Controllers
 
         public PartialViewResult Oncoming()
         {
-            return PartialView("_TournamentList", tournamentRepository.GetOncoming());
+            return PartialView("_TournamentList", tournamentRepository.GetPlanned());
         }
 
         public PartialViewResult Past()
         {
-            return PartialView("_TournamentList", tournamentRepository.GetPast());
+            return PartialView("_TournamentList", tournamentRepository.GetFinished());
         }
         
         public PartialViewResult Ongoing()
@@ -385,14 +385,14 @@ namespace IglaClub.Web.Controllers
 
         public ActionResult AvailableTournaments()
         {
-            var model = tournamentRepository.GetOncoming();
+            var model = tournamentRepository.GetPlanned();
             ViewBag.Title = "Other torunaments";
             return View("TournamentsListWrapper",model);
         }
 
         public ActionResult MyOrganizedTournaments()
         {
-            var model = tournamentRepository.GetPast();
+            var model = tournamentRepository.GetFinished();
             ViewBag.Title = "Tournaments created by you";
             return View("TournamentsListWrapper",model);
         }
