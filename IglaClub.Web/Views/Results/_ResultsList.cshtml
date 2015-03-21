@@ -77,10 +77,10 @@
                     @Html.DisplayFor(modelItem => item.TableNumber)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NS.PairNumber)
+                    <span title="@item.NS">@item.NS.PairNumber</span> 
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.EW.PairNumber)
+                    <span title="@item.EW">@item.EW.PairNumber</span> 
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Board.BoardNumber)
