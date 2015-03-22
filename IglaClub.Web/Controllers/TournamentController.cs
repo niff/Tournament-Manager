@@ -389,7 +389,7 @@ namespace IglaClub.Web.Controllers
 
         public ActionResult MyTournamentsToPlay()
         {
-            var model = tournamentRepository.GetTournamentsToPlayForUser(User.Identity.Name);
+            var model = tournamentRepository.GetTournamentsToPlayByUser(User.Identity.Name);
             ViewBag.Title = "Tournaments that you are subscribed to";
             return View("TournamentsListWrapper",model);
         }
