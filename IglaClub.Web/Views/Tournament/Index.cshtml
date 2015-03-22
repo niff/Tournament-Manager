@@ -1,4 +1,4 @@
-﻿@model IEnumerable<IglaClub.ObjectModel.Entities.Tournament>
+﻿@model IglaClub.Web.Models.ViewModels.TournamentMainPageModel
 
 <div class="row">
     <div class="col-md-2">
@@ -16,18 +16,35 @@
 
 
 <div class="row">
-    <div class="col-md-4 oncoming">
-        <span class="medium-header">Oncoming</span>
+
+    @if (@Model.CurrentlyPlayedByUser.Any())
+    {
+        <div class="col-md-12">
+            @foreach (var t in @Model.CurrentlyPlayedByUser)
+            {
+                <div class="active-tournaments">
+                    <span class="medium-header">You are playing now</span>
+                    <p></p>
+                    @*        <img src="http://4.bp.blogspot.com/-2si1CiMK8Jw/T6zHyjCfGPI/AAAAAAAAATU/FbmodJRWLyA/s1600/progressbar.gif"/>*@
+                    <img src="http://whiteningrx.com/images/progress_bar.gif" />
+                    @Html.ActionLink(t.Name, "Details", "Tournament", new { id = t.Id})
+                </div>
+            }
+        </div>
+    }
+
+    <div class="col-md-6 oncoming">
+        <span class="medium-header">My tournaments</span>
         @Html.Action("Oncoming")
     </div>
-    <div class="col-md-4 ongoing">
-        <span class="medium-header">Ongoing</span>
+    <div class="col-md-6 ongoing">
+        <span class="medium-header">Other tournaments</span>
         @Html.Action("Ongoing")
     </div>
-    <div class="col-md-4 past">
+    @*    <div class="col-md-4 past">
         <span class="medium-header">Past</span>
         @Html.Action("Past")
-    </div>
+    </div>*@
 
 </div>
 

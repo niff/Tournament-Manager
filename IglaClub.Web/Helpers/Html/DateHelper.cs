@@ -15,13 +15,21 @@ namespace IglaClub.Web.Helpers.Html
                     return "today";
                 }
 
-                string formattedDate = String.Format("{0} day{1}", span, span != 1 ? "s" : String.Empty);
-                if (span > 0)
-                    return "in " + formattedDate;
-                if (span < 0)
+                string dateIsFuture = "";
+                string dateIsPast = "";
+                if (span > 1)
                 {
-                    return formattedDate + " ago";
+                    dateIsFuture = "in ";
                 }
+                else
+                {
+                    dateIsPast = " ago";
+                }
+                var daysPlural = span != 1 ? "s" : String.Empty;
+                var daysCount = Math.Abs(span);
+
+                return String.Format("{3}{0} day{1}{2}", 
+                    daysCount, daysPlural, dateIsPast, dateIsFuture);
             }
             return inputDate.ToLongDateString();
         }

@@ -29,16 +29,16 @@
             }
                     }
                 </td>
-                <td style="width: 90px">
+                <td>
                     @if(item.PlannedStartDate != null)
                     {
                         <span>@DateHelper.DaysLeftToDate((DateTime) item.PlannedStartDate)</span>
                     }
                 </td>
-                <td style="width: 50px">
+                <td>
                     @hour
                 </td>
-                <td style="width: 20px">
+                <td>
                     @{
             var currentUserIsSubscribed = item.UserIsSubscribed(HttpContext.Current.User.Identity.Name);
             if (currentUserIsSubscribed)

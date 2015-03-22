@@ -214,6 +214,16 @@ text-indent: 30PX;
 .shadow-gradient-block img{
     width: 82px;
 }
+.active-tournaments {
+    padding-bottom: 10px;
+}
+.active-tournaments a{
+    font-size: 18px;
+    margin-left: 5px;
+}
+.active-tournaments img{
+    vertical-align: initial;
+}
 fieldset.login{
 margin: auto;
 width: 270px;

@@ -96,5 +96,10 @@ namespace IglaClub.ObjectModel.Repositories
                 select t;
             return res.ToList();
         }
+
+        public IList<Tournament> GetCurrentlyPlayedByUser(string getCurrentUserName)
+        {
+            throw new NotImplementedException(); //TODO B: implement
+        }
     }
 }

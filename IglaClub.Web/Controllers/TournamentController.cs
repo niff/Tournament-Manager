@@ -42,7 +42,16 @@ namespace IglaClub.Web.Controllers
         
         public ActionResult Index()
         {
-            return View(db.Tournaments.Include(t=>t.Pairs).OrderBy(t=>t.TournamentStatus).ToList());
+            var model = new TournamentMainPageModel
+                {
+                    CurrentlyPlayedByUser = tournamentRepository.GetCurrentlyPlayedByUser(GetCurrentUserName())
+                };
+            return View(model);
+        }
+
+        private string GetCurrentUserName()
+        {
+            return HttpContext.User.Identity.Name;
         }
 
         //
