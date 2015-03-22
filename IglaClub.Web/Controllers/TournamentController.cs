@@ -121,7 +121,7 @@ namespace IglaClub.Web.Controllers
                 //tournament.Owner = userRepository.GetUserByName(User.Identity.Name);
                 var coordinates = Request.Form["coords"];
                 tournament.Coordinates = coordinates;
-                tournamentManager.Create(tournament, User.Identity.Name);
+                tournamentManager.Create(tournament, GetCurrentUserName());
                 return RedirectToAction("Index");
             }
 
@@ -280,7 +280,7 @@ namespace IglaClub.Web.Controllers
 
         private PairsViewModel CreatePairsViewModel(long tournamentId)
         {
-            var currentUser = userRepository.GetUserByName(HttpContext.User.Identity.Name);
+            var currentUser = userRepository.GetUserByName(GetCurrentUserName());
             var tournament = this.tournamentRepository.GetTournamentWithPairsAndOwner(tournamentId);
             var model = new PairsViewModel
             {
@@ -389,14 +389,14 @@ namespace IglaClub.Web.Controllers
 
         public PartialViewResult MyTournamentsToPlay()
         {
-            var model = tournamentRepository.GetTournamentsToPlayByUser(GetCurrentUserName());
+            var model = tournamentRepository.GetCurrentlyPlayedByUser(GetCurrentUserName());
             ViewBag.Title = "My tournaments";
             return PartialView("_TournamentList", model);
         }
 
         public PartialViewResult AvailableTournaments()
         {
-            var model = tournamentRepository.GetPlanned().OrderBy(t => t.PlannedStartDate);
+            var model = tournamentRepository.GetAvailableTournamentsByUser(GetCurrentUserName()).OrderBy(t => t.PlannedStartDate);
             var pastItemsAtTheEnd = model.Where(t => t.PlannedStartDate >= DateTime.Now)
                .Union(model.Where(t => t.PlannedStartDate < DateTime.Now)).ToList();
 
