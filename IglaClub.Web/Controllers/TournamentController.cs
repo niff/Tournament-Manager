@@ -389,7 +389,7 @@ namespace IglaClub.Web.Controllers
 
         public PartialViewResult MyTournamentsToPlay()
         {
-            var model = tournamentRepository.GetCurrentlyPlayedByUser(GetCurrentUserName());
+            var model = tournamentRepository.GetAvailableTournamentsByUser(GetCurrentUserName());
             ViewBag.Title = "My tournaments";
             return PartialView("_TournamentList", model);
         }
@@ -414,6 +414,17 @@ namespace IglaClub.Web.Controllers
         public ActionResult AllTournamentsMap()
         {
             return View();
+        }
+
+        public ActionResult MyTournamentsToPlayWrapper()
+        {
+            return View("TournamentsListWrapper",
+                        tournamentRepository.GetAvailableTournamentsByUser(GetCurrentUserName()));
+        }
+
+        public ActionResult AvailableTournamentsWrapper()
+        {
+            return View("TournamentsListWrapper", tournamentRepository.GetAvailableTournamentsByUser(GetCurrentUserName()).OrderBy(t => t.PlannedStartDate).ToList());
         }
     }
 }
