@@ -44,7 +44,7 @@ namespace IglaClub.Web.Controllers
         {
             var model = new TournamentMainPageModel
                 {
-                    CurrentlyPlayedByUser = tournamentRepository.GetCurrentlyPlayedByUser(GetCurrentUserName())
+                    CurrentlyPlayedByUser = new List<Tournament>()//tournamentRepository.GetCurrentlyPlayedByUser(GetCurrentUserName())
                 };
             return View(model);
         }
@@ -364,7 +364,7 @@ namespace IglaClub.Web.Controllers
 
         public PartialViewResult Oncoming()
         {
-            return PartialView("_TournamentList", tournamentRepository.GetPlanned());
+            return PartialView("_TournamentList", tournamentRepository.GetTournamentsToPlayForUser(GetCurrentUserName()));
         }
 
         public PartialViewResult Past()

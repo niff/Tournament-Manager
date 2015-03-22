@@ -17,11 +17,11 @@ namespace IglaClub.Web.Helpers.Html
 
                 string dateIsFuture = "";
                 string dateIsPast = "";
-                if (span > 1)
+                if (span >= 1)
                 {
                     dateIsFuture = "in ";
                 }
-                else
+                else if (span <= -1)
                 {
                     dateIsPast = " ago";
                 }
