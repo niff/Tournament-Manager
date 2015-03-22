@@ -90,16 +90,23 @@ namespace IglaClub.ObjectModel.Repositories
 
         public IList<Tournament> GetTournamentsToPlayForUser(string name)
         {
-            var res = from t in db.Tournaments
-                join p in db.Pairs on t.Id equals p.Tournament.Id
-                where p.Player1.Login == name || p.Player2.Login == name
-                select t;
-            return res.ToList();
+            var tournaments = GetTournamentsBySubscribedUser(name);
+            return  tournaments.Where(t=>t.TournamentStatus == TournamentStatus.Planned).ToList();
         }
 
-        public IList<Tournament> GetCurrentlyPlayedByUser(string getCurrentUserName)
+        public IList<Tournament> GetCurrentlyPlayedByUser(string userLogin)
         {
-            throw new NotImplementedException(); //TODO B: implement
+            var tournaments = GetTournamentsBySubscribedUser(userLogin);
+            return tournaments.Where(t=>t.TournamentStatus == TournamentStatus.Started).ToList();
+        }
+
+        private IQueryable<Tournament> GetTournamentsBySubscribedUser(string userLogin)
+        {
+            var res = from t in db.Tournaments
+                join p in db.Pairs on t.Id equals p.Tournament.Id
+                where p.Player1.Login == userLogin || p.Player2.Login == userLogin
+                select t;
+            return res;
         }
     }
 }
