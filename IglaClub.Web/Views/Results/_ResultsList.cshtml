@@ -23,7 +23,7 @@
                 @Html.DisplayNameFor(model => model.EW)
             </th>
             <th>
-                <a href="@Url.Action("Manage", new {tournamenId = Model.First().TournamentId, sort = "BoardNumber"})">Board</a>
+                <a href="@Url.Action("Manage","Tournament", new {tournamenId = Model.First().TournamentId, sort = "BoardNumber", sortDir = ""})">Board</a>
             </th>
             <th>
                 Short score
@@ -64,7 +64,6 @@
         {
             <tr>
                 <td>
-                    @*@ResultHelper.GetStringForFinished(item.ResultNsPoints, item.PlayedBy)*@
                     @if (item.PlayedBy == NESW.DirectorScore || item.ResultNsPoints.HasValue)
                     {
                         <span class="glyphicon glyphicon-ok-circle"></span>
@@ -124,24 +123,3 @@
 
     </table>
 }
-@*@grid.GetHtml(columns: grid.Columns(
-        grid.Column("ResultFinished", header: "Ok", format: @<text>@ResultHelper.GetStringForFinished(@item.ResultNsPoints, @item.PlayedBy)</text>),
-        grid.Column("TableNumber",header: "Table", format: @<text>@item.TableNumber</text>),
-        grid.Column("RoundNumber",header: "Round", format: @<text>@item.RoundNumber</text>),
-        grid.Column("NsPairNumber",header: "Ns", format: @<text>@item.Ns.PairNumber</text>),
-        grid.Column("EwPairNumber",header: "Ew", format: @<text>@item.Ew.PairNumber</text>),
-        grid.Column("BoardNumber",header: "Board", format: @<text>@item.Board.BoardNumber</text>),
-        grid.Column("ContractLevel",header: "Level", format: @<text>@item.ContractLevel.ToString()</text>),
-        grid.Column("ContractColor",header: "Color", format: @<text>@Enum.GetName(typeof(ContractColors), item.ContractColor)</text>),
-        grid.Column("IsDoubled",header: "Dbl", format: @<text>@ResultHelper.GetStringForDoubledContract(item.ContractDoubled)</text>),
-        grid.Column("PlayedBy",header: "Played by", format: @<text>@item.PlayedBy.ToString()</text>),
-        grid.Column("NumberOfTricks",header: "Tricks", format: @<text>@item.NumberOfTricks</text>),
-        grid.Column("Vulnerable",header: "Vul", format: @<text>@item.Board.BoardDefinition.Vulnerability</text>),
-        grid.Column("Remove",header: "Remove result", format: @<text><a href="@Url.Action("Delete", new { id = @item.Id })" title="Remove"><span class="glyphicon glyphicon-remove"></span></a></text>),
-        grid.Column("Result",header: "Result", format: @<text>@item.ResultNsPoints</text>),
-        grid.Column("ScoreNS",header: "Score NS", format: @<text>@item.ScoreNs</text>),
-        grid.Column("ScoreEW",header: "Score EW", format: @<text>@item.ScoreEw</text>)
-
-                                )
-                                , rowStyle: "rowStyleOdd", alternatingRowStyle: "rowStyleEven", headerStyle: "headerStyle"
-                        )*@

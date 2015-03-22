@@ -35,7 +35,7 @@ namespace IglaClub.ObjectModel.Repositories
 
         public List<User> GetAvailableUsersForTournament(long tournamentId)
         {
-            //todo: filter by club users
+            //todo b: filter by club users
             List<long> subscribedPairUsersIds = ( from pairs in db.Tournaments.Find(tournamentId).Pairs
                                                     where pairs.Player1 != null
                                                     select pairs.Player1.Id)
