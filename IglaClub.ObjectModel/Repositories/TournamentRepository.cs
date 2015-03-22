@@ -85,9 +85,20 @@ namespace IglaClub.ObjectModel.Repositories
                         (p.Player2 != null && p.Player2.Login == userName));
         }
 
-        public IList<Tournament> GetTournamentsToPlayForUser(string name)
+        public IList<Tournament> GetAvailableTournamentsByUser(string userLogin)
         {
-            var tournaments = GetTournamentsBySubscribedUser(name);
+             var tournaments = from t in db.Tournaments
+                join p in db.Pairs on t.Id equals p.Tournament.Id
+                where p.Player1.Login != userLogin 
+                    && p.Player2.Login != userLogin
+                    && t.TournamentStatus == TournamentStatus.Planned
+                select t;
+            return tournaments.ToList();
+        }
+
+        public IList<Tournament> GetTournamentsToPlayByUser(string userLogin)
+        {
+            var tournaments = GetTournamentsBySubscribedUser(userLogin);
             return  tournaments.Where(t=>t.TournamentStatus == TournamentStatus.Planned).ToList();
         }
 
