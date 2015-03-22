@@ -1,5 +1,5 @@
 ﻿@using IglaClub.ObjectModel.Enums
-@using IglaClub.ObjectModel.Tools
+@using IglaClub.ObjectModel.Consts;
 @model List<IglaClub.ObjectModel.Entities.Result>
 
 @{
@@ -88,7 +88,7 @@
                     @Html.EditorFor(m => m[i].Board.BoardNumber)
                 </td>
                 <td>
-                    @Html.TextBox("ShortScore["+i+"]","",new {Title = "[Level][Color][double][dealer][result] \r\n i.e. 3HxE-1, 3C N="})
+                    @Html.TextBox("ShortScore[" + i + "]", "", new { Title = StringResources.ShortScoreTooltip })
                 </td>
                 <td>
                     @Html.EditorFor(m => m[i].ContractLevel, new {type="number", min = "0", max = "7"})

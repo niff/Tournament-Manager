@@ -15,9 +15,9 @@ namespace IglaClub.Web.Infrastructure
             this.TempData["MessageType"] = type;
         }
 
-        public void DisplayError(string message)
+        public void DisplayError(string message, params object[] parameters)
         {
-            DisplayMessage(message, NotificationType.Danger);
+            DisplayMessage(string.Format(message, parameters), NotificationType.Danger);
         }
 
         public void DisplaySuccess(string message, params object[] parameters)
