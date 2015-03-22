@@ -56,8 +56,8 @@ namespace IglaClub.TournamentManager
             
             if (tournament.TournamentMovingType != TournamentMovingType.Cavendish)
                 return new OperationStatus(false,"Tournament with id " + tournamentId + " moving type is different than cavendish (cannot generate extra round)");;
-            
-            var notFinishedBoardsInRoundCount = tournament.Results.Count(r => r.ResultNsPoints == null && r.PlayedBy != NESW.DirectorScore && r.RoundNumber == tournament.CurrentRound);
+
+            var notFinishedBoardsInRoundCount = tournament.ResultsNotFinishedInCurrentRound;
             if (notFinishedBoardsInRoundCount > 0)
             {
                 return new OperationStatus(false, "Round is still not finished. " + notFinishedBoardsInRoundCount + " results are not entered.");

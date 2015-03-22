@@ -68,8 +68,8 @@
             <div class="col-md-6">
                 @Html.Label("Round number: " + Model.Tournament.CurrentRound) <br />
 
-                @{ var resultsLeftClass = Model.ResultsToComplete == 0 ? "text-success" : "text-danger"; }
-                @Html.Label("Results left to complete round: " + Model.ResultsToComplete, new { @class = resultsLeftClass })
+                @{ var resultsLeftClass = Model.Tournament.ResultsNotFinishedInCurrentRound == 0 ? "text-success" : "text-danger"; }
+                @Html.Label("Results left to complete round: " + Model.Tournament.ResultsNotFinishedInCurrentRound, new { @class = resultsLeftClass })
             </div>
 
         </div>

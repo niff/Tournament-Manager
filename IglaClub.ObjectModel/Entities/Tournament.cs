@@ -59,6 +59,18 @@ namespace IglaClub.ObjectModel.Entities
 
         public string Address { get; set; }
 
+        public int ResultsNotFinishedInCurrentRound
+        {
+            get
+            {
+                if (this.Results == null)
+                    return 0;
+                return this.Results.Count(r => r.ResultNsPoints == null 
+                    && r.PlayedBy != NESW.DirectorScore 
+                    && r.RoundNumber == this.CurrentRound);
+            }
+        }
+
         public bool UserIsSubscribed(string login)
         {
             if (this.Pairs == null)
