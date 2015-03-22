@@ -13,26 +13,31 @@
             var hour = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("HH:mm") : "";
             <tr>
                 <td>
-                    @{
-            if (@item.TournamentStatus == TournamentStatus.Planned || @item.TournamentStatus == TournamentStatus.Finished)
-            { 
-                @Html.ActionLink(item.Name, "Details", "Tournament", new { id = @item.Id }, null)
-            }
-            else if (@item.TournamentStatus == TournamentStatus.Started)
-            {
-                @Html.ActionLink(item.Name, "RoundDetails", "Round", new {tournamentId = @item.Id}, null)
-            }
+                    @Html.ActionLink(item.Name, "Details", "Tournament", new { id = @item.Id }, null)
+                    @*@{
+                        //if (@item.TournamentStatus == TournamentStatus.Planned || @item.TournamentStatus == TournamentStatus.Finished)
+                        //{ 
+                                    @Html.ActionLink(item.Name, "Details", "Tournament", new { id = @item.Id }, null)
+                        //}
+                        //else if (@item.TournamentStatus == TournamentStatus.Started)
+                        //{
+                        //            @Html.ActionLink(item.Name, "RoundDetails", "Round", new { tournamentId = @item.Id }, null)
+                        //}
 
-            if (item.Owner != null && item.Owner.Login == HttpContext.Current.User.Identity.Name)
-            {
-                        <span class="edit-button"><a href="@Url.Action("Manage", "Tournament", new { id = item.Id }, null)"><i class="glyphicon glyphicon-pencil"></i>Edit</a></span>
-            }
-                    }
+                        if (item.Owner != null && item.Owner.Login == HttpContext.Current.User.Identity.Name)
+                        {
+                                    <span class="edit-button"><a href="@Url.Action("Manage", "Tournament", new { id = item.Id }, null)"><i class="glyphicon glyphicon-pencil"></i>Edit</a></span>
+                        }
+                    }*@
                 </td>
                 <td>
-                    @if(item.PlannedStartDate != null)
+                    @if (item.PlannedStartDate != null)
                     {
                         <span>@DateHelper.DaysLeftToDate((DateTime) item.PlannedStartDate)</span>
+                    }
+                    else
+                    {
+                        <span>Not set yet</span>
                     }
                 </td>
                 <td>
@@ -40,15 +45,15 @@
                 </td>
                 <td>
                     @{
-            var currentUserIsSubscribed = item.UserIsSubscribed(HttpContext.Current.User.Identity.Name);
-            if (currentUserIsSubscribed)
-            {
-                <span class="glyphicon glyphicon-ok-circle" title="You are subscribed to this tournament"></span>
-            }
-            else
-            {
-                <a href="#"><i class="glyphicon glyphicon-plus"></i>Join</a>
-            }
+                    var currentUserIsSubscribed = item.UserIsSubscribed(HttpContext.Current.User.Identity.Name);
+                    if (currentUserIsSubscribed)
+                    {
+                        <span class="glyphicon glyphicon-ok-circle" title="You are subscribed to this tournament"></span>
+                    }
+                    else
+                    {
+                        <a href="#"><i class="glyphicon glyphicon-plus"></i>Join</a>
+                    }
                     }
                 </td>
             </tr>

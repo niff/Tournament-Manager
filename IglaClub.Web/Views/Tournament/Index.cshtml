@@ -27,7 +27,7 @@
                     <p></p>
                     @*        <img src="http://4.bp.blogspot.com/-2si1CiMK8Jw/T6zHyjCfGPI/AAAAAAAAATU/FbmodJRWLyA/s1600/progressbar.gif"/>*@
                     <img src="http://whiteningrx.com/images/progress_bar.gif" />
-                    @Html.ActionLink(t.Name, "Details", "Tournament", new { id = t.Id})
+                    @Html.ActionLink(t.Name, "RoundDetails", "Round", new { tournamentId = @t.Id }, null)
                 </div>
             }
         </div>
