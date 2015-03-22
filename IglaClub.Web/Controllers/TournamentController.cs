@@ -418,12 +418,14 @@ namespace IglaClub.Web.Controllers
 
         public ActionResult MyTournamentsToPlayWrapper()
         {
+            ViewBag.Title = "My tournaments";
             return View("TournamentsListWrapper",
-                        tournamentRepository.GetAvailableTournamentsByUser(GetCurrentUserName()));
+                        tournamentRepository.GetTournamentsToPlayByUser(GetCurrentUserName()));
         }
 
         public ActionResult AvailableTournamentsWrapper()
         {
+            ViewBag.Title = "Available tournaments";
             return View("TournamentsListWrapper", tournamentRepository.GetAvailableTournamentsByUser(GetCurrentUserName()).OrderBy(t => t.PlannedStartDate).ToList());
         }
     }
