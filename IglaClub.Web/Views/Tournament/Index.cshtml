@@ -1,21 +1,6 @@
 ﻿@model IglaClub.Web.Models.ViewModels.TournamentMainPageModel
 
 <div class="row">
-    <div class="col-md-2">
-        <h2 class="center-block">Tournaments</h2>
-    </div>
-    <div class="col-md-2 lineheight5em">
-        <a href="@Url.Action("Create")"
-   class="btn btn-info btn-medium">
-            <span class="glyphicon glyphicon-plus-sign"></span>
-            Add tournament
-        </a>
-    </div>
-</div>
-
-
-
-<div class="row">
 
     @if (@Model.CurrentlyPlayedByUser.Any())
     {
@@ -25,7 +10,6 @@
                 @foreach (var t in @Model.CurrentlyPlayedByUser)
                 {
                     <p>
-                        @*        <img src="http://4.bp.blogspot.com/-2si1CiMK8Jw/T6zHyjCfGPI/AAAAAAAAATU/FbmodJRWLyA/s1600/progressbar.gif"/>*@
                         <img src="http://whiteningrx.com/images/progress_bar.gif" />
                         @Html.ActionLink(t.Name, "RoundDetails", "Round", new { tournamentId = @t.Id }, null)
 

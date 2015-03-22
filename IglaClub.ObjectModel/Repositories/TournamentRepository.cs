@@ -102,10 +102,18 @@ namespace IglaClub.ObjectModel.Repositories
             return  tournaments.Where(t=>t.TournamentStatus == TournamentStatus.Planned).ToList();
         }
 
-        public IList<Tournament> GetCurrentlyPlayedByUser(string userLogin)
+        public IList<Tournament> GetCurrentlyPlayingByUser(string userLogin)
         {
             var tournaments = GetTournamentsBySubscribedUser(userLogin);
             return tournaments.Where(t=>t.TournamentStatus == TournamentStatus.Started).ToList();
+        }
+
+        public IEnumerable<Tournament> GetTournamentsByOwnerUser(string userLogin)
+        {
+            var tournaments = from t in db.Tournaments
+                where t.Owner.Login == userLogin 
+                select t;
+            return tournaments;
         }
 
         private IQueryable<Tournament> GetTournamentsBySubscribedUser(string userLogin)
