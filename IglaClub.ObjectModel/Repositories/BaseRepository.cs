@@ -53,6 +53,13 @@ namespace IglaClub.ObjectModel.Repositories
             return targetDbSet == null ? null : targetDbSet.Find(id);
         }
 
+
+        public IEnumerable<T> GetAll<T>() where T : BaseEntity
+        {
+            var targetDbSet = GetDbSet<T>();
+            return targetDbSet ?? null;
+        }
+
         public void Delete<T>(T baseObject) where T: BaseEntity
         {
             var targetDbSet = GetDbSet<T>();

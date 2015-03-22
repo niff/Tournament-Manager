@@ -1,7 +1,12 @@
-﻿@using IglaClub.ObjectModel.Entities
-@using IglaClub.Web.Helpers.Html
-@model IList<Tournament>
-        <span class="medium-header">@ViewBag.Title</span>
+﻿@using IglaClub.Web.Helpers.Html
+@model IList<IglaClub.ObjectModel.Entities.Tournament>
+
+@{
+    ViewBag.Title = "All tournaments";
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+<span class="medium-header">All tournaments</span>
 @if (Model.Any())
 {
     <table class="tournamentsListTable table table-striped table-hover">
@@ -12,22 +17,7 @@
             var hour = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("HH:mm") : "";
             <tr>
                 <td>
-                    @Html.ActionLink(item.Name, "Details", "Tournament", new { id = @item.Id }, null)
-                    @*@{
-                        //if (@item.TournamentStatus == TournamentStatus.Planned || @item.TournamentStatus == TournamentStatus.Finished)
-                        //{ 
-                                    @Html.ActionLink(item.Name, "Details", "Tournament", new { id = @item.Id }, null)
-                        //}
-                        //else if (@item.TournamentStatus == TournamentStatus.Started)
-                        //{
-                        //            @Html.ActionLink(item.Name, "RoundDetails", "Round", new { tournamentId = @item.Id }, null)
-                        //}
-
-                        if (item.Owner != null && item.Owner.Login == HttpContext.Current.User.Identity.Name)
-                        {
-                                    <span class="edit-button"><a href="@Url.Action("Manage", "Tournament", new { id = item.Id }, null)"><i class="glyphicon glyphicon-pencil"></i>Edit</a></span>
-                        }
-                    }*@
+                    @item.Name
                 </td>
                 <td>
                     @if (item.PlannedStartDate != null)
@@ -49,10 +39,6 @@
                     {
                         <span class="glyphicon glyphicon-ok-circle" title="You are subscribed to this tournament"></span>
                         <span>Joined</span>
-                    }
-                    else
-                    {
-                        <a href="#"><i class="glyphicon glyphicon-plus"></i>Join</a>
                     }
                     }
                 </td>

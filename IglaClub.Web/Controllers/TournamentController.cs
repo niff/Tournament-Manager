@@ -54,6 +54,12 @@ namespace IglaClub.Web.Controllers
             return HttpContext.User.Identity.Name;
         }
 
+        public ActionResult GetAll()
+        {
+            var model = tournamentRepository.GetAll<Tournament>().ToList();
+            return View(model);
+        }
+
         //
         // GET: /Tournament/Manage/5
 
@@ -408,13 +414,13 @@ namespace IglaClub.Web.Controllers
         {
             var model = tournamentRepository.GetTournamentsByOwnerUser(GetCurrentUserName()).ToList();
             ViewBag.Title = "Tournaments created by you";
-            return View("TournamentsListWrapper", model);
+            return View("TournamentsByOwner", model);
         }
 
-        public ActionResult AllTournamentsMap()
-        {
-            return View();
-        }
+        //public ActionResult AllTournamentsMap()
+        //{
+        //    return View();
+        //}
 
         public ActionResult MyTournamentsToPlayWrapper()
         {

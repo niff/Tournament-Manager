@@ -437,6 +437,8 @@
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Tournament\TournamentsListWrapper.cshtml" />
     <Content Include="Views\Tournament\AllTournamentsMap.cshtml" />
+    <Content Include="Views\Tournament\GetAll.cshtml" />
+    <Content Include="Views\Tournament\TournamentsByOwner.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
