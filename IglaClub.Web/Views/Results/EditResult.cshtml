@@ -1,4 +1,5 @@
-﻿@using IglaClub.ObjectModel.Enums
+﻿@using IglaClub.ObjectModel.Consts
+@using IglaClub.ObjectModel.Enums
 @model IglaClub.ObjectModel.Entities.Result
 
 <h2>Edit result for board number @Model.Board.BoardNumber</h2>
@@ -70,7 +71,7 @@
         </tr>
         <tr>
             <td>
-                @Html.TextBox("ShortScore", "", new { Title = "[Level][Color][double][dealer][result] \r\n i.e. 3HxE-1, 3C N=" })
+                @Html.TextBox("ShortScore", "", new { Title = StringResources.ShortScoreTooltip })
             </td>
             <td>
                 @Html.EditorFor(m => m.ContractLevel, new { type = "number", min = "0", max = "7" })
@@ -85,7 +86,10 @@
             </td>
 
             <td>
-                @Html.DropDownListFor(m => m.PlayedBy, new SelectList(Enum.GetValues(typeof(NESW)), @Model.PlayedBy))
+                @{
+                    var possiblePlayedByValues = new List<NESW> {NESW.PassedOut, NESW.North, NESW.South, NESW.West, NESW.East};
+                }
+                @Html.DropDownListFor(m => m.PlayedBy, new SelectList(possiblePlayedByValues), @Model.PlayedBy)
             </td>
             <td>
                 @Html.EditorFor(m => m.NumberOfTricks)

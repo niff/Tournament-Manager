@@ -31,10 +31,6 @@
         Calculate results
     </a>
 
-    <a href="@Url.Action("CalculateResultsComplete", "Tournament", new { id = Model.Tournament.Id })" class="btn btn-info btn-small">
-        <span class="glyphicon glyphicon-export"></span>Calculate results
-    </a>
-
     <a href="@Url.Action("GenerateNextRound", "Tournament", new { tournamentId = Model.Tournament.Id, withPairsRepeat = false })"
        class="btn btn-info btn-small">
         <span class="glyphicon glyphicon-circle-arrow-right"></span>

@@ -59,10 +59,19 @@
 
             </th>
         </tr>
-
+        @{
+            var boardNumber = 0;
+            var rowStyle = "rowStyleOdd";
+        }
         @foreach (var item in Model)
         {
-            <tr>
+            if (item.Board.BoardNumber != boardNumber)
+            {
+                boardNumber = item.Board.BoardNumber;
+                rowStyle = rowStyle == "rowStyleOdd" ? "rowStyleEven" : "rowStyleOdd";
+            }
+            
+            <tr class="@rowStyle">
                 <td>
                     @if (item.PlayedBy == NESW.DirectorScore || item.ResultNsPoints.HasValue)
                     {

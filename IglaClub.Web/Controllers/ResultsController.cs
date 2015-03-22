@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using IglaClub.ObjectModel.Consts;
 using IglaClub.ObjectModel.Entities;
 using IglaClub.ObjectModel.Repositories;
 using IglaClub.ObjectModel.Tools;
-using IglaClub.Web.Authorization;
+using IglaClub.Web.Infrastructure;
 using IglaClub.Web.Models;
 using IglaClub.Web.Models.ViewModels;
 using IglaClub.TournamentManager;
@@ -26,6 +24,7 @@ namespace IglaClub.Web.Controllers
         private readonly ResultRepository resultRepository;
         private readonly TournamentRepository tournamentRepository;
         private const string _itemNotFound = "Tournament not found.";
+        private readonly INotificationService notificationService;
 
         public ResultsController()
         {
@@ -33,6 +32,7 @@ namespace IglaClub.Web.Controllers
             userRepository = new UserRepository(db);
             resultRepository = new ResultRepository(db);
             tournamentRepository = new TournamentRepository(db);
+            notificationService = new NotificationService(TempData);
         }
 
         public PartialViewResult Index(long tournamentId)
@@ -85,7 +85,14 @@ namespace IglaClub.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var parsedResult = ResultsParser.Parse(Request["ShortScore"]);
+                var shortScore = Request["ShortScore"];
+                var parsedResult = ResultsParser.Parse(shortScore);
+                if (!string.IsNullOrEmpty(shortScore) && parsedResult == null)
+                {
+                    notificationService.DisplayError("Wrong format of short score: {0}. \r\n Please refer to format: {1}", shortScore, StringResources.ShortScoreTooltip);
+                    return View(result);
+                }
+
                 if (parsedResult != null)
                     result = ResultsParser.UpdateResult(result, parsedResult);
                 var board = this.resultRepository.Get<BoardInstance>(result.BoardId);

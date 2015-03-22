@@ -49,7 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Consts\Consts.cs" />
+    <Compile Include="Consts\StringResources.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\BoardDefinition.cs" />
     <Compile Include="Entities\BoardInstance.cs" />
