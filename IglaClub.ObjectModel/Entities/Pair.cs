@@ -26,6 +26,12 @@ namespace IglaClub.ObjectModel.Entities
             return (Player1 == null ? "Unknown" : Player1.GetDisplayName()) + " - " + (Player2 == null ? "Unknown" : Player2.GetDisplayName());
         }
 
-        
+        public bool IsByePair
+        {
+            get
+            {
+                return (Player1 == null && Player2 == null);
+            } 
+        }
     }
 }

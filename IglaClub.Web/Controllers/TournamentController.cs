@@ -176,7 +176,7 @@ namespace IglaClub.Web.Controllers
 
         //
         // GET: /Tournament/Delete/5
-
+        [TournamentOwner]
         public ActionResult Delete(long id = 0)
         {
             Tournament tournament = db.Tournaments.Find(id);
@@ -190,11 +190,13 @@ namespace IglaClub.Web.Controllers
         //
         // POST: /Tournament/Delete/5
 
+        [TournamentOwner]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
             tournamentManager.DeleteTournament(id);
+            notificationService.DisplaySuccess("Tournament with id {0} deleted", id);
             return RedirectToAction("Index");
         }
 

@@ -98,7 +98,7 @@ namespace IglaClub.Web.Controllers
             return View(result);
         }
 
-        [TournamentOwner]
+        //[TournamentOwner]
         public ActionResult Manage(long tournamentId, string sort, string sortdir)
         {
             Tournament tournament = tournamentRepository.GetTournament(tournamentId);
@@ -116,7 +116,7 @@ namespace IglaClub.Web.Controllers
                         results = tournament.Results.OrderBy(r => r.TableNumber).ToList();
                         break;
                     default:
-                        results = tournament.Results.OrderBy(r => r.Board.BoardNumber).OrderBy(r => r.RoundNumber).ToList();
+                        results = tournament.Results.OrderBy(r => r.Board.BoardNumber).ThenBy(r => r.RoundNumber).ToList();
                         break;
                 }
                 if (sortdir == "DESC")
