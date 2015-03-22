@@ -1,8 +1,9 @@
 ﻿@using IglaClub.ObjectModel.Entities
 @using IglaClub.ObjectModel.Enums
 @using IglaClub.Web.Helpers.Html
-@model IEnumerable<Tournament>
+@model IList<Tournament>
 
+        <span class="medium-header">@ViewBag.Title</span>
 @if (Model.Any())
 {
     <table class="tournamentsListTable table table-striped table-hover">

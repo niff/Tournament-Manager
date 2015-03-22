@@ -362,20 +362,20 @@ namespace IglaClub.Web.Controllers
             throw new NotImplementedException();
         }
 
-        public PartialViewResult Oncoming()
-        {
-            return PartialView("_TournamentList", tournamentRepository.GetTournamentsToPlayForUser(GetCurrentUserName()));
-        }
+        //public PartialViewResult Oncoming()
+        //{
+        //    return PartialView("_TournamentList", tournamentRepository.GetTournamentsToPlayForUser(GetCurrentUserName()));
+        //}
 
-        public PartialViewResult Past()
-        {
-            return PartialView("_TournamentList", tournamentRepository.GetFinished());
-        }
+        //public PartialViewResult Past()
+        //{
+        //    return PartialView("_TournamentList", tournamentRepository.GetFinished().ToList());
+        //}
         
-        public PartialViewResult Ongoing()
-        {
-            return PartialView("_TournamentList", tournamentRepository.GetOngoing());
-        }
+        //public PartialViewResult Ongoing()
+        //{
+        //    return PartialView("_TournamentList", tournamentRepository.GetOngoing().ToList());
+        //}
 
 
 
@@ -387,25 +387,29 @@ namespace IglaClub.Web.Controllers
             //return View("_QuickAddUser");
         }
 
-        public ActionResult MyTournamentsToPlay()
+        public PartialViewResult MyTournamentsToPlay()
         {
             var model = tournamentRepository.GetTournamentsToPlayForUser(User.Identity.Name);
-            ViewBag.Title = "Tournaments that you are subscribed to";
-            return View("TournamentsListWrapper",model);
+            ViewBag.Title = "My tournaments";
+            return PartialView("_TournamentList", model);
         }
 
-        public ActionResult AvailableTournaments()
+        public PartialViewResult AvailableTournaments()
         {
-            var model = tournamentRepository.GetPlanned();
+            var model = tournamentRepository.GetPlanned().OrderBy(t => t.PlannedStartDate);
+            var pastItemsAtTheEnd = model.Where(t => t.PlannedStartDate >= DateTime.Now)
+               .Union(model.Where(t => t.PlannedStartDate < DateTime.Now)).ToList();
+
+
             ViewBag.Title = "Other torunaments";
-            return View("TournamentsListWrapper",model);
+            return PartialView("_TournamentList", pastItemsAtTheEnd);
         }
 
         public ActionResult MyOrganizedTournaments()
         {
-            var model = tournamentRepository.GetFinished();
+            var model = tournamentRepository.GetFinished().ToList();
             ViewBag.Title = "Tournaments created by you";
-            return View("TournamentsListWrapper",model);
+            return View("TournamentsListWrapper", model);
         }
 
         public ActionResult AllTournamentsMap()

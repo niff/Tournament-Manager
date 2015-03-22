@@ -39,32 +39,29 @@ namespace IglaClub.ObjectModel.Repositories
                 .FirstOrDefault(t => t.Id == id);
         }
 
-        public IList<Tournament> GetPlanned()
+        public IEnumerable<Tournament> GetPlanned()
         {
             DateTime dateFrom = DateTime.Today.AddDays(-1);
             return
                 db.Tournaments.Where(
-                    t => t.TournamentStatus == TournamentStatus.Planned &&
-                        ( !t.PlannedStartDate.HasValue || t.PlannedStartDate >= dateFrom))
+                    t => t.TournamentStatus == TournamentStatus.Planned 
+                        && ( !t.PlannedStartDate.HasValue || t.PlannedStartDate >= dateFrom))
                     .OrderBy(x=>x.CreationDate)
-                    .ThenBy(x => x.PlannedStartDate)
-                    .ToList();
+                    .ThenBy(x => x.PlannedStartDate);
         }
 
-        public IList<Tournament> GetFinished()
+        public IEnumerable<Tournament> GetFinished()
         {
             return
                 db.Tournaments.Where(
                     t => t.TournamentStatus == TournamentStatus.Finished)
-                    .OrderByDescending(x => x.PlannedStartDate)
-                    .ToList();
+                    .OrderByDescending(x => x.PlannedStartDate);
         }
 
-        public IList<Tournament> GetOngoing()
+        public IEnumerable<Tournament> GetOngoing()
         {
             return db.Tournaments.Where(t => t.TournamentStatus == TournamentStatus.Started)
-                .OrderByDescending(x => x.TournamentStatus).ThenBy(x => x.PlannedStartDate)
-                .ToList();
+                .OrderByDescending(x => x.TournamentStatus).ThenBy(x => x.PlannedStartDate);
         }
 
         public bool UserIsTournamentOwner(string userName, long tournamentId)
