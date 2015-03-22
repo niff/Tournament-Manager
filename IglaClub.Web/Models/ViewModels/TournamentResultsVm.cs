@@ -8,6 +8,9 @@ namespace IglaClub.Web.Models.ViewModels
         public Tournament Tournament { get; set; }
 
         public IList<Result> Results { get; set; }
+        
+        public string SortBy { get; set; }
 
+        public string SortOrder { get; set; }
     }
 }

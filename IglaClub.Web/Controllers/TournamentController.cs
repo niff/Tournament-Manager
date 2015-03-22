@@ -389,7 +389,7 @@ namespace IglaClub.Web.Controllers
 
         public PartialViewResult MyTournamentsToPlay()
         {
-            var model = tournamentRepository.GetTournamentsToPlayForUser(GetCurrentUserName());
+            var model = tournamentRepository.GetTournamentsToPlayByUser(GetCurrentUserName());
             ViewBag.Title = "My tournaments";
             return PartialView("_TournamentList", model);
         }

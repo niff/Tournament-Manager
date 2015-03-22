@@ -99,30 +99,28 @@ namespace IglaClub.Web.Controllers
         }
 
         //[TournamentOwner]
-        public ActionResult Manage(long tournamentId, string sort, string sortdir)
+        public ActionResult Manage(long tournamentId, string sortBy, string sortdir)
         {
             Tournament tournament = tournamentRepository.GetTournament(tournamentId);
             if (tournament == null)
                 return Content(_itemNotFound);
-            List<Result> results = tournament.Results.ToList();
-            if (!string.IsNullOrEmpty(sort))
-            {
-               switch (sort)
-               { 
-                    case "BoardNumber":
-                        results = tournament.Results.OrderBy(r => r.Board.BoardNumber).ToList();
-                        break;
-                    case "TableNumber":
-                        results = tournament.Results.OrderBy(r => r.TableNumber).ToList();
-                        break;
-                    default:
-                        results = tournament.Results.OrderBy(r => r.Board.BoardNumber).ThenBy(r => r.RoundNumber).ToList();
-                        break;
-                }
-                if (sortdir == "DESC")
-                    results.Reverse();
+            IEnumerable<Result> results = tournament.Results;
+            switch (sortBy)
+            { 
+                case "BoardNumber":
+                    results = results.OrderBy(r => r.Board.BoardNumber);
+                    break;
+                case "TableNumber":
+                    results = results.OrderBy(r => r.TableNumber);
+                    break;
+                default:
+                    results = results.OrderBy(r => r.Board.BoardNumber).ThenBy(r => r.RoundNumber);
+                    break;
             }
-            return View(new TournamentResultsVm{Tournament = tournament, Results = results});
+            if (sortdir == "DESC")
+                results = results.Reverse();
+            
+            return View(new TournamentResultsVm{Tournament = tournament, Results = results.ToList(), SortOrder = sortdir, SortBy = sortBy});
         }
 
         public ActionResult CreateEmpty(long tournamentId)

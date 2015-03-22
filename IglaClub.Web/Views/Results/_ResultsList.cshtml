@@ -11,10 +11,10 @@
                 Finished
             </th>
             <th>
-                <a href="@Url.Action("Manage", new {tournamenId = Model.First().TournamentId, sort = "RoundNumber"})"> @Html.DisplayNameFor(model => model.RoundNumber)</a>
+                <a href="@Url.Action("Manage", new {tournamentId = Model.First().TournamentId, sortBy = "RoundNumber"})"> @Html.DisplayNameFor(model => model.RoundNumber)</a>
             </th>
             <th>
-                <a href="@Url.Action("Manage", new {tournamenId = Model.First().TournamentId, sort = "TableNumber"})"> @Html.DisplayNameFor(model => model.TableNumber)</a>
+                <a href="@Url.Action("Manage", new { tournamentId = Model.First().TournamentId, sortBy = "TableNumber" })"> @Html.DisplayNameFor(model => model.TableNumber)</a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NS)
@@ -23,7 +23,7 @@
                 @Html.DisplayNameFor(model => model.EW)
             </th>
             <th>
-                <a href="@Url.Action("Manage","Tournament", new {tournamenId = Model.First().TournamentId, sort = "BoardNumber", sortDir = ""})">Board</a>
+                <a href="@Url.Action("Manage", "Results", new { tournamentId = Model.First().TournamentId, sortBy = "BoardNumber", sortDir = "" })">Board</a>
             </th>
             <th>
                 Short score
