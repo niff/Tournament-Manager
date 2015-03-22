@@ -406,7 +406,7 @@ namespace IglaClub.Web.Controllers
 
         public ActionResult MyOrganizedTournaments()
         {
-            var model = tournamentRepository..ToList();
+            var model = tournamentRepository.GetTournamentsByOwnerUser(GetCurrentUserName()).ToList();
             ViewBag.Title = "Tournaments created by you";
             return View("TournamentsListWrapper", model);
         }
