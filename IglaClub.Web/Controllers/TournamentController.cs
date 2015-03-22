@@ -399,9 +399,8 @@ namespace IglaClub.Web.Controllers
             var model = tournamentRepository.GetAvailableTournamentsByUser(GetCurrentUserName()).OrderBy(t => t.PlannedStartDate);
             var pastItemsAtTheEnd = model.Where(t => t.PlannedStartDate >= DateTime.Now)
                .Union(model.Where(t => t.PlannedStartDate < DateTime.Now)).ToList();
-
-
-            ViewBag.Title = "Other torunaments";
+            
+            ViewBag.Title = "Other tournaments";
             return PartialView("_TournamentList", pastItemsAtTheEnd);
         }
 

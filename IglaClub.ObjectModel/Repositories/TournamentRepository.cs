@@ -87,12 +87,12 @@ namespace IglaClub.ObjectModel.Repositories
 
         public IList<Tournament> GetAvailableTournamentsByUser(string userLogin)
         {
-             var tournaments = from t in db.Tournaments
-                join p in db.Pairs on t.Id equals p.Tournament.Id
-                where p.Player1.Login != userLogin 
-                    && p.Player2.Login != userLogin
-                    && t.TournamentStatus == TournamentStatus.Planned
-                select t;
+            var tournaments =
+                db.Tournaments.Where(
+                    t =>
+                        t.Pairs.All(p => p.Player1.Login != userLogin && p.Player2.Login != userLogin) &&
+                        t.TournamentStatus == TournamentStatus.Planned);
+
             return tournaments.ToList();
         }
 
