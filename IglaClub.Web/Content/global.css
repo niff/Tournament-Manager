@@ -444,11 +444,6 @@ footer {
     .navbar-custom .navbar-toggle {
         border-color: #002560;
     }
-
-        .navbar-custom .navbar-toggle:hover, .navbar-custom .navbar-toggle:focus {
-            /*background-color: #002560;*/
-        }
-
     .navbar-custom .btn-default:hover {
         background-color: #bbc2ce;
         color: white;
@@ -498,7 +493,7 @@ footer {
         font-size: 18px !important;
     }
 
-    .navbar-custom .dropdown-menu > li > a:hover {
+    .navbar-custom .dropdown-menu > li > a:hover,.navbar-custom .dropdown-menu > li > span:hover {
         color: slategray;
     }
 
@@ -557,4 +552,16 @@ footer {
     padding: 6px 12px;
     outline: none;
     height: inherit;
+}
+.main-menu .menu-sub-text{
+      color: rgb(184, 221, 253);
+  margin-left: 20px;
+    white-space: nowrap;
+    font-size: small;
+}
+.main-menu a{
+    line-height: 18px;
+}
+.main-menu li{
+      border-bottom: 1px dashed lightblue;
 }

@@ -38,7 +38,11 @@
                                     </button>
                                     <ul class="dropdown-menu main-menu" role="menu" aria-labelledby="menuOrg">
                                         <li><a href="@Url.Action("Create", "Tournament", new { area = "" }, null)">Create tournament</a></li>
-                                        <li><a href="@Url.Action("MyOrganizedTournaments", "Tournament", new { area = "" }, null)">My tournaments</a></li>
+                                        <li><a href="@Url.Action("MyOrganizedTournaments", "Tournament", new { area = "" }, null)">
+                                                <span>My tournaments</span>
+                                                <br/><span class="menu-sub-text">Tournaments that I organize</span>
+                                            </a>
+                                        </li>
                                         <li><a href="@Url.Action("MyClubs", "Clubs", new { area = "" }, null)">My clubs</a></li>
                                     </ul>
                                 </div>

@@ -62,9 +62,11 @@
             @Html.LabelFor(model => model.Address)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Address, new {@placeholder = "Search address"})
+            @Html.TextBoxFor(model => model.Address, new {@placeholder = "Search address", @id="pac-input"})
             @Html.ValidationMessageFor(model => model.Address)
         </div>
+        <input name="coords" id="coords" type="hidden"/>
+
     <label>Location on map</label>
         <div id="map-canvas"></div>
         <p>

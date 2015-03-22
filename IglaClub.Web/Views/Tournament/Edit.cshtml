@@ -67,10 +67,12 @@
                             <div class="editor-label">
             @Html.LabelFor(model => model.Address)
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Address)
-            @Html.ValidationMessageFor(model => model.Address)
-        </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.Address, new { @id="pac-input"})
+                @Html.ValidationMessageFor(model => model.Address)
+            </div>
+        <input name="coords" id="coords" type="hidden"/>
+
     <label>Location on map</label>
         <div id="map-canvas"></div>
             @Html.HiddenFor(model => model.Id)
@@ -99,3 +101,13 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+<script src="~/Scripts/gmap-plugin.js"></script>
+<script>
+    $(document).ready(function () {
+        var options = {
+            coordinates: '@(Model.Coordinates ?? "( 50.06139,19.93833)")'
+        };
+        $("#map-canvas").initializeMap(options);
+    });
+</script>
