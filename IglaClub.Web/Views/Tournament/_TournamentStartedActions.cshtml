@@ -1,0 +1,23 @@
+﻿@using IglaClub.ObjectModel.Enums
+@model IglaClub.ObjectModel.Entities.Tournament
+
+@Html.ActionLink("Manage results", "Manage", "Results",
+            new { tournamentId = Model.Id },
+            new { @class = "btn btn-info", title = "Manage current results: change placing, add/change scores - essential of the tournament directing." })
+
+@Html.ActionLink("Refresh results", "CalculateResults",
+            new { id = Model.Id },
+            new { @class = "btn btn-info" })
+
+@if (Model.TournamentMovingType == TournamentMovingType.Cavendish)
+{
+@Html.ActionLink("Generate next round", "GenerateNextRound",
+                new { tournamentId = Model.Id, withPairsRepeat = false },
+                new { @class = "btn btn-info", title = "If everything is ok, generate boards and placing for the next round." })
+}
+else
+{
+@Html.ActionLink("Move to the next round", "MoveToNextRound",
+                new { tournamentId = Model.Id, withPairsRepeat = false },
+                new { @class = "btn btn-info" })
+}

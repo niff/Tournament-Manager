@@ -1,0 +1,94 @@
+﻿@using IglaClub.ObjectModel.Enums
+@model IglaClub.Web.Models.ViewModels.TournamentManageVm
+
+@{
+    ViewBag.Title = "Manage tournament " + Model.Tournament.Name;
+}
+
+<div class="">
+    <p>@Html.ActionLink("Tournaments", "Index") > Manage tournament</p>
+
+    <span class="medium-header">@Model.Tournament.Name</span>
+    <span class="tournemanet-quick-edit"><a href="@Url.Action("Edit", new { id = Model.Tournament.Id })" class="btn btn-info btn-small">
+        <span class="glyphicon glyphicon-pencil"></span>Edit</a>
+        <a href="@Url.Action("Delete", new { id = Model.Tournament.Id })" class="btn btn-info btn-small">
+            <span class="glyphicon glyphicon-remove"></span>Delete</a></span>
+</div>
+<div class="tournament-manage-area">
+    <div class="row">
+        <div class="col-md-6">
+            @Html.Partial("_TournamentShortInfo", Model.Tournament)
+        </div>
+    </div>
+    <div class="row action-pane">
+        <div class="col-md-6">
+            @if (Model.Tournament.TournamentStatus == TournamentStatus.Planned)
+            {
+                @Html.ActionLink("Start Tournament", "Start", new { id = Model.Tournament.Id }, new { @class = "btn btn-info" })
+            }
+            @if (Model.Tournament.TournamentStatus == TournamentStatus.Started)
+            {
+                @Html.ActionLink("Manage results", "Manage", "Results",
+                    new { tournamentId = Model.Tournament.Id },
+                    new { @class = "btn btn-info", title = "Manage current results: change placing, add/change scores - essential of the tournament directing." })
+
+                @Html.ActionLink("Refresh results", "CalculateResults",
+                    new { id = Model.Tournament.Id },
+                    new { @class = "btn btn-info" })
+
+                if (Model.Tournament.TournamentMovingType == TournamentMovingType.Cavendish)
+                {
+                    @Html.ActionLink("Generate next round", "GenerateNextRound",
+                        new { tournamentId = Model.Tournament.Id, withPairsRepeat = false },
+                        new { @class = "btn btn-info", title = "If everything is ok, generate boards and placing for the next round." })
+                }
+                else
+                {
+
+                    @Html.ActionLink("Move to the next round", "MoveToNextRound",
+                        new { tournamentId = Model.Tournament.Id, withPairsRepeat = false },
+                        new { @class = "btn btn-info" })
+                }
+
+            }
+
+        </div>
+    </div>
+    @if (Model.Tournament.TournamentStatus == TournamentStatus.Started)
+    {
+        <div class="row">
+            <div class="col-md-6">
+                @Html.Label("Round number: " + Model.Tournament.CurrentRound) <br />
+
+                @{ var resultsLeftClass = Model.ResultsToComplete == 0 ? "text-success" : "text-danger"; }
+                @Html.Label("Results left to complete round: " + Model.ResultsToComplete, new { @class = resultsLeftClass })
+            </div>
+
+        </div>
+    }
+
+    <div class="row">
+        @if (Model.Tournament.TournamentStatus == TournamentStatus.Planned)
+        {
+            <div class="col-md-6 action-pane">
+                <div class="pairs" id="participantsDiv">
+                @Html.Action("TournamentParticipantsEdit", new { tournamentId = @Model.Tournament.Id })
+            </div>
+            </div>
+        }
+
+
+        @if (Model.Tournament.TournamentStatus == TournamentStatus.Started)
+        {
+            <div class="col-md-6 action-pane">
+                @Html.Action("PairRoster", new { tournamentId = @Model.Tournament.Id })
+            </div>
+            <div class="col-md-6 action-pane">
+                @Html.Action("PairsResults", "Results", new { tournamentId = @Model.Tournament.Id })
+            </div>
+        }
+    </div>
+
+</div>
+
+

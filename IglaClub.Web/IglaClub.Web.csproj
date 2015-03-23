@@ -444,6 +444,7 @@
     <Content Include="Views\Tournament\TournamentsByOwner.cshtml" />
     <Content Include="Views\Shared\_RegisterPartial.cshtml" />
     <Content Include="Views\Shared\_LoginMobilePartial.cshtml" />
+    <Content Include="Views\Tournament\_TournamentStartedActions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
