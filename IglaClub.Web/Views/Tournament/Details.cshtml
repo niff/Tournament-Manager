@@ -12,8 +12,14 @@
 </div>
 
 <div class="row">
-    <div class="col-md-6">       
+    <div class="col-md-12">       
         @Html.Partial("_TournamentShortInfo", Model)
+    </div>
+    <div class="col-md-12">
+        <p>
+            <img src="http://whiteningrx.com/images/progress_bar.gif" />
+            @Html.ActionLink("Go to my round details", "RoundDetails", "Round", new { tournamentId = Model.Id }, null)
+        </p>
     </div>
     <div class="col-md-6">
         @if (Model.TournamentStatus != TournamentStatus.Planned)
@@ -27,11 +33,11 @@
             @:</div>
         }
     </div>
+    <div class="col-md-6 action-pane">
+        @if (Model.TournamentStatus == TournamentStatus.Started)
+        {
+            @Html.Action("PairRoster", new { tournamentId = @Model.Id });
+        }
+    </div>
+</div>
 
-</div>
-<div class="col-md-6 action-pane">
-    @if (Model.TournamentStatus == TournamentStatus.Started)
-    {
-        @Html.Action("PairRoster", new { tournamentId = @Model.Id });
-    }
-</div>

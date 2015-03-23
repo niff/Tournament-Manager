@@ -42,9 +42,10 @@
                             Edit
                         </a>
                     </td>
-               </tr>
+                </tr>
             }
         </table>
+        @Html.ActionLink("See tournament details", "Details", "Tournament",new {id = Model.Tournament.Id}, null)
     </div>
 }
 else
