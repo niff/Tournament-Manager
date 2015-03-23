@@ -87,7 +87,7 @@ input:not([type="submit"]):not([type="button"]):not([type="checkbox"]), select, 
 }
 
 fieldset.create-tournament input, fieldset.create-tournament textarea, fieldset.create-tournament select {
-    width: 350px !important;
+    width: 350px ;
 }
 
 textarea {
@@ -398,6 +398,7 @@ footer {
 #map-canvas {
     height: 150px;
     width: 300px;
+    margin-bottom: 10px;
 }
 .quick-sign-up-block {
     padding: 20px 0 15px 0;
@@ -666,6 +667,8 @@ footer {
         margin: 0;
         padding: 0;
         font-size: 5vw;
+    }
+    .left-menu-button {
          min-width: 75px;
     }
     .start-info-block {
@@ -673,7 +676,7 @@ footer {
     }
 
     .row {
-        padding-left: 0;
+       padding-right: 8px;
     }
     .pairs {
         border: none;
@@ -683,5 +686,17 @@ footer {
     
     .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
         padding: 0 !important;
+    }
+    fieldset.login {
+        width: auto;
+    }
+    .quick-sign-up-block input {
+        max-width: 125px;
+    }
+    #map-canvas {
+        width: auto;
+    }
+    fieldset.create-tournament input, fieldset.create-tournament textarea, fieldset.create-tournament select {
+        width: 100%;
     }
 }
