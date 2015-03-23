@@ -1,0 +1,32 @@
+﻿@*<div class="login-mobile-partial">*@
+    <div class="btn-group login-menu">
+        @if (Request.IsAuthenticated)
+        {
+            using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm" }))
+            {
+            @Html.AntiForgeryToken()              
+            <button type="button" class="button-custom-menu dropdown-toggle visible-xs" data-toggle="dropdown" aria-expanded="false">
+                @User.Identity.Name<i class="glyphicon glyphicon-cog"></i><span class="caret caret-black"></span>
+            </button>
+            <ul class="dropdown-menu login-dd" role="menu">
+                <li><a href="@Url.Action("Edit", "Account", new { area = "" }, null)">Edit profile</a></li>
+                <li><a href="@Url.Action("Manage", "Account", new { area = "" }, null)">Change password</a></li>
+                <li><a href="#">Account settings</a></li>
+                <li class="divider"></li>
+                <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="glyphicon glyphicon-off"></i>Log out</a></li>
+            </ul>
+            }
+        }
+        else
+        {
+            <button type="button" class="button-custom-menu dropdown-toggle visible-xs" data-toggle="dropdown" aria-expanded="false">
+                <i class="glyphicon glyphicon-align-justify icon-with-margin"></i>
+            </button>
+            <ul class="dropdown-menu main-menu" role="menu">
+                <li><a href="@Url.Action("Register", "Account", new { id = "registerLink", area = "" })">Register</a></li>
+                <li><a href="@Url.Action("Login", "Account", new { id = "loginLink", area = "" })">Login</a></li>
+            </ul>
+        }
+
+    </div>
+@*</div>*@

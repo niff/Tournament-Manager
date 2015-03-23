@@ -16,29 +16,30 @@
         <div class="container">
             <header>
                 <div class="row navbar navbar-custom text-right text-primary">
+
                     <div class="col-md-8 col-xs-12 max-height">
                         <nav>
                             <div class="navbar-header">
                                 <div class="btn-group">
-                                <button type="button" class="button-custom-menu dropdown-toggle"
-                                        data-toggle="dropdown" aria-expanded="false" id="menuPlay">
-                                    Play
-                                    <span class="caret caret-custom-menu"></span>
-                                </button>
-                                <ul class="dropdown-menu main-menu" role="menu" aria-labelledby="menuPlay">
-                                    <li><a href="@Url.Action("MyTournamentsToPlayWrapper", "Tournament", new { area = "" }, null)">My Tournaments
-                                        <br/><span class="menu-sub-text">Tournaments in which I participate</span>
+                                    <button type="button" class="button-custom-menu dropdown-toggle"
+                                            data-toggle="dropdown" aria-expanded="false" id="menuPlay">
+                                        Play
+                                        <span class="caret caret-custom-menu"></span>
+                                    </button>
+                                    <ul class="dropdown-menu main-menu" role="menu" aria-labelledby="menuPlay">
+                                        <li><a href="@Url.Action("MyTournamentsToPlayWrapper", "Tournament", new { area = "" }, null)">My Tournaments
+                                                <br/><span class="menu-sub-text">Tournaments in which I participate</span>
                                             </a>
                                         </li>
-                                    <li><a href="@Url.Action("AvailableTournamentsWrapper", "Tournament", new { area = "" }, null)">Tournaments in near
-                                        <br/><span class="menu-sub-text">Find other interesting tournaments</span>
+                                        <li><a href="@Url.Action("AvailableTournamentsWrapper", "Tournament", new { area = "" }, null)">Tournaments in near
+                                                <br/><span class="menu-sub-text">Find other interesting tournaments</span>
                                             </a>
                                         </li>
-                                    <li><a href="@Url.Action("MyResults", "Results")">My Results
-                                        <br/><span class="menu-sub-text">See results from my recent tournaments</span>
+                                        <li><a href="@Url.Action("MyResults", "Results")">My Results
+                                                <br/><span class="menu-sub-text">See results from my recent tournaments</span>
                                             </a>
                                         </li>
-                                </ul></div>
+                                    </ul></div>
                                 <div class="btn-group">
                                     <button type="button" class="button-custom-menu dropdown-toggle"
                                             data-toggle="dropdown" aria-expanded="false" id="menuOrg">
@@ -47,7 +48,7 @@
                                     </button>
                                     <ul class="dropdown-menu main-menu" role="menu" aria-labelledby="menuOrg">
                                         <li><a href="@Url.Action("Create", "Tournament", new { area = "" }, null)">Create tournament
-                                        <br/><span class="menu-sub-text">Add new tournament and invite users</span>
+                                                <br/><span class="menu-sub-text">Add new tournament and invite users</span>
                                             </a>
                                         </li>
                                         <li><a href="@Url.Action("MyOrganizedTournaments", "Tournament", new { area = "" }, null)">My tournaments
@@ -55,29 +56,34 @@
                                             </a>
                                         </li>
                                         <li><a href="@Url.Action("MyClubs", "Clubs", new { area = "" }, null)">My clubs
-                                        <br/><span class="menu-sub-text">Bridge clubs that I manage</span>
+                                                <br/><span class="menu-sub-text">Bridge clubs that I manage</span>
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
                                 
                                 <div class="btn-group">
-                                <button type="button" class="button-custom-menu dropdown-toggle"
-                                        data-toggle="dropdown" aria-expanded="false" id="menuBrowse">
-                                    Browse
-                                    <span class="caret caret-custom-menu"></span>
-                                </button>
+                                    <button type="button" class="button-custom-menu dropdown-toggle"
+                                            data-toggle="dropdown" aria-expanded="false" id="menuBrowse">
+                                        Browse
+                                        <span class="caret caret-custom-menu"></span>
+                                    </button>
                                     <ul class="dropdown-menu main-menu" role="menu" aria-labelledby="menuBrowse">
                                         <li><a href="@Url.Action("GetAll", "Tournament", new { area = "" }, null)">All tournaments</a></li>
                                         <li><a href="@Url.Action("MyClubs", "Clubs", new { area = "" }, null)">Players</a></li>
                                     </ul>
-                                    </div>
+                                </div>
+                                @Html.Partial("_LoginMobilePartial")
                             </div>
                         </nav>
                     </div>
-                    <div class="col-md-4 col-xs-12 max-height">
+                    <div class="col-md-4 col-xs-12 hidden-xs max-height">
                         @Html.Partial("_LoginPartial")
                     </div>
+@*                
+                    <div class="col-xs-12 hidden-md hidden-sm hidden-lg max-height">
+                        @Html.Partial("_LoginMobilePartial")
+                    </div>*@
                 </div>
              @*   <div class="row logo"> </div>*@
                 @{

@@ -548,7 +548,25 @@ footer {
 .navbar-custom .login-partial ul.list-inline {
     margin-bottom: 0;
 }
-
+.login-mobile-partial {
+  /*position: absolute;
+  text-align: right;
+  right: 0px;*/
+}
+.login-mobile-partial .dropdown-menu{
+      margin: 0;
+  position: fixed;
+  left: 0;
+  top: auto;
+}
+.login-mobile-partial .glyphicon {
+    color: white;
+    font-size: 6vw;
+}
+.login-mobile-partial .login-menu {
+    position: absolute;
+  right: 0;
+}
 .caret-black {
     border-top-color: #2C2C2C !important;
 }
@@ -598,36 +616,52 @@ footer {
         padding-left: 0;
         padding-right: 0;
     }
+
     .navbar-custom {
         background-color: rgb(24, 102, 178);
         background-image: none;
         border-radius: 0;
-          padding-left: 10px;
+        padding-left: 10px;
     }
-        .navbar-custom ul {
-            width: 97vw;
+
+    .navbar-custom ul {
+        width: 100%;
     }
-        .navbar-custom .dropdown-menu {
-            margin: 0;
-            position: fixed;
-  left: 0;
-            top: auto;
+
+    .navbar-custom .dropdown-menu {
+        margin: 0;
+        position: fixed;
+        left: 0;
+        top: auto;
+    }
+
+    .navbar-custom .caret {
+        margin: 0;
+    }
+    .navbar-custom .glyphicon:empty {
+          margin-right: 6px;
+  margin-top: 6px;
+  vertical-align: bottom;
     }
     .navbar-custom .col-xs-12 {
         padding-left: 10px;
         padding-right: 0;
     }
+
     .navbar-header {
         text-align: left;
     }
+
     .button-custom-menu {
         margin: 0;
         padding: 0;
         font-size: 6vw;
     }
+
     .start-info-block {
         display: none;
     }
+
     .row {
         padding-left: 0;
     }
