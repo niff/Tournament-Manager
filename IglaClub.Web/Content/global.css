@@ -600,11 +600,21 @@ footer {
     }
     .navbar-custom {
         background-color: rgb(24, 102, 178);
+        background-image: none;
         border-radius: 0;
+          padding-left: 10px;
     }
-    
+        .navbar-custom ul {
+            width: 97vw;
+    }
+        .navbar-custom .dropdown-menu {
+            margin: 0;
+            position: fixed;
+  left: 0;
+            top: auto;
+    }
     .navbar-custom .col-xs-12 {
-        padding-left: 0;
+        padding-left: 10px;
         padding-right: 0;
     }
     .navbar-header {
@@ -613,9 +623,12 @@ footer {
     .button-custom-menu {
         margin: 0;
         padding: 0;
+        font-size: 6vw;
     }
     .start-info-block {
         display: none;
     }
-
+    .row {
+        padding-left: 0;
+    }
 }
