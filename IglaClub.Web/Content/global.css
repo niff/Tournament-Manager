@@ -121,7 +121,9 @@ list-inline a, a:hover {
 .icon-with-margin {
     margin: 0 10px;
 }
-
+.blue {
+    background-color: cornflowerblue;
+}
 .pairs {
     border: 1px solid rgb(218, 218, 218);
     padding: 10px;
@@ -196,6 +198,12 @@ table.result {
         color: rgb(25, 56, 113);
         font-weight: bold;
     }
+.user-subscribe-box {
+    border-bottom: 1px silver dashed; margin-bottom: 10px; padding-bottom: 10px;
+}
+#participantsDiv .user-subscribe-box select {
+    width: auto;
+}
 
 .tournemanet-quick-edit {
     line-height: 2em;
@@ -666,5 +674,14 @@ footer {
 
     .row {
         padding-left: 0;
+    }
+    .pairs {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+    }
+    
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+        padding: 0 !important;
     }
 }
