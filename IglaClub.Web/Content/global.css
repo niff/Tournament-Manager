@@ -44,6 +44,7 @@ body {
     }
 }
 
+
 input:not([type="submit"]):not([type="button"]):not([type="checkbox"]), select, textarea {
     background-color: #ffffff;
     border: 1px solid #cccccc;
@@ -589,4 +590,32 @@ footer {
 }
 .main-menu li{
       border-bottom: 1px dashed lightblue;
+}
+
+
+@media (max-width: 472px) {
+    .container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .navbar-custom {
+        background-color: rgb(24, 102, 178);
+        border-radius: 0;
+    }
+    
+    .navbar-custom .col-xs-12 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .navbar-header {
+        text-align: left;
+    }
+    .button-custom-menu {
+        margin: 0;
+        padding: 0;
+    }
+    .start-info-block {
+        display: none;
+    }
+
 }

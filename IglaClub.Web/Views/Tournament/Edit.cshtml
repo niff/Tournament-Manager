@@ -2,16 +2,15 @@
 @model IglaClub.ObjectModel.Entities.Tournament
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit tournament";
 }
-
-<h2>Edit @Model.Name</h2>
 <div style="float: left">
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
 
         <fieldset>
+            <legend>Edit @Model.Name</legend>
             <div class="editor-label">
                 @Html.LabelFor(model => model.Name)
             </div>
@@ -36,7 +35,7 @@
                 @Html.ValidationMessageFor(model => model.BoardsInRound)
             </div>
             <div class="editor-label">
-                 @Html.LabelFor(model => model.PlannedStartDate)
+                @Html.LabelFor(model => model.PlannedStartDate)
             </div>
             <div class="editor-field">
                 @Html.TextBoxFor(model => model.PlannedStartDate, new { id = "datepicker" })
@@ -64,17 +63,17 @@
                 @Html.HiddenFor(model => model.TournamentScoringType)
                 @Html.HiddenFor(model => model.TournamentMovingType)
             }
-                            <div class="editor-label">
-            @Html.LabelFor(model => model.Address)
-        </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Address)
+            </div>
             <div class="editor-field">
                 @Html.TextBoxFor(model => model.Address, new { @id="pac-input"})
                 @Html.ValidationMessageFor(model => model.Address)
             </div>
-        <input name="coords" id="coords" type="hidden"/>
+            <input name="coords" id="coords" type="hidden"/>
 
-    <label>Location on map</label>
-        <div id="map-canvas"></div>
+            <label>Location on map</label>
+            <div id="map-canvas"></div>
             @Html.HiddenFor(model => model.Id)
             @Html.HiddenFor(model => model.StartDate)
             
