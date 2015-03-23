@@ -290,7 +290,10 @@ span.medium-header {
     color: rgb(37, 87, 179);
     line-height: 2em;
 }
-
+span.small-header {
+    font-size: 18px;
+    color: rgb(37, 87, 179);
+}
 
 .about .who-label {
     color: rgb(25, 56, 113);
@@ -387,6 +390,28 @@ footer {
     height: 150px;
     width: 300px;
 }
+.quick-sign-up-block {
+    padding: 20px 0 15px 0;
+}
+.quick-sign-up legend, .quick-sign-up .long-form {
+    display: none;
+}
+.quick-sign-up fieldset {
+    margin-top: 15px;
+}
+.quick-sign-up input {
+    width: 150px;
+    margin-right: 20px;
+}
+.quick-sign-up .editor-field {
+    text-align: right;
+}
+.quick-sign-up .editor-label {
+    display: inline;
+  float: left;
+    padding: 0 0 0 20px;
+}
+
 
 
 

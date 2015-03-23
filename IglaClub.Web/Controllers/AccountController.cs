@@ -95,6 +95,7 @@ namespace IglaClub.Web.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
+                    notificationService.DisplaySuccess("Want to be notified about new tournaments? Fill up you <a href='account/edit'>email</a> in account settings");
                     return RedirectToAction("Index", "Home");
                 }
                 catch (MembershipCreateUserException e)

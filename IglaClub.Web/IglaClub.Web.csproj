@@ -439,6 +439,7 @@
     <Content Include="Views\Tournament\AllTournamentsMap.cshtml" />
     <Content Include="Views\Tournament\GetAll.cshtml" />
     <Content Include="Views\Tournament\TournamentsByOwner.cshtml" />
+    <Content Include="Views\Shared\_RegisterPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

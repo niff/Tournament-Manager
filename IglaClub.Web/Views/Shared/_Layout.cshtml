@@ -26,9 +26,18 @@
                                     <span class="caret caret-custom-menu"></span>
                                 </button>
                                 <ul class="dropdown-menu main-menu" role="menu" aria-labelledby="menuPlay">
-                                    <li><a href="@Url.Action("MyTournamentsToPlayWrapper", "Tournament", new { area = "" }, null)">My Tournaments</a></li>
-                                    <li><a href="@Url.Action("AvailableTournamentsWrapper", "Tournament", new { area = "" }, null)">Tournaments in near</a></li>
-                                    <li><a href="@Url.Action("MyResults", "Results")">My Results</a></li>
+                                    <li><a href="@Url.Action("MyTournamentsToPlayWrapper", "Tournament", new { area = "" }, null)">My Tournaments
+                                        <br/><span class="menu-sub-text">Tournaments in which I participate</span>
+                                            </a>
+                                        </li>
+                                    <li><a href="@Url.Action("AvailableTournamentsWrapper", "Tournament", new { area = "" }, null)">Tournaments in near
+                                        <br/><span class="menu-sub-text">Find other interesting tournaments</span>
+                                            </a>
+                                        </li>
+                                    <li><a href="@Url.Action("MyResults", "Results")">My Results
+                                        <br/><span class="menu-sub-text">See results from my recent tournaments</span>
+                                            </a>
+                                        </li>
                                 </ul></div>
                                 <div class="btn-group">
                                     <button type="button" class="button-custom-menu dropdown-toggle"
@@ -37,13 +46,18 @@
                                         <span class="caret caret-custom-menu"></span>
                                     </button>
                                     <ul class="dropdown-menu main-menu" role="menu" aria-labelledby="menuOrg">
-                                        <li><a href="@Url.Action("Create", "Tournament", new { area = "" }, null)">Create tournament</a></li>
-                                        <li><a href="@Url.Action("MyOrganizedTournaments", "Tournament", new { area = "" }, null)">
-                                                <span>My tournaments</span>
+                                        <li><a href="@Url.Action("Create", "Tournament", new { area = "" }, null)">Create tournament
+                                        <br/><span class="menu-sub-text">Add new tournament and invite users</span>
+                                            </a>
+                                        </li>
+                                        <li><a href="@Url.Action("MyOrganizedTournaments", "Tournament", new { area = "" }, null)">My tournaments
                                                 <br/><span class="menu-sub-text">Tournaments that I organize</span>
                                             </a>
                                         </li>
-                                        <li><a href="@Url.Action("MyClubs", "Clubs", new { area = "" }, null)">My clubs</a></li>
+                                        <li><a href="@Url.Action("MyClubs", "Clubs", new { area = "" }, null)">My clubs
+                                        <br/><span class="menu-sub-text">Bridge clubs that I manage</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                                 
@@ -76,7 +90,7 @@
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        @message
+                        @Html.Raw(message)
                     </div>
                 }
             
