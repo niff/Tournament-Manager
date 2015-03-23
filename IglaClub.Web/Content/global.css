@@ -627,7 +627,9 @@ footer {
     .navbar-custom ul {
         width: 100%;
     }
-
+        .navbar-custom div.btn-group:last-child {
+            float: right;
+    }
     .navbar-custom .dropdown-menu {
         margin: 0;
         position: fixed;
@@ -636,7 +638,8 @@ footer {
     }
 
     .navbar-custom .caret {
-        margin: 0;
+        margin-left: 43%;
+          display: block;
     }
     .navbar-custom .glyphicon:empty {
           margin-right: 6px;
@@ -650,13 +653,13 @@ footer {
     .navbar-header {
         text-align: left;
     }
-
+    
     .button-custom-menu {
         margin: 0;
         padding: 0;
         font-size: 5vw;
+         min-width: 75px;
     }
-
     .start-info-block {
         display: none;
     }

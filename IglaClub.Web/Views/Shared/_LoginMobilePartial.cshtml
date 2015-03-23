@@ -6,15 +6,17 @@
             {
             @Html.AntiForgeryToken()              
             <button type="button" class="button-custom-menu dropdown-toggle visible-xs" data-toggle="dropdown" aria-expanded="false">
-                @User.Identity.Name<i class="glyphicon glyphicon-cog"></i><span class="caret caret-black"></span>
+                <i class="glyphicon glyphicon-align-justify icon-with-margin"></i>
             </button>
-            <ul class="dropdown-menu login-dd" role="menu">
-                <li><a href="@Url.Action("Edit", "Account", new { area = "" }, null)">Edit profile</a></li>
-                <li><a href="@Url.Action("Manage", "Account", new { area = "" }, null)">Change password</a></li>
-                <li><a href="#">Account settings</a></li>
-                <li class="divider"></li>
-                <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="glyphicon glyphicon-off"></i>Log out</a></li>
-            </ul>
+                <ul class="dropdown-menu login-dd" role="menu">
+                    <li><a>@User.Identity.Name</a></li>
+                    <li class="divider"></li>
+                    <li><a href="@Url.Action("Edit", "Account", new { area = "" }, null)">Edit profile</a></li>
+                    <li><a href="@Url.Action("Manage", "Account", new { area = "" }, null)">Change password</a></li>
+                    <li><a href="#">Account settings</a></li>
+                    <li class="divider"></li>
+                    <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="glyphicon glyphicon-off"></i>Log out</a></li>
+                </ul>
             }
         }
         else
