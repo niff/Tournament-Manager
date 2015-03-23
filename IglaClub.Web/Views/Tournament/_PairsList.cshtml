@@ -1,8 +1,6 @@
 ﻿@using System.Globalization
 @model IglaClub.Web.Models.ViewModels.PairsViewModel
 
-<link href="~/Content/themes/base/jquery.ui.autocomplete.css" rel="stylesheet" />
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" /> @*todo change to local*@
         @{
             bool userSubscribed = Model.PairsInTounament.Any(p => p.Player1.Id == Model.CurrentUser.Id || p.Player2.Id == Model.CurrentUser.Id);
 

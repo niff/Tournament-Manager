@@ -16,11 +16,7 @@
 
     <span class="medium-header">
      <span class="tournament-status @statusLabelClass">@statusLabel</span>@Model.Tournament.Name</span>
-    @*todo: zmniejszyć i przesunąć gdzies, po starcie edit jest malo wazne, delete tez tylko na nieudany start*@
-    <span class="tournemanet-quick-edit"><a href="@Url.Action("Edit", new { id = Model.Tournament.Id })" class="btn btn-info btn-small">
-        <span class="glyphicon glyphicon-pencil"></span>Edit</a>
-        <a href="@Url.Action("Delete", new { id = Model.Tournament.Id })" class="btn btn-info btn-small">
-            <span class="glyphicon glyphicon-remove"></span>Delete</a></span>
+
 </div>
 <div class="tournament-manage-area">
     <div class="row">
@@ -32,7 +28,7 @@
         <div class="col-md-6">
             @if (Model.Tournament.TournamentStatus == TournamentStatus.Planned)
             {
-                @Html.ActionLink("Start Tournament", "Start", new { id = Model.Tournament.Id }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Start Tournament", "Start", new { id = Model.Tournament.Id }, new { @class = "btn btn-success" })
             }
             @if (Model.Tournament.TournamentStatus == TournamentStatus.Started)
             {

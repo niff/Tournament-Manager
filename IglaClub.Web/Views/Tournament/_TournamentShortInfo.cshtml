@@ -21,15 +21,20 @@
         </span>
     }
     <a class="btn" data-toggle="collapse" data-target="#viewdetails">Show details &raquo;</a>
-    <div id="viewdetails" class="collapse" >
-    <div>
-        <span class="descr-label">tournament owner: </span> @Model.Owner.DisplayName
-    </div>
+    <div id="viewdetails" class="collapse">
+        <span class="tournemanet-quick-edit"><a href="@Url.Action("Edit", new { id = Model.Id })" class="btn btn-info btn-small">
+            <span class="glyphicon glyphicon-pencil"></span>Edit</a>
+            <a href="@Url.Action("Delete", new { id = Model.Id })" class="btn btn-info btn-small">
+                <span class="glyphicon glyphicon-remove"></span>Delete</a></span>
         <div>
-            <span class="descr-label">description: </span> <br/>@Model.Description
+            <span class="descr-label">tournament owner: </span>@Model.Owner.DisplayName
         </div>
+        <div>
+            <span class="descr-label">description: </span>
+            <br />@Model.Description
         </div>
+    </div>
 
-    
+
 
 </div>

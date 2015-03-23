@@ -127,6 +127,7 @@ list-inline a, a:hover {
     box-shadow: rgb(240, 240, 240) 5px 5px;
     /*margin:10px 0;*/
     max-width: 500px;
+    margin-top: 15px;
     margin-bottom: 15px;
 }
 
@@ -197,6 +198,11 @@ table.result {
     }
 .user-subscribe-box {
     border-bottom: 1px silver dashed; margin-bottom: 10px; padding-bottom: 10px;
+}
+#viewdetails {
+    border: 1px dashed rgb(207, 207, 207);
+  padding: 10px;
+  margin-bottom: 10px;
 }
 #participantsDiv .user-subscribe-box select {
     width: auto;

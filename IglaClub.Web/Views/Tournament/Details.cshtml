@@ -4,8 +4,7 @@
 @{
     ViewBag.Title = "Details";
 }
-<link href="~/Content/themes/base/jquery.ui.autocomplete.css" rel="stylesheet" />
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" /> @*todo change to local*@
+
 <div>
     <p>@Html.ActionLink("Tournaments", "Index") > Details</p>
     <span class="medium-header">@Model.Name</span>
@@ -17,7 +16,7 @@
     </div>
     <div class="col-md-12">
         <p>
-            <img src="http://whiteningrx.com/images/progress_bar.gif" />
+            <img src="~/Content/img/progress_bar.gif" />
             @Html.ActionLink("Go to my round details", "RoundDetails", "Round", new { tournamentId = Model.Id }, null)
         </p>
     </div>

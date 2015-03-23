@@ -35,6 +35,8 @@ namespace IglaClub.Web
             bundles.Add(new StyleBundle("~/Content/DateTimepickerCss").Include
                 ("~/Content/jquery.datetimepicker.css"));
 
+            bundles.Add(new StyleBundle("~/Content/jqueryui").Include
+                ("~/Content/jquery-ui.css"));
         
             //bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
             //            "~/Content/themes/base/jquery.ui.core.css",
