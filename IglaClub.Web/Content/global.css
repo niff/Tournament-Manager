@@ -9,13 +9,11 @@ html {
 
 body {
     font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif;
-    margin-bottom: 60px;
     margin: 0;
 }
 
 .container {
     margin-bottom: 50px;
-    padding-bottom: 50px;
 }
 
 .wrapper {
@@ -35,7 +33,6 @@ body {
 .row {
     margin-right: 0;
     margin-left: 0;
-    margin-bottom: 15px;
 }
 
 @media (min-width: 768px) {
@@ -435,11 +432,11 @@ footer {
 /**-------------------BOOTSTRAP IMPROVEMENTS--------------------*/
 
 .navbar-custom {
-    background: url(img/logo.jpg) no-repeat 0px -335px;
+    background: url(img/opacity-cards.png) no-repeat 0px -44px;
     background-size: cover;
     height: 100%;
-    margin: 0 0 20px 0;
-    border-radius: 8px;
+    margin: 0 0 20px 0;border-radius: 0 0 8px 8px;
+    padding: 8px 5px 5px 5px;
 }
 
     .navbar-custom .navbar-brand {
@@ -502,7 +499,7 @@ footer {
         }
 
     .navbar-custom .caret {
-        border-top-color: #FFFFFF;
+        border-top-color:rgb(59, 124, 173);
     }
 
     .navbar-custom .col-xs-4 {
@@ -595,7 +592,7 @@ footer {
 }
 
 .button-custom-menu {
-    color: white;
+    color: rgb(59, 124, 173);
     font-size: x-large;
     font-weight: bold;
     margin-right: 5px;
@@ -620,7 +617,7 @@ footer {
 }
 
 
-@media (max-width: 472px) {
+@media (max-width: 760px) {
     .container {
         padding-left: 0;
         padding-right: 0;
