@@ -26,7 +26,7 @@
                     @p2Name
                 </td>
                 <td>
-                    <a href="#" class="removePairLink" onclick="removePair(@Model.Tournament.Id, @pair.Id)">Remove</a>
+                    <a href = "#" class="removePairLink" data-tournament-id="@Model.Tournament.Id" data-pair-id="@pair.Id" >Remove</a>
                 </td>
             </tr>
             counter++;
@@ -35,50 +35,11 @@
     </table>
     
 
-
+<script src="~/Scripts/pairs.js"></script>
 <script>
-    $(document).ready(function() {
-        $('#pairSearchSubmit').on("click", function() {
-            var user1 = $('#user1').val();
-            var user2 = $('#user2').val();
-            if (user1 == '' || user2 == '') {
-                alert("User is not chosen");
-                return false;
-            }
-            if (user1 == user2) {
-                alert("Choose two different users");
-                return false;
-            }
-            $.ajax({
-                url: "/Tournament/AddPair",
-                type: "POST",
-                data: { user1: user1, user2: user2, tournamentId: '@Model.Tournament.Id' },
-                success: function(data) {
-                    refreshParticipants();
-                },
-                error: function() {
-                    alert("ajax failure");
-                }
-            });
-            clearHiddenUsers();
-        });
-    });
-
-    function removePair(tId, pairId) {
-        $('.removePairLink').attr('href','');
-        $.ajax({
-            url: "/Tournament/RemovePair",
-            type: "POST",
-            async: false,
-            data: { tournamentId: tId, pairId: pairId },
-                success: refreshParticipants
-        });
-    }
-
-    function refreshParticipants() {
-        $('#participantsDiv').load('@Url.Action("TournamentParticipantsEdit", new { tournamentId = @Model.Tournament.Id })');
-    }
-    function clearHiddenUsers() {
-        $('.hidden.user').val('');
-    }
+    var options = {
+        tournamentId : '@Model.Tournament.Id',
+        dataUrl: '@Url.Action("TournamentParticipantsEdit", new { tournamentId = @Model.Tournament.Id })'
+    };
+    $(this).initializePairsEdit(options);
 </script>

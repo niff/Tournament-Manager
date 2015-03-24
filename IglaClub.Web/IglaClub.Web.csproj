@@ -216,10 +216,6 @@
     <Content Include="Content\themes\1408214351_folder.png" />
     <Content Include="Content\themes\1408214416_file_add.png" />
     <Content Include="Content\themes\1408214423_file_add.png" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\global.css" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ClubsController.cs" />
@@ -372,6 +368,7 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\pairs.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

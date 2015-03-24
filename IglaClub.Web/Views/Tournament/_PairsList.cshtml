@@ -2,8 +2,7 @@
 @model IglaClub.Web.Models.ViewModels.PairsViewModel
 
         @{
-            bool userSubscribed = Model.PairsInTounament.Any(p => p.Player1.Id == Model.CurrentUser.Id || p.Player2.Id == Model.CurrentUser.Id);
-
+            bool userSubscribed = Model.Tournament.UserIsSubscribed(Model.CurrentUser.Login);
             if (!userSubscribed)
             {
                 var currentUserId = Model.CurrentUser.Id.ToString(CultureInfo.InvariantCulture);
@@ -16,83 +15,44 @@
             }
         }
     <p>Pairs list <span class="badge">@Model.PairsInTounament.Count</span></p>
-    <table class="table table-striped table-hover">
+<table class="table table-striped table-hover">
 
 
-        @{
-            var counter = 1;
+    @{
+        var counter = 1;
             
-        }
-        @foreach (var pair in @Model.PairsInTounament)
-        {            
-            var p1Name = (pair.Player1 == null ? "Unknown" : pair.Player1.DisplayName);
-            var p2Name = (pair.Player2 == null ? "Unknown" : pair.Player2.DisplayName);
-            <tr>
-                <td><span class="badge blue">@counter</span></td>
-                <td>
-                    @p1Name
-                </td>
-                <td>
-                    @p2Name
-                </td>
-                <td>
-                    @if ((pair.Player1 != null && pair.Player1.Id == Model.CurrentUser.Id)
-                         || (pair.Player2!= null && pair.Player2.Id == Model.CurrentUser.Id))
-                    {
-                        <a href = "#" class="removePairLink" onclick = "removePair(@Model.Tournament.Id, @pair.Id)" >
-                            <i class="glyphicon glyphicon-remove-circle"></i>
-                        </a>
-                    } 
-                </td>
-            </tr>
-            counter++;
-        }             
-    </table>
+    }
+    @foreach (var pair in @Model.PairsInTounament)
+    {            
+        var p1Name = (pair.Player1 == null ? "Unknown" : pair.Player1.DisplayName);
+        var p2Name = (pair.Player2 == null ? "Unknown" : pair.Player2.DisplayName);
+        <tr>
+            <td><span class="badge blue">@counter</span></td>
+            <td>
+                @p1Name
+            </td>
+            <td>
+                @p2Name
+            </td>
+            <td>
+                @if ((pair.Player1 != null && pair.Player1.Id == Model.CurrentUser.Id)
+                     || (pair.Player2!= null && pair.Player2.Id == Model.CurrentUser.Id))
+                {
+                    <a href = "#" class="removePairLink" data-tournament-id="@Model.Tournament.Id" data-pair-id="@pair.Id" >
+                        <i class="glyphicon glyphicon-remove-circle"></i>
+                    </a>
+                } 
+            </td>
+        </tr>
+        counter++;
+    }             
+</table>
 
-
+<script src="~/Scripts/pairs.js"></script>
 <script>
-    $(document).ready(function() {
-        $('#pairSearchSubmit').on("click", function() {
-            var user1 = $('#user1').val();
-            var user2 = $('#user2').val();
-            if (user1 == '' || user2 == '') {
-                alert("User is not chosen");
-                return false;
-            }
-            if (user1 == user2) {
-                alert("Choose two different users");
-                return false;
-            }
-            $.ajax({
-                url: "/Tournament/AddPair",
-                type: "POST",
-                data: { user1: user1, user2: user2, tournamentId: '@Model.Tournament.Id' },
-                success: function(data) {
-                    refreshParticipants();
-                },
-                error: function() {
-                    alert("ajax failure");
-                }
-            });
-            clearHiddenUsers();
-        });
-    });
-
-    function removePair(tId, pairId) {
-        $('.removePairLink').attr('href','');
-        $.ajax({
-            url: "/Tournament/RemovePair",
-            type: "POST",
-            async: false,
-            data: { tournamentId: tId, pairId: pairId },
-                success: refreshParticipants
-        });
-    }
-
-    function refreshParticipants() {
-        $('#participantsDiv').load('@Url.Action("PairsList", new { tournamentId = @Model.Tournament.Id })');
-    }
-    function clearHiddenUsers() {
-        $('.hidden.user').val('');
-    }
+    var options = {
+        tournamentId: '@Model.Tournament.Id',
+        dataUrl: '@Url.Action("PairsList", new { tournamentId = @Model.Tournament.Id })'
+    };
+    $(this).initializePairsEdit(options);
 </script>
