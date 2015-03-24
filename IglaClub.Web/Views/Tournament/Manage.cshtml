@@ -51,10 +51,23 @@
         <div class="pairs" id="participantsDiv">
             @Html.Action("TournamentParticipantsEdit", new { tournamentId = @Model.Tournament.Id })
         </div>
+        <div id="quickAddUserDiv">
         @Html.Partial("_QuickAddUser")
+            </div>
     </div>           
 }
 
+<script src="~/Scripts/pairs.js"></script>
+<script>
+    $(document).ready(function (){
+        var options = {
+            tournamentId: '@Model.Tournament.Id',
+            dataUrl: '@Url.Action("TournamentParticipantsEdit", new { tournamentId = @Model.Tournament.Id })'
+            //refreshUrl: '@Url.Action("QuickUserPartial")'
+                };
+        $(this).initializePairsEdit(options);
+    });
+</script>
 
 
 

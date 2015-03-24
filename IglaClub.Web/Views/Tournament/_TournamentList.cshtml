@@ -12,7 +12,7 @@
             var hour = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("HH:mm") : "";              
             <tr>
                 <td>@TournamentHelper.GetTournamentStatusIcon(status)</td>
-                <td>@Html.ActionLink(item.Name, "Details", "Tournament", new { id = @item.Id }, null)</td>
+                <td>@Html.ActionLink(item.Name, "Manage", "Tournament", new { id = @item.Id }, null)</td>
                 <td>@dateFormatted</td>
                 <td>@hour</td>
                 <td>@TournamentHelper.GetSubscribtionStatus(item.UserIsSubscribed(HttpContext.Current.User.Identity.Name), item.Id)</td>

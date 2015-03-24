@@ -35,11 +35,3 @@
     </table>
     
 
-<script src="~/Scripts/pairs.js"></script>
-<script>
-    var options = {
-        tournamentId : '@Model.Tournament.Id',
-        dataUrl: '@Url.Action("TournamentParticipantsEdit", new { tournamentId = @Model.Tournament.Id })'
-    };
-    $(this).initializePairsEdit(options);
-</script>
