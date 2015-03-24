@@ -367,7 +367,7 @@ namespace IglaClub.Web.Controllers
         }
 
         [HttpPost]
-        public void QuickAddUser(string name, string email)
+        public void QuickAddUser(string name, string email, long id)
         {
             userRepository.Add(name, email);
         }
@@ -462,7 +462,13 @@ namespace IglaClub.Web.Controllers
                 return RedirectToAction("Manage", "Tournament", new { tournamentId = id });
             return Redirect(Request.UrlReferrer.ToString());
         }
+
+        public PartialViewResult QuickUserPartial()
+        {
+            return PartialView("_QuickAddUser");
+        }
     }
+
 
     public class TounamentListViewModel
     {

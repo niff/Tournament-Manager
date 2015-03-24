@@ -18,7 +18,7 @@
             var hour = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("HH:mm") : "";
             <tr>
                 <td>
-                    @Html.ActionLink(item.Name, "Details", "Tournament", new { id = @item.Id }, null)
+                    @Html.ActionLink(item.Name, "Manage", "Tournament", new { id = @item.Id }, null)
                 </td>
                 <td>
                     @if (item.PlannedStartDate != null)

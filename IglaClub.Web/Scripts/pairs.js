@@ -16,9 +16,11 @@
             $.ajax({
                 url: "/Tournament/QuickAddUser",
                 type: "POST",
-                async: false,
-                data: { name: name, email: email },
-                success: utils.refreshParticipants(initFormUrl)
+                data: { name: name, email: email, id: tournamentId },
+                success: function () {
+                    utils.refreshParticipants(initFormUrl);
+                    utils.refreshQuickUserAdd();
+                }
             });
         });
         $('#pairSearchSubmit').on("click", function() {
@@ -60,9 +62,11 @@
         refreshParticipants: function (dataUrl) {
             $('#participantsDiv').load(dataUrl);
         },
+        refreshQuickUserAdd: function () {
+            $('#quickAddUserDiv input[type=text]').val('');
+        },
         clearHiddenUsers: function () {
             $('.hidden.user').val('');
         }
-
     };
 })(jQuery);

@@ -199,6 +199,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\dd.css" />
     <Content Include="Content\img\1408214039_search.png" />
     <Content Include="Content\img\1408214055_search.png" />
     <Content Include="Content\img\1408214349_folder.png" />
@@ -208,6 +209,7 @@
     <Content Include="Content\img\logo.jpg" />
     <Content Include="Content\img\opacity-cards.png" />
     <Content Include="Content\img\progress_bar.gif" />
+    <Content Include="Content\img\spade.png" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jquery.datetimepicker.css" />
     <Content Include="Content\themes\1408214039_search.png" />
@@ -227,6 +229,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RoundController.cs" />
     <Compile Include="Controllers\TournamentController.cs" />
+    <Compile Include="Extensions\ImageSelectExtensions.cs" />
+    <Compile Include="Extensions\ImageSelectListItem.cs" />
     <Compile Include="Helpers\Html\TournamentHelper.cs" />
     <Compile Include="Migrations\201503242214342_CreateTableClubusers.cs" />
     <Compile Include="Migrations\201503242214342_CreateTableClubusers.Designer.cs">
@@ -363,6 +367,7 @@
     <Content Include="Scripts\jquery-ui-1.10.4.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.min.js" />
     <Content Include="Scripts\jquery.datetimepicker.js" />
+    <Content Include="Scripts\jquery.dd.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
