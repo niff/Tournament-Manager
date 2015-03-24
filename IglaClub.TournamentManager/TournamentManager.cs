@@ -219,6 +219,15 @@ namespace IglaClub.TournamentManager
             db.SaveChanges();
         }
 
-        
+
+        public void UndoTournamentStart(long tournamentId)
+        {
+            while (RemoveLastRound(tournamentId).Ok)
+            {
+            }
+            var tournament = db.Tournaments.Find(tournamentId);
+            tournament.TournamentStatus = TournamentStatus.Planned;
+            db.SaveChanges();
+        }
     }
 }

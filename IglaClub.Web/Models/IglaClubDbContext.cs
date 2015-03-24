@@ -23,6 +23,7 @@ namespace IglaClub.Web.Models
         public DbSet<Card> Cards { get; set; }
         public DbSet<Result> Results { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<ClubUser> ClubUsers { get; set; }
 
         public new int SaveChanges()
         {

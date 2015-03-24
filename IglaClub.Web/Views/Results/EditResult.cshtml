@@ -38,7 +38,7 @@
                     Value = "8"
                 }
         };
-    
+
 }
 @using (Html.BeginForm())
 {
@@ -143,10 +143,11 @@
         </tr>
     </table>
     <input type="submit" value="Save" class="btn btn-info btn-small" />
-    <button class="btn btn-info btn-small">
+    <a href="@Url.Action("RoundDetails", "Round", new { tournamentId = Model.TournamentId })"
+       class="btn btn-info btn-small">
         <span class="glyphicon glyphicon-arrow-left"></span>
-        @Html.ActionLink("Back", "RoundDetails", "Round", new { tournamentId = Model.TournamentId }, null)
-    </button>
+        Back
+    </a>
 }
 
 <script type="text/javascript">

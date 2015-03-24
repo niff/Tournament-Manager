@@ -14,7 +14,7 @@ namespace IglaClub.ObjectModel
         DbSet<BoardInstance> BoardInstances { get; set; }
         DbSet<Card> Cards { get; set; }
         DbSet<Result> Results { get; set; }
-
+        DbSet<ClubUser> ClubUsers { get; set; }
         int SaveChanges();
 
         DbEntityEntry Entry(object entity);

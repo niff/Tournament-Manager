@@ -24,7 +24,7 @@ namespace IglaClub.ObjectModel.Entities
         [Required(ErrorMessage = "Email is required")]
         public string Email { get; set; }
 
-        public virtual IList<Club> Clubs { get; set; }
+        public virtual IList<ClubUser> ClubUsers { get; set; }
         
         public string GetDisplayName()
         {

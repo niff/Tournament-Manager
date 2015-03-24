@@ -353,14 +353,12 @@ namespace IglaClub.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(PairsViewModel pairsViewModel)
+        public void Add(PairsViewModel pairsViewModel)
         {
             if (ModelState.IsValid)
             {
                 userRepository.Add(pairsViewModel.NewUser.Login, pairsViewModel.NewUser.Email);
             }
-
-            return Redirect(Request.UrlReferrer.ToString());
         }
 
         public ActionResult MoveToNextRound(long tournamentid, bool withpairsrepeat)
@@ -368,32 +366,10 @@ namespace IglaClub.Web.Controllers
             throw new NotImplementedException();
         }
 
-        //public PartialViewResult Oncoming()
-        //{
-        //    return PartialView("_TournamentList", tournamentRepository.GetTournamentsToPlayForUser(GetCurrentUserName()));
-        //}
-
-        //public PartialViewResult Past()
-        //{
-        //    return PartialView("_TournamentList", tournamentRepository.GetFinished().ToList());
-        //}
-        
-        //public PartialViewResult Ongoing()
-        //{
-        //    return PartialView("_TournamentList", tournamentRepository.GetOngoing().ToList());
-        //}
-
-
-
         [HttpPost]
         public void QuickAddUser(string name, string email, long id)
         {
             userRepository.Add(name, email);
-            //notificationService.DisplaySuccess("User " + name + " was successfully added.");
-            //return RedirectToRoute(Request.UrlReferrer);
-
-            //return RedirectToAction("Manage", new { tournamentId = id});
-
         }
 
         public PartialViewResult MyTournamentsToPlay()
@@ -476,6 +452,15 @@ namespace IglaClub.Web.Controllers
             };
 
             return View("TournamentsList", model);
+        }
+
+        public ActionResult UndoStart(long id)
+        {
+            this.tournamentManager.UndoTournamentStart(id);
+            
+            if (Request.UrlReferrer == null)
+                return RedirectToAction("Manage", "Tournament", new { tournamentId = id });
+            return Redirect(Request.UrlReferrer.ToString());
         }
 
         public PartialViewResult QuickUserPartial()
