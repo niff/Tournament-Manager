@@ -1,8 +1,45 @@
 ﻿@using IglaClub.ObjectModel.Consts
 @using IglaClub.ObjectModel.Enums
+@using IglaClub.Web.Extensions
 @model IglaClub.ObjectModel.Entities.Result
-
+<link href="~/Content/dd.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.dd.js"></script>
 <h2>Edit result for board number @Model.Board.BoardNumber</h2>
+
+@{
+    var list = new List<ImageSelectListItem>
+        {
+            new ImageSelectListItem
+                {
+                    ImageFileName = "spade.png",
+                    Selected = false,
+                    Text = "spade",
+                    Value = "1"
+                },
+                new ImageSelectListItem
+                {
+                    ImageFileName = "spade.png",
+                    Selected = false,
+                    Text = "trump",
+                    Value = "2"
+                },
+                new ImageSelectListItem
+                {
+                    ImageFileName = "spade.png",
+                    Selected = false,
+                    Text = "heart",
+                    Value = "4"
+                },
+                new ImageSelectListItem
+                {
+                    ImageFileName = "spade.png",
+                    Selected = false,
+                    Text = "caro",
+                    Value = "8"
+                }
+        };
+    
+}
 @using (Html.BeginForm())
 {
     <div class="field-validation-error defaultMargin">
@@ -78,6 +115,7 @@
             </td>
             <td>
                 @Html.DropDownListFor(m => m.ContractColor, new SelectList(Enum.GetValues(typeof(ContractColors)), @Model.ContractColor), new { data_image = "" })
+               <div class="editor-field">@Html.DropDownListFor(m => m.ContractColor, "../../Content/img/", @list, new { id = "selectCountry" })</div>
 
             </td>
             <td>
@@ -110,3 +148,9 @@
         @Html.ActionLink("Back", "RoundDetails", "Round", new { tournamentId = Model.TournamentId }, null)
     </button>
 }
+
+<script type="text/javascript">
+    $(function () {
+        $('#selectCountry').msDropDown();
+    })
+</script>
