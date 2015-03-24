@@ -47,7 +47,9 @@
 
         Remove last round
     </a>
-
+    <a href="@Url.Action("UndoStart","Tournament", new { id = Model.Tournament.Id })" class="btn btn-info btn-small">
+        <span class="glyphicon glyphicon-remove" title="Remove ALL results and change tournament status to planned"></span>Undo Start
+    </a>
 </div>
 
 <div id=""> 

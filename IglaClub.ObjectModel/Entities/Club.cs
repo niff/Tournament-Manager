@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Device.Location;
 
 namespace IglaClub.ObjectModel.Entities
 {
@@ -9,7 +8,7 @@ namespace IglaClub.ObjectModel.Entities
 
         public string Description { get; set; }
 
-        public virtual IList<User> Users { get; set; }
+        public virtual IList<ClubUser> ClubUsers { get; set; }
 
         public string Coordinates { get; set; }
 

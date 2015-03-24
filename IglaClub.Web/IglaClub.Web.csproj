@@ -228,6 +228,10 @@
     <Compile Include="Controllers\RoundController.cs" />
     <Compile Include="Controllers\TournamentController.cs" />
     <Compile Include="Helpers\Html\TournamentHelper.cs" />
+    <Compile Include="Migrations\201503242214342_CreateTableClubusers.cs" />
+    <Compile Include="Migrations\201503242214342_CreateTableClubusers.Designer.cs">
+      <DependentUpon>201503242214342_CreateTableClubusers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ViewModels\TournamentMainPageModel.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -468,6 +472,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201503182228032_newTournament.resx">
       <DependentUpon>201503182228032_newTournament.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503242214342_CreateTableClubusers.resx">
+      <DependentUpon>201503242214342_CreateTableClubusers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

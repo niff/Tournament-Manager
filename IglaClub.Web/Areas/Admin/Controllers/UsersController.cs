@@ -36,12 +36,12 @@ namespace IglaClub.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(User tournament)
+        public ActionResult Edit(User user)
         {
             if (!ModelState.IsValid) 
-                return View(tournament);
+                return View(user);
             
-            this.userRepository.Entry(tournament).State = EntityState.Modified;
+            this.userRepository.Entry(user).State = EntityState.Modified;
             this.userRepository.SaveChanges();
             //return RedirectToAction("Manage", "Tournament", new { tournamentId = id });
             return RedirectToAction("Index");
