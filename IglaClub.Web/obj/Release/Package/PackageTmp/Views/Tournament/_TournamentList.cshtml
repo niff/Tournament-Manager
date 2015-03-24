@@ -1,0 +1,62 @@
+﻿@using IglaClub.ObjectModel.Entities
+@using IglaClub.ObjectModel.Enums
+@using IglaClub.Web.Helpers.Html
+@model IEnumerable<Tournament>
+
+@if (Model.Any())
+{
+    <table class="tournamentsListTable table table-striped table-hover">
+
+        @foreach (var item in Model)
+        {
+            var date = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("dd MMM yyyy") : "";
+            var hour = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("HH:mm") : "";
+            <tr>
+                <td>
+                    @{
+            if (@item.TournamentStatus == TournamentStatus.Planned || @item.TournamentStatus == TournamentStatus.Finished)
+            { 
+                @Html.ActionLink(item.Name, "Details", "Tournament", new { id = @item.Id }, null)
+            }
+            else if (@item.TournamentStatus == TournamentStatus.Started)
+            {
+                @Html.ActionLink(item.Name, "RoundDetails", "Round", new {tournamentId = @item.Id}, null)
+            }
+
+            if (item.Owner != null && item.Owner.Login == HttpContext.Current.User.Identity.Name)
+            {
+                        <span class="edit-button"><a href="@Url.Action("Manage", "Tournament", new { id = item.Id }, null)"><i class="glyphicon glyphicon-pencil"></i>Edit</a></span>
+            }
+                    }
+                </td>
+                <td style="width: 90px">
+                    @if(item.PlannedStartDate != null)
+                    {
+                        <span>@DateHelper.DaysLeftToDate((DateTime) item.PlannedStartDate)</span>
+                    }
+                </td>
+                <td style="width: 50px">
+                    @hour
+                </td>
+                <td style="width: 20px">
+                    @{
+            var currentUserIsSubscribed = item.UserIsSubscribed(HttpContext.Current.User.Identity.Name);
+            if (currentUserIsSubscribed)
+            {
+                <span class="glyphicon glyphicon-ok-circle" title="You are subscribed to this tournament"></span>
+            }
+            else
+            {
+                <a href="#"><i class="glyphicon glyphicon-plus"></i>Join</a>
+            }
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <p><i class="small text-muted">No tournaments to display</i></p>
+}

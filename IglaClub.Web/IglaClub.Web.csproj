@@ -231,6 +231,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RoundController.cs" />
     <Compile Include="Controllers\TournamentController.cs" />
+    <Compile Include="Helpers\Html\TournamentHelper.cs" />
     <Compile Include="Models\ViewModels\TournamentMainPageModel.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -438,7 +439,7 @@
     </Content>
     <Content Include="Views\Results\EditResult.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
-    <Content Include="Views\Tournament\TournamentsListWrapper.cshtml" />
+    <Content Include="Views\Tournament\TournamentsList.cshtml" />
     <Content Include="Views\Tournament\AllTournamentsMap.cshtml" />
     <Content Include="Views\Tournament\GetAll.cshtml" />
     <Content Include="Views\Tournament\TournamentsByOwner.cshtml" />

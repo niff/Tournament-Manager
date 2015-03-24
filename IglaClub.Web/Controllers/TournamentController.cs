@@ -395,19 +395,26 @@ namespace IglaClub.Web.Controllers
 
         public PartialViewResult MyTournamentsToPlay()
         {
-            var model = tournamentRepository.GetTournamentsToPlayByUser(GetCurrentUserName());
-            ViewBag.Title = "My tournaments";
+            var model = new TounamentSingleListViewModel
+                {
+                    Tournaments = tournamentRepository.GetTournamentsToPlayByUser(GetCurrentUserName()),
+                    Header = "My tournaments"
+                };
             return PartialView("_TournamentList", model);
         }
 
         public PartialViewResult AvailableTournaments()
         {
-            var model = tournamentRepository.GetAvailableTournamentsByUser(GetCurrentUserName()).OrderBy(t => t.PlannedStartDate);
-            var pastItemsAtTheEnd = model.Where(t => t.PlannedStartDate >= DateTime.Now)
-               .Union(model.Where(t => t.PlannedStartDate < DateTime.Now)).ToList();
-            
-            ViewBag.Title = "Other tournaments";
-            return PartialView("_TournamentList", pastItemsAtTheEnd);
+            var tournaments = tournamentRepository.GetAvailableTournamentsByUser(GetCurrentUserName()).OrderBy(t => t.PlannedStartDate);
+            var pastItemsAtTheEnd = tournaments.Where(t => t.PlannedStartDate >= DateTime.Now)
+               .Union(tournaments.Where(t => t.PlannedStartDate < DateTime.Now)).ToList();
+            var model = new TounamentSingleListViewModel
+                {
+                    Tournaments = pastItemsAtTheEnd,
+                    Header = "Other tournaments"
+                };
+            //ViewBag.Title = "Other tournaments";
+            return PartialView("_TournamentList", model);
         }
 
         public ActionResult MyOrganizedTournaments()
@@ -422,17 +429,60 @@ namespace IglaClub.Web.Controllers
         //    return View();
         //}
 
-        public ActionResult MyTournamentsToPlayWrapper()
+        public ActionResult PlayerTournaments()
         {
-            ViewBag.Title = "My tournaments";
-            return View("TournamentsListWrapper",
-                        tournamentRepository.GetTournamentsToPlayByUser(GetCurrentUserName()));
+            var model = new TounamentListViewModel
+            {
+                TournamentsList = new List<TounamentSingleListViewModel>
+                {
+                    new TounamentSingleListViewModel
+                        {
+                            Header = "Now playing",
+                            Tournaments = tournamentRepository.GetCurrentlyPlayingByUser(GetCurrentUserName())
+                        },
+                    new TounamentSingleListViewModel
+                        {
+                            Header = "Playing soon",
+                            Tournaments = tournamentRepository.GetTournamentsToPlayByUser(GetCurrentUserName())
+                        },
+                        new TounamentSingleListViewModel
+                        {
+                            Header = "Already played",
+                            Tournaments = tournamentRepository.GetTournamentsAlreadyPlayedByUser(GetCurrentUserName())
+                        }
+                }
+            };
+            return View("TournamentsList", model);
         }
 
-        public ActionResult AvailableTournamentsWrapper()
+        public ActionResult PlayerTournamentsOther()
         {
             ViewBag.Title = "Available tournaments";
-            return View("TournamentsListWrapper", tournamentRepository.GetAvailableTournamentsByUser(GetCurrentUserName()).OrderBy(t => t.PlannedStartDate).ToList());
+            var model = new TounamentListViewModel
+            {
+                TournamentsList = new List<TounamentSingleListViewModel>
+                {
+                    new TounamentSingleListViewModel
+                        {
+                            Header = "Tournaments that you can join",
+                            Tournaments = tournamentRepository.GetAvailableTournamentsByUser(GetCurrentUserName())
+                                                              .OrderBy(t => t.PlannedStartDate)
+                                                              .ToList()
+                        }
+                }
+            };
+
+            return View("TournamentsList", model);
         }
+    }
+
+    public class TounamentListViewModel
+    {
+        public IList<TounamentSingleListViewModel> TournamentsList { get; set; }
+    }
+    public class TounamentSingleListViewModel
+    {
+        public IList<Tournament> Tournaments { get; set; }
+        public string Header { get; set; }
     }
 }

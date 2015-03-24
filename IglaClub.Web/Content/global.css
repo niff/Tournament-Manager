@@ -343,9 +343,10 @@ span.small-header {
     color: white;
     font-weight: bold;
     margin-left: 2px;
-    font-size: medium;
+    font-size: small;
     vertical-align: bottom;
     margin-right: 10px;
+      opacity: 0.8;
 }
 
     .tournament-status.planned {

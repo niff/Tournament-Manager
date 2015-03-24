@@ -27,11 +27,11 @@
                                         <span class="caret caret-custom-menu"></span>
                                     </button>
                                     <ul class="dropdown-menu main-menu" role="menu" aria-labelledby="menuPlay">
-                                        <li><a href="@Url.Action("MyTournamentsToPlayWrapper", "Tournament", new { area = "" }, null)">My Tournaments
+                                        <li><a href="@Url.Action("PlayerTournaments", "Tournament", new { area = "" }, null)">My Tournaments
                                                 <br/><span class="menu-sub-text">Tournaments in which I participate</span>
                                             </a>
                                         </li>
-                                        <li><a href="@Url.Action("AvailableTournamentsWrapper", "Tournament", new { area = "" }, null)">Tournaments in near
+                                        <li><a href="@Url.Action("PlayerTournamentsOther", "Tournament", new { area = "" }, null)">Tournaments in near
                                                 <br/><span class="menu-sub-text">Find other interesting tournaments</span>
                                             </a>
                                         </li>

@@ -124,5 +124,12 @@ namespace IglaClub.ObjectModel.Repositories
                 select t;
             return res;
         }
+
+        public IList<Tournament> GetTournamentsAlreadyPlayedByUser(string userLogin)
+        {
+            var tournaments = GetTournamentsBySubscribedUser(userLogin);
+            return tournaments.Where(t => (t.TournamentStatus == TournamentStatus.Finished ||
+                t.PlannedStartDate < DateTime.Today)).ToList();
+        }
     }
 }

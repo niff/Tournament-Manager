@@ -1,64 +1,23 @@
-﻿@using IglaClub.ObjectModel.Entities
-@using IglaClub.Web.Helpers.Html
-@model IList<Tournament>
-        <span class="medium-header">@ViewBag.Title</span>
-@if (Model.Any())
+﻿@using IglaClub.Web.Helpers.Html
+@model IglaClub.Web.Controllers.TounamentSingleListViewModel
+
+    <span class="medium-header">@Model.Header</span>
+@if (Model.Tournaments.Any())
 {
     <table class="tournamentsListTable table table-striped table-hover">
-
-        @foreach (var item in Model)
+        @foreach (var item in Model.Tournaments)
         {
-            var date = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("dd MMM yyyy") : "";
-            var hour = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("HH:mm") : "";
+            var status = item.TournamentStatus;
+            var dateFormatted = item.PlannedStartDate != null ? @DateHelper.DaysLeftToDate((DateTime)item.PlannedStartDate) : "Not set yet";
+            var hour = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("HH:mm") : "";              
             <tr>
-                <td>
-                    @Html.ActionLink(item.Name, "Details", "Tournament", new { id = @item.Id }, null)
-                    @*@{
-                        //if (@item.TournamentStatus == TournamentStatus.Planned || @item.TournamentStatus == TournamentStatus.Finished)
-                        //{ 
-                                    @Html.ActionLink(item.Name, "Details", "Tournament", new { id = @item.Id }, null)
-                        //}
-                        //else if (@item.TournamentStatus == TournamentStatus.Started)
-                        //{
-                        //            @Html.ActionLink(item.Name, "RoundDetails", "Round", new { tournamentId = @item.Id }, null)
-                        //}
-
-                        if (item.Owner != null && item.Owner.Login == HttpContext.Current.User.Identity.Name)
-                        {
-                                    <span class="edit-button"><a href="@Url.Action("Manage", "Tournament", new { id = item.Id }, null)"><i class="glyphicon glyphicon-pencil"></i>Edit</a></span>
-                        }
-                    }*@
-                </td>
-                <td>
-                    @if (item.PlannedStartDate != null)
-                    {
-                        <span>@DateHelper.DaysLeftToDate((DateTime) item.PlannedStartDate)</span>
-                    }
-                    else
-                    {
-                        <span>Not set yet</span>
-                    }
-                </td>
-                <td>
-                    @hour
-                </td>
-                <td>
-                    @{
-                    var currentUserIsSubscribed = item.UserIsSubscribed(HttpContext.Current.User.Identity.Name);
-                    if (currentUserIsSubscribed)
-                    {
-                        <span class="glyphicon glyphicon-ok-circle" title="You are subscribed to this tournament"></span>
-                        <span>Joined</span>
-                    }
-                    else
-                    {
-                        <a href="#"><i class="glyphicon glyphicon-plus"></i>Join</a>
-                    }
-                    }
-                </td>
+                <td>@TournamentHelper.GetTournamentStatusIcon(status)</td>
+                <td>@Html.ActionLink(item.Name, "Details", "Tournament", new { id = @item.Id }, null)</td>
+                <td>@dateFormatted</td>
+                <td>@hour</td>
+                <td>@TournamentHelper.GetSubscribtionStatus(item.UserIsSubscribed(HttpContext.Current.User.Identity.Name), item.Id)</td>
             </tr>
         }
-
     </table>
 }
 else
