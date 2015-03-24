@@ -11,10 +11,10 @@
     <div class="panel-group">
         <h4>Table: @Model.Results.First().TableNumber</h4>
         <span><b>NS (@Model.NsPair.PairNumber):</b> @Model.NsPair</span><br />
-        <span><b>EW (@Model.EwPair.PairNumber):</b> @Model.EwPair</span><br />
+        <span><b>EW (@Model.EwPair.PairNumber):</b> @Model.EwPair</span><br />@*todo ulepszyc*@
     </div>
     <br />
-    <div class="col-xs-3">
+    <div class="col-xs-12">
         <table class="table table-striped table-hover text-left">
             <tr>
                 <th>Board</th>
@@ -45,10 +45,13 @@
                 </tr>
             }
         </table>
-        @Html.ActionLink("See tournament details", "Details", "Tournament",new {id = Model.Tournament.Id}, null)
     </div>
 }
 else
 {
     <span>No boards on this round are yet available</span>
 }
+<div>
+@Html.ActionLink("See tournament details", "Details", "Tournament", new { id = Model.Tournament.Id }, null)
+@Html.ActionLink("Refresh", "RoundDetails", new {tournamentId = @Model.Tournament.Id})    
+</div>

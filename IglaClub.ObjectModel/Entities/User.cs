@@ -30,6 +30,10 @@ namespace IglaClub.ObjectModel.Entities
         {
             if(!string.IsNullOrEmpty(this.Nickname))
                 return this.Nickname;
+            
+            if (!string.IsNullOrEmpty(this.Name) && !string.IsNullOrEmpty(this.Lastname))
+                return string.IsNullOrEmpty(this.Name) ? this.Lastname : this.Name + " " + this.Lastname;
+            
             return this.Login;
         }
 

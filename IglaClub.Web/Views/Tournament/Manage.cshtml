@@ -30,11 +30,13 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="round-info">
             <label><span class="label label-warning">@Model.Tournament.CurrentRound.</span> round</label>
-            <label><span class="label label-warning">@Model.Tournament.ResultsNotFinishedInCurrentRound</span> rounds left</label>
+            <label><span class="label label-warning">@Model.Tournament.ResultsNotFinishedInCurrentRound</span> results left</label>
+            @*todo green if rounds 0*@
         </div>
     </div>  
     <div class="col-md-6 col-sm-12 col-xs-12 action-pane">
         @Html.Action("PairRoster", new { tournamentId = @Model.Tournament.Id })
+        @*todo numer pary polepszyc*@
     </div>
     <div class="col-md-6 col-sm-12 col-xs-12 action-pane">
         @Html.Action("PairsResults", "Results", new { tournamentId = @Model.Tournament.Id })

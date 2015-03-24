@@ -6,20 +6,6 @@
     </p>
     <input type="text" id="AddUserName" placeholder="Name" style="width: 200px;"/>
     <input type="text" id="AddUserEmail" placeholder="Email" style="width: 200px;" />
-    <input type="button" class="btn btn-default btn-small" id="CreateNewUserLogin" onclick="addUser()" value="Create" />
+    <input type="button" class="btn btn-default btn-small" id="createNewUserLogin" value="Create" />
     
 </div>
-<script>
-    function addUser() {
-        var name = $('#AddUserName').val();
-        var email = $('#AddUserEmail').val();
-
-        $.ajax({
-            url: "/Tournament/QuickAddUser",
-            type: "POST",
-            async: false,
-            data: { name: name, email: email },
-            success: refreshParticipants
-        });
-    }
-</script>

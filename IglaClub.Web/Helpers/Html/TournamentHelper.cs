@@ -13,7 +13,7 @@ namespace IglaClub.Web.Helpers.Html
                         title='You are subscribed to this tournament'></span>
                         <span>Joined</span>");
             }
-            return new HtmlString(string.Format(@"<a href='tournament/details/{0}'><i class='glyphicon glyphicon-plus'></i>Join</a>", id));
+            return new HtmlString(string.Format(@"<a href='details/{0}'><i class='glyphicon glyphicon-plus'></i>Join</a>", id));
         }
 
         public static IHtmlString GetTournamentStatusIcon(TournamentStatus status)

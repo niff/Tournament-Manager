@@ -9,6 +9,18 @@
             var pid = $(this).data("pair-id");
             utils.removePair(tid, pid, initFormUrl);
         });
+        $('#createNewUserLogin').on("click", function () {
+            var name = $('#AddUserName').val();
+            var email = $('#AddUserEmail').val();
+
+            $.ajax({
+                url: "/Tournament/QuickAddUser",
+                type: "POST",
+                async: false,
+                data: { name: name, email: email },
+                success: utils.refreshParticipants(initFormUrl)
+            });
+        });
         $('#pairSearchSubmit').on("click", function() {
             var user1 = $('#user1').val();
             var user2 = $('#user2').val();
@@ -51,5 +63,6 @@
         clearHiddenUsers: function () {
             $('.hidden.user').val('');
         }
+
     };
 })(jQuery);
