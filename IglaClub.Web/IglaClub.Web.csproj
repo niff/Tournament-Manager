@@ -207,8 +207,16 @@
     <Content Include="Content\img\1408214423_file_add.png" />
     <Content Include="Content\img\cards\club.png" />
     <Content Include="Content\img\cards\diamond.png" />
+    <Content Include="Content\img\cards\doubled.png" />
+    <Content Include="Content\img\cards\east.png" />
     <Content Include="Content\img\cards\heart.png" />
+    <Content Include="Content\img\cards\north.png" />
+    <Content Include="Content\img\cards\notdoubled.png" />
     <Content Include="Content\img\cards\notrump.png" />
+    <Content Include="Content\img\cards\passedout.png" />
+    <Content Include="Content\img\cards\redoubled.png" />
+    <Content Include="Content\img\cards\south.png" />
+    <Content Include="Content\img\cards\west.png" />
     <Content Include="Content\img\logo.jpg" />
     <Content Include="Content\img\opacity-cards.png" />
     <Content Include="Content\img\progress_bar.gif" />
