@@ -3,13 +3,14 @@
 
 @Scripts.Render("~/bundles/DateTimepickerJs")
 @Styles.Render("~/Content/DateTimepickerCss")
-
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
     
     DateTime startDate = DateTime.Now.AddMinutes(-DateTime.Now.Minute).AddSeconds(-DateTime.Now.Second).AddHours(1);
-    
+
     <fieldset class="create-tournament">
         <legend>Add new tournament</legend>
 
@@ -78,7 +79,8 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
+</div>
+    </div>
 @*@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }*@

@@ -1,5 +1,5 @@
 ﻿@*<div class="login-mobile-partial">*@
-    <div class="btn-group login-menu">
+    <div class="btn-group">
         @if (Request.IsAuthenticated)
         {
             using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm" }))

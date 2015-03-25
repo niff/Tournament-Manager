@@ -396,11 +396,11 @@ namespace IglaClub.Web.Controllers
             return PartialView("_TournamentList", model);
         }
 
-        public ActionResult MyOrganizedTournaments()
+        public ActionResult TournamentsByOwner()
         {
             var model = tournamentRepository.GetTournamentsByOwnerUser(GetCurrentUserName()).ToList();
             ViewBag.Title = "Tournaments created by you";
-            return View("TournamentsByOwner", model);
+            return View(model);
         }
 
         //public ActionResult AllTournamentsMap()

@@ -199,6 +199,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\bootstrap\js\npm.js" />
     <Content Include="Content\img\1408214039_search.png" />
     <Content Include="Content\img\1408214055_search.png" />
     <Content Include="Content\img\1408214349_folder.png" />
@@ -365,6 +366,7 @@
     <Content Include="Areas\Admin\Views\Clubs\Edit.cshtml" />
     <Content Include="Content\bootstrap\css\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Properties\PublishProfiles\iglaclub - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\iglaclub - Web Deploy.pubxml" />
     <Content Include="Scripts\bootstrap.js" />
@@ -461,6 +463,7 @@
     <Content Include="Views\Shared\_LoginMobilePartial.cshtml" />
     <Content Include="Views\Tournament\_TournamentStartedActions.cshtml" />
     <Content Include="Views\Results\SingleResultEdit.cshtml" />
+    <Content Include="Views\Shared\_TopMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

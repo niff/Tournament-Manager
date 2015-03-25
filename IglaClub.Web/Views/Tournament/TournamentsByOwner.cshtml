@@ -5,7 +5,8 @@
     ViewBag.Title = "All tournaments";
     Layout = "../Shared/_Layout.cshtml"; 
 }
-
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
 <span class="medium-header">@ViewBag.Title</span>
 @*TODO add tournament button*@
 @if (Model.Any())
@@ -65,3 +66,6 @@ else
 {
     <p><i class="small text-muted">No tournaments to display</i></p>
 }
+            
+    </div>
+    </div>
