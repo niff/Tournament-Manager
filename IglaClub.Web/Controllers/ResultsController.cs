@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using IglaClub.ObjectModel.Consts;
 using IglaClub.ObjectModel.Entities;
+using IglaClub.ObjectModel.Enums;
 using IglaClub.ObjectModel.Repositories;
 using IglaClub.ObjectModel.Tools;
 using IglaClub.Web.Infrastructure;
@@ -86,6 +87,7 @@ namespace IglaClub.Web.Controllers
             if (ModelState.IsValid)
             {
                 var shortScore = Request["ShortScore"];
+                result.ContractColor = (ContractColors)(int.Parse(Request.Form["dd-selected-value"]));
                 var parsedResult = ResultsParser.Parse(shortScore);
                 if (!string.IsNullOrEmpty(shortScore) && parsedResult == null)
                 {

@@ -18,6 +18,9 @@
             var hour = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("HH:mm") : "";
             <tr>
                 <td>
+                    @TournamentHelper.GetTournamentStatusIcon(item.TournamentStatus)
+                </td>
+                <td>
                     @Html.ActionLink(item.Name, "Manage", "Tournament", new { id = @item.Id }, null)
                 </td>
                 <td>
@@ -45,12 +48,12 @@
                 </td>
                 <td>
                     @{
-                    var currentUserIsSubscribed = item.UserIsSubscribed(HttpContext.Current.User.Identity.Name);
-                    if (currentUserIsSubscribed)
-                    {
-                        <span class="glyphicon glyphicon-ok-circle" title="You are subscribed to this tournament"></span>
-                        <span>Joined</span>
-                    }
+                        var currentUserIsSubscribed = item.UserIsSubscribed(HttpContext.Current.User.Identity.Name);
+                        if (currentUserIsSubscribed)
+                        {
+                            <span class="glyphicon glyphicon-ok-circle" title="You are subscribed to this tournament"></span>
+                            <span>Joined</span>
+                        }
                     }
                 </td>
             </tr>

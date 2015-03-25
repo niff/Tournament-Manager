@@ -199,17 +199,20 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Content Include="Content\dd.css" />
     <Content Include="Content\img\1408214039_search.png" />
     <Content Include="Content\img\1408214055_search.png" />
     <Content Include="Content\img\1408214349_folder.png" />
     <Content Include="Content\img\1408214351_folder.png" />
     <Content Include="Content\img\1408214416_file_add.png" />
     <Content Include="Content\img\1408214423_file_add.png" />
+    <Content Include="Content\img\cards\club.png" />
+    <Content Include="Content\img\cards\diamond.png" />
+    <Content Include="Content\img\cards\heart.png" />
+    <Content Include="Content\img\cards\notrump.png" />
     <Content Include="Content\img\logo.jpg" />
     <Content Include="Content\img\opacity-cards.png" />
     <Content Include="Content\img\progress_bar.gif" />
-    <Content Include="Content\img\spade.png" />
+    <Content Include="Content\img\cards\spade.png" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jquery.datetimepicker.css" />
     <Content Include="Content\themes\1408214039_search.png" />
@@ -229,8 +232,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RoundController.cs" />
     <Compile Include="Controllers\TournamentController.cs" />
-    <Compile Include="Extensions\ImageSelectExtensions.cs" />
-    <Compile Include="Extensions\ImageSelectListItem.cs" />
     <Compile Include="Helpers\Html\TournamentHelper.cs" />
     <Compile Include="Migrations\201503242214342_CreateTableClubusers.cs" />
     <Compile Include="Migrations\201503242214342_CreateTableClubusers.Designer.cs">
@@ -367,7 +368,7 @@
     <Content Include="Scripts\jquery-ui-1.10.4.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.min.js" />
     <Content Include="Scripts\jquery.datetimepicker.js" />
-    <Content Include="Scripts\jquery.dd.js" />
+    <Content Include="Scripts\jquery.ddslick.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -386,9 +387,6 @@
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Content\Site.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\_references.js" />
     <Content Include="Images\accent.png" />
