@@ -6,7 +6,7 @@
             {
             @Html.AntiForgeryToken()              
             <button type="button" class="button-custom-menu dropdown-toggle visible-xs" data-toggle="dropdown" aria-expanded="false">
-                <i class="glyphicon glyphicon-align-justify icon-with-margin"></i>
+                <i class="glyphicon glyphicon-align-justify both-side-margins"></i>
             </button>
                 <ul class="dropdown-menu login-dd" role="menu">
                     <li><a>@User.Identity.Name</a></li>
@@ -22,7 +22,7 @@
         else
         {
             <button type="button" class="button-custom-menu dropdown-toggle visible-xs" data-toggle="dropdown" aria-expanded="false">
-                <i class="glyphicon glyphicon-align-justify icon-with-margin"></i>
+                <i class="glyphicon glyphicon-align-justify both-side-margins"></i>
             </button>
             <ul class="dropdown-menu main-menu" role="menu">
                 <li><a href="@Url.Action("Register", "Account", new { id = "registerLink", area = "" })">Register</a></li>

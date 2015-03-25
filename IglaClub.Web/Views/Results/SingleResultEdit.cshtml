@@ -2,18 +2,17 @@
 @using IglaClub.ObjectModel.Enums
 @model IglaClub.ObjectModel.Entities.Result
 
-<div class="col-md-12 col-xs-12">
-    <span class="small-header">Results, board 1</span>
+@{
+    var possiblePlayedByValues = new List<NESW> { NESW.PassedOut, NESW.North, NESW.South, NESW.West, NESW.East };
+}
+<div class="col-xs-12 small-padding-mobile">
+    <span class="small-header">Results, board @Model.BoardId</span><br/>
 
-    @{
-        var possiblePlayedByValues = new List<NESW> { NESW.PassedOut, NESW.North, NESW.South, NESW.West, NESW.East };
-    }
-    <label>Short form</label>
-    @Html.TextBox("ShortScore", "", new { Title = StringResources.ShortScoreTooltip })
-
+    <label class="right-side-margin">Short form</label>@Html.TextBox("ShortScore", "", new { Title = StringResources.ShortScoreTooltip})
+    <br/>
+    <strong>Level</strong>
     <div class="btn-toolbar">
-        <p>Level</p>
-        <div id="ContractLevel" class="btn-group" data-toggle="buttons">
+        <div id="ContractLevel" class="btn-group btn-group-justified" data-toggle="buttons">
 
             @for (int i = 0; i < 8; i++)
             {
@@ -28,9 +27,9 @@
         </div>
     </div>
 
+        <strong>Color</strong>
     <div class="btn-toolbar">
-        <p>Color</p>
-        <div id="ContractColor" class="btn-group" data-toggle="buttons">
+        <div id="ContractColor" class="btn-group btn-group-justified" data-toggle="buttons">
             @foreach (var color in Enum.GetValues(typeof(ContractColors)).Cast<ContractColors>())
             {
                 var selected = color == @Model.ContractColor;
@@ -45,9 +44,9 @@
         </div>
     </div>
 
+        <strong>Dbl</strong>
     <div class="btn-toolbar">
-        <p>Dbl</p>
-        <div id="ContractDoubled" class="btn-group" data-toggle="buttons">
+        <div id="ContractDoubled" class="btn-group btn-group-justified" data-toggle="buttons">
             @foreach (var dbl in Enum.GetValues(typeof(ContractDoubled)).Cast<ContractDoubled>())
             {
                 var selected = dbl == @Model.ContractDoubled;
@@ -61,9 +60,9 @@
         </div>
     </div>
 
+        <strong>Played by</strong>
     <div class="btn-toolbar">
-        <p>Played by</p>
-        <div id="PlayedBy" class="btn-group" data-toggle="buttons">
+        <div id="PlayedBy" class="btn-group btn-group-justified" data-toggle="buttons">
             @foreach (var position in possiblePlayedByValues)
             {
                 var selected = position == @Model.PlayedBy;
@@ -77,19 +76,22 @@
         </div>
     </div>
 
-    <div class="btn-toolbar">
-        <p>Tricks</p>
-        <div id="NumberOfTricks" class="btn-group" data-toggle="buttons">
-            @for (int i = 0; i < 14; i++)
-            {
-                var selected = i == @Model.NumberOfTricks;
-                var active = selected ? "active" : "";
-                var chkd = selected ? "checked" : "";
-                <label class="btn btn-default @active">
-                    <input type="radio" name="NumberOfTricks" id="@("trick" + i)" data-value="@i" autocomplete="off" @chkd>@i
-                </label>
-            }
-        </div>
+        <strong>Tricks</strong>
+    <div class="btn-toolbar" role="toolbar" id="NumberOfTricks" data-toggle="buttons">
+        @for (int j = 0; j < 2; j++)
+        {
+            <div class="btn-group btn-group-justified">
+            @for (int i = 0 + (j * 7); i < 7 + (j * 7); i++)
+                    {
+                        var selected = i == @Model.NumberOfTricks;
+                        var active = selected ? "active" : "";
+                        var chkd = selected ? "checked" : "";
+                        <label class="btn btn-default @active">
+                            <input type="radio" name="NumberOfTricks" id="@("trick" + i)" data-value="@i" autocomplete="off" @chkd>@i
+                        </label>
+                    }
+            </div>
+        }
     </div>
     
     @Html.HiddenFor(m => m.TournamentId)

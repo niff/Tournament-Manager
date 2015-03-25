@@ -115,8 +115,11 @@ list-inline a, a:hover {
     padding: 1px 5px;
 }
 
-.icon-with-margin {
+.both-side-margins {
     margin: 0 10px;
+}
+.right-side-margin {
+    margin-right: 10px;
 }
 .blue {
     background-color: cornflowerblue;
@@ -642,6 +645,7 @@ footer {
         background-image: none;
         border-radius: 0;
         padding-left: 10px;
+        margin-bottom: 5px;
     }
 
     .navbar-custom ul {
@@ -715,5 +719,12 @@ footer {
     .tournament-status {
         padding: 2px 5px 3px 6px;
         font-size: x-small;
+    }
+    .small-padding-mobile {
+        padding-left: 5px;
+        padding-right: 0px;
+    }
+    header {
+        margin-bottom: 5px;
     }
 }

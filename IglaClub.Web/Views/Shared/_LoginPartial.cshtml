@@ -9,7 +9,7 @@
             @*<a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>*@
             <div class="btn-group login-menu">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    @User.Identity.Name<i class="glyphicon glyphicon-cog icon-with-margin"></i><span class="caret caret-black"></span>
+                    @User.Identity.Name<i class="glyphicon glyphicon-cog both-side-margins"></i><span class="caret caret-black"></span>
                 </button>
                 <ul class="dropdown-menu login-dd" role="menu">
                     <li><a href="@Url.Action("Edit", "Account", new { area = "" }, null)">Edit profile</a></li>
