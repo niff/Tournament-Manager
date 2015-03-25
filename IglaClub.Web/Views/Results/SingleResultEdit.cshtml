@@ -4,9 +4,17 @@
 
 @{
     var possiblePlayedByValues = new List<NESW> { NESW.PassedOut, NESW.North, NESW.South, NESW.West, NESW.East };
+    var labelDict = new Dictionary<string, string>
+        {
+            {"passedout","passed out"},
+            //{"notrump","NT"},
+            {"notdoubled","–"},
+            {"doubled","X"},
+            {"redoubled","2X"}
+        };
 }
-<div class="col-xs-12 small-padding-mobile">
-    <span class="small-header">Results, board @Model.BoardId</span><br/>
+<div class="col-xs-12 small-padding-mobile single-result-edit">s
+    <span class="small-header">Results, board @Model.Board.BoardNumber</span><br/>
 
     <label class="right-side-margin">Short form</label>@Html.TextBox("ShortScore", "", new { Title = StringResources.ShortScoreTooltip})
     <br/>
@@ -52,9 +60,14 @@
                 var selected = dbl == @Model.ContractDoubled;
                 var chkd = selected ? "checked" : "";
                 var active = selected ? "active" : "";
-                <label class="btn btn-default @active">
-                    <img src="../../Content/img/cards/@(dbl.ToString().ToLowerInvariant()).png"/>
+                var key = dbl.ToString().ToLowerInvariant();
+                var label = labelDict.ContainsKey(key) ? labelDict[key] : dbl.ToString();
+                var fontColor = label.Equals("X") ? "rgb(237, 101, 101)" : (label.Equals("2X") ? "rgb(87, 112, 240)" : "black");
+                var fontSizeClass = "large-font";
+                <label class="btn btn-default @fontSizeClass @active">
+                    @*<img src="../../Content/img/cards/@(dbl.ToString().ToLowerInvariant()).png"/>*@
                     <input type="radio" name="ContractDoubled" id="@("option" + (int)dbl)" data-value="@((int)dbl)" autocomplete="off" @chkd>
+                    <strong style="color: @fontColor ;">@label</strong>
                 </label>
             }
         </div>
@@ -68,9 +81,14 @@
                 var selected = position == @Model.PlayedBy;
                 var chkd = selected ? "checked" : "";
                 var active = selected ? "active" : "";
-                <label class="btn btn-default @active">
-                    <img src="../../Content/img/cards/@(position.ToString().ToLowerInvariant()).png"/>
+                var key = position.ToString().ToLowerInvariant();
+                var label = labelDict.ContainsKey(key) ? labelDict[key] : position.ToString().Substring(0, 1);
+                var fontSizeClass = !key.Equals("passedout") ? "large-font" : "";
+                <label class="btn btn-default @fontSizeClass @active">
+                    @*<img src="../../Content/img/cards/@(position.ToString().ToLowerInvariant()).png"/>
+                    <input type="radio" name="PlayedBy" id="@("option" + (int)position)" data-value="@((int)position)" autocomplete="off" @chkd>*@
                     <input type="radio" name="PlayedBy" id="@("option" + (int)position)" data-value="@((int)position)" autocomplete="off" @chkd>
+                    <strong>@label</strong>
                 </label>
             }
         </div>
@@ -87,7 +105,8 @@
                         var active = selected ? "active" : "";
                         var chkd = selected ? "checked" : "";
                         <label class="btn btn-default @active">
-                            <input type="radio" name="NumberOfTricks" id="@("trick" + i)" data-value="@i" autocomplete="off" @chkd>@i
+                            <input type="radio" name="NumberOfTricks" id="@("trick" + i)" data-value="@i" autocomplete="off" @chkd>
+                            <strong>@i</strong>
                         </label>
                     }
             </div>
@@ -103,7 +122,7 @@
 
     <button class="btn btn-success save-quick-result">Save</button>
 </div>
-
+<script src="~/Scripts/jquery-bigtext.js"></script>
 <script>
     $(document).ready(function () {
         var redirectUrl = '@Url.Action("RoundDetails", "Round", new { tournamentId = @Model.TournamentId })';

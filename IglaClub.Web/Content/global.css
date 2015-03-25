@@ -144,6 +144,10 @@ list-inline a, a:hover {
 }
 
 /*------------results-----------------*/
+.single-result-edit .btn {
+    white-space: normal;
+    padding: 6px;
+}
 .result tr td input {
     width: 100px;
     height: 25px;
@@ -181,6 +185,9 @@ table.result {
 
 .btn {
     margin: 2px;
+}
+.large-font {
+    font-size: x-large;
 }
 
 .defaultMargin {
