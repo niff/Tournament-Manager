@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using IglaClub.ObjectModel.Consts;
 using IglaClub.ObjectModel.Entities;
 using IglaClub.ObjectModel.Enums;
@@ -78,7 +80,7 @@ namespace IglaClub.Web.Controllers
         public ActionResult EditResult(long resultId)
         {
             var result = db.Results.Find(resultId);
-            return View(result);
+            return View("SingleResultEdit",result);
         }
 
         [HttpPost]
@@ -86,25 +88,50 @@ namespace IglaClub.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var shortScore = Request["ShortScore"];
-                result.ContractColor = (ContractColors)(int.Parse(Request.Form["dd-selected-value"]));
-                var parsedResult = ResultsParser.Parse(shortScore);
-                if (!string.IsNullOrEmpty(shortScore) && parsedResult == null)
+                if (!ShortScoreIsEmpty(Request))
                 {
-                    notificationService.DisplayError("Wrong format of short score: {0}. \r\n Please refer to format: {1}", shortScore, StringResources.ShortScoreTooltip);
-                    return View(result);
+                    var shortScore = GetShortScore(Request);
+                    if (shortScore == null)
+                    {
+                        return View(result);
+                    }
+                    result = ResultsParser.UpdateResult(result, shortScore);
                 }
 
-                if (parsedResult != null)
-                    result = ResultsParser.UpdateResult(result, parsedResult);
-                var board = this.resultRepository.Get<BoardInstance>(result.BoardId);
-                result.Board = board;
+                //result.ContractColor = (ContractColors)(int.Parse(Request.Form["dd-selected-value"]));
+                result.Board = this.resultRepository.Get<BoardInstance>(result.BoardId);
                 result.ResultNsPoints = TournamentHelper.CalculateScoreInBoard(result);
                 resultRepository.InsertOrUpdate(result);
                 this.resultRepository.SaveChanges();
-                return RedirectToAction("RoundDetails", "Round", new { result.TournamentId });
+                //return RedirectToAction("RoundDetails", "Round", new { result.TournamentId });
+                return Json("OK");
             }
-            return View(result);
+            return View("SingleResultEdit", result);
+        }
+
+        private bool ShortScoreIsEmpty(HttpRequestBase request)
+        {
+            return String.IsNullOrEmpty(request["ShortScore"]);
+        }
+
+        private Result GetShortScore(HttpRequestBase request)
+        {
+            var shortScore = request["ShortScore"];
+
+            var parsedResult = ResultsParser.Parse(shortScore);
+            if (!string.IsNullOrEmpty(shortScore) && parsedResult == null)
+            {
+                notificationService.DisplayError("Wrong format of short score: {0}. \r\n Please refer to format: {1}", shortScore, StringResources.ShortScoreTooltip);
+                return null;
+            }
+            return parsedResult;
+        }
+
+        [HttpPost]
+        public void QuickSaveResult(Result result)
+        {
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            //Result a = jss.Deserialize<Result>(jsonResponse);
         }
 
         public ActionResult SingleResultEdit()

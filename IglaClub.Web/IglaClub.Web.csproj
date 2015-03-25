@@ -363,6 +363,8 @@
     <Content Include="Areas\Admin\Views\Clubs\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Clubs\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Clubs\Edit.cshtml" />
+    <Content Include="Content\bootstrap\css\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap.css.map" />
     <None Include="Properties\PublishProfiles\iglaclub - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\iglaclub - Web Deploy.pubxml" />
     <Content Include="Scripts\bootstrap.js" />

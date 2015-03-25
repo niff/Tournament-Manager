@@ -1,95 +1,142 @@
 ﻿@using IglaClub.ObjectModel.Consts
 @using IglaClub.ObjectModel.Enums
-@using IglaClub.Web.Helpers.Html
 @model IglaClub.ObjectModel.Entities.Result
 
-<span class="small-header">Results, board 1</span>
+<div class="col-md-12 col-xs-12">
+    <span class="small-header">Results, board 1</span>
 
-@{
-    var possiblePlayedByValues = new List<NESW> { NESW.PassedOut, NESW.North, NESW.South, NESW.West, NESW.East };
-}
-<label>Short form</label>
-@Html.TextBox("ShortScore", "", new { Title = StringResources.ShortScoreTooltip })
+    @{
+        var possiblePlayedByValues = new List<NESW> { NESW.PassedOut, NESW.North, NESW.South, NESW.West, NESW.East };
+    }
+    <label>Short form</label>
+    @Html.TextBox("ShortScore", "", new { Title = StringResources.ShortScoreTooltip })
 
-<div class="btn-toolbar">
-    <p>Level</p>
-    <div class="btn-group" data-toggle="buttons">
+    <div class="btn-toolbar">
+        <p>Level</p>
+        <div id="ContractLevel" class="btn-group" data-toggle="buttons">
 
-        @for (int i = 1; i < 15; i++)
-        {  
-@*<button type="button" class="btn btn-default">@i</button>*@
-            var active = i == 1 ? "active" : "";
-            <label class="btn btn-default @active">
-                <input type="radio" name="options" id="@("option" + i)" autocomplete="off" checked>@i
-            </label>
-        }
+            @for (int i = 0; i < 8; i++)
+            {
+                var selected = i == @Model.ContractLevel;
+                var active = selected ? "active" : "";
+                var chkd = selected ? "checked" : "";
+                <label class="btn btn-default @active">
+                    <input type="radio" name="ContractLevel" id="@("option" + i)" data-value="@i" autocomplete="off" @chkd>
+                    <strong>@i</strong>
+                </label>
+            }
+        </div>
     </div>
+
+    <div class="btn-toolbar">
+        <p>Color</p>
+        <div id="ContractColor" class="btn-group" data-toggle="buttons">
+            @foreach (var color in Enum.GetValues(typeof(ContractColors)).Cast<ContractColors>())
+            {
+                var selected = color == @Model.ContractColor;
+                var chkd = selected ? "checked" : "";
+                var active = selected ? "active" : "";
+                <label class="btn btn-default @active">
+                    <img src="../../Content/img/cards/@(color.ToString().ToLowerInvariant()).png"/>
+                    <input type="radio" name="ContractColor" id="@("option" + (int)color)" data-value="@((int)color)" autocomplete="off" @chkd>
+                </label>
+            }
+
+        </div>
+    </div>
+
+    <div class="btn-toolbar">
+        <p>Dbl</p>
+        <div id="ContractDoubled" class="btn-group" data-toggle="buttons">
+            @foreach (var dbl in Enum.GetValues(typeof(ContractDoubled)).Cast<ContractDoubled>())
+            {
+                var selected = dbl == @Model.ContractDoubled;
+                var chkd = selected ? "checked" : "";
+                var active = selected ? "active" : "";
+                <label class="btn btn-default @active">
+                    <img src="../../Content/img/cards/@(dbl.ToString().ToLowerInvariant()).png"/>
+                    <input type="radio" name="ContractDoubled" id="@("option" + (int)dbl)" data-value="@((int)dbl)" autocomplete="off" @chkd>
+                </label>
+            }
+        </div>
+    </div>
+
+    <div class="btn-toolbar">
+        <p>Played by</p>
+        <div id="PlayedBy" class="btn-group" data-toggle="buttons">
+            @foreach (var position in possiblePlayedByValues)
+            {
+                var selected = position == @Model.PlayedBy;
+                var chkd = selected ? "checked" : "";
+                var active = selected ? "active" : "";
+                <label class="btn btn-default @active">
+                    <img src="../../Content/img/cards/@(position.ToString().ToLowerInvariant()).png"/>
+                    <input type="radio" name="PlayedBy" id="@("option" + (int)position)" data-value="@((int)position)" autocomplete="off" @chkd>
+                </label>
+            }
+        </div>
+    </div>
+
+    <div class="btn-toolbar">
+        <p>Tricks</p>
+        <div id="NumberOfTricks" class="btn-group" data-toggle="buttons">
+            @for (int i = 0; i < 14; i++)
+            {
+                var selected = i == @Model.NumberOfTricks;
+                var active = selected ? "active" : "";
+                var chkd = selected ? "checked" : "";
+                <label class="btn btn-default @active">
+                    <input type="radio" name="NumberOfTricks" id="@("trick" + i)" data-value="@i" autocomplete="off" @chkd>@i
+                </label>
+            }
+        </div>
+    </div>
+    
+    @Html.HiddenFor(m => m.TournamentId)
+    @Html.HiddenFor(m => m.BoardId)
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.ResultNsPoints)
+    @Html.HiddenFor(m => m.ScoreEw)
+    @Html.HiddenFor(m => m.ScoreNs)
+
+    <button class="btn btn-success save-quick-result">Save</button>
 </div>
 
-<div class="btn-toolbar">
-    <p>Color</p>
-    <div class="btn-group" data-toggle="buttons">
-        @foreach (var color in Enum.GetValues(typeof(ContractColors)).Cast<ContractColors>())
-        {
-@*<button type="button" class="btn btn-default">
-            <img src="../../Content/img/cards/@(color.ToString().ToLowerInvariant()).png"/>
-        </button>*@
-            var active = color == ContractColors.Spade ? "active" : "";
-            <label class="btn btn-default @active">
-                <img src="../../Content/img/cards/@(color.ToString().ToLowerInvariant()).png"/>
-                <input type="radio" name="options" id="@("option" + (int)color)" autocomplete="off" checked>
-            </label>
+<script>
+    $(document).ready(function () {
+        var redirectUrl = '@Url.Action("RoundDetails", "Round", new { tournamentId = @Model.TournamentId })';
+        
+        function getSelectedValue(areaId) {
+            var selector = "div#" + areaId + " label input:checked";
+            return $(selector).data("value");
+        }
+        function redirectToRound() {
+            window.location.href = redirectUrl;
         }
 
-    </div>
-</div>
-
-<div class="btn-toolbar">
-    <p>Dbl</p>
-    <div class="btn-group" data-toggle="buttons">
-        @foreach (var dbl in Enum.GetValues(typeof(ContractDoubled)).Cast<ContractDoubled>())
-        {
-@*<button type="button" class="btn btn-default">
-            <img src="../../Content/img/cards/@(dbl.ToString().ToLowerInvariant()).png"/>
-        </button>*@
-            var active = dbl == ContractDoubled.Doubled ? "active" : "";
-            <label class="btn btn-default @active">
-                <img src="../../Content/img/cards/@(dbl.ToString().ToLowerInvariant()).png"/>
-                <input type="radio" name="options" id="@("option" + (int)dbl)" autocomplete="off" checked>
-            </label>
-        }
-    </div>
-</div>
-
-<div class="btn-toolbar">
-    <p>Played by</p>
-    <div class="btn-group" data-toggle="buttons">
-        @foreach (var position in possiblePlayedByValues)
-        {
-@*<button type="button" class="btn btn-default">
-            <img src="../../Content/img/cards/@(position.ToString().ToLowerInvariant()).png"/>
-        </button>*@
-            var active = position == NESW.North ? "active" : "";
-            <label class="btn btn-default @active">
-                <img src="../../Content/img/cards/@(position.ToString().ToLowerInvariant()).png"/>
-                <input type="radio" name="options" id="@("option" + (int)position)" autocomplete="off" checked>
-            </label>
-        }
-    </div>
-</div>
-
-<div class="btn-toolbar">
-    <p>Tricks</p>
-    <div class="btn-group" data-toggle="buttons">
-        @for (int i = 1; i < 15; i++)
-        {  
-@*<button type="button" class="btn btn-default">@i</button>*@
-            var active = i == 1 ? "active" : "";
-            <label class="btn btn-default @active">
-                <input type="radio" name="options" id="@("option" + i)" autocomplete="off" checked>@i
-            </label>
-        }
-    </div>
-</div>
-
-<button class="btn btn-success">Save</button>
+        $(".save-quick-result").on("click", function () {
+            var result = {
+                Id: '@Model.Id',
+                ContractLevel: getSelectedValue("ContractLevel"),
+                ContractColor: getSelectedValue("ContractColor"),
+                ContractDoubled: getSelectedValue("ContractDoubled"),
+                PlayedBy: getSelectedValue("PlayedBy"),
+                NumberOfTricks: getSelectedValue("NumberOfTricks"),
+                ResultNsPoints: "@Model.ResultNsPoints",
+                BoardId: "@Model.BoardId",
+                TournamentId: "@Model.TournamentId",
+                RoundNumber: "@Model.RoundNumber",
+                TableNumber: "@Model.TableNumber",
+                ScoreNs: "@Model.ScoreNs",
+                ScoreEw: "@Model.ScoreEw"
+            };
+            $.ajax({
+                url: "EditResult",
+                type: "POST",
+                dataType: 'json',
+                data: result,
+                success: redirectToRound
+            });
+        });
+    });
+</script>
