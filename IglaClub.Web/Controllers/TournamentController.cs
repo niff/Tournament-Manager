@@ -478,5 +478,6 @@ namespace IglaClub.Web.Controllers
     {
         public IList<Tournament> Tournaments { get; set; }
         public string Header { get; set; }
+        public bool CanManage { get; set; }
     }
 }

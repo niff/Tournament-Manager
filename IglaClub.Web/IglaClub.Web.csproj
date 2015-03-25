@@ -450,6 +450,7 @@
     <Content Include="Views\Shared\_RegisterPartial.cshtml" />
     <Content Include="Views\Shared\_LoginMobilePartial.cshtml" />
     <Content Include="Views\Tournament\_TournamentStartedActions.cshtml" />
+    <Content Include="Views\Results\SingleResultEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

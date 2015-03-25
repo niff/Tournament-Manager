@@ -107,6 +107,11 @@ namespace IglaClub.Web.Controllers
             return View(result);
         }
 
+        public ActionResult SingleResultEdit()
+        {
+            return View();
+        }
+
         //[TournamentOwner]
         public ActionResult Manage(long tournamentId, string sortBy, string sortdir)
         {

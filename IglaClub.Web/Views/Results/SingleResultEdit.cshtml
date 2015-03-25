@@ -1,0 +1,95 @@
+﻿@using IglaClub.ObjectModel.Consts
+@using IglaClub.ObjectModel.Enums
+@using IglaClub.Web.Helpers.Html
+@model IglaClub.ObjectModel.Entities.Result
+
+<span class="small-header">Results, board 1</span>
+
+@{
+    var possiblePlayedByValues = new List<NESW> { NESW.PassedOut, NESW.North, NESW.South, NESW.West, NESW.East };
+}
+<label>Short form</label>
+@Html.TextBox("ShortScore", "", new { Title = StringResources.ShortScoreTooltip })
+
+<div class="btn-toolbar">
+    <p>Level</p>
+    <div class="btn-group" data-toggle="buttons">
+
+        @for (int i = 1; i < 15; i++)
+        {  
+@*<button type="button" class="btn btn-default">@i</button>*@
+            var active = i == 1 ? "active" : "";
+            <label class="btn btn-default @active">
+                <input type="radio" name="options" id="@("option" + i)" autocomplete="off" checked>@i
+            </label>
+        }
+    </div>
+</div>
+
+<div class="btn-toolbar">
+    <p>Color</p>
+    <div class="btn-group" data-toggle="buttons">
+        @foreach (var color in Enum.GetValues(typeof(ContractColors)).Cast<ContractColors>())
+        {
+@*<button type="button" class="btn btn-default">
+            <img src="../../Content/img/cards/@(color.ToString().ToLowerInvariant()).png"/>
+        </button>*@
+            var active = color == ContractColors.Spade ? "active" : "";
+            <label class="btn btn-default @active">
+                <img src="../../Content/img/cards/@(color.ToString().ToLowerInvariant()).png"/>
+                <input type="radio" name="options" id="@("option" + (int)color)" autocomplete="off" checked>
+            </label>
+        }
+
+    </div>
+</div>
+
+<div class="btn-toolbar">
+    <p>Dbl</p>
+    <div class="btn-group" data-toggle="buttons">
+        @foreach (var dbl in Enum.GetValues(typeof(ContractDoubled)).Cast<ContractDoubled>())
+        {
+@*<button type="button" class="btn btn-default">
+            <img src="../../Content/img/cards/@(dbl.ToString().ToLowerInvariant()).png"/>
+        </button>*@
+            var active = dbl == ContractDoubled.Doubled ? "active" : "";
+            <label class="btn btn-default @active">
+                <img src="../../Content/img/cards/@(dbl.ToString().ToLowerInvariant()).png"/>
+                <input type="radio" name="options" id="@("option" + (int)dbl)" autocomplete="off" checked>
+            </label>
+        }
+    </div>
+</div>
+
+<div class="btn-toolbar">
+    <p>Played by</p>
+    <div class="btn-group" data-toggle="buttons">
+        @foreach (var position in possiblePlayedByValues)
+        {
+@*<button type="button" class="btn btn-default">
+            <img src="../../Content/img/cards/@(position.ToString().ToLowerInvariant()).png"/>
+        </button>*@
+            var active = position == NESW.North ? "active" : "";
+            <label class="btn btn-default @active">
+                <img src="../../Content/img/cards/@(position.ToString().ToLowerInvariant()).png"/>
+                <input type="radio" name="options" id="@("option" + (int)position)" autocomplete="off" checked>
+            </label>
+        }
+    </div>
+</div>
+
+<div class="btn-toolbar">
+    <p>Tricks</p>
+    <div class="btn-group" data-toggle="buttons">
+        @for (int i = 1; i < 15; i++)
+        {  
+@*<button type="button" class="btn btn-default">@i</button>*@
+            var active = i == 1 ? "active" : "";
+            <label class="btn btn-default @active">
+                <input type="radio" name="options" id="@("option" + i)" autocomplete="off" checked>@i
+            </label>
+        }
+    </div>
+</div>
+
+<button class="btn btn-success">Save</button>
