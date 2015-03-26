@@ -165,7 +165,8 @@ button.login a {
     /*.pairs input[type="text"] {
         width: 80px;
     }*/
-
+.label .label-default .label-light-gray {  opacity: 0.5;
+}
 .action-pane button {
     margin: 10px 10px 10px 10px;
     max-width: 500px;
