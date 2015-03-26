@@ -108,6 +108,15 @@ namespace IglaClub.Web.Controllers
             return View(model);
         }
 
+        
+        [HttpPost]
+        public void QuickAddUser(string name, string email)
+        {
+            //todo fix - CreateUserAndAccount added to table user, we have to provide email :)
+            //userRepository.Add(name, email);
+            WebSecurity.CreateUserAndAccount(name, name);      
+            notificationService.DisplaySuccess(String.Format("User {0} was created successfully. Default password: {0}. Please change password after first login", name));
+        }
         //
         // POST: /Account/Disassociate
 

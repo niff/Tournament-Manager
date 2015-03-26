@@ -14,22 +14,24 @@
     </head>
     <body>            
         @{
+            //todo move lower and check
             var message = TempData["Message"];
             var type = TempData["MessageType"] != null ? TempData["MessageType"].ToString().ToLower() : "info";
 
             if (message != null && message is string)
             {
-                 <div class="alert alert-@type alert-dismissible" role="alert">
-                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                     </button>
-                     @Html.Raw(message)
-                 </div>
+                <div class="alert alert-@type alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    @Html.Raw(message)
+                </div>
             }
         }
             
         <div class="container">
             @Html.Partial("_TopMenu")
+            
             @RenderSection("featured", required: false)
             @RenderBody()
         </div>

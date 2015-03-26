@@ -14,7 +14,7 @@
             var email = $('#AddUserEmail').val();
 
             $.ajax({
-                url: "/Tournament/QuickAddUser",
+                url: "/Account/QuickAddUser",
                 type: "POST",
                 data: { name: name, email: email, id: tournamentId },
                 success: function () {

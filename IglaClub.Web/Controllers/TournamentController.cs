@@ -332,14 +332,6 @@ namespace IglaClub.Web.Controllers
             throw new NotImplementedException();
         }
 
-        [HttpPost]
-        public void QuickAddUser(string name, string email, long id)
-        {
-            notificationService.DisplaySuccess(String.Format("User {0} was created successfully.", name));
-            //todo nie dziala notyfikacja, wywolanie jest przez ajax
-            userRepository.Add(name, email);
-        }
-
         public PartialViewResult MyTournamentsToPlay()
         {
             var model = new TounamentSingleListViewModel
