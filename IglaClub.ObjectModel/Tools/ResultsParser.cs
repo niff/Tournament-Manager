@@ -7,7 +7,7 @@ using IglaClub.ObjectModel.Enums;
 
 namespace IglaClub.ObjectModel.Tools
 {
-     public class ResultsParser
+    public static class ResultsParser
     {
 
         public const string ParseScorePattern =
@@ -58,7 +58,7 @@ namespace IglaClub.ObjectModel.Tools
         }
 
          
-         private static string GetFormatResult(Result result, Dictionary<string, ContractColors> colorsDictionary)
+        private static string GetFormatResult(Result result, Dictionary<string, ContractColors> colorsDictionary)
          {
              if (result.PlayedBy == NESW.Unavailable)
                  return "";
@@ -66,6 +66,7 @@ namespace IglaClub.ObjectModel.Tools
                  return "Passed out";
              if (result.PlayedBy == NESW.DirectorScore)
                  return "Director score";
+
              var tricks = result.NumberOfTricks - result.ContractLevel - 6;
              var tricksString = tricks == 0 ? "=" : tricks.ToString("+#;-#;0");
              var doubledString = DoubledDictionary.First(kpv => kpv.Value == result.ContractDoubled).Key;

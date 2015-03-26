@@ -121,10 +121,11 @@ namespace IglaClub.Web.Controllers
             {
                 this.notificationService.DisplayMessage(ex.Message, NotificationType.Warning);
                // notificationService.DisplayError(ex.Message);
+                 if (filterContext.HttpContext.Request.UrlReferrer != null)
+                filterContext.HttpContext.Response.Redirect(filterContext.HttpContext.Request.UrlReferrer.ToString(),true);
             }
 
-            if (filterContext.HttpContext.Request.UrlReferrer != null)
-                filterContext.HttpContext.Response.Redirect(filterContext.HttpContext.Request.UrlReferrer.ToString(),true);
+           
         }
 
         [TournamentOwner]
