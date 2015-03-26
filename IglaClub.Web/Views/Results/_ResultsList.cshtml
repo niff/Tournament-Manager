@@ -75,7 +75,7 @@
                 <td>
                     @if (item.PlayedBy == NESW.DirectorScore || item.ResultNsPoints.HasValue)
                     {
-                        <span class="glyphicon glyphicon-ok-circle" title="Completed"></span>
+                        <span class="glyphicon glyphicon-ok success" title="Completed"></span>
                     }
                 </td>
                 <td>
@@ -95,7 +95,7 @@
                 </td>
                 <td>
                     @*todo: add html to colors ColorsHtmlDictionary*@
-                    @ResultsParser.GetFormatResultForHtml(item)
+                    @Html.Raw(ResultsParser.GetFormatResultForHtml(item))
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ContractLevel)

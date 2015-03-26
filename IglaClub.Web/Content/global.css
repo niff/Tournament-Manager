@@ -221,6 +221,24 @@ table.result {
     font-size: x-small;
 }
 
+i.glyphicon.result-icon {
+    width: 16px;
+    height: 16px;
+    margin-left: 2px;
+}
+i.glyphicon.result-icon.spade {
+    background: url('img/cards/spade-icon.png');
+}
+i.glyphicon.result-icon.club {
+    background: url('img/cards/club-icon.png');
+}
+i.glyphicon.result-icon.heart {
+    background: url('img/cards/hearts-icon.png');
+}
+i.glyphicon.result-icon.diamond {
+    background: url('img/cards/diamond-icon.png');
+}
+
 .home-text {
     padding: 15px;
     font-size: 20px;

@@ -1,7 +1,7 @@
 ﻿@using IglaClub.ObjectModel.Enums
 @model IglaClub.ObjectModel.Entities.Tournament
 
-@Html.ActionLink("Manage results", "Manage", "Results",
+@Html.ActionLink("Edit results", "Manage", "Results",
             new { tournamentId = Model.Id },
             new { @class = "btn btn-info", title = "Manage current results: change placing, add/change scores - essential of the tournament directing." })
 
