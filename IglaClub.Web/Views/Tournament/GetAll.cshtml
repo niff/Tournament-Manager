@@ -1,53 +1,57 @@
-﻿@using IglaClub.Web.Helpers.Html
-@model IList<IglaClub.ObjectModel.Entities.Tournament>
+﻿@model IglaClub.Web.Models.ViewModels.TounamentSingleListViewModel
 
 @{
     ViewBag.Title = "All tournaments";
     Layout = "../Shared/_Layout.cshtml";
 }
 
-<span class="medium-header">All tournaments</span>
-@if (Model.Any())
-{
-    <table class="tournamentsListTable table table-striped table-hover">
-
-        @foreach (var item in Model)
+<div class="row">
+    <div class="col-md-12 column-padding">
+        @Html.Partial("_TournamentList", @Model)
+        @*<span class="medium-header">All tournaments</span>
+        @if (Model.Any())
         {
-            var date = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("dd MMM yyyy") : "";
-            var hour = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("HH:mm") : "";
-            <tr>
-                <td>
-                    @item.Name
-                </td>
-                <td>
-                    @if (item.PlannedStartDate != null)
-                    {
-                        <span>@DateHelper.DaysLeftToDate((DateTime) item.PlannedStartDate)</span>
-                    }
-                    else
-                    {
-                        <span>Not set yet</span>
-                    }
-                </td>
-                <td>
-                    @hour
-                </td>
-                <td>
-                    @{
-                    var currentUserIsSubscribed = item.UserIsSubscribed(HttpContext.Current.User.Identity.Name);
-                    if (currentUserIsSubscribed)
-                    {
-                        <span class="glyphicon glyphicon-ok-circle" title="You are subscribed to this tournament"></span>
-                        <span>Joined</span>
-                    }
-                    }
-                </td>
-            </tr>
-        }
+            <table class="tournamentsListTable table table-striped table-hover">
 
-    </table>
-}
-else
-{
-    <p><i class="small text-muted">No tournaments to display</i></p>
-}
+                @foreach (var item in Model)
+                {
+                    var date = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("dd MMM yyyy") : "";
+                    var hour = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("HH:mm") : "";
+                    <tr>
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>
+                            @if (item.PlannedStartDate != null)
+                            {
+                                <span>@DateHelper.DaysLeftToDate((DateTime)item.PlannedStartDate)</span>
+                            }
+                            else
+                            {
+                                <span>Not set yet</span>
+                            }
+                        </td>
+                        <td>
+                            @hour
+                        </td>
+                        <td>
+                            @{
+                            var currentUserIsSubscribed = item.UserIsSubscribed(HttpContext.Current.User.Identity.Name);
+                            if (currentUserIsSubscribed)
+                            {
+                                <span class="glyphicon glyphicon-ok success" title="You are subscribed to this tournament"></span>
+                                <span>Joined</span>
+                            }
+                            }
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        }
+        else
+        {
+            <p><i class="small text-muted">No tournaments to display</i></p>
+        }*@
+    </div>
+</div>

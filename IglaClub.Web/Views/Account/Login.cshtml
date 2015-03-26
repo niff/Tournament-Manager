@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Log in";
 }
-
+@*todo create logout*@
 <section id="loginForm">
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
     @Html.AntiForgeryToken()
@@ -15,17 +15,17 @@
             @Html.LabelFor(model => model.UserName)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.UserName)
+            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control"})
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.Password)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Password)
+            @Html.PasswordFor(model => model.Password, new { @class = "form-control"})
         </div>
 
         <div class="editor-field">
-            @Html.EditorFor(model => model.RememberMe)
+            @Html.CheckBoxFor(model => model.RememberMe, new { @class = "form-control"})
             @Html.LabelFor(model => model.RememberMe)
         </div>
         <p>
@@ -33,7 +33,7 @@
                 <i class="glyphicon glyphicon-circle-arrow-right"></i>Log in
             </button>
         </p>
-        <p>
+        <p class="submit-button">
             or @Html.ActionLink("register", "Register"), if you don't have an account.
         </p>
     </fieldset>

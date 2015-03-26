@@ -3,42 +3,56 @@
 
 @{
     ViewBag.Title = "Details";
+    
 }
 
-<div>
-    <p>@Html.ActionLink("Tournaments", "Index") > Details</p>
-    <span class="medium-header">@Model.Name</span>
-</div>
-
+@{
+    var isSubscribed = @Model.UserIsSubscribed(User.Identity.Name);  
+}
 <div class="row">
-    <div class="col-md-12">       
-        @Html.Partial("_TournamentShortInfo", Model) @*//TODO: edit for non authorized*@
-    </div>
-    <div class="col-md-12">
-        <p>
-            <img src="~/Content/img/progress_bar.gif" />
-            @Html.ActionLink("Go to my table details", "RoundDetails", "Round", new { tournamentId = Model.Id }, null)
-            @*//TODO: disable button til started*@
-        </p>
-    </div>
-    <div class="col-md-6">
-        @if (Model.TournamentStatus != TournamentStatus.Planned)
-        {
-            @Html.Action("PairsResults", "Results", new { tournamentId = @Model.Id }) 
-        }
-        else
-        {
+    <div class="col-md-12 column-padding">
+        <div>
+            <p>@Html.ActionLink("Tournaments", "Index") > Details</p>
+            <span class="medium-header">@Model.Name</span>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                @Html.Partial("_TournamentShortInfo", Model) @*//TODO: edit for non authorized*@
+            </div>
+            @if (isSubscribed)
+            {
+                <div class="col-md-12">
+                    <p>
+                        @*@Html.ActionLink("Go to my table details", "RoundDetails", "Round", new { tournamentId = Model.Id }, null)*@
+                        @*//TODO: disable button til started*@
+                        <a href="@Url.Action("RoundDetails", "Round", new {tournamentId = Model.Id})" class="green-link">
+                            <i class="glyphicon glyphicon-triangle-right success"></i>
+                            Go to my table details
+                        </a>
+                    </p>
+                </div>
+            }
+            <div class="col-md-6">
+                @if (Model.TournamentStatus != TournamentStatus.Planned)
+                {
+                    @Html.Action("PairsResults", "Results", new { tournamentId = @Model.Id }) 
+                }
+                else
+                {
             
-            @:<div class="pairs" id="participantsDiv">
-                @Html.Action("PairsList", "Tournament", new { tournamentId = @Model.Id })
-            @:</div>
-        }
-    </div>
-    <div class="col-md-6 action-pane">
-        @if (Model.TournamentStatus == TournamentStatus.Started)
-        {
-            @Html.Action("PairRoster", new { tournamentId = @Model.Id });
-        }
+                    @:<div class="pairs" id="participantsDiv">
+                        @Html.Action("PairsList", "Tournament", new { tournamentId = @Model.Id })
+                                    @:</div>
+                        }
+            </div>
+            <div class="col-md-6 action-pane">
+                @if (Model.TournamentStatus == TournamentStatus.Started)
+                {
+                    @Html.Action("PairRoster", new { tournamentId = @Model.Id });
+                }
+            </div>
+        </div>
     </div>
 </div>
 

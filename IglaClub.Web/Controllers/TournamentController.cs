@@ -51,13 +51,6 @@ namespace IglaClub.Web.Controllers
             return HttpContext.User.Identity.Name;
         }
 
-        [AllowAnonymous]
-        public ActionResult GetAll()
-        {
-            var model = tournamentRepository.GetAll<Tournament>().ToList();
-            return View(model);
-        }
-
         [TournamentOwner]
         public ActionResult Manage(long id = 0)
         {
@@ -349,9 +342,22 @@ namespace IglaClub.Web.Controllers
             var model = new TounamentSingleListViewModel
                 {
                     Tournaments = tournamentRepository.GetTournamentsToPlayByUser(GetCurrentUserName()),
-                    Header = "My tournaments"
+                    Header = "All tournaments"
                 };
             return PartialView("_TournamentList", model);
+        }
+
+        
+
+        [AllowAnonymous]
+        public ActionResult GetAll()
+        {
+            var model = new TounamentSingleListViewModel
+            {
+                Tournaments = tournamentRepository.GetAll<Tournament>().ToList(),
+                Header = "My tournaments"
+            };
+            return View(model);
         }
 
         public PartialViewResult AvailableTournaments()

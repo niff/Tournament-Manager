@@ -10,14 +10,20 @@
             //{"notrump","NT"},
             {"notdoubled","–"},
             {"doubled","X"},
-            {"redoubled","2X"}
+            {"redoubled","XX"}
         };
 }
-<div class="col-xs-12 single-result-edit">
-    <span class="small-header">Results, board @Model.Board.BoardNumber</span><br/>
+<div class="row">
+<div class="col-xs-12 column-padding-small single-result-edit">
+    <span class="small-header">Results, board @Model.Board.BoardNumber</span>
 
-    <label class="right-side-margin">Short form</label>@Html.TextBox("ShortScore", "", new { Title = StringResources.ShortScoreTooltip})
-    <br/>
+    <form class="form-inline">
+        <div class="form-group">
+            @Html.TextBox("ShortScore", "", new { @class = "form-control", @placeholder = "Short form", Title = StringResources.ShortScoreTooltip })
+            <button type="submit" class="btn btn-success btn-small"><i class="glyphicon glyphicon-plus"></i></button>
+        </div>
+    </form>
+
     <strong>Level</strong>
     <div class="btn-toolbar">
         <div id="ContractLevel" class="btn-group btn-group-justified" data-toggle="buttons">
@@ -62,7 +68,7 @@
                 var active = selected ? "active" : "";
                 var key = dbl.ToString().ToLowerInvariant();
                 var label = labelDict.ContainsKey(key) ? labelDict[key] : dbl.ToString();
-                var fontColor = label.Equals("X") ? "rgb(237, 101, 101)" : (label.Equals("2X") ? "rgb(87, 112, 240)" : "black");
+                var fontColor = label.Equals("X") ? "rgb(237, 101, 101)" : (label.Equals("XX") ? "rgb(87, 112, 240)" : "black");
                 var fontSizeClass = "large-font";
                 <label class="btn btn-default @fontSizeClass @active">
                     @*<img src="../../Content/img/cards/@(dbl.ToString().ToLowerInvariant()).png"/>*@
@@ -119,8 +125,10 @@
     @Html.HiddenFor(m => m.ResultNsPoints)
     @Html.HiddenFor(m => m.ScoreEw)
     @Html.HiddenFor(m => m.ScoreNs)
-
+    <p class="submit-button">
     <button class="btn btn-success save-quick-result">Save</button>
+        </p>
+</div>
 </div>
 <script src="~/Scripts/jquery-bigtext.js"></script>
 <script>

@@ -4,8 +4,17 @@
     <p title="If you want to add new user to the system, please fulfill data below and confirm. New user will be instantly visible in the system">
         Create new user
     </p>
-    <input type="text" id="AddUserName" placeholder="Name" style="width: 200px;"/>
-    <input type="text" id="AddUserEmail" placeholder="Email" style="width: 200px;" />
+@*    <input type="text" id="AddUserName" placeholder="Name" />
+    <input type="text" id="AddUserEmail" placeholder="Email" />
     <input type="submit" class="btn btn-default btn-small" id="createNewUserLogin" value="Create" />
-    
+    *@
+    <form class="form-inline">
+        <div class="form-group">
+            <input type="text" id="AddUserName" class="form-control" placeholder="Enter name">
+        </div>
+        <div class="form-group">
+            <input type="email" id="AddUserEmail" class="form-control" placeholder="Enter email">
+        </div>
+        <button type="submit" class="btn btn-default btn-small" id="createNewUserLogin">Create</button>
+    </form>
 </div>

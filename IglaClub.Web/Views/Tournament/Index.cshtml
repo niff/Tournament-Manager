@@ -1,28 +1,29 @@
 ﻿@model IglaClub.Web.Models.ViewModels.TournamentMainPageModel
 
 <div class="row">
-    @if (@Model.CurrentlyPlayedByUser.Any())
-    {
-        <div class="col-md-12">
-            <div class="active-tournaments">
-                <span class="medium-header">You are playing now</span>
-                @foreach (var t in @Model.CurrentlyPlayedByUser)
-                {
-                    <p>
-                        @*<img src="http://whiteningrx.com/images/progress_bar.gif" />*@
-                        <i class="glyphicon glyphicon-triangle-right"></i>
-                        @Html.ActionLink(t.Name, "RoundDetails", "Round", new { tournamentId = @t.Id }, null)
+    <div class="col-md-12 column-padding">
+        @if (@Model.CurrentlyPlayedByUser.Any())
+        {
+            <div class="col-md-12">
+                <div class="active-tournaments">
+                    <span class="medium-header">You are playing now</span>
+                    @foreach (var t in @Model.CurrentlyPlayedByUser)
+                    {
+                        <p>
+                            <i class="glyphicon glyphicon-triangle-right success"></i>
+                            @Html.ActionLink(t.Name, "RoundDetails", "Round", new { tournamentId = @t.Id }, new { @class = "green-link" })
 
-                    </p>
-                }
+                        </p>
+                    }
+                </div>
             </div>
-        </div>
-    }
+        }
 
-    <div class="col-md-6 oncoming">
-        @Html.Action("MyTournamentsToPlay")
-    </div>
-    <div class="col-md-6 ongoing">
-        @Html.Action("AvailableTournaments")
+        <div class="col-md-6">
+            @Html.Action("MyTournamentsToPlay")
+        </div>
+        <div class="col-md-6">
+            @Html.Action("AvailableTournaments")
+        </div>
     </div>
 </div>

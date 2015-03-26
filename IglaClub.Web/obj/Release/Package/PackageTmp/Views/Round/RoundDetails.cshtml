@@ -1,0 +1,53 @@
+﻿@using IglaClub.ObjectModel.Tools;
+@model IglaClub.Web.Models.ViewModels.RoundDetailsViewModel
+
+@{
+    ViewBag.Title = "Current round";
+}
+<h2>Round @Model.Tournament.CurrentRound</h2>
+
+@if (@Model.Results.Any())
+{
+    <div class="panel-group">
+        <h4>Table: @Model.Results.First().TableNumber</h4>
+        <span><b>NS (@Model.NsPair.PairNumber):</b> @Model.NsPair</span><br />
+        <span><b>EW (@Model.EwPair.PairNumber):</b> @Model.EwPair</span><br />
+    </div>
+    <br />
+    <div class="col-xs-3">
+        <table class="table table-striped table-hover text-left">
+            <tr>
+                <th>Board</th>
+                <th>Result</th>
+                <th>Score</th>
+                <th>Action</th>
+            </tr>
+
+            @foreach (var result in Model.Results)
+            {
+                <tr>
+                    <td>
+                        @result.Board.BoardNumber
+                    </td>
+                    <td>
+                        @ResultsParser.GetFormatResult(result)
+                    </td>
+                    <td>
+                        @result.ResultNsPoints
+                    </td>
+                    <td>
+                        <a href="@Url.Action("EditResult","Results", new { resultId = result.Id })"
+                           class="btn btn-info btn-small">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                            Edit
+                        </a>
+                    </td>
+               </tr>
+            }
+        </table>
+    </div>
+}
+else
+{
+    <span>No boards on this round are yet available</span>
+}

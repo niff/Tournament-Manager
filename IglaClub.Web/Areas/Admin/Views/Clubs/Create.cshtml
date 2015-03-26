@@ -15,7 +15,7 @@
             @Html.LabelFor(model => model.Name)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
+            @Html.TextBoxFor(model => model.Name, new { @class = "form-control"})
             @Html.ValidationMessageFor(model => model.Name)
         </div>
 
@@ -23,7 +23,7 @@
             @Html.LabelFor(model => model.Description)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Description)
+            @Html.TextAreaFor(model => model.Description, new { @class = "form-control"})
             @Html.ValidationMessageFor(model => model.Description)
         </div>
         
@@ -31,12 +31,12 @@
             @Html.LabelFor(model => model.Address)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Address, new { @id="pac-input" })
+            @Html.TextBoxFor(model => model.Address, new { @id="pac-input", @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Address)
         </div>
         <input name="coords" id="coords" type="hidden"/>
 
-        <p>
+        <p class="submit-button">
             <input type="submit" value="Create" />
         </p>
         <div id="map-canvas"></div>
@@ -55,7 +55,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
 <script>
     function initialize() {
-
+        //todo remove this script
         var markers = [];
         var map = new google.maps.Map(document.getElementById('map-canvas'), {
             mapTypeId: google.maps.MapTypeId.ROADMAP

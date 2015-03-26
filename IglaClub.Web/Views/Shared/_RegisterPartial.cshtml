@@ -10,24 +10,24 @@
             @Html.LabelFor(model => model.UserName)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.UserName)
+            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control"})
         </div>
         
         <div class="editor-label">
             @Html.LabelFor(model => model.Password)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Password)
+            @Html.PasswordFor(model => model.Password, new { @class = "form-control"})
         </div>
         
         <div class="editor-label">
             <label>Confirm</label><label class="long-form"> password</label>
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.ConfirmPassword)
+            @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control"})
         </div>
         <br/>
-        <p>
+        <p class="submit-button">
             <button type="submit" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus"></span>Register</button>
         </p>
     </fieldset>

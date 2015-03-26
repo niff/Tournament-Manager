@@ -458,7 +458,6 @@
     <Content Include="Views\Results\EditResult.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Tournament\TournamentsList.cshtml" />
-    <Content Include="Views\Tournament\AllTournamentsMap.cshtml" />
     <Content Include="Views\Tournament\GetAll.cshtml" />
     <Content Include="Views\Tournament\OwnerDashboard.cshtml" />
     <Content Include="Views\Shared\_RegisterPartial.cshtml" />

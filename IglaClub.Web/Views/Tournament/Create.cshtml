@@ -4,7 +4,7 @@
 @Scripts.Render("~/bundles/DateTimepickerJs")
 @Styles.Render("~/Content/DateTimepickerCss")
     <div class="row">
-        <div class="col-md-6 col-xs-12">
+        <div class="col-md-6 col-xs-12 column-padding">
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -18,7 +18,7 @@
             @Html.LabelFor(model => model.Name)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
+            @Html.TextBoxFor(model => model.Name, new { @class = "form-control"})
             @Html.ValidationMessageFor(model => model.Name)
         </div>
 
@@ -26,7 +26,7 @@
             @Html.LabelFor(model => model.Description)
         </div>
         <div class="editor-field">
-            @Html.TextAreaFor(model => model.Description)
+            @Html.TextAreaFor(model => model.Description, new { @class = "form-control"})
             @Html.ValidationMessageFor(model => model.Description)
         </div>
 
@@ -34,21 +34,21 @@
             @Html.LabelFor(model => model.BoardsInRound)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.BoardsInRound)
+            @Html.TextBoxFor(model => model.BoardsInRound, new { @type="number", @class = "form-control", @min="1"})
             @Html.ValidationMessageFor(model => model.BoardsInRound)
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.TournamentScoringType)
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model => model.TournamentScoringType, new SelectList(Enum.GetValues(typeof(TournamentScoringType))))
+            @Html.DropDownListFor(model => model.TournamentScoringType, new SelectList(Enum.GetValues(typeof(TournamentScoringType))),  new { @class = "form-control"})
             @Html.ValidationMessageFor(model => model.TournamentScoringType)
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.TournamentMovingType)
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model => model.TournamentMovingType, new SelectList(Enum.GetValues(typeof(TournamentMovingType))))
+            @Html.DropDownListFor(model => model.TournamentMovingType, new SelectList(Enum.GetValues(typeof(TournamentMovingType))), new { @class = "form-control"})
             @Html.ValidationMessageFor(model => model.TournamentMovingType)
         </div>
         
@@ -56,14 +56,14 @@
             @Html.LabelFor(model => model.PlannedStartDate)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.PlannedStartDate, new { @Value = startDate, id = "datepicker" })
+            @Html.TextBoxFor(model => model.PlannedStartDate, new { @Value = startDate, id = "datepicker", @class = "form-control" })
             @Html.ValidationMessageFor(model => model.PlannedStartDate)
         </div>
                 <div class="editor-label">
             @Html.LabelFor(model => model.Address)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Address, new {@placeholder = "Search address", @id="pac-input"})
+            @Html.TextBoxFor(model => model.Address, new {@placeholder = "Search address", @id="pac-input", @class = "form-control"})
             @Html.ValidationMessageFor(model => model.Address)
         </div>
         <input name="coords" id="coords" type="hidden"/>
