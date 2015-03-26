@@ -22,6 +22,13 @@
     }
     <a class="" data-toggle="collapse" data-target="#viewdetails">Show details &raquo;</a>
     <div id="viewdetails" class="collapse">
+        <div>
+            <span class="descr-label">tournament owner: </span>@Model.Owner.DisplayName
+        </div>
+        <div>
+            <span class="descr-label">description: </span>
+            <br />@Model.Description
+        </div>
         <span class="tournemanet-quick-edit">
             <a href="@Url.Action("Edit", new { id = Model.Id })" class="btn btn-info btn-small">
                 <span class="glyphicon glyphicon-pencil"></span>Edit
@@ -33,13 +40,6 @@
                 <span class="glyphicon glyphicon-remove"></span>Undo Start
             </a>
         </span>
-        <div>
-            <span class="descr-label">tournament owner: </span>@Model.Owner.DisplayName
-        </div>
-        <div>
-            <span class="descr-label">description: </span>
-            <br />@Model.Description
-        </div>
     </div>
 
 
