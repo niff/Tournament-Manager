@@ -222,6 +222,8 @@
     <Content Include="Content\img\opacity-cards.png" />
     <Content Include="Content\img\progress_bar.gif" />
     <Content Include="Content\img\cards\spade.png" />
+    <Content Include="Content\img\spade_icon.ico" />
+    <Content Include="Content\img\spinner.gif" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jquery.datetimepicker.css" />
     <Content Include="Content\themes\1408214039_search.png" />

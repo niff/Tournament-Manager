@@ -335,6 +335,8 @@ namespace IglaClub.Web.Controllers
         [HttpPost]
         public void QuickAddUser(string name, string email, long id)
         {
+            notificationService.DisplaySuccess(String.Format("User {0} was created successfully.", name));
+            //todo nie dziala notyfikacja, wywolanie jest przez ajax
             userRepository.Add(name, email);
         }
 

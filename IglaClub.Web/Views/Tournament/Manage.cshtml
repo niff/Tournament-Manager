@@ -42,7 +42,6 @@
     </div>
     <div class="col-md-6 col-sm-12 col-xs-12 action-pane">
         @Html.Action("PairsResults", "Results", new { tournamentId = @Model.Tournament.Id })
-        @*todo nie dziala dodanie drugiej pary z rzedu*@
     </div>
 }
 @if (isPlanned)
@@ -61,17 +60,7 @@
 }
     </div>
     </div>
-<script src="~/Scripts/pairs.js"></script>
-<script>
-    $(document).ready(function (){
-        var options = {
-            tournamentId: '@Model.Tournament.Id',
-            dataUrl: '@Url.Action("TournamentParticipantsEdit", new { tournamentId = @Model.Tournament.Id })'
-            //refreshUrl: '@Url.Action("QuickUserPartial")'
-                };
-        $(this).initializePairsEdit(options);
-    });
-</script>
+
 
 
 
