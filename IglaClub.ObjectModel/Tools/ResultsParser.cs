@@ -30,6 +30,15 @@ namespace IglaClub.ObjectModel.Tools
             {"NT",ContractColors.NoTrump}
         };
 
+         public static readonly Dictionary<string, ContractColors> ColorsHtmlDictionary = new Dictionary<string, ContractColors>
+        {
+            {"<S>", ContractColors.Spade},
+            {"<H>", ContractColors.Heart},
+            {"<D>", ContractColors.Diamond},
+            {"<C>", ContractColors.Club},
+            {"<NT>",ContractColors.NoTrump}
+        };
+
         public static readonly Dictionary<string, ContractDoubled> DoubledDictionary = new Dictionary<string, ContractDoubled>
         {
             {"", ContractDoubled.NotDoubled},
@@ -40,24 +49,35 @@ namespace IglaClub.ObjectModel.Tools
          
         public static string GetFormatResult(Result result)
         {
-            if (result.PlayedBy == NESW.Unavailable)
-                return "";
-            if (result.PlayedBy == NESW.PassedOut)
-                return "Passed out";
-            if (result.PlayedBy == NESW.DirectorScore)
-                return "Director score";
-            var tricks = result.NumberOfTricks - result.ContractLevel - 6;
-            var tricksString = tricks == 0 ? "=" : tricks.ToString("+#;-#;0");
-            var doubledString = DoubledDictionary.First(kpv => kpv.Value == result.ContractDoubled).Key;
-
-            return string.Format("{0}{1}{2} {3} {4}", 
-                result.ContractLevel, 
-                ColorsDictionary.First(kpv=>kpv.Value == result.ContractColor).Key,
-                doubledString, 
-                PlayersDictionary.First(kpv=>kpv.Value == result.PlayedBy).Key, 
-                tricksString);
+            return GetFormatResult(result, ColorsDictionary);
         }
-        
+
+        public static string GetFormatResultForHtml(Result result)
+        {
+             return GetFormatResult(result, ColorsHtmlDictionary);
+        }
+
+         
+         private static string GetFormatResult(Result result, Dictionary<string, ContractColors> colorsDictionary)
+         {
+             if (result.PlayedBy == NESW.Unavailable)
+                 return "";
+             if (result.PlayedBy == NESW.PassedOut)
+                 return "Passed out";
+             if (result.PlayedBy == NESW.DirectorScore)
+                 return "Director score";
+             var tricks = result.NumberOfTricks - result.ContractLevel - 6;
+             var tricksString = tricks == 0 ? "=" : tricks.ToString("+#;-#;0");
+             var doubledString = DoubledDictionary.First(kpv => kpv.Value == result.ContractDoubled).Key;
+             
+             return string.Format("{0}{1}{2} {3} {4}",
+                 result.ContractLevel,
+                 colorsDictionary.First(kpv => kpv.Value == result.ContractColor).Key,
+                 doubledString,
+                 PlayersDictionary.First(kpv => kpv.Value == result.PlayedBy).Key,
+                 tricksString);
+         }
+
         public static Result Parse(string stringToParse)
         {
             var r = new Regex(ParseScorePattern);

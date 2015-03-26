@@ -94,7 +94,8 @@
                     @Html.DisplayFor(modelItem => item.Board.BoardNumber)
                 </td>
                 <td>
-                    @ResultsParser.GetFormatResult(item)
+                    @*todo: add html to colors ColorsHtmlDictionary*@
+                    @ResultsParser.GetFormatResultForHtml(item)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ContractLevel)

@@ -13,17 +13,8 @@
 }
 @*Round number: @Html.DropDownList("RoundNumberDD", roundsList, new {@class = "roundChooser"})*@
 
-<div class="defaultMargin">
-    <a href="@Url.Action("Manage", "Tournament", new { id = Model.Tournament.Id })"
-       class="btn btn-info btn-small">
-        Manage tournament
-    </a>
-
-    <a href="@Url.Action("Edit", new { tournamentId = @Model.Tournament.Id })"
-       class="btn btn-info btn-small">
-        <span class="glyphicon glyphicon-pencil"></span>
-        Edit results
-    </a>
+<div>
+    
 
     <a href="@Url.Action("CalculateResultsComplete", "Tournament", new { id = Model.Tournament.Id })"
        class="btn btn-info btn-small">
@@ -47,8 +38,19 @@
 
         Remove last round
     </a>
-    <a href="@Url.Action("UndoStart","Tournament", new { id = Model.Tournament.Id })" class="btn btn-info btn-small">
-        <span class="glyphicon glyphicon-remove" title="Remove ALL results and change tournament status to planned"></span>Undo Start
+</div>
+<div class="row">
+
+    <a href="@Url.Action("Edit", new { tournamentId = @Model.Tournament.Id })"
+       class="btn btn-info btn-small">
+        <span class="glyphicon glyphicon-pencil"></span>
+        Edit results
+    </a>
+    
+    <a href="@Url.Action("Manage", "Tournament", new { id = Model.Tournament.Id })"
+       class="btn btn-info btn-small">
+        <span class="glyphicon glyphicon-arrow-left"></span>
+        Manage tournament
     </a>
 </div>
 
