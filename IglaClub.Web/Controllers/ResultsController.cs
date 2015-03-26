@@ -86,6 +86,7 @@ namespace IglaClub.Web.Controllers
         [HttpPost]
         public ActionResult EditResult(Result result)
         {
+            result.Board = this.resultRepository.Get<BoardInstance>(result.BoardId);
             if (ModelState.IsValid)
             {
                 if (!ShortScoreIsEmpty(Request))
@@ -93,13 +94,12 @@ namespace IglaClub.Web.Controllers
                     var shortScore = GetShortScore(Request);
                     if (shortScore == null)
                     {
-                        return View(result);
+                        return View("SingleResultEdit", result);
                     }
                     result = ResultsParser.UpdateResult(result, shortScore);
                 }
 
                 //result.ContractColor = (ContractColors)(int.Parse(Request.Form["dd-selected-value"]));
-                result.Board = this.resultRepository.Get<BoardInstance>(result.BoardId);
                 result.ResultNsPoints = TournamentHelper.CalculateScoreInBoard(result);
                 resultRepository.InsertOrUpdate(result);
                 this.resultRepository.SaveChanges();

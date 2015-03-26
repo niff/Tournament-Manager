@@ -15,14 +15,14 @@
 }
 <div class="row">
 <div class="col-xs-12 column-padding-small single-result-edit">
-    <span class="small-header">Results, board @Model.Board.BoardNumber</span>
 
-    <form class="form-inline">
+    <span class="small-header">Results, board @Model.Board.BoardNumber</span>
+    <div class="form-inline">
         <div class="form-group">
             @Html.TextBox("ShortScore", "", new { @class = "form-control", @placeholder = "Short form", Title = StringResources.ShortScoreTooltip })
-            <button type="submit" class="btn btn-success btn-small"><i class="glyphicon glyphicon-plus"></i></button>
+            <button class="btn btn-success btn-small save-quick-result"><i class="glyphicon glyphicon-plus"></i></button>
         </div>
-    </form>
+    </div>
 
     <strong>Level</strong>
     <div class="btn-toolbar">
@@ -126,11 +126,11 @@
     @Html.HiddenFor(m => m.ScoreEw)
     @Html.HiddenFor(m => m.ScoreNs)
     <p class="submit-button">
-    <button class="btn btn-success save-quick-result">Save</button>
-        </p>
+        <button class="btn btn-success save-quick-result">Save</button>
+    </p>
+    
 </div>
 </div>
-<script src="~/Scripts/jquery-bigtext.js"></script>
 <script>
     $(document).ready(function () {
         var redirectUrl = '@Url.Action("RoundDetails", "Round", new { tournamentId = @Model.TournamentId })';
@@ -142,7 +142,7 @@
         function redirectToRound() {
             window.location.href = redirectUrl;
         }
-
+        //todo when sending short score doe
         $(".save-quick-result").on("click", function () {
             var result = {
                 Id: '@Model.Id',
@@ -157,7 +157,8 @@
                 RoundNumber: "@Model.RoundNumber",
                 TableNumber: "@Model.TableNumber",
                 ScoreNs: "@Model.ScoreNs",
-                ScoreEw: "@Model.ScoreEw"
+                ScoreEw: "@Model.ScoreEw",
+                ShortScore: $("#ShortScore").val()
             };
             $.ajax({
                 url: "EditResult",
