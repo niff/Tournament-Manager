@@ -163,9 +163,8 @@ namespace IglaClub.TournamentManager
             if (result.PlayedBy == NESW.Unavailable || result.PlayedBy == NESW.DirectorScore)
                 return null;
             if (result.ContractLevel == 0)
-            {
-                    return null;
-            }
+                return null;
+            
             int score = 0;
             int doubled = result.ContractDoubled == ContractDoubled.NotDoubled ? 1 : (result.ContractDoubled == ContractDoubled.Doubled ? 2 : 4);
             if(result.ContractLevel==0)
