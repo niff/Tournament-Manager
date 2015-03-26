@@ -3,18 +3,27 @@
 @using IglaClub.Web.Views.Helpers
 @model IEnumerable<IglaClub.ObjectModel.Entities.Result>
 
+@*<!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.5/css/jquery.dataTables.css">
+
+<!-- DataTables -->
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.js"></script>*@
+
 @if (Model.Any())
 {
-    <table class="resultsTable table table-striped table-hover">
-        <tr class="headerStyle">
+    <table id="resultsTable" class="table table-striped table-hover" data-order='[[ 1, "asc" ]]' data-page-length='25'>
+        <thead>
+            <tr>
             <th>
                 Finished
             </th>
             <th>
-                <a href="@Url.Action("Manage", new {tournamentId = Model.First().TournamentId, sortBy = "RoundNumber"})"> @Html.DisplayNameFor(model => model.RoundNumber)</a>
+                    @Html.DisplayNameFor(model => model.RoundNumber)
+                    @*<a href="@Url.Action("Manage", new {tournamentId = Model.First().TournamentId, sortBy = "RoundNumber"})"> </a>*@
             </th>
             <th>
-                <a href="@Url.Action("Manage", new { tournamentId = Model.First().TournamentId, sortBy = "TableNumber" })"> @Html.DisplayNameFor(model => model.TableNumber)</a>
+                    @Html.DisplayNameFor(model => model.TableNumber)
+                    @*<a href="@Url.Action("Manage", new { tournamentId = Model.First().TournamentId, sortBy = "TableNumber" })"> @Html.DisplayNameFor(model => model.TableNumber)</a>*@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NS)
@@ -23,7 +32,8 @@
                 @Html.DisplayNameFor(model => model.EW)
             </th>
             <th>
-                <a href="@Url.Action("Manage", "Results", new { tournamentId = Model.First().TournamentId, sortBy = "BoardNumber", sortDir = "" })">Board</a>
+                    Board
+                    @*<a href="@Url.Action("Manage", "Results", new { tournamentId = Model.First().TournamentId, sortBy = "BoardNumber", sortDir = "" })">Board</a>*@
             </th>
             <th>
                 Short score
@@ -59,6 +69,8 @@
 
             </th>
         </tr>
+        </thead>
+        <tbody>
         @{
             var boardNumber = 0;
             var rowStyle = "rowStyleOdd";
@@ -130,6 +142,13 @@
                 </td>
             </tr>
         }
-
+        </tbody>
     </table>
 }
+
+
+<script>
+    $(document).ready(function () {
+        $('#resultsTable').DataTable();
+    });
+</script>
