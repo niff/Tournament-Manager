@@ -113,18 +113,19 @@ namespace IglaClub.Web.Controllers
         //todo: check why it doesn't show the message on redirect
         protected override void OnException(ExceptionContext filterContext)
         {
-            if (filterContext.ExceptionHandled)
+            if (filterContext.ExceptionHandled) 
                 return;
-
+            
             Exception ex = filterContext.Exception;
             if (ex.GetType() == typeof(OperationException))
             {
                 this.notificationService.DisplayMessage(ex.Message, NotificationType.Warning);
-                // notificationService.DisplayError(ex.Message);
+               // notificationService.DisplayError(ex.Message);
+                 if (filterContext.HttpContext.Request.UrlReferrer != null)
+                filterContext.HttpContext.Response.Redirect(filterContext.HttpContext.Request.UrlReferrer.ToString(),true);
             }
 
-            if (filterContext.HttpContext.Request.UrlReferrer != null)
-                filterContext.HttpContext.Response.Redirect(filterContext.HttpContext.Request.UrlReferrer.ToString(),true);
+           
         }
 
         [TournamentOwner]
