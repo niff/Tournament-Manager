@@ -25,13 +25,20 @@ namespace IglaClub.Web
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-            "~/Scripts/bootstrap.js"));
+            "~/Content/bootstrap/js/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                         "~/Content/bootstrap/css/bootstrap.css",
-                        "~/Content/bootstrap/css/bootstrap-responsive.css"
-                        ,"~/Content/global.css"
+                        "~/Content/bootstrap/css/bootstrap-responsive.css",
+                        "~/Content/global.css",
+                        "~/Content/dataTables/css/jquery.dataTables.css",
+                        "~/Content/dataTables/css/jquery.dataTables_themeroller.css"
                         ));
+            
+            bundles.Add(new ScriptBundle("~/bundles/dataTables").Include(
+            "~/Content/dataTables/js/jquery.dataTables.js"));
+
+          
             bundles.Add(new StyleBundle("~/Content/DateTimepickerCss").Include
                 ("~/Content/jquery.datetimepicker.css"));
 
