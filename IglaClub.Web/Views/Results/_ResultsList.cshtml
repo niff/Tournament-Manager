@@ -14,134 +14,134 @@
     <table id="resultsTable" class="table table-striped table-hover" data-order='[[ 1, "asc" ]]' data-page-length='25'>
         <thead>
             <tr>
-                <th>
-                    Finished
-                </th>
-                <th>
+            <th>
+                Finished
+            </th>
+            <th>
                     @Html.DisplayNameFor(model => model.RoundNumber)
                     @*<a href="@Url.Action("Manage", new {tournamentId = Model.First().TournamentId, sortBy = "RoundNumber"})"> </a>*@
-                </th>
-                <th>
+            </th>
+            <th>
                     @Html.DisplayNameFor(model => model.TableNumber)
                     @*<a href="@Url.Action("Manage", new { tournamentId = Model.First().TournamentId, sortBy = "TableNumber" })"> @Html.DisplayNameFor(model => model.TableNumber)</a>*@
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NS)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EW)
-                </th>
-                <th>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EW)
+            </th>
+            <th>
                     Board
                     @*<a href="@Url.Action("Manage", "Results", new { tournamentId = Model.First().TournamentId, sortBy = "BoardNumber", sortDir = "" })">Board</a>*@
-                </th>
-                <th>
-                    Short score
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ContractLevel)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ContractColor)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ContractDoubled)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PlayedBy)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NumberOfTricks)
-                </th>
-                <th>
-                    Vul
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ResultNsPoints)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ScoreNs)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ScoreEw)
-                </th>
-                <th>
+            </th>
+            <th>
+                Short score
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContractLevel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContractColor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContractDoubled)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlayedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberOfTricks)
+            </th>
+            <th>
+                Vul
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ResultNsPoints)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScoreNs)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScoreEw)
+            </th>
+            <th>
 
-                </th>
-            </tr>
+            </th>
+        </tr>
         </thead>
         <tbody>
-            @{
-    var boardNumber = 0;
-    var rowStyle = "rowStyleOdd";
-            }
-            @foreach (var item in Model)
+        @{
+            var boardNumber = 0;
+            var rowStyle = "rowStyleOdd";
+        }
+        @foreach (var item in Model)
+        {
+            if (item.Board.BoardNumber != boardNumber)
             {
-                if (item.Board.BoardNumber != boardNumber)
-                {
-                    boardNumber = item.Board.BoardNumber;
-                    rowStyle = rowStyle == "rowStyleOdd" ? "rowStyleEven" : "rowStyleOdd";
-                }
-
-                <tr class="@rowStyle">
-                    <td>
-                        @if (item.PlayedBy == NESW.DirectorScore || item.ResultNsPoints.HasValue)
-                        {
-                            <span class="glyphicon glyphicon-ok-circle" title="Completed"></span>
-                        }
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RoundNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TableNumber)
-                    </td>
-                    <td>
-                        <span title="@item.NS">@item.NS.PairNumber</span>
-                    </td>
-                    <td>
-                        <span title="@item.EW">@item.EW.PairNumber</span>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Board.BoardNumber)
-                    </td>
-                    <td>
-                        @*todo: add html to colors ColorsHtmlDictionary*@
-                        @ResultsParser.GetFormatResultForHtml(item)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ContractLevel)
-                    </td>
-                    <td>
-                        @Enum.GetName(typeof(ContractColors), item.ContractColor)
-                    </td>
-                    <td>
-                        @ResultHelper.GetStringForDoubledContract(item.ContractDoubled)
-                    </td>
-                    <td>
-                        @item.PlayedBy.ToString()
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NumberOfTricks)
-                    </td>
-                    <td>
-                        @item.Board.BoardDefinition.Vulnerability
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ResultNsPoints)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ScoreNs)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ScoreEw)
-                    </td>
-
-                    <td>
-                        <a href="@Url.Action("Delete", new {id = @item.Id})" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
-                    </td>
-                </tr>
+                boardNumber = item.Board.BoardNumber;
+                rowStyle = rowStyle == "rowStyleOdd" ? "rowStyleEven" : "rowStyleOdd";
             }
+            
+            <tr class="@rowStyle">
+                <td>
+                    @if (item.PlayedBy == NESW.DirectorScore || item.ResultNsPoints.HasValue)
+                    {
+                        <span class="glyphicon glyphicon-ok success" title="Completed"></span>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoundNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TableNumber)
+                </td>
+                <td>
+                    <span title="@item.NS">@item.NS.PairNumber</span> 
+                </td>
+                <td>
+                    <span title="@item.EW">@item.EW.PairNumber</span> 
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Board.BoardNumber)
+                </td>
+                <td>
+                    @*todo: add html to colors ColorsHtmlDictionary*@
+                    @Html.Raw(ResultsParser.GetFormatResultForHtml(item))
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContractLevel)
+                </td>
+                <td>
+                    @Enum.GetName(typeof(ContractColors), item.ContractColor)
+                </td>
+                <td>
+                    @ResultHelper.GetStringForDoubledContract(item.ContractDoubled)
+                </td>
+                <td>
+                    @item.PlayedBy.ToString()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfTricks)
+                </td>
+                <td>
+                    @item.Board.BoardDefinition.Vulnerability
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ResultNsPoints)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ScoreNs)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ScoreEw)
+                </td>
+
+                <td>
+                    <a href="@Url.Action("Delete", new {id = @item.Id})" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+                </td>
+            </tr>
+        }
         </tbody>
     </table>
 }
