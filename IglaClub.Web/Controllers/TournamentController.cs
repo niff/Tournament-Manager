@@ -367,7 +367,7 @@ namespace IglaClub.Web.Controllers
             return PartialView("_TournamentList", model);
         }
 
-        public ActionResult TournamentsByOwner()
+        public ActionResult OwnerTournaments()
         {
             var tournaments = tournamentRepository.GetTournamentsByOwnerUser(GetCurrentUserName()).ToList();
             var model = new TounamentListViewModel
@@ -378,11 +378,12 @@ namespace IglaClub.Web.Controllers
                                 {
                                     Tournaments = tournaments,
                                     Header = "Tournaments created by you",
-                                    ManageMode = true
+                                    ManageMode = true,
+                                    ShowSubscriptionStatus = false
                                 }
                         }
                 };
-            return View("TournamentsList", model);
+            return View("OwnerDashboard", model);
         }
 
         public ActionResult PlayerTournaments()

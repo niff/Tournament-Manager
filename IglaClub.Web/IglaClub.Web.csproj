@@ -460,7 +460,7 @@
     <Content Include="Views\Tournament\TournamentsList.cshtml" />
     <Content Include="Views\Tournament\AllTournamentsMap.cshtml" />
     <Content Include="Views\Tournament\GetAll.cshtml" />
-    <Content Include="Views\Tournament\TournamentsByOwner.cshtml" />
+    <Content Include="Views\Tournament\OwnerDashboard.cshtml" />
     <Content Include="Views\Shared\_RegisterPartial.cshtml" />
     <Content Include="Views\Shared\_LoginMobilePartial.cshtml" />
     <Content Include="Views\Tournament\_TournamentStartedActions.cshtml" />

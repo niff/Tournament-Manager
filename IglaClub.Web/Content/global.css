@@ -268,18 +268,14 @@ table.result {
     }
 
 .active-tournaments {
-    padding-bottom: 10px;
-    
+    padding-bottom: 10px;  
     color: #20B920;
 }
 
     .active-tournaments a {
         font-size: 18px;
         margin-left: 5px;
-    }
-
-    .active-tournaments img {
-        vertical-align: initial;
+    color: #20B920;
     }
 
 fieldset.login {
@@ -289,7 +285,7 @@ fieldset.login {
 
 fieldset legend {
     color: steelblue;
-    font-size: 2.5em;
+    font-size: 2em;
 }
 
 /*header {
@@ -367,6 +363,10 @@ span.small-header {
     font-size: small;
     vertical-align: initial;
       opacity: 0.8;
+        /*white-space: nowrap;*/
+}
+.tournament-status .glyphicon{
+    display: none;
         /*white-space: nowrap;*/
 }
 
@@ -500,6 +500,9 @@ footer {
     fieldset.login {
         width: auto;
     }
+    fieldset legend {
+    font-size: 1.5em;
+}
     .quick-sign-up-block input {
         max-width: 125px;
     }
@@ -517,7 +520,7 @@ footer {
         padding-left: 5px;
         padding-right: 0px;
     }
-    header {
-        margin-bottom: 5px;
+    .tournament-status .tournament-status-text{
+        display: none;
     }
 }

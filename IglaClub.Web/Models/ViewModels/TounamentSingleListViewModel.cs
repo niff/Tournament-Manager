@@ -8,5 +8,6 @@ namespace IglaClub.Web.Models.ViewModels
         public IList<Tournament> Tournaments { get; set; }
         public string Header { get; set; }
         public bool ManageMode { get; set; }
+        public bool ShowSubscriptionStatus { get; set; }
     }
 }
