@@ -23,7 +23,8 @@
                 }
             });
         });
-        $('#pairSearchSubmit').on("click", function() {
+        $('#pairSearchSubmit').on("click", function () {
+            $('.spinner').css('display', 'inline-block');
             var user1 = $('#user1').val();
             var user2 = $('#user2').val();
             if (user1 == '' || user2 == '') {

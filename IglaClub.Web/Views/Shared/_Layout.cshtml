@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <title>@ViewBag.Title - Igla Club</title>
-        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <link href="../../Content/img/spade_icon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
         
         @Styles.Render("~/Content/css")
@@ -12,9 +12,7 @@
         @Scripts.Render("~/bundles/jqueryui")
         @Scripts.Render("~/bundles/bootstrap")
     </head>
-    <body>
-
-            
+    <body>            
         @{
             var message = TempData["Message"];
             var type = TempData["MessageType"] != null ? TempData["MessageType"].ToString().ToLower() : "info";
@@ -34,24 +32,18 @@
             @Html.Partial("_TopMenu")
             @RenderSection("featured", required: false)
             @RenderBody()
-            
-           
-        
-            </div>
-       
+        </div>
+
         <footer>
-                        <div class="footer-menu">
-                            <span>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</span> |
+            <div class="footer-menu">
+                <span>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</span> |
                             <span>@Html.ActionLink("About", "About", "Home", new { area = "" }, null)</span>|
                             <span>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, null)</span>
-                        </div>
+            </div>
             <div class="row text-center text-muted small">
                 <p>&copy; @DateTime.Now.Year - Igla Club - All rights reserved.</p>
             </div>
-
         </footer>
     </body>
-    
-    
-        @RenderSection("scripts", required: false)
+    @RenderSection("scripts", required: false)
 </html>
