@@ -1,6 +1,9 @@
-﻿@model IglaClub.Web.Controllers.TounamentListViewModel
+﻿@model IglaClub.Web.Models.ViewModels.TounamentListViewModel
 
+<div class="row"><div class="col-md-12">
 @foreach (var list in @Model.TournamentsList)
 {   
     @Html.Partial("_TournamentList", @list)
 }
+</div>
+</div>

@@ -1,7 +1,9 @@
 ﻿@using IglaClub.Web.Helpers.Html
-@model IglaClub.Web.Controllers.TounamentSingleListViewModel
-
-    <span class="medium-header">@Model.Header</span>
+@model IglaClub.Web.Models.ViewModels.TounamentSingleListViewModel
+@{
+    var userAction = @Model.ManageMode ? "Manage" : "Details";
+}
+<span class="medium-header">@Model.Header</span>
 @if (Model.Tournaments.Any())
 {
     <table class="tournamentsListTable table table-striped table-hover">
@@ -9,13 +11,15 @@
         {
             var status = item.TournamentStatus;
             var dateFormatted = item.PlannedStartDate != null ? @DateHelper.DaysLeftToDate((DateTime)item.PlannedStartDate) : "Not set yet";
+            var shortDate = item.PlannedStartDate != null ? item.PlannedStartDate.Value.ToShortDateString() : "None";
             var hour = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("HH:mm") : "";              
             <tr>
-                <td>@TournamentHelper.GetTournamentStatusIcon(status)</td>
-                <td>@Html.ActionLink(item.Name, "Details", "Tournament", new { id = @item.Id }, null)</td>
-                <td>@dateFormatted</td>
-                <td>@hour</td>
-                <td>@TournamentHelper.GetSubscribtionStatus(item.UserIsSubscribed(HttpContext.Current.User.Identity.Name), item.Id)</td>
+                <td class="hidden-xs squeeze">@TournamentHelper.GetTournamentStatusIcon(status)</td>
+                <td>@Html.ActionLink(item.Name, @userAction, "Tournament", new { id = @item.Id }, null)</td>
+                <td class="hidden-xs squeeze">@dateFormatted</td>
+                <td class="visible-xs squeeze">@shortDate</td>
+                <td class="squeeze">@hour</td>
+                <td class="squeeze">@TournamentHelper.GetSubscribtionStatus(item.UserIsSubscribed(HttpContext.Current.User.Identity.Name), item.Id)</td>
             </tr>
         }
     </table>

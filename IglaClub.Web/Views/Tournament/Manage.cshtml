@@ -12,6 +12,7 @@
     //var statusLabel = isPlanned ? "not started" : (isStarted ? "started" : "finished");
     //var resultsLeftClass = Model.Tournament.ResultsNotFinishedInCurrentRound == 0 ? "text-success" : "text-danger"; 
 }
+<div class="row">
 <div class="col-md-12 col-sm-12 col-xs-12">
     <p>@Html.ActionLink("Tournaments", "Index") > Manage tournament</p>
     <span class="medium-header">
@@ -40,6 +41,7 @@
     </div>
     <div class="col-md-6 col-sm-12 col-xs-12 action-pane">
         @Html.Action("PairsResults", "Results", new { tournamentId = @Model.Tournament.Id })
+        @*todo nie dziala dodanie drugiej pary z rzedu*@
     </div>
 }
 @if (isPlanned)
@@ -56,7 +58,7 @@
             </div>
     </div>           
 }
-
+    </div>
 <script src="~/Scripts/pairs.js"></script>
 <script>
     $(document).ready(function (){

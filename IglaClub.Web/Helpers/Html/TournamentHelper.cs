@@ -12,12 +12,12 @@ namespace IglaClub.Web.Helpers.Html
         {
             if (subscribed)
             {
-                return new HtmlString(@"<span class='glyphicon glyphicon-ok-circle' 
+                return new HtmlString(@"<span class='glyphicon glyphicon-ok success' 
                         title='You are subscribed to this tournament'></span>
-                        <span>Joined</span>");
+                        <span class='hidden-xs'>Joined</span>");
             }
             return
-                new HtmlString(string.Format(@"<a href='details/{0}'><i class='glyphicon glyphicon-plus'></i>Join</a>",
+                new HtmlString(string.Format("<a href='details/{0}'><i class='glyphicon glyphicon-plus'></i><span class=\"hidden-xs\">Join</span></a>",
                                              id));
         }
 

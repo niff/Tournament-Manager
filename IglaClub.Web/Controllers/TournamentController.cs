@@ -37,9 +37,6 @@ namespace IglaClub.Web.Controllers
              notificationService = new NotificationService(TempData);
         }
         
-        //
-        // GET: /Tournament/
-        
         public ActionResult Index()
         {
             var model = new TournamentMainPageModel
@@ -54,14 +51,12 @@ namespace IglaClub.Web.Controllers
             return HttpContext.User.Identity.Name;
         }
 
+        [AllowAnonymous]
         public ActionResult GetAll()
         {
             var model = tournamentRepository.GetAll<Tournament>().ToList();
             return View(model);
         }
-
-        //
-        // GET: /Tournament/Manage/5
 
         [TournamentOwner]
         public ActionResult Manage(long id = 0)
@@ -81,18 +76,13 @@ namespace IglaClub.Web.Controllers
             
         }
 
-        //
-        // GET: /Tournament/Details/5
-
         public ActionResult Details(long id = 0)
         {
             Tournament tournament = db.Tournaments.
                 Include(t=>t.Pairs).
                 Include(t=>t.Owner).
-                FirstOrDefault(t=>t.Id == id);
-            
-            
-            //Tournament tournament = db.Tournaments.Find(id);
+                FirstOrDefault(t=>t.Id == id);           
+          
             if (tournament == null)
             {
                 return HttpNotFound();
@@ -100,17 +90,11 @@ namespace IglaClub.Web.Controllers
             return View(tournament);
         }
 
-        //
-        // GET: /Tournament/Create
-
         public ActionResult Create()
         {
             var tournament = new Tournament {BoardsInRound = 2};
             return View(tournament);
         }
-
-        //
-        // POST: /Tournament/Create
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -124,7 +108,6 @@ namespace IglaClub.Web.Controllers
                     return View(tournament);
                 }
                 
-                //tournament.Owner = userRepository.GetUserByName(User.Identity.Name);
                 var coordinates = Request.Form["coords"];
                 tournament.Coordinates = coordinates;
                 tournamentManager.Create(tournament, GetCurrentUserName());
@@ -151,10 +134,6 @@ namespace IglaClub.Web.Controllers
                 filterContext.HttpContext.Response.Redirect(filterContext.HttpContext.Request.UrlReferrer.ToString(),true);
         }
 
-
-        //
-        // GET: /Tournament/Edit/5
-
         [TournamentOwner]
         public ActionResult Edit(long id = 0)
         {
@@ -165,9 +144,6 @@ namespace IglaClub.Web.Controllers
             }
             return View(tournament);
         }
-
-        //
-        // POST: /Tournament/Edit/5
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -185,12 +161,9 @@ namespace IglaClub.Web.Controllers
             tournament.Coordinates = coordinates;
             db.Entry(tournament).State = EntityState.Modified;
             db.SaveChanges();
-            //return RedirectToAction("Manage", "Tournament", new { tournamentId = id });
             return RedirectToAction("Manage", new {tournament.Id});
         }
 
-        //
-        // GET: /Tournament/Delete/5
         [TournamentOwner]
         public ActionResult Delete(long id = 0)
         {
@@ -201,9 +174,6 @@ namespace IglaClub.Web.Controllers
             }
             return View(tournament);
         }
-
-        //
-        // POST: /Tournament/Delete/5
 
         [TournamentOwner]
         [HttpPost, ActionName("Delete")]
@@ -329,6 +299,7 @@ namespace IglaClub.Web.Controllers
         
         public JsonResult SearchUsers(long tournamentId, string phrase)
         {
+            //todo bartek: move to users controller
             var result = userRepository.GetUsersByPhraseAndTournament(tournamentId, phrase)
                 .Select(u => new { u.Id, value = u.Name +" "+ u.Lastname  + ( (!String.IsNullOrWhiteSpace(u.Login) ) ? " (" + u.Login + ")" : "")})
                         .Take(10)
@@ -339,6 +310,7 @@ namespace IglaClub.Web.Controllers
 
         public JsonResult AddUser(string name, string email, string password)
         {
+            //todo bartek: move to users controller
             long id;
             try
             {
@@ -392,21 +364,26 @@ namespace IglaClub.Web.Controllers
                     Tournaments = pastItemsAtTheEnd,
                     Header = "Other tournaments"
                 };
-            //ViewBag.Title = "Other tournaments";
             return PartialView("_TournamentList", model);
         }
 
         public ActionResult TournamentsByOwner()
         {
-            var model = tournamentRepository.GetTournamentsByOwnerUser(GetCurrentUserName()).ToList();
-            ViewBag.Title = "Tournaments created by you";
-            return View(model);
+            var tournaments = tournamentRepository.GetTournamentsByOwnerUser(GetCurrentUserName()).ToList();
+            var model = new TounamentListViewModel
+                {
+                    TournamentsList = new List<TounamentSingleListViewModel>
+                        {
+                            new TounamentSingleListViewModel
+                                {
+                                    Tournaments = tournaments,
+                                    Header = "Tournaments created by you",
+                                    ManageMode = true
+                                }
+                        }
+                };
+            return View("TournamentsList", model);
         }
-
-        //public ActionResult AllTournamentsMap()
-        //{
-        //    return View();
-        //}
 
         public ActionResult PlayerTournaments()
         {
@@ -467,17 +444,5 @@ namespace IglaClub.Web.Controllers
         {
             return PartialView("_QuickAddUser");
         }
-    }
-
-
-    public class TounamentListViewModel
-    {
-        public IList<TounamentSingleListViewModel> TournamentsList { get; set; }
-    }
-    public class TounamentSingleListViewModel
-    {
-        public IList<Tournament> Tournaments { get; set; }
-        public string Header { get; set; }
-        public bool CanManage { get; set; }
     }
 }
