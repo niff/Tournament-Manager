@@ -342,7 +342,7 @@ namespace IglaClub.Web.Controllers
             var model = new TounamentSingleListViewModel
                 {
                     Tournaments = tournamentRepository.GetTournamentsToPlayByUser(GetCurrentUserName()),
-                    Header = "All tournaments"
+                    Header = "My tournaments to play"
                 };
             return PartialView("_TournamentList", model);
         }

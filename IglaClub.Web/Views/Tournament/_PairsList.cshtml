@@ -7,8 +7,6 @@
             {
                 var currentUserId = Model.CurrentUser.Id.ToString(CultureInfo.InvariantCulture);
                 var users = new SelectList(Model.AvailableUsers.Where(u => u.Id != Model.CurrentUser.Id).OrderBy(u=>u.DisplayName), "Id", "DisplayName");
-            <a class="" data-toggle="collapse" data-target="#subscribeme">Subscribe me &raquo;</a>
-    <div id="subscribeme" class="collapse">
     <form class="form-inline">
         <div class="form-group">
             <input type="hidden" id="user1" value="@currentUserId" />
@@ -16,7 +14,6 @@
             <button type="submit" class="btn btn-primary btn-small" id="pairSearchSubmit">Subscribe</button>
         </div>
     </form>
-        </div>
             }
         }
     <p>Pairs list <span class="badge">@Model.PairsInTounament.Count</span></p>
