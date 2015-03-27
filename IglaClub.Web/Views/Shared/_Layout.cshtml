@@ -33,9 +33,11 @@
             @Html.Partial("_TopMenu")
             
             @RenderSection("featured", required: false)
+            <div class="column-padding-layout">
             @RenderBody()
+                </div>
         </div>
-
+            
         <footer>
             <div class="footer-menu">
                 <span>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</span> |
@@ -46,6 +48,7 @@
                 <p>&copy; @DateTime.Now.Year - Igla Club - All rights reserved.</p>
             </div>
         </footer>
+
     </body>
     @RenderSection("scripts", required: false)
 </html>

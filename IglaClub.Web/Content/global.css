@@ -5,12 +5,15 @@
 }
 
 .container {
-    margin-bottom: 80px;
     min-height: 350px;
 }
     .row {
       padding:0;
       margin:0;
+    }
+    .navbar {
+          margin-left: 15px;
+  margin-right: 15px;
     }
 .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
     padding: 0;
@@ -20,94 +23,30 @@
     }
 
     .column-padding {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-    .column-padding-small {
         padding-left: 6px;
         padding-right: 6px;
     }
+    .column-padding-layout {
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+    
+    .table > tbody > tr > td {      
+        vertical-align: middle !important;
+    }
     .table.table-padding > tbody > tr > td {      
         padding: 8px !important;
+        vertical-align: middle !important;
     }
     .btn-toolbar:last-of-type {
         margin-bottom: 10px;
     }
-/*.wrapper {
-    min-height: 350px;
-    margin-bottom: 50px;
-}
-
-.logo {
-    background: url(img/logo.jpg) no-repeat 0 -288px;
-    width: 100%;
-    height: 100px;
-    background-size: cover;
-    opacity: 0.5;
-    border-radius: 8px;
-}*/
-
-.row {
-    /*margin-right: 0;
-    margin-left: 0;*/
-}
-
-/*@media (min-width: 768px) {
-    .navbar {
-        border-radius: 0 0 8px 8px;
+        .navbar-header > .navbar-brand {
+          font-variant: small-caps;
+  text-shadow: 2px 2px rgb(211, 211, 211);
+  font-weight: bold;
+  color: rgb(36, 104, 163);
     }
-}*/
-
-
-/*input:not([type="submit"]):not([type="button"]):not([type="checkbox"]), select, textarea {
-    background-color: #ffffff;
-    border: 1px solid #cccccc;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
-    -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
-    -o-transition: border linear 0.2s, box-shadow linear 0.2s;
-    transition: border linear 0.2s, box-shadow linear 0.2s;
-    display: inline-block;
-    height: 25px;
-    padding: 4px 6px;
-    margin-bottom: 10px;
-    font-size: 14px;
-    line-height: 20px;
-    color: #555555;
-    vertical-align: middle;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: normal;
-    outline: none;
-    -webkit-rtl-ordering: logical;
-    -webkit-user-select: text;
-    cursor: auto;
-    font: -webkit-small-control;
-    letter-spacing: normal;
-    word-spacing: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    -webkit-writing-mode: horizontal-tb;
-}
-
-.fullWidthInput input[type="text"], input[type="number"], input[type="email"], select, textarea {
-    width: 100%;
-}
-
-fieldset.create-tournament input, fieldset.create-tournament textarea, fieldset.create-tournament select {
-    width: 350px ;
-}
-
-textarea {
-    -webkit-appearance: textarea;
-    height: 100px;
-}*/
-
 .spinner {
     width: 24px;
     height: 24px;
@@ -244,7 +183,21 @@ i.glyphicon.result-icon.diamond {
     font-size: 20px;
     text-indent: 30PX;
 }
+.home-text-big {
+    margin-top: 12px;
+  font-size: 44px;
+}
+.home-text-big > .name {
+   font-weight: bold;
+  text-shadow: 4px 4px rgb(37, 83, 153);
+    font-variant: small-caps;
+}
 
+.justify-hack {
+      width:100%;
+  height:1em;
+  display:inline-block;
+}
 /*.btn {
     margin: 2px;
 }*/
@@ -310,17 +263,28 @@ i.glyphicon.result-icon.diamond {
     background: -webkit-linear-gradient(top, #f5f5f5 0%,#efefef 100%);
     border-radius: 7px;
     border: 1px solid #d8d8d8;
-    box-shadow: 0px 0px 1px 1px white inset, 0px 33px 40px -38px #000;
+    box-shadow: 0 0 1px 1px white inset, 0 33px 40px -38px #000;
     height: auto;
     max-width: 100%;
-    margin: 15px 15px;
-    padding: 25px;
+    margin: 15px 0;
     text-align: center;
 }
+.start-text-block {
+      /*background: -webkit-linear-gradient(top, #A9CBFF 0%,#7593C2 100%);
+  font-weight: bold;
+  box-shadow: 0 0 1px 1px rgb(94, 132, 213) inset, 0 33px 40px -38px #000;*/
+        border: none;
+  box-shadow: none;
+  background: rgb(49, 129, 199);
+  color: white;
+}
+.shadow-gradient-block.action {   
+    padding: 25px;
+}
 
-    .shadow-gradient-block img {
-        width: 82px;
-    }
+.shadow-gradient-block img {
+    width: 82px;
+}
 
 .active-tournaments {
     padding-bottom: 10px;  
@@ -409,7 +373,14 @@ span.small-header {
 .lineheight5em {
     line-height: 5em;
 }
-
+.dropdown-menu > li > a {
+  color: #2649A3;
+  font-size: large;
+}
+.dropdown-menu > li > a > span {
+  font-size: small;
+  color: gray;
+}
 .tournament-status {
     border-radius: 1em;
     font-size: 1em;
@@ -481,7 +452,7 @@ footer {
     margin-bottom: 10px;
 }
 .quick-sign-up-block {
-    padding: 20px 0 15px 0;
+    padding: 22px 47px;
 }
 .quick-sign-up legend, .quick-sign-up .long-form {
     display: none;
@@ -517,9 +488,10 @@ footer {
     }
 
     .navbar {
-        margin-bottom: 5px;
+        margin-bottom: 10px;
+        margin-left: 0;
+        margin-right: 0;
     }
-
     .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
         padding: 0;
     }
@@ -537,35 +509,21 @@ footer {
     .active-tournaments a {
     font-size: 14px;
 }
-
-    .left-menu-button {
-         min-width: 75px;
-    }
-    .start-info-block {
+    .dropdown-menu > li > a > span {
         display: none;
-    }
-
-    .row {
-       /*padding-right: 8px;*/
-    }
+}
     .pairs {
         border: none;
         box-shadow: none;
         padding: 0;
     }
     
-    /*.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
-        padding: 0 !important;
-    }*/
     fieldset.login {
         width: auto;
     }
     fieldset legend {
     font-size: 1.5em;
 }
-    .quick-sign-up-block input {
-        max-width: 125px;
-    }
     #map-canvas {
         width: auto;
     }
@@ -578,7 +536,7 @@ footer {
     }
     .small-padding-mobile {
         padding-left: 5px;
-        padding-right: 0px;
+        padding-right: 0;
     }
     .tournament-status .tournament-status-text{
         display: none;

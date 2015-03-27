@@ -14,7 +14,7 @@
         };
 }
 <div class="row">
-<div class="col-xs-12 column-padding-small single-result-edit">
+<div class="col-xs-12 single-result-edit">
 
     <span class="small-header">Results, board @Model.Board.BoardNumber</span>
     <div class="form-inline">
@@ -142,7 +142,7 @@
         function redirectToRound() {
             window.location.href = redirectUrl;
         }
-        //todo when sending short score doe
+        //todo  sending short score does nothing
         $(".save-quick-result").on("click", function () {
             var result = {
                 Id: '@Model.Id',
