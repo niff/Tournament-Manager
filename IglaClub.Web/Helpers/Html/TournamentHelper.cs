@@ -27,7 +27,7 @@ namespace IglaClub.Web.Helpers.Html
             bool isPlanned = status == TournamentStatus.Planned;
             var statusLabelClass = isPlanned ? "planned" : (isStarted ? "ongoing" : "past");
             var statusLabel = isPlanned ? "not started" : (isStarted ? "started" : "finished");
-            string statusIcon = string.Format("<span class='tournament-status {0}'><span class='tournament-status-text'>{1}</span></span>", statusLabelClass,
+            string statusIcon = string.Format("<div class='tournament-status {0}'><span class='tournament-status-text'>{1}</span></div>", statusLabelClass,
                                            statusLabel);
            
             return new HtmlString(statusIcon);

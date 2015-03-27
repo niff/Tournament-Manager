@@ -4,10 +4,6 @@
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<div class="row">
-    <div class="col-md-12 column-padding">
-    <div class="col-md-4 col-sm-6">
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -19,7 +15,7 @@
             @Html.LabelFor(model => model.Name)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+            @Html.EditorFor(model => model.Name)
             @Html.ValidationMessageFor(model => model.Name)
         </div>
 
@@ -27,7 +23,7 @@
             @Html.LabelFor(model => model.Lastname)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Lastname, new { @class = "form-control" })
+            @Html.EditorFor(model => model.Lastname)
             @Html.ValidationMessageFor(model => model.Lastname)
         </div>
 
@@ -35,7 +31,7 @@
             @Html.LabelFor(model => model.Nickname)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Nickname, new { @class = "form-control" })
+            @Html.EditorFor(model => model.Nickname)
             @Html.ValidationMessageFor(model => model.Nickname)
         </div>
 
@@ -43,7 +39,7 @@
             @Html.LabelFor(model => model.Login)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Login, new { @class = "form-control" })
+            @Html.EditorFor(model => model.Login)
             @Html.ValidationMessageFor(model => model.Login)
         </div>
 
@@ -51,14 +47,14 @@
             @Html.LabelFor(model => model.Email)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Email, new { @type = "email", @class = "form-control" })
+            @Html.EditorFor(model => model.Email)
             @Html.ValidationMessageFor(model => model.Email)
         </div>
 
         @Html.HiddenFor(model => model.Id)
 
         
-        <p class="submit-button">
+        <p>
             <button type="submit" class="btn btn-success btn-lg">
                 <i class="glyphicon glyphicon-circle-arrow-right"></i>Save
             </button>
@@ -69,5 +65,3 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-</div>
-</div></div>

@@ -104,7 +104,7 @@ namespace IglaClub.Web.Controllers
                 var coordinates = Request.Form["coords"];
                 tournament.Coordinates = coordinates;
                 tournamentManager.Create(tournament, GetCurrentUserName());
-                return RedirectToAction("Index");
+                return RedirectToAction("OwnerTournaments");
             }
 
             return View(tournament);
