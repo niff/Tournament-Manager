@@ -79,5 +79,12 @@ namespace IglaClub.ObjectModel.Entities
                 this.Pairs.Any(p => (p.Player1 != null && p.Player1.Login == login) || 
                     (p.Player2 != null && p.Player2.Login == login));
         }
+
+        public bool UserIsOwner(string login)
+        {
+            if (this.Owner == null)
+                return false;
+            return this.Owner.Login == login;
+        }
      }
 }
