@@ -31,7 +31,7 @@ namespace IglaClub.Web.Controllers
         
        public ActionResult RoundDetails(long tournamentId)
         {
-            var currentUser = userRepository.GetUserByName(HttpContext.User.Identity.Name);
+            var currentUser = userRepository.GetUserByLogin(HttpContext.User.Identity.Name);
             if(!this.tournamentRepository.UserIsSubscribedForTournament(currentUser.Login, tournamentId))
             {
                 TempData["Message"] = "You are not subscribed for this tournament";

@@ -49,7 +49,7 @@
             @Html.LabelFor(model => model.Email)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Email)
+            @Html.EditorFor(model => model.Email, new {@type = "email"})
             @Html.ValidationMessageFor(model => model.Email)
         </div>
 
@@ -62,7 +62,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to main page", "Index", "Tournament")
 </div>
 
 @section Scripts {

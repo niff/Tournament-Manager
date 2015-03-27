@@ -50,12 +50,16 @@ namespace IglaClub.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
-            {
-                return RedirectToLocal(returnUrl);
-            }
+            if (!ModelState.IsValid)
+                return View(model);
 
-            // If we got this far, something failed, redisplay form
+            if (WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+                return RedirectToLocal(returnUrl);
+
+            var user = userRepository.GetUserByEmail(model.UserName);
+            if(user!=null && WebSecurity.Login(user.Login, model.Password, persistCookie: model.RememberMe))
+                return RedirectToLocal(returnUrl);
+
             ModelState.AddModelError("", "The user name or password provided is incorrect.");
             return View(model);
         }
@@ -165,7 +169,7 @@ namespace IglaClub.Web.Controllers
 
         public ActionResult Edit()
         {
-            var model = userRepository.GetUserByName(User.Identity.Name);
+            var model = userRepository.GetUserByLogin(User.Identity.Name);
             return View(model);
         }
 
