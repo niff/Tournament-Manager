@@ -115,8 +115,8 @@ namespace IglaClub.Web.Controllers
                     ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
                 }
             }
-
-            // If we got this far, something failed, redisplay form
+            
+            notificationService.DisplayError("uupps, please try again...");
             return View(model);
         }
 
