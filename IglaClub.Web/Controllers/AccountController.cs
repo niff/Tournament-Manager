@@ -71,6 +71,13 @@ namespace IglaClub.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+
+        public ActionResult LogOut()
+        {
+            WebSecurity.Logout();
+
+            return RedirectToAction("Index", "Home");
+        }
         //
         // GET: /Account/Register
 

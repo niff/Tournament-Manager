@@ -31,7 +31,8 @@
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Create", "Tournament", new { area = "" }, null)">Create tournament</a></li>
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("OwnerTournaments", "Tournament", new { area = "" }, null)">My tournaments</a></li>
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("MyClubs", "Clubs", new { area = "" }, null)">My clubs</a></li>
-                @*<li role="presentation" class="divider"></li>
+                  @*<li role="presentation" class="divider"></li>
+                  todo add short descriptions formenu item
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="https://twitter.com/fat">Separated link</a></li>*@
               </ul>
             </li>
@@ -58,8 +59,8 @@
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Edit", "Account", new { area = "" }, null)">Edit profile</a></li>
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Manage", "Account", new { area = "" }, null)">Change password</a></li>
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Account settings</a></li>
-                            @*<li role="presentation" class="divider"></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="https://twitter.com/fat">Logout</a></li>*@
+                            <li role="presentation" class="divider"></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("LogOut","Account")"><i class="glyphicon glyphicon-off right-side-margin"></i>Logout</a></li>
                         </ul>
                     </li>
                 }

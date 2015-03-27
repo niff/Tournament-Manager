@@ -3,9 +3,9 @@
 @{
     ViewBag.Title = "Log in";
 }
-@*todo create logout*@
 <section id="loginForm">
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+    //todo repair big checkbox
     @Html.AntiForgeryToken()
 
     <fieldset class="login">
