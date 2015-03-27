@@ -12,6 +12,10 @@
       padding:0;
       margin:0;
     }
+    .navbar {
+          margin-left: 15px;
+  margin-right: 15px;
+    }
 .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
     padding: 0;
 }
@@ -90,7 +94,7 @@
     letter-spacing: normal;
     word-spacing: normal;
     text-transform: none;
-    text-indent: 0px;
+    text-indent: 0;
     text-shadow: none;
     -webkit-writing-mode: horizontal-tb;
 }
@@ -244,7 +248,20 @@ i.glyphicon.result-icon.diamond {
     font-size: 20px;
     text-indent: 30PX;
 }
+.home-text-big {
+    margin-top: 12px;
+  font-size: 44px;
+}
+.home-text-big.name {
+   font-weight: bold;
+  text-shadow: 4px 4px rgb(37, 83, 153);
+}
 
+.justify-hack {
+      width:100%;
+  height:1em;
+  display:inline-block;
+}
 /*.btn {
     margin: 2px;
 }*/
@@ -310,17 +327,28 @@ i.glyphicon.result-icon.diamond {
     background: -webkit-linear-gradient(top, #f5f5f5 0%,#efefef 100%);
     border-radius: 7px;
     border: 1px solid #d8d8d8;
-    box-shadow: 0px 0px 1px 1px white inset, 0px 33px 40px -38px #000;
+    box-shadow: 0 0 1px 1px white inset, 0 33px 40px -38px #000;
     height: auto;
     max-width: 100%;
-    margin: 15px 15px;
-    padding: 25px;
+    margin: 15px 0;
     text-align: center;
 }
+.start-text-block {
+      /*background: -webkit-linear-gradient(top, #A9CBFF 0%,#7593C2 100%);
+  font-weight: bold;
+  box-shadow: 0 0 1px 1px rgb(94, 132, 213) inset, 0 33px 40px -38px #000;*/
+        border: none;
+  box-shadow: none;
+  background: rgb(49, 129, 199);
+  color: white;
+}
+.shadow-gradient-block.action {   
+    padding: 25px;
+}
 
-    .shadow-gradient-block img {
-        width: 82px;
-    }
+.shadow-gradient-block img {
+    width: 82px;
+}
 
 .active-tournaments {
     padding-bottom: 10px;  
@@ -481,7 +509,7 @@ footer {
     margin-bottom: 10px;
 }
 .quick-sign-up-block {
-    padding: 20px 0 15px 0;
+    padding: 22px 47px;
 }
 .quick-sign-up legend, .quick-sign-up .long-form {
     display: none;
@@ -518,6 +546,8 @@ footer {
 
     .navbar {
         margin-bottom: 5px;
+        margin-left: 0;
+        margin-right: 0;
     }
 
     .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
@@ -541,31 +571,19 @@ footer {
     .left-menu-button {
          min-width: 75px;
     }
-    .start-info-block {
-        display: none;
-    }
-
-    .row {
-       /*padding-right: 8px;*/
-    }
+ 
     .pairs {
         border: none;
         box-shadow: none;
         padding: 0;
     }
     
-    /*.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
-        padding: 0 !important;
-    }*/
     fieldset.login {
         width: auto;
     }
     fieldset legend {
     font-size: 1.5em;
 }
-    .quick-sign-up-block input {
-        max-width: 125px;
-    }
     #map-canvas {
         width: auto;
     }
@@ -578,7 +596,7 @@ footer {
     }
     .small-padding-mobile {
         padding-left: 5px;
-        padding-right: 0px;
+        padding-right: 0;
     }
     .tournament-status .tournament-status-text{
         display: none;

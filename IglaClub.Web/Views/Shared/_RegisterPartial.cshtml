@@ -3,7 +3,7 @@
 @using (Html.BeginForm("Register","Account",FormMethod.Post)) {
     @Html.AntiForgeryToken()
 
-    <fieldset class="login">
+@*    <fieldset class="login">
         <legend>Sign-in!</legend>
             @Html.ValidationSummary()
         <div class="editor-label">
@@ -30,5 +30,17 @@
         <p class="submit-button">
             <button type="submit" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus"></span>Register</button>
         </p>
-    </fieldset>
+    </fieldset>*@
+
+  <div class="form-group">
+    <input type="email" class="form-control"  placeholder="Your email address">
+  </div>
+  <div class="form-group">
+    <input type="password" class="form-control"  placeholder="Password">
+  </div>
+  <div class="form-group">
+    <input type="password" class="form-control"  placeholder="Confirm password">
+  </div>
+  <button type="submit" class="btn btn-success btn-lg">Sign up!</button>
+
 }

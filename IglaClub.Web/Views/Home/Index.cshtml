@@ -2,52 +2,74 @@
     ViewBag.Title = "Hello";
 }
 
-<style type="text/css"></style>
+<div class="row">
+    <div class="col-md-12 column-padding">
 
-    <div class="col-md-12  center-block shadow-gradient-block start-info-block">
-        <div>
-            <p class="home-text">
-                If you are bridge enthusiast and you want to organize small tournaments on your own,
-                or you are participating in those kind of events and you want to have a tool for better organize and analyze them, you're in the rigth place.
-                If you are not, it is the best place to become one of us:)
-            </p>
-        </div>
-    </div>
-    <div class="col-md-3 center-block shadow-gradient-block quick-sign-up-block">
-        <div class="quick-sign-up">
-            <span class="small-header">Quick sign up and start using!</span>
-            @Html.Partial("_RegisterPartial")
-          @*  //todo repair form*@
-        </div>
-    </div>
-    <div class="col-md-4  center-block shadow-gradient-block">
-        <div>
-            <img src="~/Content/img/1408214416_file_add.png" />
-            <div class="caption">
-                <h3>Create your tournament</h3>
-                <p>and invite your friends!</p>
-                <p>
-                    <a href="@Url.Action("About","Home")" class="btn btn-primary" role="button" 
-                       title="Become a director and organize great fun for your friends">See more...</a> 
-                    <a href="@Url.Action("Create", "Tournament")" class="btn btn-default" role="button">Create a tournament</a>
+        <div class="col-md-12  center-block shadow-gradient-block start-text-block">
+            <div>
+                <div class="home-text hidden-xs">
+@*                    <table>
+                        <tr><td>Find bridge tournaments in your area and sign up.</td><td></td><td></td></tr>
+                        <tr><td></td><td>Review your results.</td><td></td></tr>
+                        <tr><td></td><td></td><td>Connect to other players.</td></tr>
+                    </table>*@
+                    <div>Find bridge tournaments in your area and sign up. Review your results. Connect to other players.
+                        @*<span class="justify-hack"> </span>*@
+
+                    </div>
+                    <span class="home-text-big"><span class="name">IGLAclub</span> is the best place in the web for bridge players and tournament organizers!</span>
+                </div>
+                <p class="home-text hidden-md hidden-sm hidden-lg">
+                    Find bridge tournaments in your area and sign up. Review your results. Connect to other players.
                 </p>
             </div>
         </div>
-    </div>
-
-    <div class="col-md-4 center-block shadow-gradient-block">
-        <div>
-
-            <img src="~/Content/img/1408214039_search.png" />
-            <div class="caption">
-                <h3>Find a tournament...</h3>
-                <p>... and sign up!</p>
-                <p>
-                    <a href="@Url.Action("About","Home")" class="btn btn-primary" role="button">See more...</a> 
-                    <a href="@Url.Action("Index","Tournament")" class="btn btn-default" role="button">Find a tournament</a>
-                </p>
+        @*  <div class="col-md-3 center-block shadow-gradient-block quick-sign-up-block">*@
+        <div class="col-md-4">
+            <div class="center-block shadow-gradient-block quick-sign-up-block">
+                @*      <div class="quick-sign-up">*@
+                <span class="small-header">Quick sign up and start using!</span>
+                @Html.Partial("_RegisterPartial")
+                @*  //todo repair form*@
+                @*    </div>*@
             </div>
         </div>
+        <div class="col-md-8">
+
+            <div class="col-md-6">
+                <div class="center-block shadow-gradient-block action">
+                    <div>
+                        <img src="~/Content/img/1408214416_file_add.png" />
+                        <div class="caption">
+                            <h3>Create your tournament</h3>
+                            <p>and invite your friends!</p>
+                            <p>
+                                <a href="@Url.Action("About", "Home")" class="btn btn-primary" role="button" 
+                       title="Become a director and organize great fun for your friends">See more...</a>
+                                <a href="@Url.Action("Create", "Tournament")" class="btn btn-default" role="button">Create a tournament</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="center-block shadow-gradient-block action">
+                    <div>
+                        <img src="~/Content/img/1408214039_search.png" />
+                        <div class="caption">
+                            <h3>Find a tournament...</h3>
+                            <p>... and sign up!</p>
+                            <p>
+                                <a href="@Url.Action("About", "Home")" class="btn btn-primary" role="button">See more...</a>
+                                <a href="@Url.Action("Index", "Tournament")" class="btn btn-default" role="button">Find a tournament</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
     </div>
-
-
+</div>
