@@ -349,8 +349,8 @@ namespace IglaClub.Web.Controllers
         {
             var model = new TounamentSingleListViewModel
             {
-                Tournaments = tournamentRepository.GetAll<Tournament>().ToList(),
-                Header = "My tournaments"
+                Tournaments = tournamentRepository.GetAll<Tournament>().OrderBy(t => t.TournamentStatus).ToList(),
+                Header = "All tournaments"
             };
             return View(model);
         }

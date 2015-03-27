@@ -1,46 +1,18 @@
 ﻿@model IglaClub.Web.Models.RegisterModel
 
-@using (Html.BeginForm("Register","Account",FormMethod.Post)) {
+@using (Html.BeginForm("Register", "Account", FormMethod.Post))
+{
     @Html.AntiForgeryToken()
 
-@*    <fieldset class="login">
-        <legend>Sign-in!</legend>
-            @Html.ValidationSummary()
-        <div class="editor-label">
-            @Html.LabelFor(model => model.UserName)
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control"})
-        </div>
-        
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Password)
-        </div>
-        <div class="editor-field">
-            @Html.PasswordFor(model => model.Password, new { @class = "form-control"})
-        </div>
-        
-        <div class="editor-label">
-            <label>Confirm</label><label class="long-form"> password</label>
-        </div>
-        <div class="editor-field">
-            @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control"})
-        </div>
-        <br/>
-        <p class="submit-button">
-            <button type="submit" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus"></span>Register</button>
-        </p>
-    </fieldset>*@
-
-  <div class="form-group">
-    <input type="email" class="form-control"  placeholder="Your email address">
-  </div>
-  <div class="form-group">
-    <input type="password" class="form-control"  placeholder="Password">
-  </div>
-  <div class="form-group">
-    <input type="password" class="form-control"  placeholder="Confirm password">
-  </div>
-  <button type="submit" class="btn btn-success btn-lg">Sign up!</button>
+    <div class="form-group">
+        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", placeholder = "Your email address" })
+    </div>
+    <div class="form-group">
+        @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Type password" })
+    </div>
+    <div class="form-group">
+        @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm password" })
+    </div>
+    <button type="submit" class="btn btn-success btn-lg">Sign up!</button>
 
 }

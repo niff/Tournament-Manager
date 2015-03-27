@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">IGLA Club</a>
+          <a class="navbar-brand small-logo" href="/">IGLAclub</a>
         </div>
         <div class="collapse navbar-collapse bs-example-js-navbar-collapse">
           <ul class="nav navbar-nav">
@@ -40,6 +40,7 @@
               </a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("GetAll", "Tournament", new { area = "" }, null)">All tournaments</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("GetAll", "Tournament", new { area = "" }, null)">Find on map</a></li>
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("MyClubs", "Clubs", new { area = "" }, null)">Players</a></li>
               </ul>
             </li>
@@ -63,8 +64,8 @@
                 }
                 else
                 {
-                    <li><a href="@Url.Action("Login", "Account", new { id = "loginLink", area = "" })">Login</a></li>
-                    <li><a href="@Url.Action("Register", "Account", new { id = "registerLink", area = "" })">Register</a></li>
+                    <li><a href="@Url.Action("Login", "Account", new { id = "loginLink", area = "" })"><i class="glyphicon glyphicon-log-in right-side-margin"></i>Login</a></li>
+                    <li><a href="@Url.Action("Register", "Account", new { id = "registerLink", area = "" })"><i class="glyphicon glyphicon-user right-side-margin"></i>Register</a></li>
                 }
             </ul>
         </div><!-- /.nav-collapse -->
