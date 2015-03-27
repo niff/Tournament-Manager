@@ -7,6 +7,7 @@ using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using IglaClub.ObjectModel.Entities;
 using IglaClub.ObjectModel.Repositories;
+using IglaClub.Web.Helpers;
 using IglaClub.Web.Infrastructure;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
@@ -100,14 +101,18 @@ namespace IglaClub.Web.Controllers
                 // Attempt to register the user
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password, propertyValues: new
+                    var email = ValidationHelper.IsValidEmailAddress(model.UserName) ? model.UserName : "";
+                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new
                                                 {
-                                                    First= "bartel",
-                                                    LastName = "igla",
-                                                    Email = "das@dsa"
+                                                    Email = email
                                                 });
                     WebSecurity.Login(model.UserName, model.Password);
-                    notificationService.DisplaySuccess("Want to be notified about new tournaments? Fill up you <a href='account/edit'>email</a> in account settings");
+                    if(string.IsNullOrEmpty(email))
+                        notificationService.DisplaySuccess("<a href='account/edit'>Want to be notified about new tournaments? Fill up your email address and other details in account settings</a> ");
+                    else
+                    {
+                        notificationService.DisplaySuccess("<a href='account/edit'>Want to be easily recognized by your friends? \n\rFill up you account details in account settings</a>");
+                    }
                     return RedirectToAction("Index", "Home");
                 }
                 catch (MembershipCreateUserException e)
