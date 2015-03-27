@@ -252,7 +252,7 @@ i.glyphicon.result-icon.diamond {
     margin-top: 12px;
   font-size: 44px;
 }
-.home-text-big.name {
+.home-text-big > .name {
    font-weight: bold;
   text-shadow: 4px 4px rgb(37, 83, 153);
 }
@@ -437,7 +437,14 @@ span.small-header {
 .lineheight5em {
     line-height: 5em;
 }
-
+.dropdown-menu > li > a {
+  color: #2649A3;
+  font-size: large;
+}
+.dropdown-menu > li > a > span {
+  font-size: small;
+  color: gray;
+}
 .tournament-status {
     border-radius: 1em;
     font-size: 1em;
@@ -568,10 +575,6 @@ footer {
     font-size: 14px;
 }
 
-    .left-menu-button {
-         min-width: 75px;
-    }
- 
     .pairs {
         border: none;
         box-shadow: none;
