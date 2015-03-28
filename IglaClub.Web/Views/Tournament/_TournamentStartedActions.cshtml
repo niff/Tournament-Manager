@@ -1,23 +1,16 @@
 ﻿@using IglaClub.ObjectModel.Enums
 @model IglaClub.ObjectModel.Entities.Tournament
 
-@Html.ActionLink("Edit results", "Manage", "Results",
-            new { tournamentId = Model.Id },
-            new { @class = "btn btn-info", title = "Manage current results: change placing, add/change scores - essential of the tournament directing." })
-
-@Html.ActionLink("Refresh results", "CalculateResults",
-            new { id = Model.Id },
-            new { @class = "btn btn-info" })
-
-@if (Model.TournamentMovingType == TournamentMovingType.Cavendish)
-{
-@Html.ActionLink("Generate next round", "GenerateNextRound",
-                new { tournamentId = Model.Id, withPairsRepeat = false },
-                new { @class = "btn btn-info", title = "If everything is ok, generate boards and placing for the next round." })
+@{
+    string linkLabel = "Generate next round";
+    var action = "GenerateNextRound";
+    //"If everything is ok, generate boards and placing for the next round."
 }
-else
+@if (Model.TournamentMovingType != TournamentMovingType.Cavendish)
 {
-@Html.ActionLink("Move to the next round", "MoveToNextRound",
-                new { tournamentId = Model.Id, withPairsRepeat = false },
-                new { @class = "btn btn-info" })
+    action = "MoveToNextRound";
+    linkLabel = "Move to the next round";
 }
+<a href="@Url.Action(action, new { tournamentId = Model.Id, withPairsRepeat = false })" class = "btn btn-info pull-right">
+    <i class="glyphicon glyphicon-arrow-right right-side-margin"></i>@linkLabel
+</a>

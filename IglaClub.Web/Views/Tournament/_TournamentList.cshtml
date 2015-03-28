@@ -6,7 +6,7 @@
 <span class="medium-header">@Model.Header</span>
 @if (Model.Tournaments.Any())
 {
-    <table class="tournamentsListTable table table-striped table-hover">
+    <table class="table tournaments table-striped table-hover">
         @foreach (var item in Model.Tournaments)
         {
             var status = item.TournamentStatus;

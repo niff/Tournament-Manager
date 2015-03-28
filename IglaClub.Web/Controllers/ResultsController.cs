@@ -215,7 +215,8 @@ namespace IglaClub.Web.Controllers
                 {
                     TournamentScoringType = tournament.TournamentScoringType,
                     PairsInTounament = pairRepository.GetPairsByTournament(tournamentId).OrderByDescending(p=>p.Score).ToList(),
-                    PairNumberMaxPoints = pairNumberMaxPoints
+                    PairNumberMaxPoints = pairNumberMaxPoints,
+                    TournamentId = tournamentId
                     
                 };
 

@@ -10,7 +10,10 @@
         pointsHeader += "(MPs)";
     }
 }
-    <p>Results</p>
+    <span>Results</span>
+    <a href="@Url.Action("CalculateResults", "Tournament",new { id = Model.TournamentId})" class = "pull-right">
+        <i class="glyphicon glyphicon-refresh"></i> Refresh results
+    </a>
     <table class="table table-striped table-hover">
         <tr>
             @*<th></th>*@
