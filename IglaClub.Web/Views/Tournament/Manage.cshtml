@@ -17,7 +17,6 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
     <p>@Html.ActionLink("Tournaments", "Index") > Manage tournament</p>
     <span class="medium-header">
-        @*<span class="tournament-status @statusLabelClass">@statusLabel</span>*@
         @Model.Tournament.Name
     </span>
 </div>
@@ -27,15 +26,21 @@
 @if (isStarted)
 {
     <div class="col-md-12 col-sm-12 col-xs-12">
-        @Html.Partial("_TournamentStartedActions", @Model.Tournament)
-    </div>
-    <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="round-info">
             <label><span class="label label-warning">@Model.Tournament.CurrentRound.</span> round</label>
-            <label><span class="label label-warning">@Model.Tournament.ResultsNotFinishedInCurrentRound</span> results left</label>
+            <label><span class="label label-warning">@Model.Tournament.ResultsNotFinishedInCurrentRound</span> results not entered yet 
+                @Html.ActionLink("(edit)", "Manage", "Results",
+            new { tournamentId = Model.Tournament.Id },
+            new { @class = "btn btn-info", title = "Manage current results: change placing, add/change scores - essential of the tournament directing." })
+            </label>
+            
+
             @*todo green if rounds 0*@
         </div>
     </div>  
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        @Html.Partial("_TournamentStartedActions", @Model.Tournament)
+    </div>
     <div class="col-md-6 col-sm-12 col-xs-12 action-pane">
         @Html.Action("PairRoster", new { tournamentId = @Model.Tournament.Id })
 

@@ -9,6 +9,7 @@ namespace IglaClub.Web.Models.ViewModels
         public TournamentScoringType TournamentScoringType { get; set; }
         public List<Pair> PairsInTounament { get; set; }
         public Dictionary<long, int> PairNumberMaxPoints { get; set; }
+        public long TournamentId { get; set; }
     }
     
 }

@@ -28,7 +28,7 @@
         padding-right: 6px;
     }
     
-    .table > tbody > tr > td {      
+    .table.tournaments > tbody > tr > td {      
         vertical-align: middle !important;
     }
     .table.table-padding > tbody > tr > td {      

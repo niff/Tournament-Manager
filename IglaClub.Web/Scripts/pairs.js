@@ -24,14 +24,16 @@
             });
         });
         $('#pairSearchSubmit').on("click", function () {
-            $('.spinner').css('display', 'inline-block');
+            utils.showSpinner();
             var user1 = $('#user1').val();
             var user2 = $('#user2').val();
             if (user1 == '' || user2 == '') {
+                utils.hideSpinner();
                 alert("User is not chosen");
                 return false;
             }
             if (user1 == user2) {
+                utils.hideSpinner();
                 alert("Choose two different users");
                 return false;
             }
@@ -68,6 +70,12 @@
         },
         clearHiddenUsers: function () {
             $('.hidden.user').val('');
+        },
+        showSpinner: function() {
+            $('.spinner').css('display', 'inline-block');
+        },
+        hideSpinner: function () {
+            $('.spinner').css('display', 'none');
         }
     };
 })(jQuery);

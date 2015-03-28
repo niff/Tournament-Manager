@@ -263,7 +263,6 @@
     <Compile Include="Controllers\ResultsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RoundController.cs" />
-    <Compile Include="Helpers\NavigationHelper.cs" />
     <Compile Include="Helpers\ValidationHelper.cs" />
     <Compile Include="Migrations\201503272236438_ClubUserRenameColumn.cs" />
     <Compile Include="Migrations\201503272236438_ClubUserRenameColumn.Designer.cs">
