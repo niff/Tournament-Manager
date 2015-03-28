@@ -263,6 +263,7 @@
     <Compile Include="Controllers\ResultsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RoundController.cs" />
+    <Compile Include="Helpers\ValidationHelper.cs" />
     <Compile Include="Models\ViewModels\TounamentListViewModel.cs" />
     <Compile Include="Models\ViewModels\TounamentSingleListViewModel.cs" />
     <Compile Include="Controllers\TournamentController.cs" />

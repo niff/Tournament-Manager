@@ -7,6 +7,7 @@ using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using IglaClub.ObjectModel.Entities;
 using IglaClub.ObjectModel.Repositories;
+using IglaClub.Web.Helpers;
 using IglaClub.Web.Infrastructure;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
@@ -49,12 +50,16 @@ namespace IglaClub.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
-            {
-                return RedirectToLocal(returnUrl);
-            }
+            if (!ModelState.IsValid)
+                return View(model);
 
-            // If we got this far, something failed, redisplay form
+            if (WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+                return RedirectToLocal(returnUrl);
+
+            var user = userRepository.GetUserByEmail(model.UserName);
+            if(user!=null && WebSecurity.Login(user.Login, model.Password, persistCookie: model.RememberMe))
+                return RedirectToLocal(returnUrl);
+
             ModelState.AddModelError("", "The user name or password provided is incorrect.");
             return View(model);
         }
@@ -100,14 +105,18 @@ namespace IglaClub.Web.Controllers
                 // Attempt to register the user
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password, propertyValues: new
+                    var email = ValidationHelper.IsValidEmailAddress(model.UserName) ? model.UserName : "";
+                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new
                                                 {
-                                                    First= "bartel",
-                                                    LastName = "igla",
-                                                    Email = "das@dsa"
+                                                    Email = email
                                                 });
                     WebSecurity.Login(model.UserName, model.Password);
-                    notificationService.DisplaySuccess("Want to be notified about new tournaments? Fill up you <a href='account/edit'>email</a> in account settings");
+                    if(string.IsNullOrEmpty(email))
+                        notificationService.DisplaySuccess("<a href='account/edit'>Want to be notified about new tournaments? Fill up your email address and other details in account settings</a> ");
+                    else
+                    {
+                        notificationService.DisplaySuccess("<a href='account/edit'>Want to be easily recognized by your friends? \n\rFill up you account details in account settings</a>");
+                    }
                     return RedirectToAction("Index", "Home");
                 }
                 catch (MembershipCreateUserException e)
@@ -160,7 +169,7 @@ namespace IglaClub.Web.Controllers
 
         public ActionResult Edit()
         {
-            var model = userRepository.GetUserByName(User.Identity.Name);
+            var model = userRepository.GetUserByLogin(User.Identity.Name);
             return View(model);
         }
 

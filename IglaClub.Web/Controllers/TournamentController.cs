@@ -250,7 +250,7 @@ namespace IglaClub.Web.Controllers
 
         private PairsViewModel CreatePairsViewModel(long tournamentId)
         {
-            var currentUser = userRepository.GetUserByName(GetCurrentUserName());
+            var currentUser = userRepository.GetUserByLogin(GetCurrentUserName());
             var tournament = this.tournamentRepository.GetTournamentWithPairsAndOwner(tournamentId);
             var model = new PairsViewModel
             {

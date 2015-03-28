@@ -15,13 +15,12 @@ namespace IglaClub.ObjectModel.Entities
         [MaxLength(100)]
         public string Nickname { get; set; }
 
-        [Index(IsUnique = true)]
+       // [Index(IsUnique = true)]
         [Required(ErrorMessage = "Login is required")]
-        [MaxLength(100)]
+        [MaxLength(254)]
         public string Login { get; set; }
 
-        [Index(IsUnique = true)]
-        [Required(ErrorMessage = "Email is required")]
+        //[Index(IsUnique = true)]
         public string Email { get; set; }
 
         public virtual IList<ClubUser> ClubUsers { get; set; }

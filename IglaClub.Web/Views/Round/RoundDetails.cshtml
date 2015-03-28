@@ -34,7 +34,7 @@
                         @result.Board.BoardNumber
                     </td>
                     <td style="white-space: nowrap">
-                        @ResultsParser.GetFormatResultForHtml(result)
+                        @Html.Raw(ResultsParser.GetFormatResultForHtml(result))
                     </td>
                     <td>
                         @result.ResultNsPoints
