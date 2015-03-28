@@ -2,9 +2,9 @@
 {
     public class ClubUser : BaseEntity
     {
-        public User Users { get; set; }
+        public User User { get; set; }
 
-        public Club Clubs { get; set; }
+        public Club Club { get; set; }
 
         public bool IsAdministrator { get; set; }
     }

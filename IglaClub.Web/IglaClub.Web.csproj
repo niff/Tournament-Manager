@@ -255,7 +255,7 @@
     <Content Include="Content\themes\1408214423_file_add.png" />
     <Content Include="Content\global.css" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\ClubsController.cs" />
+    <Compile Include="Controllers\ClubsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Authorization\TournamentOwnerAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -265,6 +265,14 @@
     <Compile Include="Controllers\RoundController.cs" />
     <Compile Include="Helpers\NavigationHelper.cs" />
     <Compile Include="Helpers\ValidationHelper.cs" />
+    <Compile Include="Migrations\201503272236438_ClubUserRenameColumn.cs" />
+    <Compile Include="Migrations\201503272236438_ClubUserRenameColumn.Designer.cs">
+      <DependentUpon>201503272236438_ClubUserRenameColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503272324018_CreateIndexClubUser.cs" />
+    <Compile Include="Migrations\201503272324018_CreateIndexClubUser.Designer.cs">
+      <DependentUpon>201503272324018_CreateIndexClubUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ViewModels\TounamentListViewModel.cs" />
     <Compile Include="Models\ViewModels\TounamentSingleListViewModel.cs" />
     <Compile Include="Controllers\TournamentController.cs" />
@@ -388,9 +396,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Clubs\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Clubs\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Clubs\Edit.cshtml" />
+    <Content Include="Views\Clubs\Create.cshtml" />
+    <Content Include="Views\Clubs\Details.cshtml" />
+    <Content Include="Views\Clubs\Edit.cshtml" />
     <Content Include="Content\bootstrap\css\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap\css\bootstrap.css.map" />
     <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
@@ -489,6 +497,8 @@
     <Content Include="Views\Tournament\_TournamentStartedActions.cshtml" />
     <Content Include="Views\Results\SingleResultEdit.cshtml" />
     <Content Include="Views\Shared\_TopMenu.cshtml" />
+    <Content Include="Views\Clubs\MyClubs.cshtml" />
+    <Content Include="Views\Clubs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -517,6 +527,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201503242214342_CreateTableClubusers.resx">
       <DependentUpon>201503242214342_CreateTableClubusers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503272236438_ClubUserRenameColumn.resx">
+      <DependentUpon>201503272236438_ClubUserRenameColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503272324018_CreateIndexClubUser.resx">
+      <DependentUpon>201503272324018_CreateIndexClubUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

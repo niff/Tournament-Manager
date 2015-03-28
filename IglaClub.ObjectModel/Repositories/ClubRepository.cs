@@ -9,9 +9,18 @@ namespace IglaClub.ObjectModel.Repositories
         {
         }
 
-        public void Add(Club club)
+        public void Add(Club club, User owner)
         {
             base.InsertOrUpdate(club);
+
+            var clubUser = new ClubUser()
+            {
+                Club = club,
+                User = owner,
+                IsAdministrator = true
+            };
+            base.InsertOrUpdate(clubUser);
+            
             SaveChanges();
         }
 
