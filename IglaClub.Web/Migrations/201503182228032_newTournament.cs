@@ -6,6 +6,8 @@ namespace IglaClub.Web.Migrations
     {
         public override void Up()
         {
+            //insert into Tournaments values ('Tournament in Zurich', 'Tournament in Zurich from Swiss Series of Bridge',0,0,3,1,0,'2015-04-03 18:00:00.000', '2015-04-01 19:10:00.000', null,null,1,null,'(47.3686498, 8.539182500000038)','Zurych, Szwajcaria')
+
 //            Sql(@"INSERT INTO [IglaClub].[dbo].[Tournaments]
 //           ([Name]
 //           ,[Description]
