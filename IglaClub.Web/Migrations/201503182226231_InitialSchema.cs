@@ -118,6 +118,7 @@ namespace IglaClub.Web.Migrations
                 })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Login, unique: true);
+            //TODO add unique on email!!!
                 //.Index(t => t.Email, unique: true);
 
             CreateTable(
