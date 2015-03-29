@@ -12,6 +12,7 @@ namespace IglaClub.Web.Models
         {
             Database.SetInitializer(
                 new MigrateDatabaseToLatestVersion<IglaClubDbContext, Configuration>());
+            //Database.SetInitializer(new DropCreateDatabaseAlways<IglaClubDbContext>());
         }
 
         public DbSet<User> Users { get; set; }

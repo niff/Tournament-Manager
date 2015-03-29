@@ -19,6 +19,10 @@ namespace IglaClub.Web.Infrastructure
         {
             DisplayMessage(string.Format(message, parameters), NotificationType.Danger);
         }
+        public void DisplayInfo(string message, params object[] parameters)
+        {
+            DisplayMessage(string.Format(message, parameters), NotificationType.Info);
+        }
 
         public void DisplaySuccess(string message, params object[] parameters)
         {
