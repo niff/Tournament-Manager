@@ -9,9 +9,9 @@ namespace IglaClub.Web.Migrations
         {
             RenameColumn(table: "dbo.ClubUsers", name: "Users_Id", newName: "User_Id");
             RenameColumn(table: "dbo.ClubUsers", name: "Clubs_Id", newName: "Club_Id");
-            RenameIndex(table: "dbo.ClubUsers", name: "IX_Clubs_Id", newName: "IX_Club_Id");
-            RenameIndex(table: "dbo.ClubUsers", name: "IX_Users_Id", newName: "IX_User_Id");
-            RenameIndex(table: "dbo.Club", name: "IX_Users_Id", newName: "IX_User_Id");
+            //RenameIndex(table: "dbo.ClubUsers", name: "IX_Clubs_Id", newName: "IX_Club_Id");
+            //RenameIndex(table: "dbo.ClubUsers", name: "IX_Users_Id", newName: "IX_User_Id");
+            //RenameIndex(table: "dbo.Club", name: "IX_Users_Id", newName: "IX_User_Id");
         }
         
         public override void Down()

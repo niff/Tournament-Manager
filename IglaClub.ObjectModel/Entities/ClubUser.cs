@@ -1,4 +1,6 @@
-﻿namespace IglaClub.ObjectModel.Entities
+﻿using System;
+
+namespace IglaClub.ObjectModel.Entities
 {
     public class ClubUser : BaseEntity
     {
@@ -7,5 +9,7 @@
         public Club Club { get; set; }
 
         public bool IsAdministrator { get; set; }
+
+        public DateTime MemberSince { get; set; }
     }
 }

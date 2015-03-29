@@ -10,9 +10,9 @@ namespace IglaClub.Web.Models
         public IglaClubDbContext()
             : base("name=IglaClubConnection")
         {
-            //Database.SetInitializer(
-            //    new MigrateDatabaseToLatestVersion<IglaClubDbContext, Configuration>());
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<IglaClubDbContext>());
+            Database.SetInitializer(
+                new MigrateDatabaseToLatestVersion<IglaClubDbContext, Configuration>());
+            //Database.SetInitializer(new DropCreateDatabaseAlways<IglaClubDbContext>());
         }
 
         public DbSet<User> Users { get; set; }
