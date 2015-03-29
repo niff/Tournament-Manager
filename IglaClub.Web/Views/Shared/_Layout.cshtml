@@ -12,7 +12,8 @@
         @Scripts.Render("~/bundles/jqueryui")
         @Scripts.Render("~/bundles/bootstrap")
     </head>
-    <body>            
+    <body>
+        <div class="wrapper">           
         @{
             //todo move lower and check
             var message = TempData["Message"];
@@ -34,21 +35,21 @@
             
             @RenderSection("featured", required: false)
             <div class="column-padding-layout">
-            @RenderBody()
-                </div>
+                @RenderBody()
+            </div>
         </div>
             
         <footer>
             <div class="footer-menu">
                 <span>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</span> |
-                            <span>@Html.ActionLink("About", "About", "Home", new { area = "" }, null)</span>|
-                            <span>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, null)</span>
+                <span>@Html.ActionLink("About", "About", "Home", new { area = "" }, null)</span>|
+                <span>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, null)</span>
             </div>
             <div class="row text-center text-muted small">
                 <p>&copy; @DateTime.Now.Year - Igla Club - All rights reserved.</p>
             </div>
         </footer>
-
+</div> 
     </body>
     @RenderSection("scripts", required: false)
 </html>
