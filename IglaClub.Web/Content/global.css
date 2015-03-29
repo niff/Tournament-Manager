@@ -1,17 +1,61 @@
-﻿body {
+﻿html,body {
     font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif;
     /*margin: 0;*/
     /*margin-bottom: 70px;*/
+	margin:0;
+	padding:0;
+	height:100%;
+}
+
+.wrapper {
+	min-height:100%;
+	position:relative;
 }
 
 .container {
-    min-height: 350px;
+	/*padding:10px;*/
+	padding-bottom:80px;   /* Height of the footer element */
 }
+footer {
+	width:100%;
+	height:80px;
+	position:absolute;
+	bottom:0;
+	left:0;
+    background-color: #f5f5f5;
+}
+/*.container {
+    min-height: 350px;
+}*/
     .row {
       padding:0;
       margin:0;
     }
+    
 
+/*footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #f5f5f5;
+    display: block;
+}*/
+
+.footer-menu {
+    color: gray;
+    font-size: medium;
+    text-align: center;
+    margin: 10px 0;
+}
+
+    .footer-menu a {
+        color: gray;
+    }
+
+        .footer-menu a:hover {
+            color: rgb(20, 51, 131);
+        }
 .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
     padding: 0;
 }
@@ -412,30 +456,6 @@ span.small-header {
     margin-left: 10px;
 }
 
-footer {
-    position: static;
-    bottom: 0;
-    width: 100%;
-    height: 70px;
-    background-color: #f5f5f5;
-    display: block;
-}
-
-.footer-menu {
-    color: gray;
-    font-size: medium;
-    text-align: center;
-    margin: 10px 0;
-}
-
-    .footer-menu a {
-        color: gray;
-    }
-
-        .footer-menu a:hover {
-            color: rgb(20, 51, 131);
-        }
-
 .display-label {
     margin-top: 5px;
 }
@@ -476,15 +496,17 @@ footer {
 
 @media (max-width: 760px) {
     .container {
-        padding: 0;
-        margin: 0;
+          padding-left: 0;
+  padding-right: 0;
     }
 
     .row {
         padding: 0;
         margin: 0;
     }
-
+    /*footer {
+        position: static;
+    }*/
     .navbar {
         margin-bottom: 10px;
         margin-left: 0;

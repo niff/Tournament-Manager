@@ -12,9 +12,14 @@
         @Scripts.Render("~/bundles/jqueryui")
         @Scripts.Render("~/bundles/bootstrap")
     </head>
-    <body>            
-        @{
-            //todo move lower and check
+    <body>
+        <div class="wrapper">           
+        
+            
+        <div class="container">
+            @Html.Partial("_TopMenu")
+            
+            @{
             var message = TempData["Message"];
             var type = TempData["MessageType"] != null ? TempData["MessageType"].ToString().ToLower() : "info";
 
@@ -29,26 +34,23 @@
             }
         }
             
-        <div class="container">
-            @Html.Partial("_TopMenu")
-            
             @RenderSection("featured", required: false)
             <div class="column-padding-layout">
-            @RenderBody()
-                </div>
+                @RenderBody()
+            </div>
         </div>
             
         <footer>
             <div class="footer-menu">
                 <span>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</span> |
-                            <span>@Html.ActionLink("About", "About", "Home", new { area = "" }, null)</span>|
-                            <span>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, null)</span>
+                <span>@Html.ActionLink("About", "About", "Home", new { area = "" }, null)</span>|
+                <span>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, null)</span>
             </div>
             <div class="row text-center text-muted small">
                 <p>&copy; @DateTime.Now.Year - Igla Club - All rights reserved.</p>
             </div>
         </footer>
-
+</div> 
     </body>
     @RenderSection("scripts", required: false)
 </html>

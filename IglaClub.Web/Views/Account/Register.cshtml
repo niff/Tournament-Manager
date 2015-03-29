@@ -2,5 +2,12 @@
 @{
     ViewBag.Title = "Register";
 }
-
-@Html.Partial("_RegisterPartial")
+<div class="row">
+    <div class="col-md-12 column-padding">
+        @*//todo add more fields to normal register and mark reqiured with star, separate quick register from normal*@
+    <fieldset class="login">
+        <legend>Create an account</legend>
+        @Html.Partial("_RegisterPartial")
+        </fieldset>
+    </div>
+        </div>
