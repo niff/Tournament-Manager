@@ -14,8 +14,12 @@
     </head>
     <body>
         <div class="wrapper">           
-        @{
-            //todo move lower and check
+        
+            
+        <div class="container">
+            @Html.Partial("_TopMenu")
+            
+            @{
             var message = TempData["Message"];
             var type = TempData["MessageType"] != null ? TempData["MessageType"].ToString().ToLower() : "info";
 
@@ -29,9 +33,6 @@
                 </div>
             }
         }
-            
-        <div class="container">
-            @Html.Partial("_TopMenu")
             
             @RenderSection("featured", required: false)
             <div class="column-padding-layout">
