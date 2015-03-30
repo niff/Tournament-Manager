@@ -11,6 +11,11 @@ namespace IglaClub.Web.Models.ViewModels
         public User CurrentUser { get; set; }
 
         public User NewUser { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("Pairs: {0}; Available users: {1}", PairsInTounament.Count, AvailableUsers.Count);
+        }
     }
     
 }

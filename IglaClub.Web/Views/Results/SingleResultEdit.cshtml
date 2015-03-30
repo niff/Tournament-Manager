@@ -14,13 +14,13 @@
         };
 }
 <div class="row">
-<div class="col-xs-12 single-result-edit">
+<div class="col-xs-12 col-sm-10 col-md-6 single-result-edit">
 
     <span class="small-header">Results, board @Model.Board.BoardNumber</span>
     <div class="form-inline">
-        <div class="form-group">
-            @Html.TextBox("ShortScore", "", new { @class = "form-control", @placeholder = "Short form", Title = StringResources.ShortScoreTooltip })
-            <button class="btn btn-success btn-small save-quick-result"><i class="glyphicon glyphicon-plus"></i></button>
+        <div class="form-group" title=@StringResources.ShortScoreTooltip>
+            @Html.TextBox("ShortScore", "", new { @class = "form-control", @placeholder = "Short form" })
+            <button class="btn btn-success btn-small save-quick-result"><i class="glyphicon glyphicon-plus"></i> Save as quick format</button>
         </div>
     </div>
 

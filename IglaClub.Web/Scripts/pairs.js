@@ -4,7 +4,7 @@
         var initFormUrl = options.dataUrl;
         var tournamentId = options.tournamentId;
 
-        $('.removePairLink').on("click", function () {
+        $('#removePairLink').on("click", function () {
             var tid = $(this).data("tournament-id");
             var pid = $(this).data("pair-id");
             utils.removePair(tid, pid, initFormUrl);
@@ -59,12 +59,18 @@
                 type: "POST",
                 async: false,
                 data: { tournamentId: tId, pairId: pairId },
-                success: utils.refreshParticipants(initFormUrl)
+                success: function (data) {
+                    utils.refreshParticipants(initFormUrl);
+                }
             });
         },
         refreshParticipants: function (dataUrl) {
             $('#participantsDiv').load(dataUrl);
         },
+        refreshAll: function (dataUrl) {
+            $("body").html(content);
+        },
+
         refreshQuickUserAdd: function () {
             $('#quickAddUserDiv input[type=text]').val('');
         },
