@@ -124,7 +124,14 @@ button.login a {
     font-size: small;
     padding: 1px 5px;
 }
-
+.btn-short {
+    padding: 1px 5px;
+}
+.btn-disabled {
+    color: #EFEFEF;
+  background-color: #D0D0D0;
+  border-color: #BEBEBE;
+}
 .both-side-margins {
     margin: 0 10px;
 }
@@ -470,7 +477,7 @@ span.small-header {
     margin-bottom: 10px;
 }
 .quick-sign-up-block {
-    padding: 22px 47px;
+    padding: 18px 47px;
 }
 .quick-sign-up legend, .quick-sign-up .long-form {
     display: none;
