@@ -11,7 +11,7 @@
         <div class="form-group">
             <input type="hidden" id="user1" value="@currentUserId" />
             I want to play with: @Html.DropDownList("user2", users, new { @class = "form-control"})
-            <button type="submit" class="btn btn-primary btn-small" id="pairSearchSubmit">Subscribe</button>
+            <button type="button" class="btn btn-primary btn-small" id="pairSearchSubmit">Subscribe</button>
         </div>
     </form>
             }
@@ -38,7 +38,7 @@
                 @if ((pair.Player1 != null && pair.Player1.Id == Model.CurrentUser.Id)
                      || (pair.Player2!= null && pair.Player2.Id == Model.CurrentUser.Id))
                 {
-                    <a href = "#" class="removePairLink" data-tournament-id="@Model.Tournament.Id" data-pair-id="@pair.Id" >
+                    <a href = "#" id="removePairLink" data-tournament-id="@Model.Tournament.Id" data-pair-id="@pair.Id" >
                         <i class="glyphicon glyphicon-trash" title="Remove"></i>
                     </a>
                 } 

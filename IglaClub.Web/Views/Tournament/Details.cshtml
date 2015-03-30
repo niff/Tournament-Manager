@@ -24,10 +24,7 @@
             {
                 <div class="col-md-12">
                     <p>
-                        @*@Html.ActionLink("Go to my table details", "RoundDetails", "Round", new { tournamentId = Model.Id }, null)*@
-                        @*//TODO: disable button till started*@
-                        @*todo: not refresh on subscription because it is out of the div -> referesh whole page?*@
-                        <a href="@Url.Action("RoundDetails", "Round", new {tournamentId = Model.Id})" class="green-link">
+                            <a href="@Url.Action("RoundDetails", "Round", new {tournamentId = Model.Id})" class="green-link">
                             <i class="glyphicon glyphicon-triangle-right success"></i>
                             Go to my table details
                         </a>

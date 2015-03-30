@@ -399,6 +399,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
+    <Content Include="Scripts\jquery.tabledit.min.js" />
     <Content Include="Views\Clubs\Create.cshtml" />
     <Content Include="Views\Clubs\Details.cshtml" />
     <Content Include="Views\Clubs\Edit.cshtml" />
