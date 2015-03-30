@@ -162,7 +162,9 @@ button.login a {
     table-layout: fixed;
     word-break: break-all;
 }*/
-
+.table .table-noborder > tr > td {
+    border: none;  
+}
     tr td.squeeze{
         padding: 3px !important;
     width:1%;
@@ -522,7 +524,10 @@ span.small-header {
     .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
         padding: 0;
     }
-
+    
+.table-small-padding  > tbody > tr > td {
+        padding: 3px !important;
+}
     tr td.squeeze {
         font-size: small;
     }

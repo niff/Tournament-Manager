@@ -247,6 +247,10 @@
     <Content Include="Content\img\spinner.gif" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jquery.datetimepicker.css" />
+    <Content Include="Content\qtip\jquery.qtip.css" />
+    <Content Include="Content\qtip\jquery.qtip.js" />
+    <Content Include="Content\qtip\jquery.qtip.min.css" />
+    <Content Include="Content\qtip\jquery.qtip.min.js" />
     <Content Include="Content\themes\1408214039_search.png" />
     <Content Include="Content\themes\1408214055_search.png" />
     <Content Include="Content\themes\1408214349_folder.png" />

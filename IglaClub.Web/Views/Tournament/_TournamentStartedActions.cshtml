@@ -5,12 +5,14 @@
     string linkLabel = "Generate<br/>next round";
     var action = "GenerateNextRound";
     //"If everything is ok, generate boards and placing for the next round."
+    bool notFinishedYet = (bool)ViewData["notFinishedYet"];
+    var btnClass = notFinishedYet ? "default disabled" : "success";
 }
 @if (Model.TournamentMovingType != TournamentMovingType.Cavendish)
 {
     action = "MoveToNextRound";
     linkLabel = "Move to the next round";
 }
-<a href="@Url.Action(action, new { tournamentId = Model.Id, withPairsRepeat = false })" class = "btn btn-info btn-short disabled btn-disabled" >
+<a href="@Url.Action(action, new { tournamentId = Model.Id, withPairsRepeat = false })" class = "btn btn-@btnClass btn-short" >
     <i class="glyphicon glyphicon-arrow-right right-side-margin"></i>@Html.Raw(linkLabel)
 </a>
