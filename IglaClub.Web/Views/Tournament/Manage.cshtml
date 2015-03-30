@@ -2,6 +2,10 @@
 @model IglaClub.Web.Models.ViewModels.TournamentManageVm
 
 @{
+    var editResultTitle = "Manage current results: change placing, add/change scores - essential of the tournament directing.";
+}
+
+@{
     ViewBag.Title = "Manage tournament " + Model.Tournament.Name;
 }
 @{
@@ -25,22 +29,32 @@
 </div>
 @if (isStarted)
 {
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="round-info">
-            <label><span class="label label-warning">@Model.Tournament.CurrentRound.</span> round</label>
-            <label><span class="label label-warning">@Model.Tournament.ResultsNotFinishedInCurrentRound</span> results not entered yet 
-                @Html.ActionLink("(edit)", "Manage", "Results",
-            new { tournamentId = Model.Tournament.Id },
-            new { @class = "btn btn-info", title = "Manage current results: change placing, add/change scores - essential of the tournament directing." })
-            </label>
-            
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <table class="table">
+            <tr>
+                <td>
+                    <label><span class="label label-warning">@Model.Tournament.CurrentRound.</span> round</label>
+                </td>
+                <td class="squeeze">
 
-            @*todo green if rounds 0*@
-        </div>
-    </div>  
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        @Html.Partial("_TournamentStartedActions", @Model.Tournament)
+                    @Html.Partial("_TournamentStartedActions", @Model.Tournament)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label><span class="label label-warning">@Model.Tournament.ResultsNotFinishedInCurrentRound</span> results not entered yet </label>
+                    @*todo green if rounds 0*@
+                </td>
+                    <td class="squeeze">
+
+                    <a href="@Url.Action("Manage", "Results", new { tournamentId = Model.Tournament.Id })" class = "btn btn-info btn-short" title="@editResultTitle">
+                        <i class="glyphicon glyphicon-edit right-side-margin"></i>Edit results
+                    </a>
+                </td>
+            </tr>
+        </table>
     </div>
+
     <div class="col-md-6 col-sm-12 col-xs-12 action-pane">
         @Html.Action("PairRoster", new { tournamentId = @Model.Tournament.Id })
 

@@ -103,6 +103,8 @@ namespace IglaClub.Web.Controllers
             if (ModelState.IsValid)
             {
                 // Attempt to register the user
+
+                //todo add column created date and save the data
                 try
                 {
                     var email = ValidationHelper.IsValidEmailAddress(model.UserName) ? model.UserName : "";
