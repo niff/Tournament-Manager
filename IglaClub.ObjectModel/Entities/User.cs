@@ -22,7 +22,6 @@ namespace IglaClub.ObjectModel.Entities
         [StringLength(250)]
         public string Login { get; set; }
 
-        [Index(IsUnique = true)]
         [StringLength(250)]
         public string Email { get; set; }
 

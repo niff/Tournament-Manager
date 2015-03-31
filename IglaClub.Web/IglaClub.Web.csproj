@@ -283,6 +283,10 @@
     <Compile Include="Migrations\201503312012568_UserValidColumn.Designer.cs">
       <DependentUpon>201503312012568_UserValidColumn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503312103549_EmailShouldNotBeUniqueBecauseOFNull.cs" />
+    <Compile Include="Migrations\201503312103549_EmailShouldNotBeUniqueBecauseOFNull.Designer.cs">
+      <DependentUpon>201503312103549_EmailShouldNotBeUniqueBecauseOFNull.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ViewModels\TounamentListViewModel.cs" />
     <Compile Include="Models\ViewModels\TounamentSingleListViewModel.cs" />
     <Compile Include="Controllers\TournamentController.cs" />
@@ -549,6 +553,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201503312012568_UserValidColumn.resx">
       <DependentUpon>201503312012568_UserValidColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503312103549_EmailShouldNotBeUniqueBecauseOFNull.resx">
+      <DependentUpon>201503312103549_EmailShouldNotBeUniqueBecauseOFNull.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
