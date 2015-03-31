@@ -2730,9 +2730,9 @@
 		var language = settings.oLanguage;
 		var previousSearch = settings.oPreviousSearch;
 		var features = settings.aanFeatures;
-		var input = '<input type="search" class="'+classes.sFilterInput+'"/>';
+		var input = '<input type="search" class="' + classes.sFilterInput + ' form-control" />';
 	
-		var str = language.sSearch;
+		var str = "";
 		str = str.match(/_INPUT_/) ?
 			str.replace('_INPUT_', input) :
 			str+input;
@@ -2741,7 +2741,7 @@
 				'id': ! features.f ? tableId+'_filter' : null,
 				'class': classes.sFilter
 			} )
-			.append( $('<label/>' ).append( str ) );
+			.append(  str  );
 	
 		var searchFn = function() {
 			/* Update all other filter input elements for the new display */
@@ -2771,7 +2771,7 @@
 	
 		var jqFilter = $('input', filter)
 			.val( previousSearch.sSearch )
-			.attr( 'placeholder', language.sSearchPlaceholder )
+			.attr( 'placeholder', "Search")
 			.bind(
 				'keyup.DT search.DT input.DT paste.DT cut.DT',
 				searchDelay ?
@@ -3363,14 +3363,14 @@
 		var select = $('<select/>', {
 			'name':          tableId+'_length',
 			'aria-controls': tableId,
-			'class':         classes.sLengthSelect
+			'class':         classes.sLengthSelect + " form-control width-auto"
 		} );
 	
 		for ( var i=0, ien=lengths.length ; i<ien ; i++ ) {
 			select[0][ i ] = new Option( language[i], lengths[i] );
 		}
 	
-		var div = $('<div><label/></div>').addClass( classes.sLength );
+		var div = $('<div><span/></div>').addClass( classes.sLength );
 		if ( ! settings.aanFeatures.l ) {
 			div[0].id = tableId+'_length';
 		}

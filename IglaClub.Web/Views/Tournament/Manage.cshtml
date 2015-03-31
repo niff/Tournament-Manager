@@ -29,31 +29,39 @@
 </div>
 @if (isStarted)
 {
-    <div class="col-md-6 col-sm-6 col-xs-12">
-        <table class="table">
-            <tr>
-                <td>
-                    <label><span class="label label-warning">@Model.Tournament.CurrentRound.</span> round</label>
-                </td>
-                <td class="squeeze">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                @{
+                    var toFinish = Model.Tournament.ResultsNotFinishedInCurrentRound;
+                    var roundsLeftClass = toFinish > 0 ? "warning" : "success";
+                }
+                <table class="table table-noborder table-small-padding">
+                    <tr>
+                        <td>
+                            <label><span class="label label-default">@Model.Tournament.CurrentRound.</span> round</label>
+                        </td>
+                        <td>
 
-                    @Html.Partial("_TournamentStartedActions", @Model.Tournament)
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label><span class="label label-warning">@Model.Tournament.ResultsNotFinishedInCurrentRound</span> results not entered yet </label>
-                    @*todo green if rounds 0*@
-                </td>
-                    <td class="squeeze">
+                            @Html.Partial("_TournamentStartedActions", @Model.Tournament, new ViewDataDictionary { { "notFinishedYet", toFinish > 0 } })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label><span class="label label-@roundsLeftClass">@toFinish</span> results not entered yet </label>
+                            @*todo green if rounds 0*@
+                        </td>
+                        <td>
 
-                    <a href="@Url.Action("Manage", "Results", new { tournamentId = Model.Tournament.Id })" class = "btn btn-info btn-short" title="@editResultTitle">
-                        <i class="glyphicon glyphicon-edit right-side-margin"></i>Edit results
-                    </a>
-                </td>
-            </tr>
-        </table>
-    </div>
+                            <a href="@Url.Action("Manage", "Results", new { tournamentId = Model.Tournament.Id })" class = "btn btn-default btn-short" title="@editResultTitle">
+                                <i class="glyphicon glyphicon-edit right-side-margin"></i>Edit results
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        </div>
 
     <div class="col-md-6 col-sm-12 col-xs-12 action-pane">
         @Html.Action("PairRoster", new { tournamentId = @Model.Tournament.Id })
@@ -80,6 +88,28 @@
     </div>
     </div>
 
-
+<script>
+//    $(document).ready(function () {
+//        $('body a[href]').qtip();
+//        $('.btn.btn-default.disabled.btn-short').qtip({
+//// Grab some elements to apply the tooltip to
+//            content: {
+//                text: 'My common piece of text here'
+//            }
+//        });
+//        $(".btn.btn-default.disabled.btn-short").attr("disabled", true)
+//   .attr("readonly", true)
+//   .parent() // Use the parent element for our qTip binding
+//   .qtip({
+//       content: $(".btn.btn-default.disabled.btn-short").val(),
+//       show: 'mouseover',
+//       hide: 'mouseout',
+//       position: { corner: { target: 'topRight', tooltip: 'bottomLeft' } },
+//       style: {
+//           name: 'light'
+//       }
+//   });
+//    });
+</script>
 
 

@@ -201,7 +201,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\bootstrap\js\npm.js" />
     <Content Include="Content\dataTables\css\jquery.dataTables.css" />
-    <Content Include="Content\dataTables\css\jquery.dataTables.min.css" />
     <Content Include="Content\dataTables\css\jquery.dataTables_themeroller.css" />
     <Content Include="Content\dataTables\images\back_disabled.png" />
     <Content Include="Content\dataTables\images\back_enabled.png" />
@@ -216,7 +215,6 @@
     <Content Include="Content\dataTables\images\sort_desc.png" />
     <Content Include="Content\dataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\dataTables\js\jquery.dataTables.js" />
-    <Content Include="Content\dataTables\js\jquery.dataTables.min.js" />
     <Content Include="Content\img\1408214039_search.png" />
     <Content Include="Content\img\1408214055_search.png" />
     <Content Include="Content\img\1408214349_folder.png" />
@@ -247,6 +245,10 @@
     <Content Include="Content\img\spinner.gif" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jquery.datetimepicker.css" />
+    <Content Include="Content\qtip\jquery.qtip.css" />
+    <Content Include="Content\qtip\jquery.qtip.js" />
+    <Content Include="Content\qtip\jquery.qtip.min.css" />
+    <Content Include="Content\qtip\jquery.qtip.min.js" />
     <Content Include="Content\themes\1408214039_search.png" />
     <Content Include="Content\themes\1408214055_search.png" />
     <Content Include="Content\themes\1408214349_folder.png" />
@@ -263,6 +265,7 @@
     <Compile Include="Controllers\ResultsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RoundController.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Helpers\ValidationHelper.cs" />
     <Compile Include="Migrations\201503272236438_ClubUserRenameColumn.cs" />
     <Compile Include="Migrations\201503272236438_ClubUserRenameColumn.Designer.cs">
@@ -399,7 +402,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
-    <Content Include="Scripts\jquery.tabledit.min.js" />
     <Content Include="Views\Clubs\Create.cshtml" />
     <Content Include="Views\Clubs\Details.cshtml" />
     <Content Include="Views\Clubs\Edit.cshtml" />
