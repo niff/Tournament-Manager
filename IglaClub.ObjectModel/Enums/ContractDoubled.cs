@@ -5,7 +5,9 @@ namespace IglaClub.ObjectModel.Enums
 
     public enum ContractDoubled
     {
-        [Display(Name = "-")]
+        [Display(Name = "")]
+        Unknown = 0,
+        [Display(Name = "")]
         NotDoubled = 1,
         [Display(Name = "X")]
         Doubled = 2,
