@@ -47,5 +47,7 @@ namespace IglaClub.ObjectModel.Entities
         public DateTime CreationDate { get; set; }
 
         public DateTime? LastLoginTs { get; set; }
+
+        public bool Valid { get; set; }
     }
 }
