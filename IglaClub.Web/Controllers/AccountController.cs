@@ -110,7 +110,8 @@ namespace IglaClub.Web.Controllers
                     var email = ValidationHelper.IsValidEmailAddress(model.UserName) ? model.UserName : "";
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new
                                                 {
-                                                    Email = email
+                                                    Email = email,
+                                                    CreationDate = DateTime.UtcNow
                                                 });
                     WebSecurity.Login(model.UserName, model.Password);
                     if(string.IsNullOrEmpty(email))

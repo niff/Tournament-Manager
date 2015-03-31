@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,12 +16,14 @@ namespace IglaClub.ObjectModel.Entities
         [MaxLength(100)]
         public string Nickname { get; set; }
 
-       // [Index(IsUnique = true)]
+        [Index(IsUnique = true)]
         [Required(ErrorMessage = "Login is required")]
-        [MaxLength(254)]
+        [MaxLength(250)]
+        [StringLength(250)]
         public string Login { get; set; }
 
-        //[Index(IsUnique = true)]
+        [Index(IsUnique = true)]
+        [StringLength(250)]
         public string Email { get; set; }
 
         public virtual IList<ClubUser> ClubUsers { get; set; }
@@ -41,5 +44,8 @@ namespace IglaClub.ObjectModel.Entities
             get { return GetDisplayName(); }
         }
 
+        public DateTime CreationDate { get; set; }
+
+        public DateTime? LastLoginTs { get; set; }
     }
 }
