@@ -57,7 +57,7 @@ namespace IglaClub.Web.Controllers
                 return RedirectToLocal(returnUrl);
 
             var user = userRepository.GetUserByEmail(model.UserName);
-            if(user!=null && WebSecurity.Login(user.Login, model.Password, persistCookie: model.RememberMe))
+            if (user != null && WebSecurity.Login(user.Login, model.Password, persistCookie: model.RememberMe))
                 return RedirectToLocal(returnUrl);
 
             ModelState.AddModelError("", "The user name or password provided is incorrect.");
@@ -102,43 +102,43 @@ namespace IglaClub.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Attempt to register the user
-
-                //todo add column created date and save the data
-                try
-                {
-                    var email = ValidationHelper.IsValidEmailAddress(model.UserName) ? model.UserName : "";
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new
-                                                {
-                                                    Email = email,
-                                                    CreationDate = DateTime.UtcNow
-                                                });
+                    if(!CreateUserAndAccount(model.UserName, model.Password, model.UserName))
+                        return View(model);
                     WebSecurity.Login(model.UserName, model.Password);
-                    if(string.IsNullOrEmpty(email))
-                        notificationService.DisplaySuccess("<a href='account/edit'>Want to be notified about new tournaments? Fill up your email address and other details in account settings</a> ");
-                    else
-                    {
-                        notificationService.DisplaySuccess("<a href='account/edit'>Want to be easily recognized by your friends? \n\rFill up you account details in account settings</a>");
-                    }
+                    notificationService.DisplaySuccess("<a href='account/edit'>Want to be easily recognized by your friends? \n\rFill up you account details in account settings</a>");
                     return RedirectToAction("Index", "Home");
-                }
-                catch (MembershipCreateUserException e)
-                {
-                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
-                }
+                
             }
-            
+
             notificationService.DisplayError("uupps, please try again...");
             return View(model);
         }
 
-        
+        private bool CreateUserAndAccount(string name, string password, string email)
+        {
+            try
+            {
+                email = ValidationHelper.IsValidEmailAddress(email) ? email : null;
+                WebSecurity.CreateUserAndAccount(name, password, new
+                {
+                    Email = email,
+                    CreationDate = DateTime.UtcNow
+                });
+            }
+            catch (MembershipCreateUserException e)
+            {
+                notificationService.DisplayError(ErrorCodeToString(e.StatusCode));
+                return false;
+            }
+            return true;
+        }
+
+
         [HttpPost]
         public void QuickAddUser(string name, string email)
         {
-            //todo fix - CreateUserAndAccount added to table user, we have to provide email :)
-            //userRepository.Add(name, email);
-            WebSecurity.CreateUserAndAccount(name, name);      
+            if(!CreateUserAndAccount(name, name, email))
+                        return;
             notificationService.DisplaySuccess(String.Format("User {0} was created successfully. Default password: {0}. Please change password after first login", name));
         }
         //
