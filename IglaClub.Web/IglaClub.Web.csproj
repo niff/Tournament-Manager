@@ -272,6 +272,10 @@
     <Compile Include="Migrations\201503292037579_AddColumnToClubsUser.Designer.cs">
       <DependentUpon>201503292037579_AddColumnToClubsUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503311815515_UserCreationDateAndUniqueOnLoginAndEmail.cs" />
+    <Compile Include="Migrations\201503311815515_UserCreationDateAndUniqueOnLoginAndEmail.Designer.cs">
+      <DependentUpon>201503311815515_UserCreationDateAndUniqueOnLoginAndEmail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ViewModels\TounamentListViewModel.cs" />
     <Compile Include="Models\ViewModels\TounamentSingleListViewModel.cs" />
     <Compile Include="Controllers\TournamentController.cs" />
@@ -535,6 +539,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201503292037579_AddColumnToClubsUser.resx">
       <DependentUpon>201503292037579_AddColumnToClubsUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503311815515_UserCreationDateAndUniqueOnLoginAndEmail.resx">
+      <DependentUpon>201503311815515_UserCreationDateAndUniqueOnLoginAndEmail.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
