@@ -39,7 +39,7 @@ namespace IglaClub.Web.Migrations
 //            Sql(@"USE [IglaClub]
 //GO
 //SET IDENTITY_INSERT [dbo].[Users] ON 
-//
+
 //GO
 //INSERT [dbo].[Users] ([Id], [Name], [Lastname], [Nickname], [Login], [Email], [CreationDate], [LastLoginTs]) VALUES (1, N'Bartlomiej', N'Igla', NULL, N'bartlomiej@igla.pl', N'bartlomiej@igla.pl', CAST(N'1900-01-01 00:00:00.000' AS DateTime), NULL)
 //GO
@@ -72,6 +72,10 @@ namespace IglaClub.Web.Migrations
 //SET IDENTITY_INSERT [dbo].[Users] OFF
 //GO
 //");
+
+//            Sql(@"  delete from Results where NS_Id>13 or EW_Id>13
+//  delete from pairs where Player1_Id >13 or Player2_Id>13
+//  delete from users where id>13");
         }
         
         public override void Down()

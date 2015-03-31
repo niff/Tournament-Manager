@@ -32,11 +32,21 @@ namespace IglaClub.ObjectModel.Tools
 
          public static readonly Dictionary<string, ContractColors> ColorsHtmlDictionary = new Dictionary<string, ContractColors>
         {
+            {"", ContractColors.Unknown},
             {"<i class=\"glyphicon result-icon spade\"></i>", ContractColors.Spade},
             {"<i class=\"glyphicon result-icon heart\"></i>", ContractColors.Heart},
             {"<i class=\"glyphicon result-icon diamond\"></i>", ContractColors.Diamond},
             {"<i class=\"glyphicon result-icon club\"></i>", ContractColors.Club},
             {"<stron>NT</strong>",ContractColors.NoTrump}
+        };
+         public static readonly Dictionary<ContractColors, string> ColorsEnumDictionary = new Dictionary<ContractColors, string>
+        {
+            {ContractColors.Unknown, ""},
+            {ContractColors.Spade, "<i class=\"glyphicon result-icon spade\"></i>" },
+            {ContractColors.Heart, "<i class=\"glyphicon result-icon heart\"></i>"},
+            {ContractColors.Diamond, "<i class=\"glyphicon result-icon diamond\"></i>"},
+            {ContractColors.Club, "<i class=\"glyphicon result-icon club\"></i>"},
+            {ContractColors.NoTrump, "<stron>NT</strong>"}
         };
 
         public static readonly Dictionary<string, ContractDoubled> DoubledDictionary = new Dictionary<string, ContractDoubled>
