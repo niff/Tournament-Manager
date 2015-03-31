@@ -1,14 +1,15 @@
 ﻿@using IglaClub.ObjectModel.Enums
 @using IglaClub.ObjectModel.Consts;
+@using IglaClub.Web.Helpers.Html
 @model List<IglaClub.ObjectModel.Entities.Result>
 
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var list = @Model;
+    var count = @Model.Count;   
 }
 
-<h2>Edit</h2>
+<span class="medium-header">Edit</span>
 @using (Html.BeginForm())
 {
     <div class="field-validation-error defaultMargin">
@@ -26,13 +27,13 @@
                 @Html.DisplayNameFor(m => m[0].TableNumber)
             </th>
             <th>
-               NS @Html.DisplayNameFor(m => m[0].NS.PairNumber)
+               NS @*@Html.DisplayNameFor(m => m[0].NS.PairNumber)*@
             </th>
             <th>
-                EW @Html.DisplayNameFor(m => m[0].EW.PairNumber)
+                EW @*@Html.DisplayNameFor(m => m[0].EW.PairNumber)*@
             </th>
             <th>
-                @Html.DisplayNameFor(m => m[0].Board.BoardNumber)
+                Board no.@*@Html.DisplayNameFor(m => m[0].Board.BoardNumber)*@
             </th>
             <th>
                 @Html.Label("Short form")
@@ -68,7 +69,7 @@
             <th></th>
         </tr>
 
-        @for (int i = 0; i < @Model.Count(); i++)
+        @for (int i = 0; i < @count; i++)
         {
             <tr>
                 <td>
@@ -94,12 +95,14 @@
                     @Html.EditorFor(m => m[i].ContractLevel, new {type="number", min = "0", max = "7"})
                 </td>
                 <td>
-                    @Html.DropDownListFor(m => m[i].ContractColor, new SelectList(Enum.GetValues(typeof(ContractColors)), @Model[i].ContractColor), new { data_image = "" })
-
+                    @*@Html.DropDownListFor(m => m[i].ContractColor, new SelectList(Enum.GetValues(typeof(ContractColors)), @Model[i].ContractColor), new { data_image = "" })*@
+                    @IglaClub.Web.Helpers.Html.TournamentHelper.ContractColorsDropDown("contract-color"+@i, @Model[i].ContractColor)
                 </td>
                 <td>
-                    @Html.DropDownListFor(m => m[i].ContractDoubled, new SelectList(Enum.GetValues(typeof(ContractDoubled)), @Model[i].ContractDoubled))
+                    @Html.DropDownListFor(m => m[i].ContractDoubled, @TournamentHelper.ContractDoubleSelectList(@Model[i].ContractDoubled))
+                    @*@Html.DropDownListFor(m => m[i].ContractDoubled, new SelectList(Enum.GetValues(typeof(ContractDoubled)), @Model[i].ContractDoubled))*@
 
+                    @*@IglaClub.Web.Helpers.Html.TournamentHelper.ContractDoubleDropDown("contract-doubled"+@i, @Model[i].ContractDoubled)*@
                 </td>
 
                 <td>
@@ -145,3 +148,14 @@
         @Html.ActionLink("Back", "Manage", "Results", new { tournamentId = Model[0].TournamentId}, null)
     </button>
 }
+
+<script src="~/Scripts/jquery.ddslick.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var count = '@count';
+        for (var i = 0; i < count ; i++) {
+            $('#contract-color' + i).ddslick();
+            //$('#contract-doubled' + i).ddslick();
+        }
+    });
+</script>

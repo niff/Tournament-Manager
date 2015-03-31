@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
+using System.Web.Mvc;
 using IglaClub.ObjectModel.Enums;
+using IglaClub.Web.Extensions;
 
 namespace IglaClub.Web.Helpers.Html
 {
@@ -52,6 +55,18 @@ namespace IglaClub.Web.Helpers.Html
             dropdown.Append("</select>");
 
             return new HtmlString(dropdown.ToString());
+        }        
+        
+        public static SelectList ContractDoubleSelectList(ContractDoubled selected)
+        {
+            var items = Enum.GetValues(typeof (ContractDoubled)).Cast<ContractDoubled>().Select(doubled => new SelectListItem
+                {
+                    Text = doubled.GetDisplayAttributeFrom(typeof (ContractDoubled)), 
+                    Value = ((int) doubled).ToString(), 
+                    Selected = (int) doubled == (int) selected
+                }).ToList();
+
+            return new SelectList(items, "Value", "Text", (int)selected); ;
         }
     }
 }

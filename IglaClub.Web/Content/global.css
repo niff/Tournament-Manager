@@ -221,7 +221,7 @@ tr td.squeeze {
     }
 
 .result tr td select {
-    width: 130px;
+    /*width: 130px;*/
     height: 25px;
 }
 
