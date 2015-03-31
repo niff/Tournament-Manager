@@ -201,7 +201,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\bootstrap\js\npm.js" />
     <Content Include="Content\dataTables\css\jquery.dataTables.css" />
-    <Content Include="Content\dataTables\css\jquery.dataTables.min.css" />
     <Content Include="Content\dataTables\css\jquery.dataTables_themeroller.css" />
     <Content Include="Content\dataTables\images\back_disabled.png" />
     <Content Include="Content\dataTables\images\back_enabled.png" />
@@ -216,7 +215,6 @@
     <Content Include="Content\dataTables\images\sort_desc.png" />
     <Content Include="Content\dataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\dataTables\js\jquery.dataTables.js" />
-    <Content Include="Content\dataTables\js\jquery.dataTables.min.js" />
     <Content Include="Content\img\1408214039_search.png" />
     <Content Include="Content\img\1408214055_search.png" />
     <Content Include="Content\img\1408214349_folder.png" />
