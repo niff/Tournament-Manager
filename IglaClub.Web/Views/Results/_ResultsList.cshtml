@@ -1,5 +1,6 @@
 ﻿@using IglaClub.ObjectModel.Enums
 @using IglaClub.ObjectModel.Tools
+@using IglaClub.Web.Extensions
 @using IglaClub.Web.Views.Helpers
 @model IEnumerable<IglaClub.ObjectModel.Entities.Result>
 
@@ -44,7 +45,7 @@
                 @Html.DisplayNameFor(model => model.ContractDoubled)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PlayedBy)
+                Dealer @*@Html.DisplayNameFor(model => model.PlayedBy)*@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NumberOfTricks)
@@ -114,7 +115,7 @@
                     @ResultHelper.GetStringForDoubledContract(item.ContractDoubled)
                 </td>
                 <td>
-                    @item.PlayedBy.ToString()
+                    @item.PlayedBy.GetDisplayAttributeFrom(typeof(NESW))
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.NumberOfTricks)
