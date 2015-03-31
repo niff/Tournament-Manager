@@ -206,10 +206,14 @@ tr td.squeeze {
     vertical-align: middle;
 }
 
+.result tr td {   
+      padding: 2px;
+}
+
 .result tr td input {
     width: 100px;
     height: 25px;
-    border: 1px rgb(128, 128, 128) solid;
+    /*border: 1px rgb(128, 128, 128) solid;*/
 }
 
     .result tr td input[type="text"] {
@@ -218,11 +222,13 @@ tr td.squeeze {
 
     .result tr td input[type="number"] {
         width: 55px;
+          padding: 0 6px;
     }
 
 .result tr td select {
     /*width: 130px;*/
     height: 25px;
+    padding: 0;
 }
 
 .result tr td number {
