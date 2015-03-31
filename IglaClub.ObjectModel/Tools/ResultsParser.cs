@@ -69,7 +69,7 @@ namespace IglaClub.ObjectModel.Tools
 
              var tricks = result.NumberOfTricks - result.ContractLevel - 6;
              var tricksString = tricks == 0 ? "=" : tricks.ToString("+#;-#;0");
-             var doubledString = DoubledDictionary.First(kpv => kpv.Value == result.ContractDoubled).Key; //todo wywala exception Sequence contains no matching element dla ContractDoubled=0
+             var doubledString = DoubledDictionary.FirstOrDefault(kpv => kpv.Value == result.ContractDoubled).Key;
              
              return string.Format("{0}{1}{2} {3} {4}",
                  result.ContractLevel,
