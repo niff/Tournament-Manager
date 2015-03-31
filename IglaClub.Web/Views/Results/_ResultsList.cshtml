@@ -1,6 +1,7 @@
 ﻿@using IglaClub.ObjectModel.Enums
 @using IglaClub.ObjectModel.Tools
 @using IglaClub.Web.Extensions
+@using IglaClub.Web.Helpers.Html
 @using IglaClub.Web.Views.Helpers
 @model IEnumerable<IglaClub.ObjectModel.Entities.Result>
 
@@ -109,7 +110,8 @@
                     @Html.DisplayFor(modelItem => item.ContractLevel)
                 </td>
                 <td>
-                    @Enum.GetName(typeof(ContractColors), item.ContractColor)
+                    @*@Enum.GetName(typeof(ContractColors), item.ContractColor)*@
+                    @ResultsParser.ColorsEnumDictionary[item.ContractColor] 
                 </td>
                 <td>
                     @ResultHelper.GetStringForDoubledContract(item.ContractDoubled)

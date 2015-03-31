@@ -7,6 +7,7 @@ namespace IglaClub.Web.Migrations
     {
         public override void Up()
         {
+            AlterColumn("Users","Email", c => c.String(nullable:false, maxLength:255));
             AddColumn("dbo.Users", "CreationDate", c => c.DateTime(nullable: false));
             AddColumn("dbo.Users", "LastLoginTs", c => c.DateTime());
             CreateIndex("dbo.Users", "Login", unique: true);
