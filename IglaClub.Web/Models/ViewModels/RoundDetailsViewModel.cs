@@ -11,5 +11,7 @@ namespace IglaClub.Web.Models.ViewModels
         public Pair EwPair { get; set; }
 
         public Tournament Tournament { get; set; }
+
+        public int TableNumber { get; set; }
     }
 }
