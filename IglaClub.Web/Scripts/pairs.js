@@ -40,6 +40,7 @@
             $.ajax({
                 url: "/Tournament/AddPair",
                 type: "POST",
+                cache: false,
                 data: { user1: user1, user2: user2, tournamentId: tournamentId },
                 success: function(data) {
                     utils.refreshParticipants(initFormUrl);
@@ -58,6 +59,7 @@
                 url: "/Tournament/RemovePair",
                 type: "POST",
                 async: false,
+                cache: false,
                 data: { tournamentId: tId, pairId: pairId },
                 success: function (data) {
                     utils.refreshParticipants(initFormUrl);
@@ -65,7 +67,7 @@
             });
         },
         refreshParticipants: function (dataUrl) {
-            $('#participantsDiv').load(dataUrl);
+            $('#participantsDiv').load(dataUrl + "&uid=" + (new Date().getTime())); //for ie caching url target data
         },
         refreshAll: function (dataUrl) {
             $("body").html(content);

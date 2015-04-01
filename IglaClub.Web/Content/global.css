@@ -508,7 +508,10 @@ span.small-header {
 .quick-sign-up-block {
     padding: 18px 47px;
 }
-
+.quick-sign-up-block form {
+  max-width: 300px;
+  margin: auto;
+}
 .quick-sign-up legend, .quick-sign-up .long-form {
     display: none;
 }
@@ -532,9 +535,13 @@ span.small-header {
     padding: 0 0 0 20px;
 }
 
+/*IE rules*/
+.only-ie {
+    display: none;
+}
 
 
-
+/*Responsive css*/
 @media (max-width: 760px) {
     .container {
         padding-left: 0;
