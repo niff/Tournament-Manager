@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using IglaClub.ObjectModel.Entities;
 using IglaClub.ObjectModel.Repositories;
+using IglaClub.ObjectModel.Tools;
 using IglaClub.Web.Models;
 using IglaClub.Web.Models.ViewModels;
 
@@ -40,18 +41,20 @@ namespace IglaClub.Web.Controllers
             var tournament = this.tournamentRepository.Get<Tournament>(tournamentId);
             var results = this.resultRepository.GetResultsByRoundAndUser(tournamentId, tournament.CurrentRound,
                 currentUser.Id);
-            if (results == null || results.Count == 0)
+            if (results.IsNullOrEmpty())
                 return View(new RoundDetailsViewModel()
                 {
                     Tournament = tournament,
                     Results = results
                 });
+            var firstResult = results.First();
             return View(new RoundDetailsViewModel()
             {
                 Tournament = tournament,
                 Results = results,
-                NsPair = results.FirstOrDefault().NS,
-                EwPair = results.FirstOrDefault().EW
+                NsPair = firstResult.NS,
+                EwPair = firstResult.EW,
+                TableNumber = firstResult.TableNumber
             });
         }
 

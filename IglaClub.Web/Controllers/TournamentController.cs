@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Web.Mvc;
 using IglaClub.ObjectModel.Entities;
@@ -291,33 +290,6 @@ namespace IglaClub.Web.Controllers
             return Redirect(Request.UrlReferrer.ToString());
         }
         
-        public JsonResult SearchUsers(long tournamentId, string phrase)
-        {
-            //todo bartek: move to users controller
-            var result = userRepository.GetUsersByPhraseAndTournament(tournamentId, phrase)
-                .Select(u => new { u.Id, value = u.Name +" "+ u.Lastname  + ( (!String.IsNullOrWhiteSpace(u.Login) ) ? " (" + u.Login + ")" : "")})
-                        .Take(10)
-                        .ToArray();
-            var jsonResult = Json(result, JsonRequestBehavior.AllowGet);
-            return jsonResult;
-        }
-
-        public JsonResult AddUser(string name, string email, string password)
-        {
-            //todo bartek: move to users controller
-            long id;
-            try
-            {
-                id =  userRepository.Add(name, email);
-            }
-            catch (SqlException sqlException)
-            {
-                return Json(new {data = -1, errorStatus = sqlException.Message});
-            }
-            return Json(new {Data = id, ErrorStatus = ""});
-            
-        }
-
         [HttpPost]
         public void Add(PairsViewModel pairsViewModel)
         {

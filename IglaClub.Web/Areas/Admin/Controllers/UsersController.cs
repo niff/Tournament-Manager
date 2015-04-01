@@ -54,5 +54,30 @@ namespace IglaClub.Web.Areas.Admin.Controllers
             this.userRepository.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        //public JsonResult SearchUsers(long tournamentId, string phrase)
+        //{
+        //    var result = userRepository.GetUsersByPhraseAndTournament(tournamentId, phrase)
+        //        .Select(u => new { u.Id, value = u.Name +" "+ u.Lastname  + ( (!String.IsNullOrWhiteSpace(u.Login) ) ? " (" + u.Login + ")" : "")})
+        //                .Take(10)
+        //                .ToArray();
+        //    var jsonResult = Json(result, JsonRequestBehavior.AllowGet);
+        //    return jsonResult;
+        //}
+
+        //public JsonResult AddUser(string name, string email, string password)
+        //{
+        //    long id;
+        //    try
+        //    {
+        //        id =  userRepository.Add(name, email);
+        //    }
+        //    catch (SqlException sqlException)
+        //    {
+        //        return Json(new {data = -1, errorStatus = sqlException.Message});
+        //    }
+        //    return Json(new {Data = id, ErrorStatus = ""});
+            
+        //}
     }
 }

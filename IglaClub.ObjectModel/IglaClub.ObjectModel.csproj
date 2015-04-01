@@ -80,6 +80,7 @@
     <Compile Include="Repositories\TournamentRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Tools\CollectionHelper.cs" />
+    <Compile Include="Tools\ListExtensions.cs" />
     <Compile Include="Tools\ResultsParser.cs" />
   </ItemGroup>
   <ItemGroup>
