@@ -102,12 +102,12 @@ namespace IglaClub.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                    if(!CreateUserAndAccount(model.UserName, model.Password, model.UserName))
-                        return View(model);
-                    WebSecurity.Login(model.UserName, model.Password);
-                    notificationService.DisplaySuccess("<a href='account/edit'>Want to be easily recognized by your friends? \n\rFill up you account details in account settings</a>");
-                    return RedirectToAction("Index", "Home");
-                
+                if (!CreateUserAndAccount(model.UserName, model.Password, model.UserName))
+                    return View(model); //todo send email http://azure.microsoft.com/en-us/documentation/articles/sendgrid-dotnet-how-to-send-email/
+                WebSecurity.Login(model.UserName, model.Password);
+                notificationService.DisplaySuccess("<a href='account/edit'>Want to be easily recognized by your friends? \n\rFill up you account details in account settings</a>");
+                return RedirectToAction("Index", "Home");
+
             }
 
             notificationService.DisplayError("uupps, please try again...");
@@ -137,8 +137,8 @@ namespace IglaClub.Web.Controllers
         [HttpPost]
         public void QuickAddUser(string name, string email)
         {
-            if(!CreateUserAndAccount(name, name, email))
-                        return;
+            if (!CreateUserAndAccount(name, email, email)) //todo send email
+                return;
             notificationService.DisplaySuccess(String.Format("User {0} was created successfully. Default password: {0}. Please change password after first login", name));
         }
         //

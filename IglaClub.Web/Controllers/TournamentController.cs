@@ -418,5 +418,10 @@ namespace IglaClub.Web.Controllers
         {
             return PartialView("_QuickAddUser");
         }
+
+        public ActionResult PlayerResults()
+        {
+            return View();
+        }
     }
 }

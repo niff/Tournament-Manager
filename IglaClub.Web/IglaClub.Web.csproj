@@ -517,6 +517,7 @@
     <Content Include="Views\Shared\_TopMenu.cshtml" />
     <Content Include="Views\Clubs\MyClubs.cshtml" />
     <Content Include="Views\Clubs\Index.cshtml" />
+    <Content Include="Views\Tournament\PlayerResults.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
