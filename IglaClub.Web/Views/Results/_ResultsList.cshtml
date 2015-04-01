@@ -110,8 +110,7 @@
                     @Html.DisplayFor(modelItem => item.ContractLevel)
                 </td>
                 <td>
-                    @*@Enum.GetName(typeof(ContractColors), item.ContractColor)*@
-                    @ResultsParser.ColorsEnumDictionary[item.ContractColor] 
+                    @Html.Raw(ResultsParser.ColorsEnumDictionary[item.ContractColor] )
                 </td>
                 <td>
                     @ResultHelper.GetStringForDoubledContract(item.ContractDoubled)
@@ -144,10 +143,7 @@
     </table>
 }
 @Scripts.Render("~/bundles/dataTables")
-@*@{
 
-    var currentRound = Model.Any() ? Model.FirstOrDefault().Tournament.CurrentRound : 0;
-}*@
 <script>
     
     $(document).ready(function () {

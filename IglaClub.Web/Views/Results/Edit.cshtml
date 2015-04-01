@@ -110,14 +110,10 @@
                     @Html.TextBoxFor(m => m[i].ContractLevel, new { type = "number", min = "0", max = "7", @class = "form-control" })
                 </td>
                 <td>
-                    @*@Html.DropDownListFor(m => m[i].ContractColor, new SelectList(Enum.GetValues(typeof(ContractColors)), @Model[i].ContractColor), new { data_image = "" })*@
-                    @IglaClub.Web.Helpers.Html.TournamentHelper.ContractColorsDropDown("contract-color" + @i, @Model[i].ContractColor)
+                    @IglaClub.Web.Helpers.Html.TournamentHelper.ContractColorsDropDown("contract-color_" + @i, @Model[i].ContractColor)
                 </td>
                 <td>
                     @Html.DropDownListFor(m => m[i].ContractDoubled, @TournamentHelper.ContractDoubleSelectList(@Model[i].ContractDoubled), new { @class = "form-control" })
-                    @*@Html.DropDownListFor(m => m[i].ContractDoubled, new SelectList(Enum.GetValues(typeof(ContractDoubled)), @Model[i].ContractDoubled))*@
-
-                    @*@IglaClub.Web.Helpers.Html.TournamentHelper.ContractDoubleDropDown("contract-doubled"+@i, @Model[i].ContractDoubled)*@
                 </td>
 
                 <td>
@@ -158,7 +154,7 @@
     $(document).ready(function () {
         var count = '@count';
         for (var i = 0; i < count ; i++) {
-            $('#contract-color' + i).ddslick();
+            $('#contract-color_' + i).ddslick();
             //$('#contract-doubled' + i).ddslick();
         }
     });

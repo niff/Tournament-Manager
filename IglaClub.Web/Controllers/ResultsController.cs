@@ -58,9 +58,15 @@ namespace IglaClub.Web.Controllers
 
             if (results != null)
             {
+
+
                 for (int i = 0; i < results.Count; i++)
                 {
                     var result = results[i];
+
+                    var color = (ContractColors)(int.Parse(Request.Form["contract-color_" + i]));
+                    result.ContractColor = color;
+
                     var parsedResult = ResultsParser.Parse(Request["ShortScore[" + i + "]"]);
                     if (parsedResult != null)
                         result = ResultsParser.UpdateResult(result, parsedResult);

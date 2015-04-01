@@ -37,7 +37,7 @@ namespace IglaClub.ObjectModel.Tools
             {"<i class=\"glyphicon result-icon heart\"></i>", ContractColors.Heart},
             {"<i class=\"glyphicon result-icon diamond\"></i>", ContractColors.Diamond},
             {"<i class=\"glyphicon result-icon club\"></i>", ContractColors.Club},
-            {"<stron>NT</strong>",ContractColors.NoTrump}
+            {"<strong>NT</strong>",ContractColors.NoTrump}
         };
          public static readonly Dictionary<ContractColors, string> ColorsEnumDictionary = new Dictionary<ContractColors, string>
         {
@@ -46,14 +46,14 @@ namespace IglaClub.ObjectModel.Tools
             {ContractColors.Heart, "<i class=\"glyphicon result-icon heart\"></i>"},
             {ContractColors.Diamond, "<i class=\"glyphicon result-icon diamond\"></i>"},
             {ContractColors.Club, "<i class=\"glyphicon result-icon club\"></i>"},
-            {ContractColors.NoTrump, "<stron>NT</strong>"}
+            {ContractColors.NoTrump, "<strong>NT</strong>"}
         };
 
         public static readonly Dictionary<string, ContractDoubled> DoubledDictionary = new Dictionary<string, ContractDoubled>
         {
             {"", ContractDoubled.NotDoubled},
-            {"x", ContractDoubled.Doubled},
-            {"xx", ContractDoubled.Redoubled}
+            {"X", ContractDoubled.Doubled},
+            {"XX", ContractDoubled.Redoubled}
         };
 
          

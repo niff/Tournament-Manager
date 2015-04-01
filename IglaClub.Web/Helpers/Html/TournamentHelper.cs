@@ -42,8 +42,9 @@ namespace IglaClub.Web.Helpers.Html
             var dropdown = new StringBuilder();
 
             dropdown.Append(string.Format("<select id=\"{0}\">", ddId));
-
-            foreach (var color in Enum.GetValues(typeof(ContractColors)).Cast<ContractColors>())
+            dropdown.Append(string.Format("<option value=\"{0}\" ></option>",(int)ContractColors.Unknown));
+            var contractColors = Enum.GetValues(typeof (ContractColors)).Cast<ContractColors>().Where(c => c != ContractColors.Unknown);
+            foreach (var color in contractColors)
             {
                 dropdown.Append(
                     string.Format(
