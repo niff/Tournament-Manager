@@ -9,7 +9,6 @@ namespace IglaClub.Web.Models.ViewModels
         public List<Pair> PairsInTounament { get; set; }
         public List<User> AvailableUsers { get; set; }
         public User CurrentUser { get; set; }
-
         public User NewUser { get; set; }
 
         public override string ToString()

@@ -93,12 +93,6 @@ footer {
     vertical-align: middle;
     display: none;
 }
-
-.field-validation-error {
-    font-size: small;
-    color: orangered;
-}
-
 button a, a:hover {
     color: inherit;
 }
@@ -386,7 +380,10 @@ fieldset legend {
     color: steelblue;
     font-size: 2em;
 }
-
+.bottom-line {
+  margin: 20px 0;
+  border-bottom : 1px solid #e5e5e5;
+}
 .validation-summary-errors ul{
     margin-left: -40px;
     color: rgb(228, 84, 41);
@@ -394,7 +391,7 @@ fieldset legend {
 .validation-summary-errors ul li{
     list-style: none;
 }
-.field-validation-error {
+.field-validation-error, .red-asterisk {
     color: rgb(228, 84, 41);
 }
 span.validation-summary-errors {
@@ -423,6 +420,9 @@ span.medium-header {
 span.small-header {
     font-size: 18px;
     color: #9E9E9E;
+}
+span.blue-header {
+    color: steelblue;
 }
 
 .about .who-label {

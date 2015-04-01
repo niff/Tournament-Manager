@@ -5,7 +5,6 @@
 }
 <section id="loginForm">
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
-    //todo repair big checkbox
     //todo add forgot password
     @Html.AntiForgeryToken()
 
@@ -13,7 +12,7 @@
         <legend>Log in</legend>
          @Html.ValidationSummary(true)
         <div class="editor-label">
-            @Html.LabelFor(model => model.UserName)
+            <label for="UserName">Login or email</label>
         </div>
         <div class="editor-field">
             @Html.TextBoxFor(model => model.UserName, new { @class = "form-control"})
@@ -31,7 +30,7 @@
         </div>
         <p>
             <button type="submit" class="btn btn-success btn-lg">
-                <i class="glyphicon glyphicon-circle-arrow-right"></i>Log in
+                <i class="glyphicon glyphicon-circle-arrow-right right-side-margin"></i>Log in
             </button>
         </p>
         <p class="submit-button">

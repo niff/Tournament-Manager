@@ -26,7 +26,7 @@ namespace IglaClub.Web.Controllers
         private readonly ResultRepository resultRepository;
 
         private readonly INotificationService notificationService;
-        
+        //todo add caching fortournaments and invalidate on add or edit
         public TournamentController()
         {
              pairRepository = new PairRepository(db);
@@ -90,6 +90,7 @@ namespace IglaClub.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AntiSpam]
         public ActionResult Create(Tournament tournament)
         {
             if (ModelState.IsValid)
@@ -253,7 +254,8 @@ namespace IglaClub.Web.Controllers
             var tournament = this.tournamentRepository.GetTournamentWithPairsAndOwner(tournamentId);
             var model = new PairsViewModel
             {
-                PairsInTounament = tournament.Pairs.ToList(),
+                //todo add caching for tournaments, users, and invalidate on add or edit
+                PairsInTounament = tournament.Pairs.ToList(), 
                 AvailableUsers = userRepository.GetAvailableUsersForTournament(tournamentId),
                 Tournament = tournament,
                 CurrentUser = currentUser
@@ -264,7 +266,6 @@ namespace IglaClub.Web.Controllers
 
         public PartialViewResult PairRoster(int tournamentId)
         {
-
             var results = resultRepository.GetResultsFromCurrentRound(tournamentId);
             var list = new List<PairRosterViewModel>();
             foreach (var result in results)

@@ -1,5 +1,6 @@
 ﻿@using IglaClub.ObjectModel.Consts
 @using IglaClub.ObjectModel.Enums
+@using Pair = IglaClub.ObjectModel.Entities.Pair
 @model IglaClub.Web.Models.ViewModels.PairsResultsViewModel
 
 <div id="pairsResults" class="pairs">
@@ -9,6 +10,7 @@
     {
         pointsHeader += "(MPs)";
     }
+    const string format = "<strong title=\"you\">{0}</strong>";
 }
     <span>Results</span>
     <a href="@Url.Action("CalculateResults", "Tournament",new { id = Model.TournamentId})" class = "pull-right">
@@ -21,32 +23,37 @@
             <th>@pointsHeader</th>
 
         </tr>
-        @for (int i = 0; i < Model.PairsInTounament.Count; i++)
+        @foreach (Pair pair in Model.PairsInTounament)
         {
+            var p1 = pair.Player1;
+            var p2 = pair.Player2;
             string p1Name;
             string p2Name;
             
-            if (Model.PairsInTounament[i].IsByePair)
+            if (pair.IsByePair)
             {
                 p1Name = StringResources.ByePair;
                 p2Name = StringResources.ByePair;
             }
             else
             {
-                p1Name = (Model.PairsInTounament[i].Player1 == null ? "Unknown" : Model.PairsInTounament[i].Player1.GetDisplayName());
-                p2Name = (Model.PairsInTounament[i].Player2 == null ? "Unknown" : Model.PairsInTounament[i].Player2.GetDisplayName());
+                p1Name = (p1 == null ? "Unknown" : //todo why sometimes unknown, and sometimes bye
+                    (@Model.CurrentUserLogin == p1.Login) ? String.Format(format, p1.GetDisplayName()) :
+                    p1.GetDisplayName());
+                p2Name = (p2 == null ? "Unknown" :
+                    (@Model.CurrentUserLogin == p2.Login) ? String.Format(format, p2.GetDisplayName()) :
+                    p2.GetDisplayName());
             }
             
-            int maxPoints = Model.PairNumberMaxPoints.FirstOrDefault(p => p.Key == Model.PairsInTounament[i].PairNumber).Value;
-            float pairScore = Model.PairsInTounament[i].Score;
+            int maxPoints = Model.PairNumberMaxPoints.FirstOrDefault(p => p.Key == pair.PairNumber).Value;
+            float pairScore = pair.Score;
             <tr>
-                @*<td>@(i+1).</td>*@
-                <td>@Model.PairsInTounament[i].PairNumber</td>
+                <td><span class="label label-default label-light-gray">@pair.PairNumber</span></td>
                 <td>
-                    @p1Name
+                    @Html.Raw(p1Name)
                 </td>
                 <td>
-                    @p2Name
+                    @Html.Raw(p2Name)
                 </td>
                 <td></td>
                 <td>
@@ -57,15 +64,9 @@
                     }
                     else
                     {
-                        var s = "0";
-                        if (pairScore > 0)
-                        {
-                            
-                            s = string.Format("{0:P} ({1}/{2})", 
-                                maxPoints == 0? 0 : pairScore/maxPoints, 
-                                pairScore, maxPoints);
-                        }
-                    
+                        var s = pairScore > 0 ? string.Format("{0:P} ({1}/{2})",
+                                              maxPoints == 0 ? 0 : pairScore / maxPoints,
+                                              pairScore, maxPoints) : "0";                   
                         <span>@s</span>
                     }
 

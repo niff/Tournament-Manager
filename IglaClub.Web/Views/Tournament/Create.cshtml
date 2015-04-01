@@ -13,6 +13,8 @@
 
     <fieldset class="create-tournament">
         <legend>Add new tournament</legend>
+        
+        @Html.ValidationMessage("ExcessiveRequests")
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Name)

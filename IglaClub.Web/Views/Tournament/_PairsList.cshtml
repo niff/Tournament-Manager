@@ -1,51 +1,53 @@
 ﻿@using System.Globalization
 @model IglaClub.Web.Models.ViewModels.PairsViewModel
 
-        @{
-            bool userSubscribed = Model.Tournament.UserIsSubscribed(Model.CurrentUser.Login);
-            if (!userSubscribed)
-            {
-                var currentUserId = Model.CurrentUser.Id.ToString(CultureInfo.InvariantCulture);
-                var users = new SelectList(Model.AvailableUsers.Where(u => u.Id != Model.CurrentUser.Id).OrderBy(u=>u.DisplayName), "Id", "DisplayName");
-    <form class="form-inline">
-        <div class="form-group">
-            <input type="hidden" id="user1" value="@currentUserId" />
-            I want to play with: @Html.DropDownList("user2", users, new { @class = "form-control"})
-            <button type="button" class="btn btn-primary btn-small" id="pairSearchSubmit">Subscribe</button>
-        </div>
-    </form>
-            }
-        }
-    <p>Pairs list <span class="badge">@Model.PairsInTounament.Count</span></p>
+@{
+    bool userSubscribed = Model.Tournament.UserIsSubscribed(Model.CurrentUser.Login);
+    const string format = "<strong title=\"you\">{0}</strong>";
+    if (!userSubscribed)
+    {
+        var users = new SelectList(Model.AvailableUsers.Where(u => u.Id != Model.CurrentUser.Id).OrderBy(u => u.DisplayName), "Id", "DisplayName");
+        <form class="form-inline">
+            <div class="form-group">
+                <input type="hidden" id="user1" value="@Model.CurrentUser.Id" />
+                I want to play with: @Html.DropDownList("user2", users, new { @class = "form-control" })
+                <button type="button" class="btn btn-primary btn-small" id="pairSearchSubmit">Subscribe</button>
+            </div>
+        </form>
+    }
+}
+<p>Pairs list <span class="badge">@Model.PairsInTounament.Count</span></p>
 <table class="table table-striped table-hover">
     @{
         var counter = 1;
-            //todo add indicator that peerson on the list is me
     }
     @foreach (var pair in @Model.PairsInTounament)
-    {            
-        var p1Name = (pair.Player1 == null ? "Unknown" : pair.Player1.DisplayName);
-        var p2Name = (pair.Player2 == null ? "Unknown" : pair.Player2.DisplayName);
+    {
+        var p1 = pair.Player1;
+        var p2 = pair.Player2;
+
+        var p1Name = (p1 == null ? "BYE" : (@Model.CurrentUser.Id == p1.Id ? String.Format(format, p1.DisplayName) : p1.DisplayName));
+        var p2Name = (p2 == null ? "BYE" : (@Model.CurrentUser.Id == p2.Id ? String.Format(format, p2.DisplayName) : p2.DisplayName));
+
         <tr>
             <td><span>@counter.</span></td>
             <td>
-                @p1Name
+                @Html.Raw(p1Name)
             </td>
             <td>
-                @p2Name
+                @Html.Raw(@p2Name)
             </td>
-            <td>
-                @if ((pair.Player1 != null && pair.Player1.Id == Model.CurrentUser.Id)
-                     || (pair.Player2!= null && pair.Player2.Id == Model.CurrentUser.Id))
+            <td>               
+                @if (userSubscribed)
                 {
                     <a href = "#" id="removePairLink" data-tournament-id="@Model.Tournament.Id" data-pair-id="@pair.Id" >
                         <i class="glyphicon glyphicon-trash" title="Remove"></i>
                     </a>
-                } 
+                }
             </td>
         </tr>
-        counter++;
-    }             
+                counter++;
+    }
 </table>
 
 <script src="~/Scripts/pairs.js"></script>

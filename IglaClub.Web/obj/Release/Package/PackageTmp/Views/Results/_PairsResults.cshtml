@@ -1,0 +1,58 @@
+﻿@using IglaClub.ObjectModel.Enums
+@model IglaClub.Web.Models.ViewModels.PairsResultsViewModel
+
+<div id="pairsResults" class="pairs">
+@{
+    var pointsHeader = "Result";
+    if (Model.TournamentScoringType == TournamentScoringType.Imps)
+    {
+        pointsHeader += "(MPs)";
+    }
+}
+    <p>Results</p>
+    <table class="table table-striped table-hover">
+        <tr><th></th><th>Pair Nr</th><th>Pair</th><th></th><th></th>
+            <th>@pointsHeader</th>
+
+        </tr>
+        @for (int i = 0; i < Model.PairsInTounament.Count; i++)
+        {
+            var p1Name = (Model.PairsInTounament[i].Player1 == null ? "Unknown" : Model.PairsInTounament[i].Player1.GetDisplayName());
+            var p2Name = (Model.PairsInTounament[i].Player2 == null ? "Unknown" : Model.PairsInTounament[i].Player2.GetDisplayName());
+            int maxPoints = Model.PairNumberMaxPoints.FirstOrDefault(p => p.Key == Model.PairsInTounament[i].PairNumber).Value;
+            float pairScore = Model.PairsInTounament[i].Score;
+            //var rank = i + 1;
+            <tr>
+                <td>@(i+1).</td>
+                <td>@Model.PairsInTounament[i].PairNumber</td>
+                <td>
+                    @p1Name
+                </td>
+                <td>
+                    @p2Name
+                </td>
+                <td></td>
+                <td>
+                    
+                    @if (Model.TournamentScoringType == TournamentScoringType.Imps)
+                    {
+                        @pairScore
+                    }
+                    else
+                    {
+                        var s = "0";
+                        if (pairScore > 0)
+                        {
+                            
+                            s = string.Format("{0:P} ({1}/{2})", 
+                                maxPoints == 0? 0 : pairScore/maxPoints, 
+                                pairScore, maxPoints);
+                        }
+                    
+                        <span>@s</span>
+                    }
+
+                </td>
+            </tr>
+        }</table>
+</div>

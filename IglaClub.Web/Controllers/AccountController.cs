@@ -31,8 +31,6 @@ namespace IglaClub.Web.Controllers
             userRepository = new UserRepository(db);
             notificationService = new NotificationService(TempData);
         }
-        //
-        // GET: /Account/Login 
 
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -41,9 +39,6 @@ namespace IglaClub.Web.Controllers
             return View();
 
         }
-
-        //
-        // POST: /Account/Login 
 
         [HttpPost]
         [AllowAnonymous]
@@ -64,9 +59,6 @@ namespace IglaClub.Web.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Account/LogOff
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
@@ -83,17 +75,12 @@ namespace IglaClub.Web.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-        //
-        // GET: /Account/Register
 
         [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
         }
-
-        //
-        // POST: /Account/Register
 
         [HttpPost]
         [AllowAnonymous]
@@ -102,19 +89,22 @@ namespace IglaClub.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (!CreateUserAndAccount(model.UserName, model.Password, model.UserName))
-                    return View(model); //todo send email http://azure.microsoft.com/en-us/documentation/articles/sendgrid-dotnet-how-to-send-email/
-                WebSecurity.Login(model.UserName, model.Password);
-                notificationService.DisplaySuccess("<a href='account/edit'>Want to be easily recognized by your friends? \n\rFill up you account details in account settings</a>");
-                return RedirectToAction("Index", "Home");
-
+                if (CreateUserAndAccount(model.UserName, model.Password, model.UserName, model.FirstName, model.LastName))
+                {
+                    //todo send email http://azure.microsoft.com/en-us/documentation/articles/sendgrid-dotnet-how-to-send-email/
+                    WebSecurity.Login(model.UserName, model.Password);
+                    notificationService.DisplaySuccess(
+                        "<a href='account/edit'>Want to be easily recognized by your friends? \n\rFill up you account details in account settings</a>");
+                    return RedirectToAction("Index", "Home");
+                }
+                return View(model); 
             }
 
             //notificationService.DisplayError("uupps, please try again...");
             return View(model);
         }
 
-        private bool CreateUserAndAccount(string name, string password, string email)
+        private bool CreateUserAndAccount(string name, string password, string email, string firstname = null, string lastname = null)
         {
             try
             {
@@ -122,7 +112,9 @@ namespace IglaClub.Web.Controllers
                 WebSecurity.CreateUserAndAccount(name, password, new
                 {
                     Email = email,
-                    CreationDate = DateTime.UtcNow
+                    CreationDate = DateTime.UtcNow,
+                    Name = firstname,
+                    LastName = lastname
                 });
             }
             catch (MembershipCreateUserException e)
@@ -469,5 +461,9 @@ namespace IglaClub.Web.Controllers
         }
         #endregion
 
+        public ActionResult Settings()
+        {
+            return View();
+        }
     }
 }
