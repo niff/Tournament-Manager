@@ -14,7 +14,7 @@
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
 
-                    <fieldset>
+                    <fieldset class="create-tournament">
                         <legend>Edit @Model.Name</legend>
                         <div class="editor-label">
                             @Html.LabelFor(model => model.Name)

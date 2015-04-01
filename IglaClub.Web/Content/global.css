@@ -25,23 +25,11 @@ footer {
     left: 0;
     background-color: #f5f5f5;
 }
-/*.container {
-    min-height: 350px;
-}*/
+
 .row {
     padding: 0;
     margin: 0;
 }
-
-
-/*footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 50px;
-    background-color: #f5f5f5;
-    display: block;
-}*/
 
 .footer-menu {
     color: gray;
@@ -160,18 +148,16 @@ a.btn {
 .blue {
     background-color: cornflowerblue;
 }
-
+.create-tournament {
+    max-width: 400px;
+}
 .pairs {
     border: 1px solid rgb(218, 218, 218);
     padding: 10px;
     box-shadow: rgb(240, 240, 240) 5px 5px;
     margin: 10px auto;
-    /*margin: 15px 10px 15px 0;*/
 }
 
-/*.pairs input[type="text"] {
-        width: 80px;
-    }*/
 .label .label-default .label-light-gray {
     opacity: 0.5;
 }
@@ -180,10 +166,6 @@ a.btn {
     margin: 10px 10px 10px 10px;
     max-width: 500px;
 }
-/*table.tournamentsListTable {
-    table-layout: fixed;
-    word-break: break-all;
-}*/
 .table .table-noborder > tr > td {
     border: none;
 }
@@ -405,21 +387,16 @@ fieldset legend {
     font-size: 2em;
 }
 
-/*header {
-    margin-bottom: 20px;
-}*/
-
-.validation-summary-errors {
-    background-color: #D9FFB2;
-    border: 1px solid #5CBA30;
-    width: 270px;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-    padding: 10px 5px 5px 0;
-    font: small calibri;
+.validation-summary-errors ul{
+    margin-left: -40px;
+    color: rgb(228, 84, 41);
 }
-
+.validation-summary-errors ul li{
+    list-style: none;
+}
+.field-validation-error {
+    color: rgb(228, 84, 41);
+}
 span.validation-summary-errors {
     border-bottom-color: #D9FFB2;
     display: block;
@@ -433,7 +410,6 @@ ul.validation-summary-errors {
 
 span.big-header {
     font-size: 38px;
-    /*color: rgb(37, 87, 179);*/
     color: #9E9E9E;
     line-height: 2em;
 }
@@ -526,7 +502,6 @@ span.small-header {
 
 #map-canvas {
     height: 150px;
-    width: 300px;
     margin-bottom: 10px;
 }
 
@@ -621,9 +596,9 @@ span.small-header {
         font-size: 1.5em;
     }
 
-    #map-canvas {
+    /*#map-canvas {
         width: auto;
-    }
+    }*/
 
     fieldset.create-tournament input, fieldset.create-tournament textarea, fieldset.create-tournament select {
         width: 100%;

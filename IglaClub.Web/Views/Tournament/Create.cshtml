@@ -47,7 +47,8 @@
         <div class="editor-label">
             @Html.LabelFor(model => model.TournamentMovingType)
         </div>
-        <div class="editor-field">
+        @*//todo add some bridge definitions to type and scoring title*@
+        <div class="editor-field" title="Cavendish Bridge is the name of a bridge over the River Trent, connecting the counties of Leicestershire and Derbyshire; it is also the name of a hamlet on the Leicestershire side of the river within the Castle Donington parish.">
             @Html.DropDownListFor(model => model.TournamentMovingType, new SelectList(Enum.GetValues(typeof(TournamentMovingType))), new { @class = "form-control"})
             @Html.ValidationMessageFor(model => model.TournamentMovingType)
         </div>

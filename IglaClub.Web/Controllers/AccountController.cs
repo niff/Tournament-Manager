@@ -110,7 +110,7 @@ namespace IglaClub.Web.Controllers
 
             }
 
-            notificationService.DisplayError("uupps, please try again...");
+            //notificationService.DisplayError("uupps, please try again...");
             return View(model);
         }
 
@@ -180,8 +180,11 @@ namespace IglaClub.Web.Controllers
         [HttpPost]
         public ActionResult Edit(User model)
         {
-            userRepository.InsertOrUpdate(model);
-            notificationService.DisplayMessage("Saved successfully", NotificationType.Success);
+            if (ModelState.IsValid)
+            {
+                userRepository.InsertOrUpdate(model);
+                notificationService.DisplayMessage("Saved successfully", NotificationType.Success);
+            }
             return View(model);
         }
         //

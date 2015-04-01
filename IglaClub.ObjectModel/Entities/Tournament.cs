@@ -57,6 +57,7 @@ namespace IglaClub.ObjectModel.Entities
 
         public string Coordinates { get; set; }
 
+        [DisplayName("Location")]
         public string Address { get; set; }
 
         public int ResultsNotFinishedInCurrentRound
