@@ -8,6 +8,7 @@
         {
             {"passedout","passed out"},
             //{"notrump","NT"},
+            {"unknown",""},
             {"notdoubled","–"},
             {"doubled","X"},
             {"redoubled","XX"}
@@ -15,7 +16,9 @@
 }
 <div class="row">
 <div class="col-xs-12 col-sm-10 col-md-6 single-result-edit">
-
+            <div>
+            <a href="@Url.Action("RoundDetails", "Round", new { tournamentId = Model.Tournament.Id })"><i class="glyphicon glyphicon-arrow-left right-side-margin"></i>go back to round details</a>
+        </div>
     <span class="small-header">Results, board @Model.Board.BoardNumber</span>
     <div class="form-inline">
         <div class="form-group" title=@StringResources.ShortScoreTooltip>
@@ -50,7 +53,10 @@
                 var chkd = selected ? "checked" : "";
                 var active = selected ? "active" : "";
                 <label class="btn btn-default @active">
-                    <img src="../../Content/img/cards/@(color.ToString().ToLowerInvariant()).png"/>
+                    @if (color != ContractColors.Unknown)
+                    { 
+                        <img src="../../Content/img/cards/@(color.ToString().ToLowerInvariant()).png"/>
+                    }
                     <input type="radio" name="ContractColor" id="@("option" + (int)color)" data-value="@((int)color)" autocomplete="off" @chkd>
                 </label>
             }
@@ -106,15 +112,15 @@
         {
             <div class="btn-group btn-group-justified">
             @for (int i = 0 + (j * 7); i < 7 + (j * 7); i++)
-                    {
-                        var selected = i == @Model.NumberOfTricks;
-                        var active = selected ? "active" : "";
-                        var chkd = selected ? "checked" : "";
+            {
+                var selected = i == @Model.NumberOfTricks;
+                var active = selected ? "active" : "";
+                var chkd = selected ? "checked" : "";
                         <label class="btn btn-default @active">
                             <input type="radio" name="NumberOfTricks" id="@("trick" + i)" data-value="@i" autocomplete="off" @chkd>
                             <strong>@i</strong>
                         </label>
-                    }
+            }
             </div>
         }
     </div>
