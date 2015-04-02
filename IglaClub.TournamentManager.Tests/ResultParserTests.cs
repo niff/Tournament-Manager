@@ -14,7 +14,6 @@ namespace IglaClub.TournamentManager.Tests
             [TestMethod]
             public void OneSpadeJustMadeByNorth()
             {
-
                 var expected = CreateNewResult(1, ContractColors.Spade, 7, ContractDoubled.NotDoubled, NESW.North);
 
                 var result = ResultsParser.Parse("1sN=");
@@ -25,7 +24,6 @@ namespace IglaClub.TournamentManager.Tests
             [TestMethod]
             public void ThreeHeartsPlusOneDoubledBySouth()
             {
-
                 var expected = CreateNewResult(3, ContractColors.Heart, 10, ContractDoubled.Doubled, NESW.South);
 
                 var result = ResultsParser.Parse("3h  x s +1");
@@ -36,7 +34,6 @@ namespace IglaClub.TournamentManager.Tests
             [TestMethod]
             public void ThreeHeartsDblPlusOne()
             {
-
                 var expected = CreateNewResult(3, ContractColors.Heart, 10, ContractDoubled.Doubled, NESW.South);
 
                 var result = ResultsParser.Parse("3hxs+1");
@@ -47,7 +44,6 @@ namespace IglaClub.TournamentManager.Tests
             [TestMethod]
             public void SevenNtDoubledMinusTwoByN()
             {
-
                 var expected = CreateNewResult(7, ContractColors.NoTrump, 11, ContractDoubled.Doubled, NESW.North);
 
                 var result = ResultsParser.Parse("7nt x N-2");
@@ -66,7 +62,6 @@ namespace IglaClub.TournamentManager.Tests
             [TestMethod]
             public void OneSpadeEqual3()
             {
-
                 var expected = CreateNewResult(1, ContractColors.Spade, 7, ContractDoubled.NotDoubled, NESW.North);
 
                 var result = ResultsParser.Parse("1sN=3");
@@ -77,10 +72,19 @@ namespace IglaClub.TournamentManager.Tests
             [TestMethod]
             public void TwoClubsRedoubledPlusOne()
             {
-
                 var expected = CreateNewResult(2, ContractColors.Club, 9, ContractDoubled.Redoubled, NESW.North);
 
                 var result = ResultsParser.Parse("2cxxN+1");
+
+                CompareResults(expected, result);
+            }
+
+            [TestMethod]
+            public void TricksEnteredWithoutDash()
+            {
+                var expected = CreateNewResult(5, ContractColors.Club, 6, ContractDoubled.Redoubled, NESW.East);
+
+                var result = ResultsParser.Parse("5 c xx E 6");
 
                 CompareResults(expected, result);
             }
@@ -90,11 +94,9 @@ namespace IglaClub.TournamentManager.Tests
         [TestClass]
         public class FormatResultMethod
         {
-
             [TestMethod]
             public void ThreeHeartsByEastPlusOne()
             {
-
                 var data = CreateNewResult(3, ContractColors.Heart, 10, ContractDoubled.Doubled, NESW.East);
 
                 var result = ResultsParser.GetFormatResult(data);
@@ -105,7 +107,6 @@ namespace IglaClub.TournamentManager.Tests
             [TestMethod]
             public void OneSpadeByNorthJustMade()
             {
-
                 var data = CreateNewResult(1, ContractColors.Spade, 7, ContractDoubled.NotDoubled, NESW.North);
 
                 var result = ResultsParser.GetFormatResult(data);

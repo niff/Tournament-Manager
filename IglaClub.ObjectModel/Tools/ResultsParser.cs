@@ -52,8 +52,8 @@ namespace IglaClub.ObjectModel.Tools
         public static readonly Dictionary<string, ContractDoubled> DoubledDictionary = new Dictionary<string, ContractDoubled>
         {
             {"", ContractDoubled.NotDoubled},
-            {"X", ContractDoubled.Doubled},
-            {"XX", ContractDoubled.Redoubled}
+            {"x", ContractDoubled.Doubled},
+            {"xx", ContractDoubled.Redoubled}
         };
 
          

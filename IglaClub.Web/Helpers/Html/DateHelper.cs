@@ -7,7 +7,7 @@ namespace IglaClub.Web.Helpers.Html
         public static string DaysLeftToDate(DateTime inputDate)
         {
             const int weekDays = 7;
-            int span = (inputDate - DateTime.Today).Days;
+            int span = (inputDate.Date - DateTime.Today).Days;
             if (span <= weekDays && span >= -weekDays)
             {
                 if (span == 0)

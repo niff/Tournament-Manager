@@ -26,6 +26,7 @@ namespace IglaClub.Web.Controllers
         private readonly ResultRepository resultRepository;
 
         private readonly INotificationService notificationService;
+        private const int DEFAULT_TOURNAMENT_COUNT = 10;
         //todo add caching fortournaments and invalidate on add or edit
         public TournamentController()
         {
@@ -38,11 +39,16 @@ namespace IglaClub.Web.Controllers
         
         public ActionResult Index()
         {
+            var currentUser = userRepository.GetUserByLogin(GetCurrentUserName());
             var model = new TournamentMainPageModel
                 {
-                    CurrentlyPlayedByUser = tournamentRepository.GetCurrentlyPlayingByUser(GetCurrentUserName())
+                    CurrentlyPlayedByUser = tournamentRepository.GetCurrentlyPlayingByUser(GetCurrentUserName()),
+                    UserIsManagingTournament = currentUser != null && tournamentRepository.UserIsManagingAtLeastOneTournament(currentUser.Id)
                 };
             return View(model);
+            //todo wazne: nawigacja w tournamentach | zrobic breadcrumb taki np: Organize > Tournaments > Tournament "tytul" > Edit results
+            //
+
         }
 
         private string GetCurrentUserName()
@@ -279,7 +285,7 @@ namespace IglaClub.Web.Controllers
         }
 
         public ActionResult GenerateNextRound(long tournamentId, bool withPairsRepeat)
-        {
+        {//todo how to finish tournament
             var status = tournamentManager.GenerateNextRound(tournamentId, withPairsRepeat);
 
             if (!status.Ok)
@@ -307,11 +313,10 @@ namespace IglaClub.Web.Controllers
 
         public PartialViewResult MyTournamentsToPlay()
         {
-            var model = new TounamentSingleListViewModel
-                {
-                    Tournaments = tournamentRepository.GetTournamentsToPlayByUser(GetCurrentUserName()),
-                    Header = "My tournaments to play"
-                };
+            var model =
+                CreateTounamentSingleListViewModelWithSortedItems(
+                    tournamentRepository.GetTournamentsToPlayByUser(GetCurrentUserName()), DEFAULT_TOURNAMENT_COUNT);
+            model.Header = "You are playing soon";
             return PartialView("_TournamentList", model);
         }
 
@@ -343,21 +348,63 @@ namespace IglaClub.Web.Controllers
 
         public ActionResult OwnerTournaments()
         {
-            var tournaments = tournamentRepository.GetTournamentsByOwnerUser(GetCurrentUserName()).ToList();
             var model = new TounamentListViewModel
                 {
+
                     TournamentsList = new List<TounamentSingleListViewModel>
                         {
-                            new TounamentSingleListViewModel
-                                {
-                                    Tournaments = tournaments,
-                                    Header = "Tournaments created by you",
-                                    ManageMode = true,
-                                    ShowSubscriptionStatus = false
-                                }
+                            GetTournamentsCreatedByUser(GetCurrentUserName())
                         }
                 };
-            return View("OwnerDashboard", model);
+            return View("OwnerDashboard", model);//todo zamienic na wywolywanie akcji do kazdej listy w widoku a nie budowanie modelu zlozonego z list tutaj
+        }
+
+        private TounamentSingleListViewModel GetTournamentsCreatedByUser(string user)
+        {
+            //var tournaments = tournamentRepository.GetTournamentsByOwnerUser(user).
+            //    Take(DEFAULT_TOURNAMENT_COUNT).ToList();
+            //var dateTime = DateTime.Now;
+            //var future = tournaments.Where(t => t.PlannedStartDate >= dateTime).OrderBy(t => t.PlannedStartDate);
+            //var past = tournaments.Where(t => t.PlannedStartDate < dateTime).OrderByDescending(t => t.PlannedStartDate); ;
+            var model = CreateTounamentSingleListViewModelWithSortedItems(
+                                        tournamentRepository.GetTournamentsByOwnerUser(user),
+                                        DEFAULT_TOURNAMENT_COUNT);
+
+            model.Header = "Tournaments created by you";
+            model.ManageMode = true;
+            model.ShowSubscriptionStatus = false;
+
+            return model;
+                //new List<TounamentSingleListViewModel>
+                //{
+                //    new TounamentSingleListViewModel
+                //        {
+                //            Tournaments = future.ToList(),
+                //            TournamentsPast = past.ToList(),
+                //            Header = "Tournaments created by you",
+                //            ManageMode = true,
+                //            ShowSubscriptionStatus = false
+                //       // }
+                //};
+        }
+
+        private TounamentSingleListViewModel CreateTounamentSingleListViewModelWithSortedItems(IEnumerable<Tournament> tournaments, int defaultTournamentCount)
+        {
+            var tournamentsDefaultCount = tournaments.Take(defaultTournamentCount).ToList();
+            var dateTime = DateTime.Now;
+            var future = tournamentsDefaultCount.Where(t => t.PlannedStartDate >= dateTime).OrderBy(t => t.PlannedStartDate).ToList();
+            var past = tournamentsDefaultCount.Where(t => t.PlannedStartDate < dateTime).OrderByDescending(t => t.PlannedStartDate).ToList();
+            return new TounamentSingleListViewModel
+                {
+                    Tournaments = future,
+                    TournamentsPast = past
+                };
+        }
+
+        public PartialViewResult OwnerTournamentsList()
+        {
+            var model = GetTournamentsCreatedByUser(GetCurrentUserName());
+            return PartialView("_TournamentList", model);
         }
 
         public ActionResult PlayerTournaments()

@@ -23,7 +23,14 @@
             @Html.Action("MyTournamentsToPlay")
         </div>
         <div class="col-md-6">
-            @Html.Action("AvailableTournaments")
+            @if (@Model.UserIsManagingTournament)
+            {
+                @Html.Action("OwnerTournamentsList")
+            }
+            else
+            {
+                @Html.Action("AvailableTournaments")
+            }
         </div>
     </div>
 </div>

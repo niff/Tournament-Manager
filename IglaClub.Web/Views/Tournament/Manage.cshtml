@@ -1,10 +1,5 @@
 ﻿@using IglaClub.ObjectModel.Enums
 @model IglaClub.Web.Models.ViewModels.TournamentManageVm
-
-@{
-    var editResultTitle = "Manage current results: change placing, add/change scores - essential of the tournament directing.";
-}
-
 @{
     ViewBag.Title = "Manage tournament " + Model.Tournament.Name;
 }
@@ -12,9 +7,7 @@
     var status = @Model.Tournament.TournamentStatus;
     bool isStarted = status == TournamentStatus.Started;
     bool isPlanned = status == TournamentStatus.Planned;
-    //var statusLabelClass = isPlanned ? "planned" : (isStarted ? "ongoing" : "past");
-    //var statusLabel = isPlanned ? "not started" : (isStarted ? "started" : "finished");
-    //var resultsLeftClass = Model.Tournament.ResultsNotFinishedInCurrentRound == 0 ? "text-success" : "text-danger"; 
+    var editResultTitle = "Manage current results: change placing, add/change scores - essential of the tournament directing.";
 }
     <div class="row">
         <div class="col-md-12 col-xs-12 column-padding">
@@ -40,9 +33,9 @@
                     <tr>
                         <td>
                             <label><span class="label label-default">@Model.Tournament.CurrentRound.</span> round</label>
+                            @*//todo maybe move this next to header*@
                         </td>
-                        <td>
-
+                        <td class="squeeze">
                             @Html.Partial("_TournamentStartedActions", @Model.Tournament, new ViewDataDictionary { { "notFinishedYet", toFinish > 0 } })
                         </td>
                     </tr>
@@ -50,7 +43,7 @@
                         <td>
                             <label><span class="label label-@roundsLeftClass">@toFinish</span> results not entered yet </label>
                         </td>
-                        <td>
+                        <td class="squeeze">
 
                             <a href="@Url.Action("Manage", "Results", new { tournamentId = Model.Tournament.Id })" class = "btn btn-default btn-short" title="@editResultTitle">
                                 <i class="glyphicon glyphicon-edit right-side-margin"></i>Edit results

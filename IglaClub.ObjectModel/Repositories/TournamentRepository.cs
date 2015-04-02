@@ -46,7 +46,7 @@ namespace IglaClub.ObjectModel.Repositories
                 db.Tournaments.Where(
                     t => t.TournamentStatus == TournamentStatus.Planned 
                         && ( !t.PlannedStartDate.HasValue || t.PlannedStartDate >= dateFrom))
-                    .OrderBy(x=>x.CreationDate)
+                    .OrderBy(t => t.PlannedStartDate)
                     .ThenBy(x => x.PlannedStartDate);
         }
 
@@ -93,25 +93,28 @@ namespace IglaClub.ObjectModel.Repositories
                         t.Pairs.All(p => p.Player1.Login != userLogin && p.Player2.Login != userLogin) &&
                         t.TournamentStatus == TournamentStatus.Planned);
 
-            return tournaments.ToList();
+            return tournaments.OrderBy(t => t.PlannedStartDate).ToList();
         }
 
         public IList<Tournament> GetTournamentsToPlayByUser(string userLogin)
         {
             var tournaments = GetTournamentsBySubscribedUser(userLogin);
-            return  tournaments.Where(t=>t.TournamentStatus == TournamentStatus.Planned).ToList();
+            return tournaments.Where(t => t.TournamentStatus == TournamentStatus.Planned).
+                OrderBy(t => t.PlannedStartDate).ToList();
         }
 
         public IList<Tournament> GetCurrentlyPlayingByUser(string userLogin)
         {
             var tournaments = GetTournamentsBySubscribedUser(userLogin);
-            return tournaments.Where(t=>t.TournamentStatus == TournamentStatus.Started).ToList();
+            return tournaments.Where(t => t.TournamentStatus == TournamentStatus.Started).
+                OrderBy(t => t.PlannedStartDate).ToList();
         }
 
         public IEnumerable<Tournament> GetTournamentsByOwnerUser(string userLogin)
         {
             var tournaments = from t in db.Tournaments
                 where t.Owner.Login == userLogin 
+                orderby t.PlannedStartDate descending 
                 select t;
             return tournaments;
         }
@@ -120,7 +123,8 @@ namespace IglaClub.ObjectModel.Repositories
         {
             var res = from t in db.Tournaments
                 join p in db.Pairs on t.Id equals p.Tournament.Id
-                where p.Player1.Login == userLogin || p.Player2.Login == userLogin
+                      where p.Player1.Login == userLogin || p.Player2.Login == userLogin
+                      orderby t.PlannedStartDate descending 
                 select t;
             return res;
         }
@@ -129,7 +133,12 @@ namespace IglaClub.ObjectModel.Repositories
         {
             var tournaments = GetTournamentsBySubscribedUser(userLogin);
             return tournaments.Where(t => (t.TournamentStatus == TournamentStatus.Finished ||
-                t.PlannedStartDate < DateTime.Today)).ToList();
+                t.PlannedStartDate < DateTime.Today)).OrderByDescending(t => t.PlannedStartDate).ToList();
+        }
+
+        public bool UserIsManagingAtLeastOneTournament(long userId)
+        {
+            return db.Tournaments.Any(t => t.OwnerId == userId);
         }
     }
 }

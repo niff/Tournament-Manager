@@ -68,7 +68,12 @@ footer {
 .table.tournaments > tbody > tr > td {
     vertical-align: middle !important;
 }
-
+tr.past-tournaments > td, tr.past-tournaments > td > a {
+    color: #BEBEBE;
+}
+tr.past-tournaments > td > div.tournament-status {
+    background-color: #BEBEBE;
+}
 .table.table-padding > tbody > tr > td {
     padding: 8px !important;
     vertical-align: middle !important;
@@ -220,10 +225,11 @@ table.result {
 i.glyphicon.result-icon {
     width: 16px;
     height: 16px;
-    margin-left: 2px;
+    margin: 2px 4px;
 }
 
     i.glyphicon.result-icon.spade {
+        /*todo use a sprite and different icons*/
         background: url('img/cards/spade-icon.png');
     }
 
@@ -566,7 +572,7 @@ span.blue-header {
     }
 
     .table-small-padding > tbody > tr > td {
-        padding: 3px !important;
+        padding: 8px 3px !important;
     }
 
     tr td.squeeze {
