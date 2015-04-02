@@ -315,8 +315,8 @@ namespace IglaClub.Web.Controllers
         {
             var model =
                 CreateTounamentSingleListViewModelWithSortedItems(
-                    tournamentRepository.GetTournamentsToPlayByUser(GetCurrentUserName()), DEFAULT_TOURNAMENT_COUNT);
-            model.Header = "You are playing soon";
+                    tournamentRepository.GetTournamentsToPlayByUser(GetCurrentUserName()), DEFAULT_TOURNAMENT_COUNT,
+                    "You are playing soon", manageMode: false, showSubscriptionStatus: false);
             return PartialView("_TournamentList", model);
         }
 
@@ -325,11 +325,11 @@ namespace IglaClub.Web.Controllers
         [AllowAnonymous]
         public ActionResult GetAll()
         {
-            var model = new TounamentSingleListViewModel
-            {
-                Tournaments = tournamentRepository.GetAll<Tournament>().OrderBy(t => t.TournamentStatus).ToList(),
-                Header = "All tournaments"
-            };
+            var model = CreateTounamentSingleListViewModelWithSortedItems(
+                tournamentRepository.GetAll<Tournament>().OrderBy(t => t.TournamentStatus).ToList(),
+                1000,
+                "All tournaments"
+                );
             return View(model);
         }
 
@@ -361,34 +361,17 @@ namespace IglaClub.Web.Controllers
 
         private TounamentSingleListViewModel GetTournamentsCreatedByUser(string user)
         {
-            //var tournaments = tournamentRepository.GetTournamentsByOwnerUser(user).
-            //    Take(DEFAULT_TOURNAMENT_COUNT).ToList();
-            //var dateTime = DateTime.Now;
-            //var future = tournaments.Where(t => t.PlannedStartDate >= dateTime).OrderBy(t => t.PlannedStartDate);
-            //var past = tournaments.Where(t => t.PlannedStartDate < dateTime).OrderByDescending(t => t.PlannedStartDate); ;
             var model = CreateTounamentSingleListViewModelWithSortedItems(
                                         tournamentRepository.GetTournamentsByOwnerUser(user),
-                                        DEFAULT_TOURNAMENT_COUNT);
-
-            model.Header = "Tournaments created by you";
-            model.ManageMode = true;
-            model.ShowSubscriptionStatus = false;
+                                        DEFAULT_TOURNAMENT_COUNT,
+                                        "Tournaments created by you",
+                                        manageMode :true,
+                                        showSubscriptionStatus:false);
 
             return model;
-                //new List<TounamentSingleListViewModel>
-                //{
-                //    new TounamentSingleListViewModel
-                //        {
-                //            Tournaments = future.ToList(),
-                //            TournamentsPast = past.ToList(),
-                //            Header = "Tournaments created by you",
-                //            ManageMode = true,
-                //            ShowSubscriptionStatus = false
-                //       // }
-                //};
         }
 
-        private TounamentSingleListViewModel CreateTounamentSingleListViewModelWithSortedItems(IEnumerable<Tournament> tournaments, int defaultTournamentCount)
+        private TounamentSingleListViewModel CreateTounamentSingleListViewModelWithSortedItems(IEnumerable<Tournament> tournaments, int defaultTournamentCount, string header, bool manageMode = false, bool showSubscriptionStatus = false)
         {
             var tournamentsDefaultCount = tournaments.Take(defaultTournamentCount).ToList();
             var dateTime = DateTime.Now;
@@ -397,7 +380,10 @@ namespace IglaClub.Web.Controllers
             return new TounamentSingleListViewModel
                 {
                     Tournaments = future,
-                    TournamentsPast = past
+                    TournamentsPast = past,
+                    Header = header,
+                    ManageMode = manageMode,
+                    ShowSubscriptionStatus = showSubscriptionStatus
                 };
         }
 
@@ -413,21 +399,18 @@ namespace IglaClub.Web.Controllers
             {
                 TournamentsList = new List<TounamentSingleListViewModel>
                 {
-                    new TounamentSingleListViewModel
-                        {
-                            Header = "Now playing",
-                            Tournaments = tournamentRepository.GetCurrentlyPlayingByUser(GetCurrentUserName())
-                        },
-                    new TounamentSingleListViewModel
-                        {
-                            Header = "Playing soon",
-                            Tournaments = tournamentRepository.GetTournamentsToPlayByUser(GetCurrentUserName())
-                        },
-                        new TounamentSingleListViewModel
-                        {
-                            Header = "Already played",
-                            Tournaments = tournamentRepository.GetTournamentsAlreadyPlayedByUser(GetCurrentUserName())
-                        }
+                    CreateTounamentSingleListViewModelWithSortedItems(
+                    tournamentRepository.GetCurrentlyPlayingByUser(GetCurrentUserName()),
+                    DEFAULT_TOURNAMENT_COUNT, 
+                    "Now playing"),
+                    CreateTounamentSingleListViewModelWithSortedItems(
+                    tournamentRepository.GetTournamentsToPlayByUser(GetCurrentUserName()),
+                    DEFAULT_TOURNAMENT_COUNT, 
+                    "Playing soon"),
+                    CreateTounamentSingleListViewModelWithSortedItems(
+                    tournamentRepository.GetTournamentsAlreadyPlayedByUser(GetCurrentUserName()),
+                    DEFAULT_TOURNAMENT_COUNT, 
+                    "Already played")
                 }
             };
             return View("TournamentsList", model);
@@ -435,18 +418,22 @@ namespace IglaClub.Web.Controllers
 
         public ActionResult PlayerTournamentsOther()
         {
-            ViewBag.Title = "Available tournaments";
             var model = new TounamentListViewModel
             {
                 TournamentsList = new List<TounamentSingleListViewModel>
                 {
-                    new TounamentSingleListViewModel
-                        {
-                            Header = "Tournaments that you can join",
-                            Tournaments = tournamentRepository.GetAvailableTournamentsByUser(GetCurrentUserName())
-                                                              .OrderBy(t => t.PlannedStartDate)
-                                                              .ToList()
-                        }
+                    //new TounamentSingleListViewModel
+                    //    {
+                    //        Header = "Tournaments that you can join",
+                    //        Tournaments = tournamentRepository.GetAvailableTournamentsByUser(GetCurrentUserName())
+                    //                                          .OrderBy(t => t.PlannedStartDate)
+                    //                                          .ToList()
+                    //    }
+                    CreateTounamentSingleListViewModelWithSortedItems(
+                    tournamentRepository.GetAvailableTournamentsByUser(GetCurrentUserName()),
+                    DEFAULT_TOURNAMENT_COUNT,
+                    "Tournaments that you can join"
+                    )
                 }
             };
 

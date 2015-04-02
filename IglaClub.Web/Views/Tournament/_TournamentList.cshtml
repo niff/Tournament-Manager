@@ -4,18 +4,39 @@
     var userAction = @Model.ManageMode ? "Manage" : "Details";
 }
 <span class="medium-header">@Model.Header</span>
-@if (Model.Tournaments.Any())
-{
-    <table class="table tournaments table-striped table-hover">
-        @foreach (var item in Model.Tournaments)
-        {
+    @if (Model.Tournaments.Any() || (Model.TournamentsPast != null && Model.TournamentsPast.Any()))
+    {
+        <table class="table tournaments table-striped table-hover">
+
+            @foreach (var item in Model.Tournaments)
+            {
+                var status = item.TournamentStatus;
+                var dateFormatted = item.PlannedStartDate != null ? @DateHelper.DaysLeftToDate((DateTime) item.PlannedStartDate) : "Not set yet";
+                var shortDate = item.PlannedStartDate != null ? item.PlannedStartDate.Value.ToShortDateString() : "None";
+                var hour = item.PlannedStartDate != null ? ((DateTime) item.PlannedStartDate).ToString("HH:mm") : "";
+                <tr>
+                    <td class="squeeze">@TournamentHelper.GetTournamentStatusIcon(status)</td>
+                    <td>@Html.ActionLink(item.Name, @userAction, "Tournament", new {id = @item.Id}, null)</td>
+                    <td class="hidden-xs squeeze">@dateFormatted</td>
+                    <td class="visible-xs squeeze">@shortDate</td>
+                    <td class="squeeze">@hour</td>
+                    @if (@Model.ShowSubscriptionStatus)
+                    {
+                        <td class="squeeze">@TournamentHelper.GetSubscribtionStatus(item.UserIsSubscribed(HttpContext.Current.User.Identity.Name), item.Id)</td>
+                    }
+                </tr>
+            }
+
+   
+            @foreach (var item in Model.TournamentsPast)
+            {
             var status = item.TournamentStatus;
-            var dateFormatted = item.PlannedStartDate != null ? @DateHelper.DaysLeftToDate((DateTime)item.PlannedStartDate) : "Not set yet";
+            var dateFormatted = item.PlannedStartDate != null ? @DateHelper.DaysLeftToDate((DateTime) item.PlannedStartDate) : "Not set yet";
             var shortDate = item.PlannedStartDate != null ? item.PlannedStartDate.Value.ToShortDateString() : "None";
-            var hour = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("HH:mm") : "";              
-            <tr>
+            var hour = item.PlannedStartDate != null ? ((DateTime) item.PlannedStartDate).ToString("HH:mm") : "";
+            <tr class="past-tournaments">
                 <td class="squeeze">@TournamentHelper.GetTournamentStatusIcon(status)</td>
-                <td>@Html.ActionLink(item.Name, @userAction, "Tournament", new { id = @item.Id }, null)</td>
+                <td>@Html.ActionLink(item.Name, @userAction, "Tournament", new {id = @item.Id}, null)</td>
                 <td class="hidden-xs squeeze">@dateFormatted</td>
                 <td class="visible-xs squeeze">@shortDate</td>
                 <td class="squeeze">@hour</td>
@@ -24,31 +45,13 @@
                     <td class="squeeze">@TournamentHelper.GetSubscribtionStatus(item.UserIsSubscribed(HttpContext.Current.User.Identity.Name), item.Id)</td>
                 }
             </tr>
-        }
-                @if (Model.TournamentsPast != null && Model.TournamentsPast.Any())
-                {
-                    foreach (var item in Model.TournamentsPast)
-                    {
-                        var status = item.TournamentStatus;
-                        var dateFormatted = item.PlannedStartDate != null ? @DateHelper.DaysLeftToDate((DateTime) item.PlannedStartDate) : "Not set yet";
-                        var shortDate = item.PlannedStartDate != null ? item.PlannedStartDate.Value.ToShortDateString() : "None";
-                        var hour = item.PlannedStartDate != null ? ((DateTime) item.PlannedStartDate).ToString("HH:mm") : "";
-                        <tr class="past-tournaments">
-                            <td class="squeeze">@TournamentHelper.GetTournamentStatusIcon(status)</td>
-                            <td>@Html.ActionLink(item.Name, @userAction, "Tournament", new {id = @item.Id}, null)</td>
-                            <td class="hidden-xs squeeze">@dateFormatted</td>
-                            <td class="visible-xs squeeze">@shortDate</td>
-                            <td class="squeeze">@hour</td>
-                            @if (@Model.ShowSubscriptionStatus)
-                            {
-                                <td class="squeeze">@TournamentHelper.GetSubscribtionStatus(item.UserIsSubscribed(HttpContext.Current.User.Identity.Name), item.Id)</td>
-                            }
-                        </tr>
-                    }
-                }
-    </table>
-}
-else
-{
+            }
+    
+        </table>
+    }
+    else
+    {
     <p><i class="small text-muted">No tournaments to display</i></p>
-}
+    }
+
+

@@ -87,11 +87,14 @@ namespace IglaClub.ObjectModel.Repositories
 
         public IList<Tournament> GetAvailableTournamentsByUser(string userLogin)
         {
+            var now = DateTime.Now.AddMinutes(-30);
             var tournaments =
                 db.Tournaments.Where(
                     t =>
                         t.Pairs.All(p => p.Player1.Login != userLogin && p.Player2.Login != userLogin) &&
-                        t.TournamentStatus == TournamentStatus.Planned);
+                        t.TournamentStatus == TournamentStatus.Planned &&
+                        t.PlannedStartDate >= now
+                        );
 
             return tournaments.OrderBy(t => t.PlannedStartDate).ToList();
         }
@@ -132,8 +135,8 @@ namespace IglaClub.ObjectModel.Repositories
         public IList<Tournament> GetTournamentsAlreadyPlayedByUser(string userLogin)
         {
             var tournaments = GetTournamentsBySubscribedUser(userLogin);
-            return tournaments.Where(t => (t.TournamentStatus == TournamentStatus.Finished ||
-                t.PlannedStartDate < DateTime.Today)).OrderByDescending(t => t.PlannedStartDate).ToList();
+            return tournaments.Where(t => (t.TournamentStatus == TournamentStatus.Finished)).
+                OrderByDescending(t => t.PlannedStartDate).ToList();
         }
 
         public bool UserIsManagingAtLeastOneTournament(long userId)

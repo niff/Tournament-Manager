@@ -25,8 +25,9 @@ namespace IglaClub.Web.Helpers.Html
                 {
                     dateIsPast = " ago";
                 }
-                var daysPlural = span != 1 ? "s" : String.Empty;
                 var daysCount = Math.Abs(span);
+                var daysPlural = daysCount != 1 ? "s" : String.Empty;
+                
 
                 return String.Format("{3}{0} day{1}{2}", 
                     daysCount, daysPlural, dateIsPast, dateIsFuture);
