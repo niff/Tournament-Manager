@@ -78,9 +78,6 @@
             <th>
                 @Html.DisplayNameFor(m => m[0].ScoreEw)
             </th>
-            <th>
-                @Html.DisplayNameFor(m => m[0].ResultNsPoints)
-            </th>
             <th></th>
         </tr>
 
@@ -131,9 +128,6 @@
                 </td>
                 <td>
                     @Html.TextBoxFor(m => m[i].ScoreEw, new { @class = "form-control" })
-                </td>
-                <td>
-                    @Html.TextBoxFor(m => m[i].ResultNsPoints, new { @class = "form-control" })
                 </td>
                 <td>
                     <a href="@Url.Action("Delete", new { id = Model[i].Id })" title="Remove"><span class="glyphicon glyphicon-remove"></span></a>
