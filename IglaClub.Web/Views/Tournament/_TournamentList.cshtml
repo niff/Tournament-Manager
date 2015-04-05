@@ -11,13 +11,13 @@
             @foreach (var item in Model.Tournaments)
             {
                 var status = item.TournamentStatus;
-                var dateFormatted = item.PlannedStartDate != null ? @DateHelper.DaysLeftToDate((DateTime) item.PlannedStartDate) : "Not set yet";
+                //var dateFormatted = item.PlannedStartDate != null ? @DateHelper.DaysLeftToDate((DateTime) item.PlannedStartDate) : "Not set yet";
                 var shortDate = item.PlannedStartDate != null ? item.PlannedStartDate.Value.ToShortDateString() : "None";
                 var hour = item.PlannedStartDate != null ? ((DateTime) item.PlannedStartDate).ToString("HH:mm") : "";
                 <tr>
                     <td class="squeeze">@TournamentHelper.GetTournamentStatusIcon(status)</td>
                     <td>@Html.ActionLink(item.Name, @userAction, "Tournament", new {id = @item.Id}, null)</td>
-                    <td class="hidden-xs squeeze">@dateFormatted</td>
+                    <td class="hidden-xs squeeze">@Html.Raw(DateHelper.DaysLeftToDate(item.PlannedStartDate))</td>
                     <td class="visible-xs squeeze">@shortDate</td>
                     <td class="squeeze">@hour</td>
                     @if (@Model.ShowSubscriptionStatus)
@@ -31,13 +31,12 @@
             @foreach (var item in Model.TournamentsPast)
             {
             var status = item.TournamentStatus;
-            var dateFormatted = item.PlannedStartDate != null ? @DateHelper.DaysLeftToDate((DateTime) item.PlannedStartDate) : "Not set yet";
             var shortDate = item.PlannedStartDate != null ? item.PlannedStartDate.Value.ToShortDateString() : "None";
             var hour = item.PlannedStartDate != null ? ((DateTime) item.PlannedStartDate).ToString("HH:mm") : "";
             <tr class="past-tournaments">
                 <td class="squeeze">@TournamentHelper.GetTournamentStatusIcon(status)</td>
                 <td>@Html.ActionLink(item.Name, @userAction, "Tournament", new {id = @item.Id}, null)</td>
-                <td class="hidden-xs squeeze">@dateFormatted</td>
+                <td class="hidden-xs squeeze">@Html.Raw(DateHelper.DaysLeftToDate(item.PlannedStartDate))</td>
                 <td class="visible-xs squeeze">@shortDate</td>
                 <td class="squeeze">@hour</td>
                 @if (@Model.ShowSubscriptionStatus)
