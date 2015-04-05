@@ -30,5 +30,14 @@ namespace IglaClub.Web.Controllers
 
             return View();
         }
+
+        public ActionResult OrganizerFaq()
+        {
+            ViewBag.Message = "FAQ";
+
+            return View();
+        }
+
+
     }
 }
