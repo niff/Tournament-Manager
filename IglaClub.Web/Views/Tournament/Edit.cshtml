@@ -4,6 +4,8 @@
 @{
     ViewBag.Title = "Edit tournament - " + @Model.Name;
 }
+
+@Styles.Render("~/Content/DateTimepickerCss")
 <div class="row">
     <div class="col-md-12 column-padding">
         <div class="row">
@@ -99,30 +101,30 @@
                     @Html.ActionLink("Manage tournament", "Manage", new { id = Model.Id })
                 </div>
             </div>
-            <div class="col-md-6 col-xs-12">
+            <div class="col-md-6 col-xs-12 action-pane">
                 <p><span class="medium-header">Edit participants list</span></p>
+        <div class="pairs" id="participantsDiv">
                 @Html.Action("TournamentParticipantsEdit", new { tournamentId = @Model.Id })
+            </div>
             </div>
     </div>
     </div>
 </div>
-@*<div style="float: left; margin-left: 10px;">
-    @Html.Action("TournamentParticipantsEdit", new { tournamentId = @Model.Id })
-</div>*@
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/DateTimepickerJs")
 }
 
-<script>
-    jQuery('#datepicker').datetimepicker();
-</script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
 <script src="~/Scripts/gmap-plugin.js"></script>
 <script>
     $(document).ready(function () {
+        jQuery('#datepicker').datetimepicker();
+        
         var options = {
             coordinates: '@(Model.Coordinates ?? "( 50.06139,19.93833)")'
         };
-        $("#map-canvas").initializeMap(options);
+        //$("#map-canvas").initializeMap(options);
     });
 </script>

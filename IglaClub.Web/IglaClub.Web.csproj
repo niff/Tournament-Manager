@@ -268,7 +268,7 @@
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Helpers\Html\LinkHelper.cs" />
     <Compile Include="Helpers\ValidationHelper.cs" />
-    <Compile Include="Infrastructure\PreventSpamAttribute.cs" />
+    <Compile Include="Infrastructure\AntiSpamAttribute.cs" />
     <Compile Include="Migrations\201503272236438_ClubUserRenameColumn.cs" />
     <Compile Include="Migrations\201503272236438_ClubUserRenameColumn.Designer.cs">
       <DependentUpon>201503272236438_ClubUserRenameColumn.cs</DependentUpon>
@@ -521,6 +521,7 @@
     <Content Include="Views\Clubs\Index.cshtml" />
     <Content Include="Views\Tournament\PlayerResults.cshtml" />
     <Content Include="Views\Account\Settings.cshtml" />
+    <Content Include="Views\Tournament\FindOnMap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

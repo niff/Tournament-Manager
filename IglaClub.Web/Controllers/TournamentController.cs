@@ -333,6 +333,17 @@ namespace IglaClub.Web.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
+        public ActionResult FindOnMap()
+        {
+            var model = CreateTounamentSingleListViewModelWithSortedItems(
+                tournamentRepository.GetAll<Tournament>().OrderBy(t => t.TournamentStatus).ToList(),
+                1000,
+                "All tournaments"
+                );
+            return View(model);
+        }
+
         public PartialViewResult AvailableTournaments()
         {
             var tournaments = tournamentRepository.GetAvailableTournamentsByUser(GetCurrentUserName()).OrderBy(t => t.PlannedStartDate);
