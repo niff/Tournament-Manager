@@ -7,7 +7,7 @@ namespace IglaClub.ObjectModel.Enums
     public enum NESW
     {
         [Display(Name = "n/a")]
-        Unavailable = 1,
+        Unavailable = 0,
         [Display(Name = "N")]
         North = 2,
         [Display(Name = "E")]

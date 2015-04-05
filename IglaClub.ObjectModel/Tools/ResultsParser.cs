@@ -76,6 +76,9 @@ namespace IglaClub.ObjectModel.Tools
                  return "Passed out";
              if (result.PlayedBy == NESW.DirectorScore)
                  return "Director score";
+             if (result.ContractColor == ContractColors.Unknown)
+                return "";
+
 
              var tricks = result.NumberOfTricks - result.ContractLevel - 6;
              var tricksString = tricks == 0 ? "=" : tricks.ToString("+#;-#;0");
