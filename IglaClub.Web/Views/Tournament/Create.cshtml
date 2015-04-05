@@ -1,4 +1,5 @@
-﻿@using IglaClub.ObjectModel.Enums
+﻿@using IglaClub.ObjectModel.Consts
+@using IglaClub.ObjectModel.Enums
 @model IglaClub.ObjectModel.Entities.Tournament
 
 @Scripts.Render("~/bundles/DateTimepickerJs")
@@ -39,7 +40,7 @@
             @Html.TextBoxFor(model => model.BoardsInRound, new { @type="number", @class = "form-control", @min="1"})
             @Html.ValidationMessageFor(model => model.BoardsInRound)
         </div>
-        <div class="editor-label">
+        <div class="editor-label" title="@StringResources.TournamentScoringTypesDescription">
             @Html.LabelFor(model => model.TournamentScoringType)
         </div>
         <div class="editor-field">
@@ -49,8 +50,7 @@
         <div class="editor-label">
             @Html.LabelFor(model => model.TournamentMovingType)
         </div>
-        @*//todo add some bridge definitions to type and scoring title*@
-        <div class="editor-field" title="Cavendish Bridge is the name of a bridge over the River Trent, connecting the counties of Leicestershire and Derbyshire; it is also the name of a hamlet on the Leicestershire side of the river within the Castle Donington parish.">
+        <div class="editor-field" title="@StringResources.TournamentMovingTypesDescription">
             @Html.DropDownListFor(model => model.TournamentMovingType, new SelectList(Enum.GetValues(typeof(TournamentMovingType))), new { @class = "form-control"})
             @Html.ValidationMessageFor(model => model.TournamentMovingType)
         </div>
