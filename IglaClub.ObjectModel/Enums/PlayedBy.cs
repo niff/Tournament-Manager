@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace IglaClub.ObjectModel.Enums
 {
     [Flags]
-    public enum NESW
+    public enum PlayedBy
     {
         [Display(Name = "n/a")]
         Unavailable = 0,

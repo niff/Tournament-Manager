@@ -1,4 +1,5 @@
-﻿@using IglaClub.ObjectModel.Enums
+﻿@using IglaClub.ObjectModel.Consts
+@using IglaClub.ObjectModel.Enums
 @model IglaClub.Web.Models.ViewModels.TournamentManageVm
 @{
     ViewBag.Title = "Manage tournament " + Model.Tournament.Name;
@@ -7,7 +8,7 @@
     var status = @Model.Tournament.TournamentStatus;
     bool isStarted = status == TournamentStatus.Started;
     bool isPlanned = status == TournamentStatus.Planned;
-    var editResultTitle = "Manage current results: change placing, add/change scores - essential of the tournament directing.";
+    
 }
     <div class="row">
         <div class="col-md-12 col-xs-12 column-padding">
@@ -45,7 +46,7 @@
                         </td>
                         <td class="squeeze">
 
-                            <a href="@Url.Action("Manage", "Results", new { tournamentId = Model.Tournament.Id })" class = "btn btn-default btn-short" title="@editResultTitle">
+                            <a href="@Url.Action("Manage", "Results", new { tournamentId = Model.Tournament.Id })" class = "btn btn-default btn-short" title="@StringResources.EditResultTitle">
                                 <i class="glyphicon glyphicon-edit right-side-margin"></i>Edit results
                             </a>
                         </td>
@@ -79,29 +80,5 @@
 }
     </div>
     </div>
-
-<script>
-//    $(document).ready(function () {
-//        $('body a[href]').qtip();
-//        $('.btn.btn-default.disabled.btn-short').qtip({
-//// Grab some elements to apply the tooltip to
-//            content: {
-//                text: 'My common piece of text here'
-//            }
-//        });
-//        $(".btn.btn-default.disabled.btn-short").attr("disabled", true)
-//   .attr("readonly", true)
-//   .parent() // Use the parent element for our qTip binding
-//   .qtip({
-//       content: $(".btn.btn-default.disabled.btn-short").val(),
-//       show: 'mouseover',
-//       hide: 'mouseout',
-//       position: { corner: { target: 'topRight', tooltip: 'bottomLeft' } },
-//       style: {
-//           name: 'light'
-//       }
-//   });
-//    });
-</script>
 
 

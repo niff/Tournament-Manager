@@ -12,7 +12,7 @@ namespace IglaClub.TournamentManager.TournamentHelperTests.Tests
         [TestMethod]
         public void CalculateSimpleNonVulScore()
         {
-            var result = CreateNewResult(3, ContractColors.Club, 8, ContractDoubled.NotDoubled, NESW.South);
+            var result = CreateNewResult(3, ContractColors.Club, 8, ContractDoubled.NotDoubled, PlayedBy.South);
 
             var score = TournamentHelper.CalculateScoreInBoard(result, false);
 
@@ -21,7 +21,7 @@ namespace IglaClub.TournamentManager.TournamentHelperTests.Tests
 
         
         private static Result CreateNewResult(int level, ContractColors contractColors,
-            int numberOfTricks, ContractDoubled contractDoubled, NESW playedBy)
+            int numberOfTricks, ContractDoubled contractDoubled, PlayedBy playedBy)
         {
             var expected = new Result()
             {

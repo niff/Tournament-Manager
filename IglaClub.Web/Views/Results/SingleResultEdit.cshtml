@@ -3,7 +3,7 @@
 @model IglaClub.ObjectModel.Entities.Result
 
 @{
-    var possiblePlayedByValues = new List<NESW> { NESW.PassedOut, NESW.North, NESW.South, NESW.West, NESW.East };
+    var possiblePlayedByValues = new List<PlayedBy> { PlayedBy.PassedOut, PlayedBy.North, PlayedBy.South, PlayedBy.West, PlayedBy.East };
     var labelDict = new Dictionary<string, string>
         {
             {"passedout","passed out"},

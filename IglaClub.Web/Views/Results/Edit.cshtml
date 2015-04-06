@@ -114,13 +114,13 @@
                 </td>
 
                 <td>
-                    @Html.DropDownListFor(m => m[i].PlayedBy, new SelectList(Enum.GetValues(typeof(NESW)), @Model[i].PlayedBy), new { @class = "form-control" })
+                    @Html.DropDownListFor(m => m[i].PlayedBy, new SelectList(Enum.GetValues(typeof(PlayedBy)), @Model[i].PlayedBy), new { @class = "form-control" })
                 </td>
                 <td>
-                    @Html.TextBoxFor(m => m[i].NumberOfTricks, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m[i].NumberOfTricks, new { type = "number", min = "0", max = "13", @class = "form-control" })
                 </td>
                 <td>
-                    @Html.TextBoxFor(m => m[i].ResultNsPoints, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m[i].ResultNsPoints, new { @class = "form-control", title = StringResources.ResultNsPointsTitle })
                 </td>
 
                 <td>

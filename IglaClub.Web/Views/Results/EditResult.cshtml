@@ -6,7 +6,7 @@
 <h2>Edit result for board number @Model.Board.BoardNumber</h2>
 
 @{
-    var possiblePlayedByValues = new List<NESW> {NESW.PassedOut, NESW.North, NESW.South, NESW.West, NESW.East};
+    var possiblePlayedByValues = new List<PlayedBy> {PlayedBy.PassedOut, PlayedBy.North, PlayedBy.South, PlayedBy.West, PlayedBy.East};
 }
 @using (Html.BeginForm())
 {

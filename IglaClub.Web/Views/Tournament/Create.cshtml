@@ -40,7 +40,7 @@
             @Html.TextBoxFor(model => model.BoardsInRound, new { @type="number", @class = "form-control", @min="1"})
             @Html.ValidationMessageFor(model => model.BoardsInRound)
         </div>
-        <div class="editor-label" title="@StringResources.TournamentScoringTypesDescription">
+        <div class="editor-label" title="@StringResources.TournamentScoringTypesTitle">
             @Html.LabelFor(model => model.TournamentScoringType)
         </div>
         <div class="editor-field">
@@ -50,7 +50,7 @@
         <div class="editor-label">
             @Html.LabelFor(model => model.TournamentMovingType)
         </div>
-        <div class="editor-field" title="@StringResources.TournamentMovingTypesDescription">
+        <div class="editor-field" title="@StringResources.TournamentMovingTypesTitle">
             @Html.DropDownListFor(model => model.TournamentMovingType, new SelectList(Enum.GetValues(typeof(TournamentMovingType))), new { @class = "form-control"})
             @Html.ValidationMessageFor(model => model.TournamentMovingType)
         </div>

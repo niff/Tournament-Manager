@@ -87,7 +87,7 @@ namespace IglaClub.TournamentManager
                         EW = sortedPairsList[i + sortedPairsList.Count / 2],
                         RoundNumber = tournament.CurrentRound+1,
                         TableNumber = i + 1,
-                        PlayedBy = NESW.Unavailable
+                        PlayedBy = PlayedBy.Unavailable
                     };
                     results.Add(result);
                 }
@@ -98,7 +98,7 @@ namespace IglaClub.TournamentManager
         public static void UpdatePointsPerBoard(Tournament tournament)
         {
             var resultsGroupedByBoards = tournament.Results
-                .Where(r=>r.ResultNsPoints != null && r.PlayedBy != NESW.DirectorScore)
+                .Where(r=>r.ResultNsPoints != null && r.PlayedBy != PlayedBy.DirectorScore)
                 .GroupBy(r => r.Board.BoardNumber, r=>r, (key,g) => new { BoardId = key, Results = g.ToList()})
                 .ToList();
             foreach (var resultsGroupedByBoard in resultsGroupedByBoards)
@@ -158,9 +158,9 @@ namespace IglaClub.TournamentManager
         }
         public static int? CalculateScoreInBoard(Result result, bool dealerIsVulnerable)
         {
-            if (result.PlayedBy == NESW.PassedOut)
+            if (result.PlayedBy == PlayedBy.PassedOut)
                     return 0;
-            if (result.PlayedBy == NESW.Unavailable || result.PlayedBy == NESW.DirectorScore)
+            if (result.PlayedBy == PlayedBy.Unavailable || result.PlayedBy == PlayedBy.DirectorScore)
                 return null;
             if (result.ContractLevel == 0)
                 return null;
@@ -242,7 +242,7 @@ namespace IglaClub.TournamentManager
                     
             }
 
-            if (result.PlayedBy == NESW.East || result.PlayedBy == NESW.West)
+            if (result.PlayedBy == PlayedBy.East || result.PlayedBy == PlayedBy.West)
                 score *= -1;
             return score;
         }
@@ -250,8 +250,8 @@ namespace IglaClub.TournamentManager
         public static bool DealerIsVulnerable(Result result)
         {
             return result.Board.BoardDefinition.Vulnerability == Vulnerable.Both || 
-                   (result.Board.BoardDefinition.Vulnerability ==Vulnerable.NS && (result.PlayedBy == NESW.North || result.PlayedBy == NESW.South))  ||
-                   (result.Board.BoardDefinition.Vulnerability ==Vulnerable.EW && (result.PlayedBy == NESW.East || result.PlayedBy == NESW.West));
+                   (result.Board.BoardDefinition.Vulnerability ==Vulnerable.NS && (result.PlayedBy == PlayedBy.North || result.PlayedBy == PlayedBy.South))  ||
+                   (result.Board.BoardDefinition.Vulnerability ==Vulnerable.EW && (result.PlayedBy == PlayedBy.East || result.PlayedBy == PlayedBy.West));
         }
 
         private static int GetPointsPerTrick(ContractColors contractColor)
@@ -262,20 +262,20 @@ namespace IglaClub.TournamentManager
                 return 30;
         }
 
-        public static NESW GetDealerByBoardNumber(int boardNumber)
+        public static PlayedBy GetDealerByBoardNumber(int boardNumber)
         {
             switch (boardNumber % 4)
             {
                 case 1:
-                    return NESW.North;
+                    return PlayedBy.North;
                 case 2:
-                    return NESW.East;
+                    return PlayedBy.East;
                 case 3:
-                    return NESW.South;
+                    return PlayedBy.South;
                 case 0:
-                    return NESW.West;
+                    return PlayedBy.West;
                 default:
-                    return NESW.North;
+                    return PlayedBy.North;
             }
         }
 
