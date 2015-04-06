@@ -134,11 +134,11 @@ namespace IglaClub.TournamentManager
 
             var total = (resultsGroupedByBoard.Count - 1) * 2;
             var currentMax = total;
-            if (resultsGroupedByBoard.Count == 1)
-            {
-                total = 2;
-                currentMax = 1;
-            }
+            //if (resultsGroupedByBoard.Count == 1)
+            //{
+            //    total = 2;
+            //    currentMax = 1;
+            //}
 
             foreach (IGrouping<int?, Result> resultsWithTheSameScore in orderedResults)
             {

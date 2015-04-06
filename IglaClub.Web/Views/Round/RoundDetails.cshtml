@@ -9,6 +9,9 @@
         <div>
             <a href="@Url.Action("Details", "Tournament", new { id = Model.Tournament.Id })"><i class="glyphicon glyphicon-arrow-left right-side-margin"></i>go back to tournament details</a>
         </div>
+        <div>
+            <a href="@Url.Action("MyResults", "Results", new { tournamentId = Model.Tournament.Id })"><i class="glyphicon glyphicon-list right-side-margin"></i>My results</a>
+        </div>
         <span class="medium-header">Round @Model.Tournament.CurrentRound</span>
         <br/>
         <div class="col-md-6 col-xs-12">

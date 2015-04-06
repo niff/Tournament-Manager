@@ -60,5 +60,29 @@ namespace IglaClub.ObjectModel.Entities
             var ewName = EW != null ? EW.ToString() :string.Empty;
             return string.Format("Ns({2}): {0}, Ew({3}): {1}", ScoreNs, ScoreEw, nsName, ewName);
         }
+
+        public bool UserIsInThisResult(long userId)
+        {
+            return (this.EW.Player1 != null && this.EW.Player1.Id == userId)
+                    || (this.EW.Player2 != null && this.EW.Player2.Id == userId)
+                    || (this.NS.Player1 != null && this.NS.Player1.Id == userId)
+                    || (this.NS.Player2 != null && this.NS.Player2.Id == userId);
+        }
+        public bool UserIsNs(long userId)
+        {
+            return (this.NS.Player1 != null && this.NS.Player1.Id == userId)
+                    || (this.NS.Player2 != null && this.NS.Player2.Id == userId);
+        }
+
+        public bool IsFinished
+        {
+            get
+            {
+                 return ScoreNs != null;    
+            }
+            //return this.ResultNsPoints != null || this.PlayedBy == Enums.PlayedBy.PassedOut || r.PlayedBy == Enums.PlayedBy.DirectorScore;
+            
+        }    
+
     }
 }

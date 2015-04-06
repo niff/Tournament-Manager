@@ -235,9 +235,13 @@ namespace IglaClub.Web.Controllers
             return PartialView("_PairsResults", pairsResultsViewModel);
         }
 
-        public ActionResult MyResults()
+        public ActionResult MyResults(long tournamentId)
         {
-            throw new NotImplementedException();
+            var currentUser = userRepository.GetUserByLogin(HttpContext.User.Identity.Name);
+            var tournament = db.Tournaments.Find(tournamentId);
+            var results = resultRepository.GetResultsByTournamentAndUser(tournamentId, currentUser.Id);
+            return View(new MyResultsVm(results, tournament, currentUser));
         }
+
     }
 }

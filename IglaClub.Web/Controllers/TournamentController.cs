@@ -333,9 +333,7 @@ namespace IglaClub.Web.Controllers
                     "You are playing soon", manageMode: false, showSubscriptionStatus: false);
             return PartialView("_TournamentList", model);
         }
-
         
-
         [AllowAnonymous]
         public ActionResult GetAll()
         {
@@ -360,14 +358,12 @@ namespace IglaClub.Web.Controllers
 
         public PartialViewResult AvailableTournaments()
         {
-            var tournaments = tournamentRepository.GetAvailableTournamentsByUser(GetCurrentUserName()).OrderBy(t => t.PlannedStartDate);
-            var pastItemsAtTheEnd = tournaments.Where(t => t.PlannedStartDate >= DateTime.Now)
-               .Union(tournaments.Where(t => t.PlannedStartDate < DateTime.Now)).ToList();
-            var model = new TounamentSingleListViewModel
-                {
-                    Tournaments = pastItemsAtTheEnd,
-                    Header = "Other tournaments"
-                };
+            var model = CreateTounamentSingleListViewModelWithSortedItems(
+                                        tournamentRepository.GetAvailableTournamentsByUser(GetCurrentUserName()),
+                                        DEFAULT_TOURNAMENT_COUNT,
+                                        "Other tournaments",
+                                        manageMode :false,
+                                        showSubscriptionStatus:false);
             return PartialView("_TournamentList", model);
         }
         
@@ -486,9 +482,9 @@ namespace IglaClub.Web.Controllers
         }
 
         [TournamentOwner]
-        public ActionResult Finish(long tournamentid)
+        public ActionResult Finish(long id)
         {
-            var operationStatus = this.tournamentManager.Finish(tournamentid);
+            var operationStatus = this.tournamentManager.Finish(id);
             if (operationStatus.Ok)
                 notificationService.DisplaySuccess("Tournament finished");
             else
@@ -496,7 +492,7 @@ namespace IglaClub.Web.Controllers
                     operationStatus.ErrorMessage);
             
             if (Request.UrlReferrer == null)
-                return RedirectToAction("Manage", "Tournament", new { tournamentId = tournamentid });
+                return RedirectToAction("Manage", "Tournament", new { tournamentId = id });
             return Redirect(Request.UrlReferrer.ToString());
         }
     }
