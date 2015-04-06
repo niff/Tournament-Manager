@@ -1,4 +1,5 @@
-﻿@using IglaClub.ObjectModel.Enums
+﻿@using IglaClub.ObjectModel.Consts
+@using IglaClub.ObjectModel.Enums
 @model IglaClub.ObjectModel.Entities.Tournament
 
 @{
@@ -18,6 +19,13 @@
     title = "";
 }
 <div title="@title">
-<a href="@Url.Action(action, new { tournamentId = Model.Id, withPairsRepeat = false })" class = "btn btn-@btnClass btn-short" >
-    <i class="glyphicon glyphicon-arrow-right right-side-margin"></i>@Html.Raw(linkLabel)
-</a></div>
+    <a href="@Url.Action(action, new { tournamentId = Model.Id, withPairsRepeat = false })" class = "btn btn-@btnClass btn-short" >
+        <i class="glyphicon glyphicon-arrow-right right-side-margin"></i>@Html.Raw(linkLabel)
+    </a></div>
+
+
+<div title="@StringResources.FinishTournamentTitle">
+    <a href="@Url.Action("Finish", new { tournamentId = Model.Id})" class="btn btn-@btnClass btn-short">
+        <i class="glyphicon glyphicon-stop right-side-margin"></i>Finish tournament
+    </a>
+</div>

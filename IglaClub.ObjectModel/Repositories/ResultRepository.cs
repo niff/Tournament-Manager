@@ -59,7 +59,7 @@ namespace IglaClub.ObjectModel.Repositories
 
         private static bool ResultIsFinished(Result r)
         {
-            return r.ResultNsPoints != null || r.PlayedBy == Enums.NESW.PassedOut || r.PlayedBy == Enums.NESW.DirectorScore;
+            return r.ResultNsPoints != null || r.PlayedBy == Enums.PlayedBy.PassedOut || r.PlayedBy == Enums.PlayedBy.DirectorScore;
         }
 
         

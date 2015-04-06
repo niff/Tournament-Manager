@@ -13,12 +13,12 @@ namespace IglaClub.ObjectModel.Tools
         public const string ParseScorePattern =
             @"(?<level>[1-7])(?<color>s|h|c|d|nt)(?<double>x{0,2})(?<player>[nesw])(?<tricks>(=|[+-](1[0-3]|[1-9])))";
 
-        public static readonly Dictionary<string, NESW> PlayersDictionary = new Dictionary<string, NESW>
+        public static readonly Dictionary<string, PlayedBy> PlayersDictionary = new Dictionary<string, PlayedBy>
         {
-            {"S", NESW.South},
-            {"W", NESW.West},
-            {"N", NESW.North},
-            {"E", NESW.East}
+            {"S", PlayedBy.South},
+            {"W", PlayedBy.West},
+            {"N", PlayedBy.North},
+            {"E", PlayedBy.East}
         };
 
         public static readonly Dictionary<string, ContractColors> ColorsDictionary = new Dictionary<string, ContractColors>
@@ -70,11 +70,11 @@ namespace IglaClub.ObjectModel.Tools
          
         private static string GetFormatResult(Result result, Dictionary<string, ContractColors> colorsDictionary)
          {
-             if (result.PlayedBy == NESW.Unavailable)
+             if (result.PlayedBy == PlayedBy.Unavailable)
                  return "";
-             if (result.PlayedBy == NESW.PassedOut)
+             if (result.PlayedBy == PlayedBy.PassedOut)
                  return "Passed out";
-             if (result.PlayedBy == NESW.DirectorScore)
+             if (result.PlayedBy == PlayedBy.DirectorScore)
                  return "Director score";
              if (result.ContractColor == ContractColors.Unknown)
                 return "";
@@ -127,7 +127,7 @@ namespace IglaClub.ObjectModel.Tools
 
         public static bool ResultIsEntered(Result result)
         {
-            return result.PlayedBy == NESW.Unavailable;
+            return result.PlayedBy == PlayedBy.Unavailable;
         }
 
         private static int ParseNumberOfTricks(string numberOfTricksString, int contractLevel)
@@ -141,7 +141,7 @@ namespace IglaClub.ObjectModel.Tools
             return DoubledDictionary[doubleString.ToLowerInvariant()];
         }
 
-        private static NESW ParsePlayedBy(string playerString)
+        private static PlayedBy ParsePlayedBy(string playerString)
         {
             return PlayersDictionary[playerString.ToUpperInvariant()];
         }

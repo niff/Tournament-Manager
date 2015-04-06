@@ -67,7 +67,7 @@ namespace IglaClub.ObjectModel.Entities
                 if (this.Results == null)
                     return 0;
                 return this.Results.Count(r => r.ResultNsPoints == null 
-                    && r.PlayedBy != NESW.DirectorScore 
+                    && r.PlayedBy != PlayedBy.DirectorScore 
                     && r.RoundNumber == this.CurrentRound);
             }
         }

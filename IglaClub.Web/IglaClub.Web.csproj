@@ -293,6 +293,10 @@
     <Compile Include="Migrations\201504011015188_ChangeEmailColumnToAcceptNull.Designer.cs">
       <DependentUpon>201504011015188_ChangeEmailColumnToAcceptNull.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504060821110_PlayedByDefaultValueChangedToZero.cs" />
+    <Compile Include="Migrations\201504060821110_PlayedByDefaultValueChangedToZero.Designer.cs">
+      <DependentUpon>201504060821110_PlayedByDefaultValueChangedToZero.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ViewModels\TounamentListViewModel.cs" />
     <Compile Include="Models\ViewModels\TounamentSingleListViewModel.cs" />
     <Compile Include="Controllers\TournamentController.cs" />
@@ -569,6 +573,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504011015188_ChangeEmailColumnToAcceptNull.resx">
       <DependentUpon>201504011015188_ChangeEmailColumnToAcceptNull.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504060821110_PlayedByDefaultValueChangedToZero.resx">
+      <DependentUpon>201504060821110_PlayedByDefaultValueChangedToZero.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

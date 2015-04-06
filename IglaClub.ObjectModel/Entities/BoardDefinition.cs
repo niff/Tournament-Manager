@@ -8,7 +8,7 @@ namespace IglaClub.ObjectModel.Entities
 {
     public class BoardDefinition : BaseEntity
     {
-        public NESW Dealer { get; set; }
+        public PlayedBy Dealer { get; set; }
 
         public Vulnerable Vulnerability { get; set; }
 

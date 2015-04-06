@@ -83,7 +83,7 @@
             
             <tr class="@rowStyle">
                 <td>
-                    @if (item.PlayedBy == NESW.DirectorScore || item.ResultNsPoints.HasValue)
+                    @if (item.PlayedBy == PlayedBy.DirectorScore || item.ResultNsPoints.HasValue)
                     {
                         <span class="glyphicon glyphicon-ok success" title="Completed"></span>
                     }
@@ -116,7 +116,7 @@
                     @ResultHelper.GetStringForDoubledContract(item.ContractDoubled)
                 </td>
                 <td>
-                    @item.PlayedBy.GetDisplayAttributeFrom(typeof(NESW))
+                    @item.PlayedBy.GetDisplayAttributeFrom(typeof(PlayedBy))
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.NumberOfTricks)

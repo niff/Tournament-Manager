@@ -285,7 +285,7 @@ namespace IglaClub.Web.Controllers
         }
 
         public ActionResult GenerateNextRound(long tournamentId, bool withPairsRepeat)
-        {//todo how to finish tournament
+        {
             var status = tournamentManager.GenerateNextRound(tournamentId, withPairsRepeat);
 
             if (!status.Ok)
@@ -468,6 +468,21 @@ namespace IglaClub.Web.Controllers
         public ActionResult PlayerResults()
         {
             return View();
+        }
+
+        [TournamentOwner]
+        public ActionResult Finish(long tournamentid)
+        {
+            var operationStatus = this.tournamentManager.Finish(tournamentid);
+            if (operationStatus.Ok)
+                notificationService.DisplaySuccess("Tournament finished");
+            else
+                notificationService.DisplayError("Some errors during tournament finish. \r\n Details: {0}",
+                    operationStatus.ErrorMessage);
+            
+            if (Request.UrlReferrer == null)
+                return RedirectToAction("Manage", "Tournament", new { tournamentId = tournamentid });
+            return Redirect(Request.UrlReferrer.ToString());
         }
     }
 }

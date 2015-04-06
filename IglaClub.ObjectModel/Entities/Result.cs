@@ -23,7 +23,7 @@ namespace IglaClub.ObjectModel.Entities
         public ContractDoubled ContractDoubled { get; set; }
 
         [DisplayName("Played By")]
-        public NESW PlayedBy { get; set; }
+        public PlayedBy PlayedBy { get; set; }
 
         [DisplayName("Tricks")]
         [Range(0, 13, ErrorMessage = "Number of tricks must be between 0 and 13")]
