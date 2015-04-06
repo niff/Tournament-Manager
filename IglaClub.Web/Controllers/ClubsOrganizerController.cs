@@ -42,8 +42,8 @@ namespace IglaClub.Web.Controllers
             var coordinates = Request.Form["coords"];
             club.Coordinates = coordinates;
             var user = userRepository.GetUserByLogin(User.Identity.Name);
-            
-            clubRepository.Add(club, user);
+
+            clubRepository.Insert(club, user);
             
             return RedirectToAction("Index");
         }
