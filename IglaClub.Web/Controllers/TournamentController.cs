@@ -347,14 +347,12 @@ namespace IglaClub.Web.Controllers
 
         public PartialViewResult AvailableTournaments()
         {
-            var tournaments = tournamentRepository.GetAvailableTournamentsByUser(GetCurrentUserName()).OrderBy(t => t.PlannedStartDate);
-            var pastItemsAtTheEnd = tournaments.Where(t => t.PlannedStartDate >= DateTime.Now)
-               .Union(tournaments.Where(t => t.PlannedStartDate < DateTime.Now)).ToList();
-            var model = new TounamentSingleListViewModel
-                {
-                    Tournaments = pastItemsAtTheEnd,
-                    Header = "Other tournaments"
-                };
+            var model = CreateTounamentSingleListViewModelWithSortedItems(
+                                        tournamentRepository.GetAvailableTournamentsByUser(GetCurrentUserName()),
+                                        DEFAULT_TOURNAMENT_COUNT,
+                                        "Other tournaments",
+                                        manageMode :false,
+                                        showSubscriptionStatus:false);
             return PartialView("_TournamentList", model);
         }
         
