@@ -137,6 +137,7 @@ namespace IglaClub.Web.Controllers
         }
 
         [TournamentOwner]
+        [SiteMapTitle("Name", Target= AttributeTarget.ParentNode)]
         public ActionResult Edit(long id = 0)
         {
             Tournament tournament = db.Tournaments.Find(id);
@@ -359,6 +360,7 @@ namespace IglaClub.Web.Controllers
             return PartialView("_TournamentList", model);
         }
         
+        //[SiteMapTitle("Organize tournaments", Target = AttributeTarget.ParentNode)]
         public ActionResult OwnerTournaments()
         {
             var model = new TounamentListViewModel

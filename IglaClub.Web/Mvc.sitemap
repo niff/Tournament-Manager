@@ -3,10 +3,24 @@
             xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
             xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
 
-  <mvcSiteMapNode title="Tournaments" controller="Tournament" action="Index">
-    <mvcSiteMapNode title="My tournaments" action="OwnerTournaments">
-      <mvcSiteMapNode title="Tournament" action="Manage" preservedRouteParameters="id" />
-  </mvcSiteMapNode>
+  <mvcSiteMapNode title="Home" controller="Home" action="Index">
+      <mvcSiteMapNode title="Tournaments" controller="Tournament" action="Index">
+        <mvcSiteMapNode title="Organize tournaments" action="OwnerTournaments">
+          <mvcSiteMapNode title="Manage" action="Manage" preservedRouteParameters="id" >
+            <mvcSiteMapNode title="Edit" action="Edit" preservedRouteParameters="id" />
+          </mvcSiteMapNode>
+        </mvcSiteMapNode>
+        <mvcSiteMapNode title="Play tournaments" action="PlayerTournaments">
+          <mvcSiteMapNode title="Tournament" action="Details" preservedRouteParameters="id" />
+        </mvcSiteMapNode>
+    </mvcSiteMapNode>
+    <!--<mvcSiteMapNode title="Play" clickable="false">
+      <mvcSiteMapNode title="Tournaments" controller="Tournament" action="Index">
+        <mvcSiteMapNode title="My tournaments" action="PlayerTournaments">
+          <mvcSiteMapNode title="Tournament" action="Details" preservedRouteParameters="id" />
+        </mvcSiteMapNode>
+      </mvcSiteMapNode>
+    </mvcSiteMapNode>-->
   </mvcSiteMapNode>
 
 </mvcSiteMap>
