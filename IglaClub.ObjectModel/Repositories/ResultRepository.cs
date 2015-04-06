@@ -55,25 +55,22 @@ namespace IglaClub.ObjectModel.Repositories
         public Dictionary<long, int> GetDictionaryPairNumberMaxPoints(long tournamentId)
         {
             var res = new Dictionary<long, int>();
-            var results = GetResults(tournamentId);
+            var finishedResults = GetResults(tournamentId).Where(r=>r.IsFinished).ToList();
             foreach (var pair in db.Pairs.Where(p => p.Tournament.Id == tournamentId).ToList())
             {
                 long pairId = pair.Id;
                 int pairNumber = pair.PairNumber;
                 List<int> boardsPlayedByPair =
-                    results.Where(r => (ResultIsFinished(r)) && (r.NS.Id == pairId || r.EW.Id == pairId)).Select(r => r.Board.BoardNumber).ToList();
+                    finishedResults.Where(r => (r.NS.Id == pairId || r.EW.Id == pairId)).Select(r => r.Board.BoardNumber).ToList();
                 var numberOfResults =
-                    results.Count(r => (ResultIsFinished(r)) && boardsPlayedByPair.Contains(r.Board.BoardNumber));
+                    finishedResults.Count(r => boardsPlayedByPair.Contains(r.Board.BoardNumber));
                 var maxPoints = (numberOfResults - boardsPlayedByPair.Count) * 2;
                 res.Add(pairNumber, maxPoints);
             }
             return res;
         }
 
-        private static bool ResultIsFinished(Result r)
-        {
-            return r.ResultNsPoints != null || r.PlayedBy == Enums.PlayedBy.PassedOut || r.PlayedBy == Enums.PlayedBy.DirectorScore;
-        }
+        
 
 
     }

@@ -74,6 +74,15 @@ namespace IglaClub.ObjectModel.Entities
                     || (this.NS.Player2 != null && this.NS.Player2.Id == userId);
         }
 
+        public bool IsFinished
+        {
+            get
+            {
+                 return ScoreNs != null;    
+            }
+            //return this.ResultNsPoints != null || this.PlayedBy == Enums.PlayedBy.PassedOut || r.PlayedBy == Enums.PlayedBy.DirectorScore;
+            
+        }    
 
     }
 }
