@@ -3,30 +3,26 @@
 @using System.Linq
 @using MvcSiteMapProvider.Web.Html.Models
  
-@if (Model.Nodes.Count != 1)
-{
-    
-<ul class="breadcrumb">
-@foreach (var node in Model.Nodes)
-{
-    if (node == Model.Nodes.First())
+@if (Model.Nodes.Count > 2)
+{  
+    <ul class="breadcrumb">
+    @foreach (var node in Model.Nodes)
     {
-        continue;
+        if (node == Model.Nodes.First())
+        {
+            continue;
+        }
+
+        if (node != Model.Nodes.Last())
+        {
+            string url = node.IsClickable ? node.Url : "#";          
+            <li><a href="@url">@node.Title</a><span class="divider"></span></li>
+        }
+        else
+        {
+            
+            <li class="active">@node.Title</li>
+        }
     }
- 
-    if (node != Model.Nodes.Last())
-    {
-        string url = node.IsClickable ? node.Url : "#";
- 
-            
-    <li><a href="@url">@node.Title</a><span class="divider"></span></li>
-}
-    else
-    {
-            
-    <li class="active">@node.Title</li>
-}
-}
- 
     </ul>
 }

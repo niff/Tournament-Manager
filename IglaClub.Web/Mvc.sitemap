@@ -1,26 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
-            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
-
+<mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0" xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
   <mvcSiteMapNode title="Home" controller="Home" action="Index">
-      <mvcSiteMapNode title="Tournaments" controller="Tournament" action="Index">
-        <mvcSiteMapNode title="Organize tournaments" action="OwnerTournaments">
-          <mvcSiteMapNode title="Manage" action="Manage" preservedRouteParameters="id" >
-            <mvcSiteMapNode title="Edit" action="Edit" preservedRouteParameters="id" />
-          </mvcSiteMapNode>
-        </mvcSiteMapNode>
-        <mvcSiteMapNode title="Play tournaments" action="PlayerTournaments">
-          <mvcSiteMapNode title="Tournament" action="Details" preservedRouteParameters="id" />
-        </mvcSiteMapNode>
-    </mvcSiteMapNode>
-    <!--<mvcSiteMapNode title="Play" clickable="false">
-      <mvcSiteMapNode title="Tournaments" controller="Tournament" action="Index">
-        <mvcSiteMapNode title="My tournaments" action="PlayerTournaments">
-          <mvcSiteMapNode title="Tournament" action="Details" preservedRouteParameters="id" />
+    <mvcSiteMapNode title="Tournaments" controller="Tournament" action="Index" >
+      <mvcSiteMapNode title="Organize tournaments" action="OwnerTournaments">
+        <mvcSiteMapNode title="Create" action="Create" preservedRouteParameters="id" />
+        <mvcSiteMapNode title="Manage" action="Manage" preservedRouteParameters="id" >
+          <mvcSiteMapNode title="Edit details" action="Edit" preservedRouteParameters="id" />
+          <mvcSiteMapNode title="Edit results" action="Manage" controller="Results" 
+                          preservedRouteParameters="tournamentId" inheritedRouteParameters="id"  />
         </mvcSiteMapNode>
       </mvcSiteMapNode>
-    </mvcSiteMapNode>-->
+      <mvcSiteMapNode title="Play tournaments" action="PlayerTournaments">
+        <mvcSiteMapNode title="Tournament" action="Details" preservedRouteParameters="id" />
+      </mvcSiteMapNode>
+    </mvcSiteMapNode>
   </mvcSiteMapNode>
-
 </mvcSiteMap>
