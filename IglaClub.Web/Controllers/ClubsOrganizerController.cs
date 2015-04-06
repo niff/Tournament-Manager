@@ -7,7 +7,7 @@ using IglaClub.Web.Models;
 
 namespace IglaClub.Web.Controllers
 {
-    public class ClubOrganizerController : Controller
+    public class ClubsOrganizerController : Controller
     {
         private readonly IglaClubDbContext db = new IglaClubDbContext();
         private readonly ClubRepository clubRepository;
@@ -15,7 +15,7 @@ namespace IglaClub.Web.Controllers
         private readonly NotificationService notificationService;
 
 
-        public ClubOrganizerController()
+        public ClubsOrganizerController()
         {
             clubRepository = new ClubRepository(db);
             userRepository = new UserRepository(db);

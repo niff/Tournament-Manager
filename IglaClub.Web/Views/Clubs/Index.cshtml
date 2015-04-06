@@ -1,0 +1,11 @@
+﻿@using IglaClub.Web.Models.ViewModels.Clubs
+@model ClubsIndexViewModel
+
+@{
+    ViewBag.Title = "Clubs";
+}
+
+<h2>All clubs</h2>
+
+@Html.Partial("_ClubsList", new ClubsListViewModel{Header = "My clubs", Clubs = Model.ClubsWithSubscribedUser, User = Model.User})
+@Html.Partial("_ClubsList", new ClubsListViewModel{Header = "Other clubs", Clubs = Model.ClubsWithNotSubscribedUser, User = Model.User})

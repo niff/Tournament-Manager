@@ -266,10 +266,12 @@
     <Content Include="Content\themes\1408214423_file_add.png" />
     <Content Include="Content\global.css" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Controllers\ClubOrganizerController.cs" />
+    <Compile Include="Controllers\ClubsOrganizerController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Authorization\TournamentOwnerAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ClubsController.cs" />
+    <Compile Include="Models\ViewModels\Clubs\ClubsIndexViewModel.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\ResultsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -306,6 +308,7 @@
     <Compile Include="Migrations\201504060821110_PlayedByDefaultValueChangedToZero.Designer.cs">
       <DependentUpon>201504060821110_PlayedByDefaultValueChangedToZero.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModels\Clubs\ClubsListViewModel.cs" />
     <Compile Include="Models\ViewModels\MyResultsVm.cs" />
     <Compile Include="Models\ViewModels\TounamentListViewModel.cs" />
     <Compile Include="Models\ViewModels\TounamentSingleListViewModel.cs" />
@@ -430,9 +433,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
-    <Content Include="Views\ClubOrganizer\Create.cshtml" />
-    <Content Include="Views\ClubOrganizer\Details.cshtml" />
-    <Content Include="Views\ClubOrganizer\Edit.cshtml" />
+    <Content Include="Views\ClubsOrganizer\Create.cshtml" />
+    <Content Include="Views\ClubsOrganizer\Details.cshtml" />
+    <Content Include="Views\ClubsOrganizer\Edit.cshtml" />
     <Content Include="Content\bootstrap\css\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap\css\bootstrap.css.map" />
     <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.woff2">
@@ -535,8 +538,8 @@
     <Content Include="Views\Tournament\_TournamentStartedActions.cshtml" />
     <Content Include="Views\Results\SingleResultEdit.cshtml" />
     <Content Include="Views\Shared\_TopMenu.cshtml" />
-    <Content Include="Views\ClubOrganizer\MyClubs.cshtml" />
-    <Content Include="Views\ClubOrganizer\Index.cshtml" />
+    <Content Include="Views\ClubsOrganizer\MyClubs.cshtml" />
+    <Content Include="Views\ClubsOrganizer\Index.cshtml" />
     <Content Include="Views\Tournament\PlayerResults.cshtml" />
     <Content Include="Views\Account\Settings.cshtml" />
     <Content Include="Views\Tournament\FindOnMap.cshtml" />
@@ -551,6 +554,8 @@
     <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\BootstrapSiteMapPathHelperModel.cshtml" />
     <Content Include="Views\Results\MyResults.cshtml" />
+    <Content Include="Views\Clubs\Index.cshtml" />
+    <Content Include="Views\Clubs\_ClubsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

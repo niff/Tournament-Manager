@@ -1,0 +1,48 @@
+﻿@model IglaClub.Web.Models.ViewModels.Clubs.ClubsListViewModel
+
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Coordinates
+            </th>
+            <th>
+                Address
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var club in Model.Clubs)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => club.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => club.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => club.Coordinates)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => club.Address)
+                </td>
+                <td>
+                    @if (!club.UserIsSubscribed(Model.User.Id))
+                    {
+                        @Html.ActionLink("Subscribe |", "Subscribe", new { id = club.Id })
+                    }
+                    @Html.ActionLink("Details", "Details", new { id = club.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
