@@ -321,9 +321,7 @@ namespace IglaClub.Web.Controllers
                     "You are playing soon", manageMode: false, showSubscriptionStatus: false);
             return PartialView("_TournamentList", model);
         }
-
         
-
         [AllowAnonymous]
         public ActionResult GetAll()
         {
@@ -473,9 +471,9 @@ namespace IglaClub.Web.Controllers
         }
 
         [TournamentOwner]
-        public ActionResult Finish(long tournamentid)
+        public ActionResult Finish(long id)
         {
-            var operationStatus = this.tournamentManager.Finish(tournamentid);
+            var operationStatus = this.tournamentManager.Finish(id);
             if (operationStatus.Ok)
                 notificationService.DisplaySuccess("Tournament finished");
             else
@@ -483,7 +481,7 @@ namespace IglaClub.Web.Controllers
                     operationStatus.ErrorMessage);
             
             if (Request.UrlReferrer == null)
-                return RedirectToAction("Manage", "Tournament", new { tournamentId = tournamentid });
+                return RedirectToAction("Manage", "Tournament", new { tournamentId = id });
             return Redirect(Request.UrlReferrer.ToString());
         }
     }

@@ -39,7 +39,7 @@ namespace IglaClub.Web.Controllers
                 return RedirectToAction("Index", "Tournament");
             }
             var tournament = this.tournamentRepository.Get<Tournament>(tournamentId);
-            var results = this.resultRepository.GetResultsByRoundAndUser(tournamentId, tournament.CurrentRound,
+            var results = this.resultRepository.GetResultsByTournamentAndRoundAndUser(tournamentId, tournament.CurrentRound,
                 currentUser.Id);
             if (results.IsNullOrEmpty())
                 return View(new RoundDetailsViewModel()

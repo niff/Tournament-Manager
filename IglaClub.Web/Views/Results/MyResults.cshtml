@@ -1,0 +1,60 @@
+﻿@using IglaClub.ObjectModel.Tools
+@model IglaClub.Web.Models.ViewModels.MyResultsVm
+
+@{
+    ViewBag.Title = "My Results";
+}
+
+<h2>My Results in tournament @Model.Tournament.Name</h2>
+<table id="myResultsHistoryTable" class="table table-striped table-hover" data-order='[[ 1, "asc" ]]' data-page-length='25'>
+        <thead>
+            <tr>
+                <th>Round</th>
+                <th>Opponents</th>
+                <th>Board</th>
+                <th>Line</th>
+                <th>Contract</th>
+                <th>Score NS</th>
+                <th>Tournament score</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var result in Model.Results)
+            {
+                <tr>
+                    <td>
+                        @result.RoundNumber
+                    </td>
+                    <td>
+                        @( @result.UserIsNs(Model.CurrentUser.Id) ? @result.EW : @result.NS)
+                    </td>
+                    <td>
+                        @result.Board.BoardNumber
+                    </td>
+                    <td>
+                        @( @result.UserIsNs(Model.CurrentUser.Id) ? "NS" : "EW")
+                    </td>
+                    <td>
+                        @Html.Raw(ResultsParser.GetFormatResultForHtml(result))
+                    </td>
+                    <td>
+                        @result.ResultNsPoints
+                    </td>
+                    <td>
+                        @( result.UserIsNs(Model.CurrentUser.Id) ? result.ScoreNs : result.ScoreEw)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+@Scripts.Render("~/bundles/dataTables")
+
+<script>
+
+    $(document).ready(function () {
+        $('#myResultsHistoryTable').DataTable();
+    });
+
+</script>
