@@ -43,6 +43,7 @@
 
             @RenderSection("featured", required: false)
             <div class="column-padding-layout">
+                @Html.MvcSiteMap().SiteMapPath() 
                 @RenderBody()
             </div>
         </div>

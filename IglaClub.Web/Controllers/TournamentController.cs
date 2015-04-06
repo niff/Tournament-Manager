@@ -11,6 +11,7 @@ using IglaClub.Web.Authorization;
 using IglaClub.Web.Models;
 using IglaClub.Web.Models.ViewModels;
 using IglaClub.Web.Infrastructure;
+using MvcSiteMapProvider.Web.Mvc.Filters;
 
 namespace IglaClub.Web.Controllers
 {
@@ -57,6 +58,7 @@ namespace IglaClub.Web.Controllers
         }
 
         [TournamentOwner]
+        [SiteMapTitle("Tournament.Name")]
         public ActionResult Manage(long id = 0)
         {
             
@@ -356,7 +358,7 @@ namespace IglaClub.Web.Controllers
                 };
             return PartialView("_TournamentList", model);
         }
-
+        
         public ActionResult OwnerTournaments()
         {
             var model = new TounamentListViewModel
