@@ -13,6 +13,8 @@ using IglaClub.Web.Infrastructure;
 using IglaClub.Web.Models;
 using IglaClub.Web.Models.ViewModels;
 using IglaClub.TournamentManager;
+using MvcSiteMapProvider;
+using MvcSiteMapProvider.Web.Mvc.Filters;
 
 namespace IglaClub.Web.Controllers
 {
@@ -145,9 +147,12 @@ namespace IglaClub.Web.Controllers
             return View();
         }
 
+        //[SiteMapTitle("Tournament.Name")]
+        [SiteMapTitle("Tournament.Name", Target = AttributeTarget.ParentNode)]
         //[TournamentOwner]
         public ActionResult Manage(long tournamentId, string sortBy, string sortdir)
         {
+            
             Tournament tournament = tournamentRepository.GetTournament(tournamentId);
             if (tournament == null)
                 return Content(_itemNotFound);

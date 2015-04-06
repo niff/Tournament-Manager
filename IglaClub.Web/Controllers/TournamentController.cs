@@ -11,6 +11,7 @@ using IglaClub.Web.Authorization;
 using IglaClub.Web.Models;
 using IglaClub.Web.Models.ViewModels;
 using IglaClub.Web.Infrastructure;
+using MvcSiteMapProvider;
 using MvcSiteMapProvider.Web.Mvc.Filters;
 
 namespace IglaClub.Web.Controllers
@@ -61,7 +62,16 @@ namespace IglaClub.Web.Controllers
         [SiteMapTitle("Tournament.Name")]
         public ActionResult Manage(long id = 0)
         {
-            
+            //var node = SiteMaps.Current.FindSiteMapNodeFromKey("Manage_Results");
+            //if (node != null)
+            //{
+            //    node.RouteValues.Add("id", id);
+            //    var parent = node.ParentNode;
+            //    if (parent != null)
+            //    {
+            //        parent.RouteValues.Add("id", id);
+            //    }
+            //}
             Tournament tournament = db.Tournaments.
                 Include(t=>t.Pairs).
                 Include(t=>t.Owner).
@@ -76,6 +86,7 @@ namespace IglaClub.Web.Controllers
             
         }
 
+        [SiteMapTitle("Tournament.Name")]
         public ActionResult Details(long id = 0)
         {
             Tournament tournament = db.Tournaments.
