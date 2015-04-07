@@ -9,7 +9,7 @@ namespace IglaClub.ObjectModel.Repositories
         {
         }
 
-        public void Add(Club club, User owner)
+        public void Insert(Club club, User owner)
         {
             base.InsertOrUpdate(club);
 

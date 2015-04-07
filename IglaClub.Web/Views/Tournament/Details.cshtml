@@ -22,11 +22,17 @@
             </div>
             @if (isSubscribed)
             {
+                var goToRoundDetailsText = Model.TournamentStatus == TournamentStatus.Planned ? "Wait for tournament start and click here" : "Go to my table details";
+                var goToRoundDetailsAction = Model.TournamentStatus == TournamentStatus.Planned ?
+                    Url.Action("Details", "Tournament", new { tournamentId = Model.Id })
+                    : Url.Action("RoundDetails", "Round", new { tournamentId = Model.Id });
+
+                
                 <div class="col-md-12">
                     <p>
-                            <a href="@Url.Action("RoundDetails", "Round", new {tournamentId = Model.Id})" class="green-link">
+                            <a href="@goToRoundDetailsAction" class="green-link">
                             <i class="glyphicon glyphicon-triangle-right success"></i>
-                            Go to my table details
+                            @goToRoundDetailsText
                         </a>
                     </p>
                 </div>

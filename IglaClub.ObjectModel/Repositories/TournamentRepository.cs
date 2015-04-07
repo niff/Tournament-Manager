@@ -87,13 +87,11 @@ namespace IglaClub.ObjectModel.Repositories
 
         public IList<Tournament> GetAvailableTournamentsByUser(string userLogin)
         {
-            var now = DateTime.Now.AddMinutes(-30);
             var tournaments =
                 db.Tournaments.Where(
                     t =>
                         t.Pairs.All(p => p.Player1.Login != userLogin && p.Player2.Login != userLogin) &&
-                        t.TournamentStatus == TournamentStatus.Planned &&
-                        t.PlannedStartDate >= now
+                        t.TournamentStatus == TournamentStatus.Planned
                         );
 
             return tournaments.OrderBy(t => t.PlannedStartDate).ToList();

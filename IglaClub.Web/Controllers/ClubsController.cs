@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using IglaClub.ObjectModel.Entities;
 using IglaClub.ObjectModel.Repositories;
 using IglaClub.Web.Infrastructure;
 using IglaClub.Web.Models;
+using IglaClub.Web.Models.ViewModels.Clubs;
 
 namespace IglaClub.Web.Controllers
 {
@@ -21,66 +21,30 @@ namespace IglaClub.Web.Controllers
             userRepository = new UserRepository(db);
             notificationService = new NotificationService(TempData);
         }
+        //
+        // GET: /Clubs/
 
-        public ActionResult MyClubs()
+        public ActionResult Index()
         {
-            var clubs = db.Clubs.Where(c=>c.ClubUsers.Any(cu=>cu.User.Login == User.Identity.Name && cu.IsAdministrator));
-            return View(clubs);
+            var user = this.userRepository.GetUserByLogin(User.Identity.Name);
+            var clubs = this.db.Clubs;
+            var clubsListViewModel = new ClubsIndexViewModel
+            {
+                ClubsWithSubscribedUser = clubs.Where(c=>c.ClubUsers.Any(cu=>cu.User.Id == user.Id)).ToList(),
+                ClubsWithNotSubscribedUser = clubs.Where(c=>c.ClubUsers.All(cu=>cu.User.Id != user.Id)).ToList(),
+                User = user
+            };
+            return View(clubsListViewModel);
         }
 
-        public ActionResult Create()
+        //
+        // GET: /Clubs/Details/5
+
+        public ActionResult Details(int id)
         {
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Create(Club club)
-        {
-            if (!ModelState.IsValid)
-                return View();
-            
-            var coordinates = Request.Form["coords"];
-            club.Coordinates = coordinates;
-            var user = userRepository.GetUserByLogin(User.Identity.Name);
-            
-            clubRepository.Add(club, user);
-            
-            return RedirectToAction("Index");
-        }
 
-        public ActionResult Edit(int id)
-        {
-            var club = clubRepository.Get<Club>(id);
-            return View(club);
-        }
-
-        [HttpPost]
-        public ActionResult Edit(Club club)
-        {
-            var coordinates = Request.Form["coords"];
-            club.Coordinates = coordinates;
-            clubRepository.Update(club);
-            return View("Details", club);
-        }
-
-        public ActionResult Details(int id)
-        {
-            var club = clubRepository.Get<Club>(id);
-            return View(club);
-        }
-
-        public ActionResult Index()
-        {
-            var clubs = db.Clubs;
-            return View(clubs);
-        }
-
-        public ActionResult Delete(long id)
-        {
-            var club = db.Clubs.Find(id);
-            db.Clubs.Remove(club);
-            notificationService.DisplayInfo("Club {0} removed.",club.Name);
-            return RedirectToAction("Index");
-        }
     }
 }
