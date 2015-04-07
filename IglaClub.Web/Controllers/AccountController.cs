@@ -95,12 +95,12 @@ namespace IglaClub.Web.Controllers
                     WebSecurity.Login(model.UserName, model.Password);
                     notificationService.DisplaySuccess(
                         "<a href='account/edit'>Want to be easily recognized by your friends? \n\rFill up you account details in account settings</a>");
+                    EmailSender.SendEmail(model.Email, model.FirstName + " " + model.LastName, EmailTemplatesDict.NewAccount);
                     return RedirectToAction("Index", "Home");
                 }
                 return View(model); 
             }
 
-            //notificationService.DisplayError("uupps, please try again...");
             return View(model);
         }
 

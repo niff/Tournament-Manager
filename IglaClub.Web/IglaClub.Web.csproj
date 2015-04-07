@@ -61,6 +61,14 @@
     <Reference Include="Portable.Licensing">
       <HintPath>..\packages\Portable.Licensing.1.1.0\lib\portable-net40+sl4+wp7+win8\Portable.Licensing.dll</HintPath>
     </Reference>
+    <Reference Include="SendGrid.SmtpApi, Version=1.2.1.0, Culture=neutral, PublicKeyToken=2ae73662c35d80e4, processorArchitecture=MSIL">
+      <HintPath>..\packages\SendGrid.SmtpApi.1.2.1\lib\net40\SendGrid.SmtpApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SendGridMail, Version=5.1.0.0, Culture=neutral, PublicKeyToken=2ae73662c35d80e4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sendgrid.5.1.0\lib\SendGridMail.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Device" />
@@ -278,6 +286,7 @@
     <Compile Include="Helpers\Html\LinkHelper.cs" />
     <Compile Include="Helpers\ValidationHelper.cs" />
     <Compile Include="Infrastructure\AntiSpamAttribute.cs" />
+    <Compile Include="Infrastructure\EmailSender.cs" />
     <Compile Include="Migrations\201503272236438_ClubUserRenameColumn.cs" />
     <Compile Include="Migrations\201503272236438_ClubUserRenameColumn.Designer.cs">
       <DependentUpon>201503272236438_ClubUserRenameColumn.cs</DependentUpon>

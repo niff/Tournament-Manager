@@ -50,7 +50,6 @@ namespace IglaClub.Web.Controllers
             return View(model);
             //todo wazne: nawigacja w tournamentach | zrobic breadcrumb taki np: Organize > Tournaments > Tournament "tytul" > Edit results
             //
-
         }
 
         private string GetCurrentUserName()
