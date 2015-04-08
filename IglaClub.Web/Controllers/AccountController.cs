@@ -91,14 +91,18 @@ namespace IglaClub.Web.Controllers
             {
                 if (CreateUserAndAccount(model.UserName, model.Password, model.UserName, model.FirstName, model.LastName))
                 {
-                    //todo send email http://azure.microsoft.com/en-us/documentation/articles/sendgrid-dotnet-how-to-send-email/
                     WebSecurity.Login(model.UserName, model.Password);
                     notificationService.DisplaySuccess(
-                        "<a href='account/edit'>Want to be easily recognized by your friends? \n\rFill up you account details in account settings</a>");
-                    EmailSender.SendEmail(model.Email, model.FirstName + " " + model.LastName, EmailTemplatesDict.NewAccount);
+                        "Want to be easily recognized by your friends? \n\rFill up your <a href='account/edit'>account details</a> in account settings");
+                    if (ValidationHelper.IsValidEmailAddress(model.UserName))
+                    {
+                        var name = !String.IsNullOrEmpty(model.FirstName) ? model.FirstName : model.UserName;
+                        EmailSender.SendEmail(model.UserName, name, EmailTemplatesDict.NewAccount);
+                    }
+
                     return RedirectToAction("Index", "Home");
                 }
-                return View(model); 
+                return View(model);
             }
 
             return View(model);

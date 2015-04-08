@@ -30,7 +30,8 @@ namespace IglaClub.Web.Infrastructure
 
             if (cache[hashValue] != null)
             {
-                filterContext.Controller.ViewData.ModelState.AddModelError("ExcessiveRequests", ErrorMessage);
+                //filterContext.Controller.ViewData.ModelState.AddModelError("ExcessiveRequests", ErrorMessage);
+                filterContext.Result = new RedirectResult("Index");
             }
             else
             {

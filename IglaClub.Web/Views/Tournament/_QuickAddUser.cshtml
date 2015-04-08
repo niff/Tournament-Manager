@@ -1,4 +1,5 @@
 ﻿<div class="pairs">
+    <p><span class ="small-header">Quick create new player</span></p>
     <span title="If you want to add new user to the system, please fulfill data below and confirm. New user will be instantly visible in the system">
         If there is no user on the list simply create him here and refresh the page
     </span>
@@ -12,8 +13,12 @@
         </div>
         <button type="submit" class="btn btn-default btn-small" id="createNewUserLogin">Create</button>
         <div>
-            <a href="">What if you don't know user email? <i class="glyphicon glyphicon-question-sign"></i></a>
+            <a data-toggle="collapse" data-target="#noemailhelp">What if you don't know user email? <i class="glyphicon glyphicon-question-sign"></i></a>
             @*//todo add mechanism to catch all questions mark and bind help modal info to it*@
+            <div id="noemailhelp" class="collapse">
+                In the field <strong>Email</strong> type user's nickname or login and then he can contact IGLAclub Team to activate his account.
+            </div>
         </div>
+        
     </form>
 </div>

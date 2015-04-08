@@ -35,7 +35,7 @@ namespace IglaClub.Web.Helpers.Html
                 return new HtmlString(String.Format("<span title=\"{4}\">{3}{0} day{1}{2}</span>",
                     daysCount, daysPlural, dateIsPast, dateIsFuture, title));
             }
-            return new HtmlString(String.Format("<span>{0}</span>", date.ToLongDateString()));
+            return new HtmlString(String.Format("<span>{0}</span>", date.ToString("dd MMM yyyy")));
         }
     }
 }

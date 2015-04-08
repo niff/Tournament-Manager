@@ -442,6 +442,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
+    <Content Include="Scripts\jquery.searchabledropdown-1.0.8.src.js" />
     <Content Include="Views\ClubsOrganizer\Create.cshtml" />
     <Content Include="Views\ClubsOrganizer\Details.cshtml" />
     <Content Include="Views\ClubsOrganizer\Edit.cshtml" />

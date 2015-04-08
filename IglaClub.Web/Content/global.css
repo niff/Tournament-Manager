@@ -630,4 +630,10 @@ span.blue-header {
     .tournament-status .tournament-status-text {
         display: none;
     }
+
+    .breadcrumb ul {
+        margin: 0;
+        margin-left: -40px;
+        font-size: x-small;
+    }
 }

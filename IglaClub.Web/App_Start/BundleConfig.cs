@@ -28,6 +28,8 @@ namespace IglaClub.Web
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
             "~/Content/bootstrap/js/bootstrap.js"));
+            bundles.Add(new ScriptBundle("~/bundles/searchable").Include(
+            "~/Scripts/jquery.searchabledropdown-1.0.8.src.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                         "~/Content/bootstrap/css/bootstrap.css",
