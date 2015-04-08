@@ -19,6 +19,19 @@ namespace IglaClub.Web
             );
 
             routes.MapRoute(
+                name: "TournamentManage",
+                url: "Tournament/Manage/{tournamentId}",
+                defaults: new { controller = "Tournament", action = "Manage" },
+                namespaces: area
+            );
+
+            routes.MapRoute(
+                name: "TournamentDetails",
+                url: "Tournament/Details/{tournamentId}",
+                defaults: new { controller = "Tournament", action = "Details" },
+                namespaces: area
+            );
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }, 

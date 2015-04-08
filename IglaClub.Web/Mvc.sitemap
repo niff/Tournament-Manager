@@ -4,10 +4,9 @@
     <mvcSiteMapNode title="Tournaments" controller="Tournament" action="Index" >
       <mvcSiteMapNode title="Organize" action="OwnerTournaments">
         <mvcSiteMapNode title="Create" action="Create" preservedRouteParameters="id" />
-        <mvcSiteMapNode title="Manage" action="Manage" preservedRouteParameters="id" >
+        <mvcSiteMapNode title="Manage" action="Manage" preservedRouteParameters="id,tournamentId" >
           <mvcSiteMapNode title="Edit details" action="Edit" preservedRouteParameters="id" />
-          <mvcSiteMapNode title="Edit results" action="Manage" controller="Results" 
-                          preservedRouteParameters="tournamentId" inheritedRouteParameters="id"  />
+          <mvcSiteMapNode title="Edit results" action="Manage" controller="Results" preservedRouteParameters="tournamentId" inheritedRouteParameters="id"/>
         </mvcSiteMapNode>
       </mvcSiteMapNode>
       <mvcSiteMapNode title="Play tournaments" action="PlayerTournaments">

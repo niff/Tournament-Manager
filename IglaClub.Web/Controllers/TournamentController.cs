@@ -59,22 +59,13 @@ namespace IglaClub.Web.Controllers
 
         [TournamentOwner]
         [SiteMapTitle("Tournament.Name")]
-        public ActionResult Manage(long id = 0)
+        //[FixMissingIdParameterForBreadcrumb]
+        public ActionResult Manage(long tournamentId = 0)
         {
-            //var node = SiteMaps.Current.FindSiteMapNodeFromKey("Manage_Results");
-            //if (node != null)
-            //{
-            //    node.RouteValues.Add("id", id);
-            //    var parent = node.ParentNode;
-            //    if (parent != null)
-            //    {
-            //        parent.RouteValues.Add("id", id);
-            //    }
-            //}
             Tournament tournament = db.Tournaments.
                 Include(t=>t.Pairs).
                 Include(t=>t.Owner).
-                FirstOrDefault(t=>t.Id == id);
+                FirstOrDefault(t => t.Id == tournamentId);
             
             if (tournament == null)
             {
@@ -86,12 +77,12 @@ namespace IglaClub.Web.Controllers
         }
 
         [SiteMapTitle("Tournament.Name")]
-        public ActionResult Details(long id = 0)
+        public ActionResult Details(long tournamentId = 0)
         {
             Tournament tournament = db.Tournaments.
                 Include(t=>t.Pairs).
                 Include(t=>t.Owner).
-                FirstOrDefault(t=>t.Id == id);           
+                FirstOrDefault(t => t.Id == tournamentId);           
           
             if (tournament == null)
             {
@@ -360,6 +351,8 @@ namespace IglaClub.Web.Controllers
             var model = TournamentsListPlannedUserNotSubscribedModel();
             return PartialView("_TournamentList", model);
         }
+
+        [ActionName("Join")]
         public ActionResult TournamentsListPlannedUserNotSubscribed()
         {
             var model = new TounamentListViewModel
@@ -491,4 +484,16 @@ namespace IglaClub.Web.Controllers
             return Redirect(Request.UrlReferrer.ToString());
         }
     }
+
+    //public class FixMissingIdParameterForBreadcrumbAttribute : ActionFilterAttribute
+    //{
+    //    public override void OnActionExecuting(ActionExecutingContext filterContext)
+    //    {
+    //        if (filterContext.RouteData.Values["id"] != null)
+    //        {
+    //            filterContext.ActionParameters["tournamentId"] = long.Parse(filterContext.RouteData.Values["id"].ToString());
+    //        }
+    //        base.OnActionExecuting(filterContext);
+    //    }
+    //}
 }

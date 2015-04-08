@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using MvcSiteMapProvider;
 
 namespace IglaClub.Web
 {
@@ -20,9 +21,6 @@ namespace IglaClub.Web
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
 
-            
-            //Database.SetInitializer<IglaClubDbContext>(null);
         }
-
     }
 }

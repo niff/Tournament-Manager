@@ -65,9 +65,15 @@
 <script>
     $(document).ready(function () {
         $('[title!=""]').qtip({
-            //position: {
-            //    target: 'mouse'
-            //}
+            style: {"font-size" : 12},
+            position: {
+                my: 'center left',  // Position my top left...
+                at: 'center right',// at the bottom right of...
+                corner: {
+                    target: 'leftMiddle',
+                    tooltip: 'leftMiddle'
+                }
+            }
         });
     });
 </script>

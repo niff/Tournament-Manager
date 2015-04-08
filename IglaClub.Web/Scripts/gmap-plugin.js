@@ -1,7 +1,12 @@
 ﻿(function($) {
     $.fn.initializeMap = function(params) {
         var mapCanvasId = $(this).attr("id");
+        var noLocationSet = false;
         var options = params;
+        if (options.coordinates == null || options.coordinates == 'undefined' || options.coordinates == '') {
+            options.coordinates = '(50.06139,19.93833)';
+            noLocationSet = true;
+        } 
         var latAndLng = utils.getLatLng(options.coordinates);
         var position = new google.maps.LatLng(latAndLng[0], latAndLng[1]);
         var markers = [];
@@ -17,6 +22,17 @@
             
             
             var map = new google.maps.Map(document.getElementById(mapCanvasId), mapOptions);
+
+            if (!noLocationSet)
+            {
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: position
+                });
+
+                markers.push(marker);
+            }
+
             //var defaultBounds = new google.maps.LatLngBounds(
             //    new google.maps.LatLng(-33.8902, 151.1759),
             //    new google.maps.LatLng(-33.8474, 151.2631));
@@ -77,7 +93,7 @@
             google.maps.event.addListener(map, 'bounds_changed', function () {
                 var bounds = map.getBounds();
                 searchBox.setBounds(bounds);
-                map.setZoom(14);
+                //map.setZoom(14);
             });
             
         };
@@ -111,8 +127,5 @@
         //    };
         //    return image;
         //}
-        setHiddenCoordinates : function(location) {
-            $("#coords").val(location);
-        }
     };
 })(jQuery);

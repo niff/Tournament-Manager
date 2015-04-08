@@ -84,9 +84,6 @@
 </div>
 </div>
     </div>
-@*@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}*@
 
 <script>
     jQuery('#datepicker').datetimepicker();
@@ -96,7 +93,7 @@
 <script>
     $(document).ready(function () {
         var options = {
-            coordinates: '( 50.06139,19.93833)'
+            coordinates: ''
         };
         $("#map-canvas").initializeMap(options);
     });

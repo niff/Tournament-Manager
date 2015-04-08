@@ -123,8 +123,8 @@
         jQuery('#datepicker').datetimepicker();
         
         var options = {
-            coordinates: '@(Model.Coordinates ?? "( 50.06139,19.93833)")'
+            coordinates: '@(Model.Coordinates)'
         };
-        //$("#map-canvas").initializeMap(options);
+        $("#map-canvas").initializeMap(options);
     });
 </script>

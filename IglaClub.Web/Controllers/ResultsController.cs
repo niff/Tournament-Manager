@@ -147,9 +147,13 @@ namespace IglaClub.Web.Controllers
             return View();
         }
 
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            
+            base.OnActionExecuting(filterContext);
+        }
         //[SiteMapTitle("Tournament.Name")]
         [SiteMapTitle("Tournament.Name", Target = AttributeTarget.ParentNode)]
-        //[TournamentOwner]
         public ActionResult Manage(long tournamentId, string sortBy, string sortdir)
         {
             
