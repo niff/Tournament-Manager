@@ -581,10 +581,12 @@ span.blue-header {
 
     span.medium-header {
         font-size: 18px;
+        line-height: 1em;
     }
 
     span.small-header {
         font-size: 14px;
+        line-height: 1em;
     }
 
     .active-tournaments a {
@@ -631,9 +633,8 @@ span.blue-header {
         display: none;
     }
 
-    .breadcrumb ul {
-        margin: 0;
-        margin-left: -40px;
+    .breadcrumb {
+        margin-bottom: 10px;
         font-size: x-small;
     }
 }
