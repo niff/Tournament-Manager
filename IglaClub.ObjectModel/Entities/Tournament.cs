@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -25,7 +26,7 @@ namespace IglaClub.ObjectModel.Entities
         public virtual IList<Pair> Pairs { get; set; }
 
         [DisplayName ("Boards in round")]
-        [Required(ErrorMessage = "The boards in round field is required")]
+        [Range(1,5000, ErrorMessage = "Value has to be between 1 and 5000")]
         public int BoardsInRound { get; set; }
 
         public virtual IList<BoardInstance> Boards { get; set; }

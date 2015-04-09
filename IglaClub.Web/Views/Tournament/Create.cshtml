@@ -50,8 +50,8 @@
         <div class="editor-label">
             @Html.LabelFor(model => model.TournamentMovingType)
         </div>
-        <div class="editor-field" title="@StringResources.TournamentMovingTypesTitle">
-            @Html.DropDownListFor(model => model.TournamentMovingType, new SelectList(Enum.GetValues(typeof(TournamentMovingType))), new { @class = "form-control"})
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.TournamentMovingType, new SelectList(Enum.GetValues(typeof(TournamentMovingType))), new { @class = "form-control", title = "@StringResources.TournamentMovingTypesTitle" })
             @Html.ValidationMessageFor(model => model.TournamentMovingType)
         </div>
         
