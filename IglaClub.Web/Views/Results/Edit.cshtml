@@ -28,7 +28,7 @@
     </button>
     <button class="btn btn-info btn-small">
         <span class="glyphicon glyphicon-plus-sign"></span>
-        @Html.ActionLink("Add new result", "AddNewResult", "Results", new { tournamentId = Model[0].TournamentId }, null)
+        @Html.ActionLink("Add new result", "AddNewResult", "Results", new { tournamentId = ViewBag.TournamentId }, null)
     </button>
 
     <div class="field-validation-error defaultMargin">

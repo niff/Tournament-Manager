@@ -79,15 +79,22 @@ namespace IglaClub.TournamentManager
             return new OperationStatus(true);
         }
 
+        //todo add new empty result, add board on fly
         public OperationStatus AddNewResult(long tournamentId)
         {
             Tournament tournament = db.Tournaments.Find(tournamentId);
             if (tournament == null)
                 return new OperationStatus(false, "Tournament with id " + tournamentId + " not found");
+            if (tournament.Results.Count == 0)
+                return new OperationStatus(false, "No results, cannot determine board");
+
             var result = new Result();
             result.Tournament = tournament;
             result.RoundNumber = tournament.CurrentRound;
-            result.Board = tournament.Results.FirstOrDefault(r => r.RoundNumber == tournament.CurrentRound).Board;
+            var firstResult = tournament.Results.FirstOrDefault(r => r.RoundNumber == tournament.CurrentRound);
+            if (firstResult != null)
+                result.Board = firstResult.Board;
+
             result.NS = tournament.Pairs.FirstOrDefault();
             result.EW = tournament.Pairs.FirstOrDefault(p=>p.Id != result.NS.Id);
             

@@ -49,6 +49,8 @@ namespace IglaClub.Web.Controllers
         {
             var results = db.Tournaments.Find(tournamentId).Results.ToList();
             results = results.OrderBy(r => r.Board.BoardNumber).ThenBy(r => r.TableNumber).ToList();
+            //todo prebound to all methods in tournaments and result controller
+            ViewBag.TournamentId = tournamentId;
             return View(results);
         }
               
@@ -219,7 +221,7 @@ namespace IglaClub.Web.Controllers
             tournamentManager.AddNewResult(tournamentId);
             if (Request.UrlReferrer != null) 
                 return Redirect(Request.UrlReferrer.ToString());
-            return RedirectToAction("Edit", new { tournamentId });
+            return RedirectToAction("Manage", new { tournamentId });
         }
 
         public PartialViewResult PairsResults(long tournamentId)
