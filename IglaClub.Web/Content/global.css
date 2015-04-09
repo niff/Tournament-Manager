@@ -1,7 +1,5 @@
 ﻿html, body {
     font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif;
-    /*margin: 0;*/
-    /*margin-bottom: 70px;*/
     margin: 0;
     padding: 0;
     height: 100%;
@@ -13,8 +11,7 @@
 }
 
 .container {
-    /*padding:10px;*/
-    padding-bottom: 80px; /* Height of the footer element */
+    padding-bottom: 80px;
 }
 
 footer {
@@ -48,7 +45,7 @@ footer {
 
 .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
     padding: 0;
-      margin-bottom: 8px;
+    margin-bottom: 8px;
 }
 
     .col-xs-1:not(:last-child), .col-sm-1:not(:last-child), .col-md-1:not(:last-child), .col-lg-1:not(:last-child), .col-xs-2:not(:last-child), .col-sm-2:not(:last-child), .col-md-2:not(:last-child), .col-lg-2:not(:last-child), .col-xs-3:not(:last-child), .col-sm-3:not(:last-child), .col-md-3:not(:last-child), .col-lg-3:not(:last-child), .col-xs-4:not(:last-child), .col-sm-4:not(:last-child), .col-md-4:not(:last-child), .col-lg-4:not(:last-child), .col-xs-5:not(:last-child), .col-sm-5:not(:last-child), .col-md-5:not(:last-child), .col-lg-5:not(:last-child), .col-xs-6:not(:last-child), .col-sm-6:not(:last-child), .col-md-6:not(:last-child), .col-lg-6:not(:last-child), .col-xs-7:not(:last-child), .col-sm-7:not(:last-child), .col-md-7:not(:last-child), .col-lg-7:not(:last-child), .col-xs-8:not(:last-child), .col-sm-8:not(:last-child), .col-md-8:not(:last-child), .col-lg-8:not(:last-child), .col-xs-9:not(:last-child), .col-sm-9:not(:last-child), .col-md-9:not(:last-child), .col-lg-9:not(:last-child), .col-xs-10:not(:last-child), .col-sm-10:not(:last-child), .col-md-10:not(:last-child), .col-lg-10:not(:last-child), .col-xs-11:not(:last-child), .col-sm-11:not(:last-child), .col-md-11:not(:last-child), .col-lg-11:not(:last-child) {
@@ -68,12 +65,15 @@ footer {
 .table.tournaments > tbody > tr > td {
     vertical-align: middle !important;
 }
+
 tr.past-tournaments > td, tr.past-tournaments > td > a {
     color: #BEBEBE;
 }
-tr.past-tournaments > td > div.tournament-status {
-    background-color: #BEBEBE;
-}
+
+    tr.past-tournaments > td > div.tournament-status {
+        background-color: #BEBEBE;
+    }
+
 .table.table-padding > tbody > tr > td {
     padding: 8px !important;
     vertical-align: middle !important;
@@ -98,16 +98,15 @@ tr.past-tournaments > td > div.tournament-status {
     vertical-align: middle;
     display: none;
 }
+
 button a, a:hover {
     color: inherit;
 }
 
-button.login a {
-    color: black;
-}
 a.btn {
     margin-bottom: 5px;
 }
+
 .editor-field {
     margin-bottom: 10px;
 }
@@ -115,6 +114,7 @@ a.btn {
 .submit-button {
     text-align: right;
 }
+
 .width-auto {
     width: auto !important;
     display: inline-block;
@@ -130,12 +130,6 @@ a.btn {
     padding: 1px 5px;
 }
 
-.btn-disabled {
-    color: #EFEFEF;
-    background-color: #D0D0D0;
-    border-color: #BEBEBE;
-}
-
 .both-side-margins {
     margin: 0 10px;
 }
@@ -144,12 +138,10 @@ a.btn {
     margin-right: 10px;
 }
 
-.blue {
-    background-color: cornflowerblue;
-}
 .create-tournament {
     max-width: 400px;
 }
+
 .pairs {
     border: 1px solid rgb(218, 218, 218);
     padding: 10px;
@@ -157,15 +149,11 @@ a.btn {
     margin: 10px auto;
 }
 
-.label .label-default .label-light-gray {
-    opacity: 0.5;
-}
-
 .action-pane button {
-    /*margin: 10px 10px 10px 10px;*/
     height: 34px;
     max-width: 500px;
 }
+
 .table .table-noborder > tr > td {
     border: none;
 }
@@ -181,43 +169,43 @@ tr td.squeeze {
     white-space: normal;
     padding: 6px;
 }
-
+.form-inline {
+    margin-bottom: 8px;
+}
 .single-result-edit .form-inline .form-group .form-control {
     display: inline-block;
     width: auto;
     vertical-align: middle;
 }
 
-.result tr td {   
-      padding: 2px;
+.result tr td {
+    padding: 2px;
 }
 
-.result tr td input {
-    width: 100px;
-    height: 25px;
-    /*border: 1px rgb(128, 128, 128) solid;*/
-}
-
-    .result tr td input[type="text"] {
-        width: 60px;
+    .result tr td input {
+        width: 100px;
+        height: 25px;
     }
 
-    .result tr td input[type="number"] {
-        width: 55px;
-          padding: 0 6px;
+        .result tr td input[type="text"] {
+            width: 60px;
+        }
+
+        .result tr td input[type="number"] {
+            width: 55px;
+            padding: 0 6px;
+        }
+
+    .result tr td select {
+        height: 25px;
+        padding: 0;
     }
 
-.result tr td select {
-    /*width: 130px;*/
-    height: 25px;
-    padding: 0;
-}
-
-.result tr td number {
-    width: 130px;
-    height: 25px;
-    border: 1px rgb(128, 128, 128) solid;
-}
+    .result tr td number {
+        width: 130px;
+        height: 25px;
+        border: 1px rgb(128, 128, 128) solid;
+    }
 
 table.result {
     font-size: x-small;
@@ -268,9 +256,7 @@ i.glyphicon.result-icon {
     height: 1em;
     display: inline-block;
 }
-/*.btn {
-    margin: 2px;
-}*/
+
 .large-font {
     font-size: x-large;
 }
@@ -293,29 +279,11 @@ i.glyphicon.result-icon {
         font-weight: bold;
     }
 
-.user-subscribe-box {
-    border-bottom: 1px silver dashed;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-}
 
 #viewdetails {
     border: 1px dashed rgb(207, 207, 207);
     padding: 10px;
     margin-bottom: 10px;
-}
-
-.round-info {
-    margin-top: 10px;
-}
-
-    .round-info label {
-        margin-right: 20px;
-        font-size: large;
-    }
-
-#participantsDiv .user-subscribe-box select {
-    width: auto;
 }
 
 .tournemanet-quick-edit {
@@ -327,14 +295,6 @@ i.glyphicon.result-icon {
     .tournemanet-quick-edit a {
         padding-right: 10px;
     }
-
-.tournament-manage-area > div {
-    padding-left: 0;
-}
-
-.quick-user-add {
-    border: 1px solid silver;
-}
 
 .shadow-gradient-block {
     background: -webkit-linear-gradient(top, #f5f5f5 0%,#efefef 100%);
@@ -348,9 +308,6 @@ i.glyphicon.result-icon {
 }
 
 .start-text-block {
-    /*background: -webkit-linear-gradient(top, #A9CBFF 0%,#7593C2 100%);
-  font-weight: bold;
-  box-shadow: 0 0 1px 1px rgb(94, 132, 213) inset, 0 33px 40px -38px #000;*/
     border: none;
     box-shadow: none;
     background: rgb(49, 129, 199);
@@ -387,20 +344,25 @@ fieldset legend {
     color: steelblue;
     font-size: 2em;
 }
+
 .bottom-line {
-  margin: 20px 0;
-  border-bottom : 1px solid #e5e5e5;
+    margin: 20px 0;
+    border-bottom: 1px solid #e5e5e5;
 }
-.validation-summary-errors ul{
+
+.validation-summary-errors ul {
     margin-left: -40px;
     color: rgb(228, 84, 41);
 }
-.validation-summary-errors ul li{
-    list-style: none;
-}
+
+    .validation-summary-errors ul li {
+        list-style: none;
+    }
+
 .field-validation-error, .red-asterisk {
     color: rgb(228, 84, 41);
 }
+
 span.validation-summary-errors {
     border-bottom-color: #D9FFB2;
     display: block;
@@ -428,6 +390,7 @@ span.small-header {
     font-size: 18px;
     color: #9E9E9E;
 }
+
 span.blue-header {
     color: steelblue;
 }
@@ -444,14 +407,6 @@ span.blue-header {
 
 .indent100 {
     margin-left: 100px;
-}
-
-.indent30 {
-    margin-left: 30px;
-}
-
-.lineheight5em {
-    line-height: 5em;
 }
 
 .dropdown-menu > li > a {
@@ -475,13 +430,11 @@ span.blue-header {
     vertical-align: initial;
     opacity: 0.6;
     text-align: center;
-    /*white-space: nowrap;*/
 }
 
-    .tournament-status .glyphicon {
+    /*.tournament-status .glyphicon {
         display: none;
-        /*white-space: nowrap;*/
-    }
+    }*/
 
     .tournament-status.planned {
         background-color: #3094e1;
@@ -494,10 +447,6 @@ span.blue-header {
     .tournament-status.past {
         background-color: darkgray;
     }
-
-.edit-button {
-    margin-left: 10px;
-}
 
 .display-label {
     margin-top: 5px;
@@ -515,10 +464,12 @@ span.blue-header {
 .quick-sign-up-block {
     padding: 18px 47px;
 }
-.quick-sign-up-block form {
-  max-width: 300px;
-  margin: auto;
-}
+
+    .quick-sign-up-block form {
+        max-width: 300px;
+        margin: auto;
+    }
+
 .quick-sign-up legend, .quick-sign-up .long-form {
     display: none;
 }
@@ -559,9 +510,7 @@ span.blue-header {
         padding: 0;
         margin: 0;
     }
-    /*footer {
-        position: static;
-    }*/
+
     .navbar {
         margin-bottom: 10px;
         margin-left: 0;
@@ -613,6 +562,13 @@ span.blue-header {
     #participantsDiv > .form-inline > .form-group > .pairSearchSubmit {
         float: left;
     }
+
+    .quick-add-user {
+        background-color: rgb(244, 244, 244);
+        padding: 5px;
+        border: 1px solid rgb(210, 210, 210);
+    }
+
     fieldset.login {
         width: auto;
     }
@@ -620,10 +576,6 @@ span.blue-header {
     fieldset legend {
         font-size: 1.5em;
     }
-
-    /*#map-canvas {
-        width: auto;
-    }*/
 
     fieldset.create-tournament input, fieldset.create-tournament textarea, fieldset.create-tournament select {
         width: 100%;

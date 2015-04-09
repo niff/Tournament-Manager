@@ -73,7 +73,7 @@
         <div class="pairs" id="participantsDiv">
             @Html.Action("TournamentParticipantsEdit", new { tournamentId = @Model.Tournament.Id })
         </div>
-        <div id="quickAddUserDiv">
+        <div id="quickAddUserDiv" class="quick-add-user">
         @Html.Partial("_QuickAddUser")
             </div>
     </div>           
