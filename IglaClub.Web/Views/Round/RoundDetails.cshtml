@@ -10,7 +10,7 @@
             <a href="@Url.Action("Details", "Tournament", new { id = Model.Tournament.Id })"><i class="glyphicon glyphicon-arrow-left right-side-margin"></i>go back to tournament details</a>
         </div>
         <div>
-            <a href="@Url.Action("MyResults", "Results", new { tournamentId = Model.Tournament.Id })"><i class="glyphicon glyphicon-list right-side-margin"></i>My results</a>
+            
         </div>
         <span class="medium-header">Round @Model.Tournament.CurrentRound</span>
         <br/>
@@ -19,7 +19,7 @@
         {
             <div class="panel-group">
                 <span class="small-header">Table @Model.TableNumber</span> 
-                
+                <a href="@Url.Action("MyResults", "Results", new { tournamentId = Model.Tournament.Id })" class="pull-right"><i class="glyphicon glyphicon-list right-side-margin"></i>My results</a>
                 <a href="@Url.Action("RoundDetails", "Round", new { tournamentId = Model.Tournament.Id })" class="pull-right">
                     <i class="glyphicon glyphicon-refresh right-side-margin"></i>Refresh
                 </a> 
