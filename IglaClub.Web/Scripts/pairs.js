@@ -18,8 +18,8 @@
                 type: "POST",
                 data: { name: name, email: email, id: tournamentId },
                 success: function () {
-                    utils.refreshParticipants(initFormUrl);
-                    utils.refreshQuickUserAdd();
+                    //utils.refreshParticipants(initFormUrl);
+                    //utils.refreshQuickUserAdd();
                 }
             });
         });

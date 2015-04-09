@@ -96,11 +96,11 @@ namespace IglaClub.Web.Controllers
                     WebSecurity.Login(model.UserName, model.Password);
                     notificationService.DisplaySuccess(
                         "Want to be easily recognized by your friends? \n\rFill up your <a href='account/edit'>account details</a> in account settings");
-                    if (ValidationHelper.IsValidEmailAddress(model.UserName))
-                    {
-                        var name = !String.IsNullOrEmpty(model.FirstName) ? model.FirstName : model.UserName;
-                        EmailSender.SendEmail(model.UserName, name, EmailTemplatesDict.NewAccount);
-                    }
+                    //if (ValidationHelper.IsValidEmailAddress(model.UserName))
+                    //{
+                    //    var name = !String.IsNullOrEmpty(model.FirstName) ? model.FirstName : model.UserName;
+                    //    EmailSender.SendEmail(model.UserName, name, EmailTemplatesDict.NewAccount);
+                    //}
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -122,6 +122,10 @@ namespace IglaClub.Web.Controllers
                     Name = firstname,
                     LastName = lastname
                 });
+                if (email != null)
+                {
+                    EmailSender.SendEmail(email, name, EmailTemplatesDict.NewAccount);
+                }
             }
             catch (MembershipCreateUserException e)
             {
@@ -133,14 +137,21 @@ namespace IglaClub.Web.Controllers
 
 
         [HttpPost]
-        public void QuickAddUser(string name, string email)
+        public ActionResult QuickAddUser(string name, string email, long id)
         {
-            if (!CreateUserAndAccount(name, email, email)) //todo send email
-                return;
-            notificationService.DisplaySuccess(String.Format("User {0} was created successfully. Default password: {0}. Please change password after first login", name));
+            if (!CreateUserAndAccount(name, email, email))
+            {
+                notificationService.DisplaySuccess("Something went wrong");
+            }
+            else
+            {
+                notificationService.DisplaySuccess(
+                    String.Format(
+                        "User {0} was created successfully. Default password: {1}. Please change password after first login",
+                        name, email));
+            }
+            return RedirectToAction("Manage", "Tournament", new {tournamentId = id});
         }
-        //
-        // POST: /Account/Disassociate
 
         [HttpPost]
         [ValidateAntiForgeryToken]

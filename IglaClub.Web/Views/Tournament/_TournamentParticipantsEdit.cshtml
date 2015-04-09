@@ -7,10 +7,10 @@
 <p>Pairs list <span class="badge">@Model.PairsInTounament.Count</span></p>
 <div class="form-inline">
     <div class="form-group">
-        @Html.DropDownList("user1", users, "Player 1", new { @class = "form-control" })
+        @Html.DropDownList("user1", users, "", new { @class = "form-control" })
     </div>
     <div class="form-group">
-        @Html.DropDownList("user2", users, "Player 2", new { @class = "form-control" })
+        @Html.DropDownList("user2", users, "", new { @class = "form-control" })
     </div>
     <button type="submit" class="btn btn-default btn-small pairSearchSubmit" id="pairSearchSubmit">Add</button>
     <span class="spinner"></span>
