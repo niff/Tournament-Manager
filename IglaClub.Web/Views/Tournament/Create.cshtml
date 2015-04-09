@@ -37,21 +37,21 @@
             @Html.LabelFor(model => model.BoardsInRound)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.BoardsInRound, new { @type="number", @class = "form-control", @min="1"})
+            @Html.TextBoxFor(model => model.BoardsInRound, new { @type="number", @class = "form-control", @min="1", @max="5000"})
             @Html.ValidationMessageFor(model => model.BoardsInRound)
         </div>
-        <div class="editor-label" title="@StringResources.TournamentScoringTypesTitle">
+        <div class="editor-label">
             @Html.LabelFor(model => model.TournamentScoringType)
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model => model.TournamentScoringType, new SelectList(Enum.GetValues(typeof(TournamentScoringType))),  new { @class = "form-control"})
+            @Html.DropDownListFor(model => model.TournamentScoringType, new SelectList(Enum.GetValues(typeof(TournamentScoringType))),  new { @class = "form-control", title=StringResources.TournamentScoringTypesTitle})
             @Html.ValidationMessageFor(model => model.TournamentScoringType)
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.TournamentMovingType)
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model => model.TournamentMovingType, new SelectList(Enum.GetValues(typeof(TournamentMovingType))), new { @class = "form-control", title = "@StringResources.TournamentMovingTypesTitle" })
+            @Html.DropDownListFor(model => model.TournamentMovingType, new SelectList(Enum.GetValues(typeof(TournamentMovingType))), new { @class = "form-control", title = StringResources.TournamentMovingTypesTitle })
             @Html.ValidationMessageFor(model => model.TournamentMovingType)
         </div>
         
@@ -69,7 +69,8 @@
             @Html.TextBoxFor(model => model.Address, new {@placeholder = "Search address", @id="pac-input", @class = "form-control"})
             @Html.ValidationMessageFor(model => model.Address)
         </div>
-        <input name="coords" id="coords" type="hidden"/>
+        @*<input name="coords" id="coords" type="hidden"/>*@
+        @Html.HiddenFor(model=>model.Coordinates, new {name="coords", id="coords"})
     <label>Location on map</label>
         <div id="map-canvas"></div>
         <p>
@@ -92,8 +93,9 @@
 <script>
     $(document).ready(function () {
         var options = {
-            coordinates: ''
+            coordinates: '@(Model.Coordinates)'
         };
+        
         $("#map-canvas").initializeMap(options);
     });
 </script>

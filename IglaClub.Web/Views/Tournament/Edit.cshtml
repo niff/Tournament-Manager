@@ -77,7 +77,8 @@
                             @Html.TextBoxFor(model => model.Address, new { @id = "pac-input", @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.Address)
                         </div>
-                        <input name="coords" id="coords" type="hidden" />
+                        @*<input name="coords" id="coords" type="hidden" />*@
+                        @Html.HiddenFor(model => model.Coordinates, new { name = "coords", id = "coords" })
 
                         <label>Location on map</label>
                         <div id="map-canvas"></div>

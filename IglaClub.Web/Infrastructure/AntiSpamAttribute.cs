@@ -10,7 +10,7 @@ namespace IglaClub.Web.Infrastructure
     public class AntiSpamAttribute : ActionFilterAttribute
     {
         public int DelayRequest = 10;
-        public string ErrorMessage = "Excessive request attempts detected";
+        public string ErrorMessage = "Excessive request attempts detected. Please wait 10 seconds before next attempt.";
         public string RedirectURL;
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
@@ -30,8 +30,8 @@ namespace IglaClub.Web.Infrastructure
 
             if (cache[hashValue] != null)
             {
-                //filterContext.Controller.ViewData.ModelState.AddModelError("ExcessiveRequests", ErrorMessage);
-                filterContext.Result = new RedirectResult("Index");
+                filterContext.Controller.ViewData.ModelState.AddModelError("ExcessiveRequests", ErrorMessage);
+                //filterContext.Result = new RedirectResult("Index");
             }
             else
             {

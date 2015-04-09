@@ -107,8 +107,8 @@ namespace IglaClub.Web.Controllers
                     return View(tournament);
                 }
                 
-                var coordinates = Request.Form["coords"];
-                tournament.Coordinates = coordinates;
+                //var coordinates = Request.Form["coords"];
+                //tournament.Coordinates = coordinates;
                 tournamentManager.Create(tournament, GetCurrentUserName());
                 return RedirectToAction("OwnerTournaments");
             }
@@ -158,8 +158,8 @@ namespace IglaClub.Web.Controllers
                 return View(tournament);
             }
             
-            var coordinates = Request.Form["coords"];
-            tournament.Coordinates = coordinates;
+            //var coordinates = Request.Form["coords"];
+            //tournament.Coordinates = coordinates;
             db.Entry(tournament).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Manage", new {tournament.Id});
