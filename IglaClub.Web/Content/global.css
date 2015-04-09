@@ -390,7 +390,9 @@ span.small-header {
     font-size: 18px;
     color: #9E9E9E;
 }
-
+.smaller-header {
+    font-size: 14px;
+}
 span.blue-header {
     color: steelblue;
 }
