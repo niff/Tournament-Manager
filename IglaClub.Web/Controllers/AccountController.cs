@@ -498,18 +498,33 @@ namespace IglaClub.Web.Controllers
                 var user = userRepository.GetUserByEmail(email) ?? userRepository.GetUserByLogin(email);
                 if (user != null)
                 {
-                    string confirmationToken = WebSecurity.GeneratePasswordResetToken(user.Login);
-                    var host = ConfigurationManager.AppSettings["EnvHost"];
-                    var emailLink = string.Format("http://{0}/Account/ResetPasswordStep2?email={1}&token={2}",
-                                                  host, email, confirmationToken);
-                    EmailSender.SendEmail(email, email, EmailTemplatesDict.ResetPassword, emailLink);
-                    notificationService.DisplaySuccess("You will receive an email with password recovery instructions shortly.");
-                    return View("Login");
+                    string validEmail = GetValidEmailFromUserAccount(user);
+                    if (!String.IsNullOrEmpty(validEmail))
+                    {
+                        string confirmationToken = WebSecurity.GeneratePasswordResetToken(user.Login);
+                        var host = ConfigurationManager.AppSettings["EnvHost"];
+                        var emailLink = string.Format("http://{0}/Account/ResetPasswordStep2?email={1}&token={2}",
+                                                      host, email, confirmationToken);
+                        EmailSender.SendEmail(email, email, EmailTemplatesDict.ResetPassword, emailLink);
+                        notificationService.DisplaySuccess(
+                            "You will receive an email with password recovery instructions shortly.");
+                        return View("Login");
+                    }
+                    notificationService.DisplayError("There is no valid email address assigned to the account. Please contact IGLAclub Team.");
+                    return View();
                 }
-                notificationService.DisplayError("Wrong email address");
+                notificationService.DisplayError("User does not exist.");
                 return View();
             }
             return View();
+        }
+
+        private static string GetValidEmailFromUserAccount(User user)
+        {
+            string validEmail = ValidationHelper.IsValidEmailAddress(user.Login)
+                                    ? user.Login
+                                    : (ValidationHelper.IsValidEmailAddress(user.Email) ? user.Email : String.Empty);
+            return validEmail;
         }
 
 
