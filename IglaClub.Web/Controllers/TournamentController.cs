@@ -48,8 +48,6 @@ namespace IglaClub.Web.Controllers
                     UserIsManagingTournament = currentUser != null && tournamentRepository.UserIsManagingAtLeastOneTournament(currentUser.Id)
                 };
             return View(model);
-            //todo wazne: nawigacja w tournamentach | zrobic breadcrumb taki np: Organize > Tournaments > Tournament "tytul" > Edit results
-            //
         }
 
         private string GetCurrentUserName()
@@ -59,7 +57,6 @@ namespace IglaClub.Web.Controllers
 
         [TournamentOwner]
         [SiteMapTitle("Tournament.Name")]
-        //[FixMissingIdParameterForBreadcrumb]
         public ActionResult Manage(long tournamentId = 0)
         {
             Tournament tournament = db.Tournaments.

@@ -279,6 +279,7 @@
     <Compile Include="Authorization\TournamentOwnerAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClubsController.cs" />
+    <Compile Include="Controllers\HelpRepository.cs" />
     <Compile Include="Migrations\201504082031564_AddPasswordVerificationToken.cs" />
     <Compile Include="Migrations\201504082031564_AddPasswordVerificationToken.Designer.cs">
       <DependentUpon>201504082031564_AddPasswordVerificationToken.cs</DependentUpon>
@@ -286,6 +287,10 @@
     <Compile Include="Migrations\201504090702230_RemovePasswordVerificationToken.cs" />
     <Compile Include="Migrations\201504090702230_RemovePasswordVerificationToken.Designer.cs">
       <DependentUpon>201504090702230_RemovePasswordVerificationToken.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504091232505_HelpEntriesTable.cs" />
+    <Compile Include="Migrations\201504091232505_HelpEntriesTable.Designer.cs">
+      <DependentUpon>201504091232505_HelpEntriesTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModels\Clubs\ClubsIndexViewModel.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
@@ -632,6 +637,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504090702230_RemovePasswordVerificationToken.resx">
       <DependentUpon>201504090702230_RemovePasswordVerificationToken.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504091232505_HelpEntriesTable.resx">
+      <DependentUpon>201504091232505_HelpEntriesTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

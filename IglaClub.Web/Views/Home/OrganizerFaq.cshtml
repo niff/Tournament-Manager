@@ -1,11 +1,79 @@
-﻿@{
+﻿@model IEnumerable<IglaClub.ObjectModel.Entities.HelpEntry>
+
+@{
     ViewBag.Title = "Frequently asked questions";
 }
+<span class="medium-header">Organiser FAQ</span>
+<span class="small-header clearfix">We would like to help you here with a most common scenarios that you can face as tournament organiser </span>
 
-<p>We would like to help you here with a most common scenarios that you can face as tournament or club organizator </p>
+@*<span class="small-header">Before play</span>
+<ul class="list-unstyled">
+    <li><a data-toggle="collapse" data-target="#2">I want to subscribe a player which does not have an accout in the system</a>
+        <div id="2" class="collapse">No definition yet.</div>
+    </li>
+</ul>
+<span class="small-header">During play</span>
+<ul class="list-unstyled">
+    <li><a data-toggle="collapse" data-target="#1">During the fourth round of cavendish one pair has decided to go home</a>
+        <div id="1" class="collapse">
+            Just easily go to manage tournament -> show details -> edit and remove this pair. 
+            If there are some boards that are generated to play by them, please go to the edit results and change played by to director score. Nextly, you should write NS and EW score from this board.
+        </div>
+    </li>
+    <li><a></a></li>
+    <li><a data-toggle="collapse" data-target="#3">Somebody came during first round</a>
+        <div id="3" class="collapse">No definition yet.</div>
+    </li>
+</ul>*@
+<br/>
+<div class="panel-group" id="accordion">
+    @{
+        int count = 0;
+    }
+    @foreach (var item in @Model)
+    {
+        <div class="panel panel-default" id="panel-@count">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-target="#collapse-@count" 
+                       href="#collapse-@count">
+                        @item.Question
+                    </a>
+                </h4>
 
-<p>During the fourth round of cavendish one pair has decided to go home</p>
-<div>Just easily go to manage tournament -> show details -> edit and remove this pair. 
-    If there are some boards that are generated to play by them, please go to the edit results and change played by to director score. Nextly, you should write NS and EW score from this board.</div>
-<p>Somebody came during first round</p>
-<p>I want to subscribe a player which does not have an accout in the system</p>
+            </div>
+            <div id="collapse-@count" class="panel-collapse collapse">
+                <div class="panel-body">@Html.Raw(item.Answer)</div>
+            </div>
+        </div>
+        count++;
+    }
+    @*    <div class="panel panel-default" id="panel2">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-target="#collapseTwo" 
+                   href="#collapseTwo" class="collapsed">
+                    Collapsible Group Item #2
+                </a>
+            </h4>
+
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse">
+            <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</div>
+        </div>
+    </div>
+    <div class="panel panel-default" id="panel3">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-target="#collapseThree"
+                   href="#collapseThree" class="collapsed">
+                    Collapsible Group Item #3
+                </a>
+            </h4>
+
+        </div>
+        <div id="collapseThree" class="panel-collapse collapse">
+            <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</div>
+        </div>
+    </div>*@
+</div>

@@ -25,6 +25,7 @@ namespace IglaClub.Web.Models
         public DbSet<Result> Results { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<ClubUser> ClubUsers { get; set; }
+        public DbSet<HelpEntry> HelpEntries { get; set; }
 
         public new int SaveChanges()
         {

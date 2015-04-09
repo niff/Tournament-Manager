@@ -1,13 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using IglaClub.ObjectModel.Entities;
+using IglaClub.Web.Models;
 
 namespace IglaClub.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IglaClubDbContext db = new IglaClubDbContext();
+        private readonly HelpRepository helpRepository;
+
+        public HomeController()
+        {
+            helpRepository = new HelpRepository(db);
+        }
         public ActionResult Index()
         {
             //ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
@@ -33,9 +38,8 @@ namespace IglaClub.Web.Controllers
 
         public ActionResult OrganizerFaq()
         {
-            ViewBag.Message = "FAQ";
-
-            return View();
+            var model = helpRepository.GetAll<HelpEntry>();
+            return View(model);
         }
 
 
