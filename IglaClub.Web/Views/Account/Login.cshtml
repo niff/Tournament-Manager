@@ -5,7 +5,6 @@
 }
 <section id="loginForm">
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
-    //todo add forgot password
     @Html.AntiForgeryToken()
 
     <fieldset class="login">
@@ -35,6 +34,9 @@
         </p>
         <p class="submit-button">
             or @Html.ActionLink("register", "Register"), if you don't have an account.
+        </p>
+        <p>
+            @Html.ActionLink("Forgot password?", "ResetPassword")
         </p>
     </fieldset>
     <br />

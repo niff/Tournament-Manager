@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Transactions;
 using System.Web.Mvc;
@@ -9,6 +10,7 @@ using IglaClub.ObjectModel.Entities;
 using IglaClub.ObjectModel.Repositories;
 using IglaClub.Web.Helpers;
 using IglaClub.Web.Infrastructure;
+using IglaClub.Web.Models.ViewModels;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using IglaClub.Web.Filters;
@@ -468,6 +470,71 @@ namespace IglaClub.Web.Controllers
         public ActionResult Settings()
         {
             return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult ResetPassword()
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult ResetPassword(ResetPasswordModel model)
+        {
+            string email = model.Email;
+            if (!string.IsNullOrEmpty(email))
+            {
+                var user = userRepository.GetUserByEmail(email) ?? userRepository.GetUserByLogin(email);
+                if (user != null)
+                {
+                    string confirmationToken = WebSecurity.GeneratePasswordResetToken(user.Login);
+                    var host = ConfigurationManager.AppSettings["EnvHost"];
+                    var emailLink = string.Format("http://{0}/Account/ResetPasswordStep2?email={1}&token={2}",
+                                                  host, email, confirmationToken);
+                    EmailSender.SendEmail(email, email, EmailTemplatesDict.ResetPassword, emailLink);
+                    notificationService.DisplaySuccess("You will receive an email with password recovery instructions shortly.");
+                    return View("Login");
+                }
+                notificationService.DisplayError("Wrong email address");
+                return View();
+            }
+            return View();
+        }
+
+
+        [AllowAnonymous]
+        public ActionResult ResetPasswordStep2(string email, string token)
+        {
+            if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(token))
+            {
+                var user = userRepository.GetUserByEmail(email) ?? userRepository.GetUserByLogin(email);
+                if (user != null)
+                {
+                        return View("SetNewPassword", new SetNewPasswordModel
+                            {
+                                Token = token,
+                                Email = email
+                            });
+                }
+
+            }
+            notificationService.DisplayError("Wrong verification token or user email");
+            return RedirectToAction("Login");
+        }
+
+
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult ResetPasswordStep2(SetNewPasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                WebSecurity.ResetPassword(model.Token, model.NewPassword);
+                notificationService.DisplaySuccess("Password succesfully changed. Now log in.");
+                return RedirectToAction("Login");
+            }
+            notificationService.DisplayError("Wrong verification token or user email");
+            return View("SetNewPassword", model);
         }
     }
 }
