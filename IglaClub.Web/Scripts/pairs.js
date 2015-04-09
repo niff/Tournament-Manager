@@ -79,11 +79,13 @@
         clearHiddenUsers: function () {
             $('.hidden.user').val('');
         },
-        showSpinner: function() {
+        showSpinner: function () {            
+            $('.pairSearchSubmit').css('display', 'none');
             $('.spinner').css('display', 'inline-block');
         },
         hideSpinner: function () {
             $('.spinner').css('display', 'none');
+            $('.pairSearchSubmit').css('display', 'inline');
         }
     };
 })(jQuery);

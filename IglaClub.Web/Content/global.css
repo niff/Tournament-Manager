@@ -162,7 +162,8 @@ a.btn {
 }
 
 .action-pane button {
-    margin: 10px 10px 10px 10px;
+    /*margin: 10px 10px 10px 10px;*/
+    height: 34px;
     max-width: 500px;
 }
 .table .table-noborder > tr > td {
@@ -603,6 +604,15 @@ span.blue-header {
         padding: 0;
     }
 
+    #participantsDiv > .form-inline > .form-group > .form-control {
+        width: 38%;
+        float: left;
+        margin: 0 5px 5px 0;
+    }
+
+    #participantsDiv > .form-inline > .form-group > .pairSearchSubmit {
+        float: left;
+    }
     fieldset.login {
         width: auto;
     }
