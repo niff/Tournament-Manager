@@ -3,13 +3,13 @@
 @model IglaClub.ObjectModel.Entities.Tournament
 
 @{
-    string linkLabel = "Generate<br/>next round";
+    string linkLabel = "Start next round";
     var action = "GenerateNextRound";
     //"If everything is ok, generate boards and placing for the next round."
     bool notFinishedYet = (bool)ViewData["notFinishedYet"];
     var generateNextRoundButtonClass = notFinishedYet ? "default disabled" : "success";
     var finishTournamentButtonClass = notFinishedYet ? "default disabled" : "warning";
-    
+
     var title = notFinishedYet ?
         "Wait for all users to provide their results or edit results by yourself with \"Edit results\" button" :
         "Generate next round for the tournament and let users enter their results";
@@ -20,14 +20,25 @@
     linkLabel = "Move to the next round";
     title = "";
 }
-<div title="@title">
-    <a href="@Url.Action(action, new { tournamentId = Model.Id, withPairsRepeat = false })" class = "btn btn-@generateNextRoundButtonClass btn-short" >
-        <i class="glyphicon glyphicon-arrow-right right-side-margin"></i>@Html.Raw(linkLabel)
-    </a></div>
+<table>
+    <tr>
+        <td>
+            <div title="@title" class="pull-left right-side-margin">
+                <a href="@Url.Action(action, new { tournamentId = Model.Id, withPairsRepeat = false })" 
+                       class = "btn btn-@generateNextRoundButtonClass btn-short" style="white-space: normal;" >
+                    <i class="glyphicon glyphicon-arrow-right right-side-margin"></i>@Html.Raw(linkLabel)
+                </a>
+            </div>
+        </td>
+        <td>
+            <div title="@StringResources.FinishTournamentTitle">
+                <a href="@Url.Action("Finish", new { tournamentId = Model.Id })" class="btn btn-@finishTournamentButtonClass btn-short" style="white-space: normal;">
+                    <i class="glyphicon glyphicon-stop right-side-margin"></i>Finish tournament
+                </a>
+            </div>
+        </td>
+    </tr>
+</table>
 
 
-<div title="@StringResources.FinishTournamentTitle">
-    <a href="@Url.Action("Finish", new { tournamentId = Model.Id})" class="btn btn-@finishTournamentButtonClass btn-short">
-        <i class="glyphicon glyphicon-stop right-side-margin"></i>Finish tournament
-    </a>
-</div>
+

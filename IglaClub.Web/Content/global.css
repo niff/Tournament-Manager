@@ -82,7 +82,9 @@ tr.past-tournaments > td, tr.past-tournaments > td > a {
 .btn-toolbar:last-of-type {
     margin-bottom: 10px;
 }
-
+.label-default {
+    background-color: #B3B3B3;
+}
 .navbar-header > .navbar-brand {
     font-variant: small-caps;
     text-shadow: 2px 2px rgb(211, 211, 211);
