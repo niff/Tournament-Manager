@@ -1,51 +1,51 @@
 ﻿<nav id="navbar-example" class="navbar navbar-default navbar-static">
-      <div class="container-fluid">
+    <div class="container-fluid">
         <div class="navbar-header">
-          <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-example-js-navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand small-logo" href="/">IGLAclub</a>
+            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#top-menu">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand small-logo" href="/">IGLAclub</a>
         </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="dropdown">
-              <a id="drop1" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                Play
-                <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("PlayerTournaments", "Tournament", new { area = "" }, null)">My Tournaments<br/><span>Tournaments in which I participate</span></a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Join", "Tournament", new { area = "" }, null)">Tournaments in near<br/><span>Find other interesting tournaments</span></a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("PlayerResults", "Tournament", new { area = "" }, null)">My Results<br/><span>See results from my recent tournaments</span></a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                Organize
-                <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="drop2">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Create", "Tournament", new { area = "" }, null)">Create tournament<br/><span>Add new tournament and invite users</span></a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("OwnerTournaments", "Tournament", new { area = "" }, null)">My tournaments<br/><span>Tournaments that I organize</span></a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("MyClubs", "ClubsOrganizer", new { area = "" }, null)">My clubs<br/><span>Bridge clubs that I manage</span></a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("OrganizerFaq", "Home", new { area = "" }, null)">Faq<br/><span>Frequently asked questions</span></a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a id="drop3" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                Browse
-                <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("GetAll", "Tournament", new { area = "" }, null)">All tournaments</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("FindOnMap", "Tournament", new { area = "" }, null)">Find on map</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("MyClubs", "ClubsOrganizer", new { area = "" }, null)">Players</a></li>
-              </ul>
-            </li>
-          </ul>
+        <div class="collapse navbar-collapse" id="top-menu">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a id="drop1" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                        Play
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("PlayerTournaments", "Tournament", new { area = "" }, null)">My Tournaments<br/><span>Tournaments in which I participate</span></a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Join", "Tournament", new { area = "" }, null)">Tournaments in near<br/><span>Find other interesting tournaments</span></a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("PlayerResults", "Tournament", new { area = "" }, null)">My Results<br/><span>See results from my recent tournaments</span></a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                        Organize
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="drop2">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Create", "Tournament", new { area = "" }, null)">Create tournament<br/><span>Add new tournament and invite users</span></a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("OwnerTournaments", "Tournament", new { area = "" }, null)">My tournaments<br/><span>Tournaments that I organize</span></a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("MyClubs", "ClubsOrganizer", new { area = "" }, null)">My clubs<br/><span>Bridge clubs that I manage</span></a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("OrganizerFaq", "Home", new { area = "" }, null)">Faq<br/><span>Frequently asked questions</span></a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a id="drop3" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                        Browse
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("GetAll", "Tournament", new { area = "" }, null)">All tournaments</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("FindOnMap", "Tournament", new { area = "" }, null)">Find on map</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("MyClubs", "ClubsOrganizer", new { area = "" }, null)">Players</a></li>
+                    </ul>
+                </li>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
                 @if (Request.IsAuthenticated)
                 {
@@ -70,5 +70,5 @@
                 }
             </ul>
         </div><!-- /.nav-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
+    </div><!-- /.container-fluid -->
+</nav>
