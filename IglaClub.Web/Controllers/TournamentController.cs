@@ -194,7 +194,11 @@ namespace IglaClub.Web.Controllers
 
         public ActionResult Start(long id)
         {
-            this.tournamentManager.StartTournament(id);
+            var result = this.tournamentManager.StartTournament(id);
+            if (!result.Ok)
+            {
+                notificationService.DisplayError(result.ErrorMessage);
+            }
             return RedirectToAction("Manage", new {id});
         }
 
@@ -401,8 +405,7 @@ namespace IglaClub.Web.Controllers
                                         "Tournaments created by you",
                                         manageMode :true,
                                         showSubscriptionStatus:false);
-
-            return model;
+           return model;
         }
        
         private TounamentSingleListViewModel CreateTounamentSingleListViewModelWithSortedItems(IEnumerable<Tournament> tournaments, int defaultTournamentCount, string header, bool manageMode = false, bool showSubscriptionStatus = false)

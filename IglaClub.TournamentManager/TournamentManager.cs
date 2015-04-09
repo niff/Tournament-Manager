@@ -29,9 +29,13 @@ namespace IglaClub.TournamentManager
             return true;
         }
 
-        public bool StartTournament(long tournamentId)
+        public OperationStatus StartTournament(long tournamentId)
         {
             Tournament tournament = db.Tournaments.Find(tournamentId);
+            if (tournament.Pairs.Count == 0)
+            {
+                return new OperationStatus(false,"No pairs subscribed");
+            }
             IEnumerable<BoardInstance> boards = GenerateEmptyBoards(tournament);
             TournamentHelper.AddBoardsToTournament(tournament, boards);
 
@@ -42,7 +46,7 @@ namespace IglaClub.TournamentManager
             tournament.TournamentStatus = TournamentStatus.Started;
             tournament.StartDate = DateTime.Now;
             db.SaveChanges();
-            return true;
+            return new OperationStatus(true);
         }
 
         public OperationStatus GenerateNextRound(long tournamentId, bool withPairRepeats)
