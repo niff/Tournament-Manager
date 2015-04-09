@@ -50,7 +50,9 @@
 @Scripts.Render("~/bundles/searchable")
 <script>
     $(document).ready(function () {
-        $("select").searchable();
+        if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            $("select").searchable();
+        }
 
         var options = {
             tournamentId: '@Model.Tournament.Id',
