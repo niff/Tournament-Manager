@@ -294,7 +294,7 @@ i.glyphicon.result-icon {
 .tournemanet-quick-edit {
     line-height: 2em;
     vertical-align: text-bottom;
-    margin-left: 10px;
+    /*margin-left: 10px;*/
 }
 
     .tournemanet-quick-edit a {
