@@ -4,6 +4,7 @@
 @{
     var userAction = @Model.ManageMode ? "Manage" : "Details";
     var controller = "Tournament";
+    var invalidTournamentMsg = "This tournament has some date and status errors. It won't be visible for users until it's fixed.";
     
 }
 <span class="medium-header">@Model.Header</span>
@@ -27,7 +28,7 @@
                 var hour = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("HH:mm") : "";
                 if (Model.ManageMode && (item.TournamentStatus == TournamentStatus.Planned || item.TournamentStatus == TournamentStatus.Started) && item.PlannedStartDate < DateTime.Today.AddDays(-1))
                 {
-                    specialRow = "<a role=\"button\" class=\"popovers\" data-toggle=\"popover\" data-placement=\"top\" data-content=\"This tournament has some date and status errors. It won't be visible for users until it's fixed.\" ><i class=\"glyphicon glyphicon-ban-circle error\"></i></a>";
+                    specialRow = BootstrapHelper.Popover(invalidTournamentMsg, "ban-circle error").ToString();
                 }
                 if (i >= validTournamentsCount)
                 {

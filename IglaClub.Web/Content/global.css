@@ -300,7 +300,13 @@ i.glyphicon.result-icon {
     .tournemanet-quick-edit a {
         padding-right: 10px;
     }
-
+.popover {
+    color: darkgray;
+    background: lemonchiffon;
+}
+.popover.top > .arrow:after {
+    border-top-color: lemonchiffon;
+}
 .shadow-gradient-block {
     background: -webkit-linear-gradient(top, #f5f5f5 0%,#efefef 100%);
     border-radius: 7px;
