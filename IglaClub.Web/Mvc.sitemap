@@ -20,7 +20,7 @@
         <mvcSiteMapNode title="Round" action="RoundDetails" controller="Round" preservedRouteParameters="tournamentId"  >
           <mvcSiteMapNode title="All results" action="TournamentResults" controller="Tournament" preservedRouteParameters="tournamentId"/>
           <mvcSiteMapNode title="My results" action="MyResults" controller="Results" route="TournamentResults" preservedRouteParameters="tournamentId" />
-          <mvcSiteMapNode title="Edit results" action="EditResult" controller="Results" preservedRouteParameters="tournamentId,resultId" />
+          <!--<mvcSiteMapNode title="Edit results" action="EditResult" controller="Results" preservedRouteParameters="tournamentId,resultId" />-->
           <!--//todo fix missing tournId param in singleresultedit view-->
         </mvcSiteMapNode>
       </mvcSiteMapNode>

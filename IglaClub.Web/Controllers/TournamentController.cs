@@ -430,8 +430,8 @@ namespace IglaClub.Web.Controllers
         {
             var tournamentsDefaultCount = tournaments.Take(defaultTournamentCount).ToList();
             var dateTime = DateTime.Now;
-            var future = tournamentsDefaultCount.Where(t => t.PlannedStartDate >= dateTime).OrderBy(t => t.PlannedStartDate).ToList();
-            var past = tournamentsDefaultCount.Where(t => t.PlannedStartDate < dateTime).OrderByDescending(t => t.PlannedStartDate).ToList();
+            var future = tournamentsDefaultCount.Where(t => t.PlannedStartDate >= dateTime || t.TournamentStatus == TournamentStatus.Started).OrderBy(t => t.PlannedStartDate).ToList();
+            var past = tournamentsDefaultCount.Where(t => t.PlannedStartDate < dateTime && t.TournamentStatus != TournamentStatus.Started).OrderByDescending(t => t.PlannedStartDate).ToList();
             return new TounamentSingleListViewModel
                 {
                     Tournaments = future,
@@ -447,6 +447,7 @@ namespace IglaClub.Web.Controllers
 
         public ActionResult PlayerTournaments()
         {
+            //todo to not show toutn. which are broken
             var model = new TounamentListViewModel
             {
                 TournamentsList = new List<TounamentSingleListViewModel>

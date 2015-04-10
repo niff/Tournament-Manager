@@ -412,6 +412,9 @@ span.blue-header {
     color: rgb(45, 214, 45);
 }
 
+.glyphicon.error {
+    color: red;
+}
 .indent100 {
     margin-left: 100px;
 }

@@ -1,4 +1,5 @@
-﻿@using IglaClub.Web.Helpers.Html
+﻿@using IglaClub.ObjectModel.Enums
+@using IglaClub.Web.Helpers.Html
 @model IglaClub.Web.Models.ViewModels.TounamentSingleListViewModel
 @{
     var userAction = @Model.ManageMode ? "Manage" : "Details";
@@ -8,22 +9,34 @@
 <span class="medium-header">@Model.Header</span>
     @if (Model.Tournaments.Any() || (Model.TournamentsPast != null && Model.TournamentsPast.Any()))
     {
+        var validTournamentsCount = Model.Tournaments.Count;
+        var i = 0;
+        var rowClass = "";
         if (Model.NowPlayingMode)
         {
             userAction = "RoundDetails";
             controller = "Round";
         }
         <table class="table tournaments table-striped table-hover">
-
-            @foreach (var item in Model.Tournaments)
+            @*//todo jesli turniej jest started to w date i hour wyswietlac date z pola StatredDate a nie planned*@
+            @foreach (var item in Model.Tournaments.Union(Model.TournamentsPast))
             {
+                var specialRow = "";
                 var status = item.TournamentStatus;
-                //var dateFormatted = item.PlannedStartDate != null ? @DateHelper.DaysLeftToDate((DateTime) item.PlannedStartDate) : "Not set yet";
                 var shortDate = item.PlannedStartDate != null ? item.PlannedStartDate.Value.ToShortDateString() : "None";
-                var hour = item.PlannedStartDate != null ? ((DateTime) item.PlannedStartDate).ToString("HH:mm") : "";
-                <tr>
+                var hour = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("HH:mm") : "";
+                if (Model.ManageMode && (item.TournamentStatus == TournamentStatus.Planned || item.TournamentStatus == TournamentStatus.Started) && item.PlannedStartDate < DateTime.Today.AddDays(-1))
+                {
+                    specialRow = "<a role=\"button\" class=\"popovers\" data-toggle=\"popover\" data-content=\"This tournament has some date and status errors. It won't be visible for users until it's fixed.\" ><i class=\"glyphicon glyphicon-ban-circle error\"></i></a>";
+                }
+                if (i >= validTournamentsCount)
+                {
+                    rowClass = "past-tournaments";
+                }
+                <tr class="@rowClass">
                     <td class="squeeze">@TournamentHelper.GetTournamentStatusIcon(status)</td>
                     <td>@Html.ActionLink(item.Name, @userAction, @controller, new {tournamentId = @item.Id}, null)</td>
+                    <td class="squeeze">@Html.Raw(specialRow)</td>
                     <td class="hidden-xs squeeze">@Html.Raw(DateHelper.DaysLeftToDate(item.PlannedStartDate))</td>
                     <td class="visible-xs squeeze">@shortDate</td>
                     <td class="squeeze">@hour</td>
@@ -32,10 +45,11 @@
                         <td class="squeeze">@TournamentHelper.GetSubscribtionStatus(item.UserIsSubscribed(HttpContext.Current.User.Identity.Name), item.Id)</td>
                     }
                 </tr>
+                i++;
             }
 
    
-            @foreach (var item in Model.TournamentsPast)
+@*            @foreach (var item in Model.TournamentsPast)
             {
             var status = item.TournamentStatus;
             var shortDate = item.PlannedStartDate != null ? item.PlannedStartDate.Value.ToShortDateString() : "None";
@@ -51,7 +65,7 @@
                     <td class="squeeze">@TournamentHelper.GetSubscribtionStatus(item.UserIsSubscribed(HttpContext.Current.User.Identity.Name), item.Id)</td>
                 }
             </tr>
-            }
+            }*@
     
         </table>
     }
