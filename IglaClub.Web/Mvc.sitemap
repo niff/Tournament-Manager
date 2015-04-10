@@ -10,7 +10,19 @@
         </mvcSiteMapNode>
       </mvcSiteMapNode>
       <mvcSiteMapNode title="Play tournaments" action="PlayerTournaments">
-        <mvcSiteMapNode title="Tournament" action="Details" preservedRouteParameters="id" />
+        <!--<mvcSiteMapNode title="Tournament" action="Details" preservedRouteParameters="tournamentId" />-->
+      </mvcSiteMapNode>
+      <mvcSiteMapNode title="Playing soon" action="PlayerTournaments">
+        <mvcSiteMapNode title="Tournament" action="Details" controller="Tournament" preservedRouteParameters="tournamentId">
+        </mvcSiteMapNode>
+        </mvcSiteMapNode>
+      <mvcSiteMapNode title="Now playing" action="PlayerTournaments" >
+        <mvcSiteMapNode title="Round" action="RoundDetails" controller="Round" preservedRouteParameters="tournamentId"  >
+          <mvcSiteMapNode title="All results" action="TournamentResults" controller="Tournament" preservedRouteParameters="tournamentId"/>
+          <mvcSiteMapNode title="My results" action="MyResults" controller="Results" route="TournamentResults" preservedRouteParameters="tournamentId" />
+          <mvcSiteMapNode title="Edit results" action="EditResult" controller="Results" preservedRouteParameters="tournamentId,resultId" />
+          <!--//todo fix missing tournId param in singleresultedit view-->
+        </mvcSiteMapNode>
       </mvcSiteMapNode>
     </mvcSiteMapNode>
   </mvcSiteMapNode>

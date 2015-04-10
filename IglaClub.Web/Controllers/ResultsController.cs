@@ -87,9 +87,13 @@ namespace IglaClub.Web.Controllers
             return null;
         }
 
+        [SiteMapTitle("SMCurrentRound", Target = AttributeTarget.ParentNode)]
         public ActionResult EditResult(long resultId)
         {
             var result = db.Results.Find(resultId);
+
+            ViewData["SMCurrentRound"] = "Current round - " + result.Tournament.CurrentRound;
+
             return View("SingleResultEdit",result);
         }
 
@@ -241,11 +245,13 @@ namespace IglaClub.Web.Controllers
             return PartialView("_PairsResults", pairsResultsViewModel);
         }
 
+        [SiteMapTitle("SMCurrentRound", Target = AttributeTarget.ParentNode)]
         public ActionResult MyResults(long tournamentId)
         {
             var currentUser = userRepository.GetUserByLogin(HttpContext.User.Identity.Name);
             var tournament = db.Tournaments.Find(tournamentId);
             var results = resultRepository.GetResultsByTournamentAndUser(tournamentId, currentUser.Id);
+            ViewData["SMCurrentRound"] = "Current round - " + tournament.CurrentRound;
             return View(new MyResultsVm(results, tournament, currentUser));
         }
 

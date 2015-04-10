@@ -582,6 +582,7 @@
     <Content Include="Views\Clubs\_ClubsList.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\SetNewPassword.cshtml" />
+    <Content Include="Views\Tournament\TournamentResults.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

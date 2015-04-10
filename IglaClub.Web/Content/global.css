@@ -139,6 +139,9 @@ a.btn {
 .right-side-margin {
     margin-right: 10px;
 }
+.right-side-margin-double {
+    margin-right: 20px;
+}
 
 .create-tournament {
     max-width: 400px;

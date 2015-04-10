@@ -73,7 +73,7 @@ namespace IglaClub.Web.Controllers
             
         }
 
-        [SiteMapTitle("Tournament.Name")]
+        [SiteMapTitle("TournamentName")]
         public ActionResult Details(long tournamentId = 0)
         {
             Tournament tournament = db.Tournaments.
@@ -85,6 +85,24 @@ namespace IglaClub.Web.Controllers
             {
                 return HttpNotFound();
             }
+            ViewData["TournamentName"] = tournament.Name;
+            return View(tournament);
+        }
+        [SiteMapTitle("SMCurrentRound", Target = AttributeTarget.ParentNode)]
+        [SiteMapTitle("SMTitle")]
+        public ActionResult TournamentResults(long tournamentId = 0)
+        {
+            Tournament tournament = db.Tournaments.
+                Include(t=>t.Pairs).
+                Include(t=>t.Owner).
+                FirstOrDefault(t => t.Id == tournamentId);           
+          
+            if (tournament == null)
+            {
+                return HttpNotFound();
+            }
+            ViewData["SMCurrentRound"] = "Current round - " + tournament.CurrentRound;
+            ViewData["SMTitle"] = "All results";
             return View(tournament);
         }
 
@@ -408,7 +426,7 @@ namespace IglaClub.Web.Controllers
            return model;
         }
        
-        private TounamentSingleListViewModel CreateTounamentSingleListViewModelWithSortedItems(IEnumerable<Tournament> tournaments, int defaultTournamentCount, string header, bool manageMode = false, bool showSubscriptionStatus = false)
+        private TounamentSingleListViewModel CreateTounamentSingleListViewModelWithSortedItems(IEnumerable<Tournament> tournaments, int defaultTournamentCount, string header, bool manageMode = false, bool showSubscriptionStatus = false, bool nowPlayingMode = false)
         {
             var tournamentsDefaultCount = tournaments.Take(defaultTournamentCount).ToList();
             var dateTime = DateTime.Now;
@@ -420,7 +438,8 @@ namespace IglaClub.Web.Controllers
                     TournamentsPast = past,
                     Header = header,
                     ManageMode = manageMode,
-                    ShowSubscriptionStatus = showSubscriptionStatus
+                    ShowSubscriptionStatus = showSubscriptionStatus,
+                    NowPlayingMode = nowPlayingMode
                 };
         }
 
@@ -435,7 +454,7 @@ namespace IglaClub.Web.Controllers
                     CreateTounamentSingleListViewModelWithSortedItems(
                     tournamentRepository.GetCurrentlyPlayingByUser(GetCurrentUserName()),
                     DEFAULT_TOURNAMENT_COUNT, 
-                    "Now playing"),
+                    "Now playing", nowPlayingMode : true),
                     CreateTounamentSingleListViewModelWithSortedItems(
                     tournamentRepository.GetTournamentsToPlayByUser(GetCurrentUserName()),
                     DEFAULT_TOURNAMENT_COUNT, 

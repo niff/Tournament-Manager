@@ -2,10 +2,17 @@
 @model IglaClub.Web.Models.ViewModels.TounamentSingleListViewModel
 @{
     var userAction = @Model.ManageMode ? "Manage" : "Details";
+    var controller = "Tournament";
+    
 }
 <span class="medium-header">@Model.Header</span>
     @if (Model.Tournaments.Any() || (Model.TournamentsPast != null && Model.TournamentsPast.Any()))
     {
+        if (Model.NowPlayingMode)
+        {
+            userAction = "RoundDetails";
+            controller = "Round";
+        }
         <table class="table tournaments table-striped table-hover">
 
             @foreach (var item in Model.Tournaments)
@@ -16,7 +23,7 @@
                 var hour = item.PlannedStartDate != null ? ((DateTime) item.PlannedStartDate).ToString("HH:mm") : "";
                 <tr>
                     <td class="squeeze">@TournamentHelper.GetTournamentStatusIcon(status)</td>
-                    <td>@Html.ActionLink(item.Name, @userAction, "Tournament", new {tournamentId = @item.Id}, null)</td>
+                    <td>@Html.ActionLink(item.Name, @userAction, @controller, new {tournamentId = @item.Id}, null)</td>
                     <td class="hidden-xs squeeze">@Html.Raw(DateHelper.DaysLeftToDate(item.PlannedStartDate))</td>
                     <td class="visible-xs squeeze">@shortDate</td>
                     <td class="squeeze">@hour</td>
@@ -35,7 +42,7 @@
             var hour = item.PlannedStartDate != null ? ((DateTime) item.PlannedStartDate).ToString("HH:mm") : "";
             <tr class="past-tournaments">
                 <td class="squeeze">@TournamentHelper.GetTournamentStatusIcon(status)</td>
-                <td>@Html.ActionLink(item.Name, @userAction, "Tournament", new {tournamentId = @item.Id}, null)</td>
+                <td>@Html.ActionLink(item.Name, @userAction,  @controller, new {tournamentId = @item.Id}, null)</td>
                 <td class="hidden-xs squeeze">@Html.Raw(DateHelper.DaysLeftToDate(item.PlannedStartDate))</td>
                 <td class="visible-xs squeeze">@shortDate</td>
                 <td class="squeeze">@hour</td>

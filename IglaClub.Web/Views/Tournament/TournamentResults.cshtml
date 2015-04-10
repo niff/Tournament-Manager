@@ -1,0 +1,32 @@
+﻿@using IglaClub.ObjectModel.Enums
+@model IglaClub.ObjectModel.Entities.Tournament
+
+@{
+    ViewBag.Title = "Tournament results";
+    
+}
+<div class="row">
+    <div class="col-md-12 column-padding">
+        <div>
+            <span class="medium-header right-side-margin">Tournament results</span>
+            <span class="small-header">@Model.Name</span>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                @if (Model.TournamentStatus != TournamentStatus.Planned)
+                {
+                    @Html.Action("PairsResults", "Results", new { tournamentId = @Model.Id }) 
+                }
+                else
+                {
+            
+                    @:<div class="pairs" id="participantsDiv">
+                        @Html.Action("PairsList", "Tournament", new { tournamentId = @Model.Id })
+                                    @:</div>
+                        }
+            </div>
+        </div>
+    </div>
+</div>
+
