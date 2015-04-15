@@ -8,6 +8,7 @@ using IglaClub.ObjectModel.Repositories;
 using IglaClub.ObjectModel.Tools;
 using IglaClub.Web.Models;
 using IglaClub.Web.Models.ViewModels;
+using MvcSiteMapProvider.Web.Mvc.Filters;
 
 namespace IglaClub.Web.Controllers
 {
@@ -29,11 +30,13 @@ namespace IglaClub.Web.Controllers
             tournamentRepository = new TournamentRepository(db);
             resultRepository = new ResultRepository(db);
         }
-        
-       public ActionResult RoundDetails(long tournamentId)
+
+        //[SiteMapTitle("Tournament.Name", Target = AttributeTarget.ParentNode)]
+        [SiteMapTitle("CurrentRound")]
+        public ActionResult RoundDetails(long tournamentId)
         {
             var currentUser = userRepository.GetUserByLogin(HttpContext.User.Identity.Name);
-            if(!this.tournamentRepository.UserIsSubscribedForTournament(currentUser.Login, tournamentId))
+            if (!this.tournamentRepository.UserIsSubscribedForTournament(currentUser.Login, tournamentId))
             {
                 TempData["Message"] = "You are not subscribed for this tournament";
                 return RedirectToAction("Index", "Tournament");
@@ -48,6 +51,7 @@ namespace IglaClub.Web.Controllers
                     Results = results
                 });
             var firstResult = results.First();
+            ViewData["CurrentRound"] = "Current round - " + tournament.CurrentRound;
             return View(new RoundDetailsViewModel()
             {
                 Tournament = tournament,

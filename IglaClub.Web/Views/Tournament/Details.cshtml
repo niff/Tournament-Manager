@@ -12,8 +12,9 @@
 <div class="row">
     <div class="col-md-12 column-padding">
         <div>
-            <p>@Html.ActionLink("Tournaments", "Index") > Details</p>
-            <span class="medium-header">@Model.Name</span>
+            @*<p>@Html.ActionLink("Tournaments", "Index") > Details</p>*@
+            <span class="medium-header right-side-margin">Tournament details</span>
+            <span class="small-header">@Model.Name</span>
         </div>
 
         <div class="row">
@@ -50,12 +51,12 @@
                                     @:</div>
                         }
             </div>
-            <div class="col-md-6 action-pane">
+            @*<div class="col-md-6 action-pane">
                 @if (Model.TournamentStatus == TournamentStatus.Started)
                 {
                     @Html.Action("PairRoster", new { tournamentId = @Model.Id });
                 }
-            </div>
+            </div>*@
         </div>
     </div>
 </div>

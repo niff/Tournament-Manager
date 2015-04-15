@@ -9,6 +9,8 @@
         public static readonly string EditResultTitle = "Manage current results: change placing, add/change scores - essential of the tournament directing.";
         public static readonly string FinishTournamentTitle = "Finish tournament. Nobody except you will be able to modify score.";
         public static readonly string ResultNsPointsTitle = "It will be calculated automatically according to provided contract and number of tricks. If contract details will not be provided or will be provided incorrectly, this value can be set manually by entering in this field.";
+        public static readonly string InvalidTournamentPopMsg = "This tournament has some date and status errors. It won't be visible for users until it's fixed.";
+       
         
     }
 }

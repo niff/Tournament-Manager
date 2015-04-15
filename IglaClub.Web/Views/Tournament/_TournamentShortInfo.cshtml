@@ -29,8 +29,8 @@
             <span class="descr-label">tournament owner: </span>@Model.Owner.DisplayName
         </div>
         <div>
-            <span class="descr-label">description: </span>
-            <br />@Model.Description
+            <span class="descr-label">description: </span>@(!String.IsNullOrEmpty(Model.Description) ? Model.Description : "None")
+            
         </div>
         @if (isOwner)
         {

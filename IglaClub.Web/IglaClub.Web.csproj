@@ -280,6 +280,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClubsController.cs" />
     <Compile Include="Controllers\HelpRepository.cs" />
+    <Compile Include="Helpers\Html\BootstrapHelper.cs" />
     <Compile Include="Migrations\201504082031564_AddPasswordVerificationToken.cs" />
     <Compile Include="Migrations\201504082031564_AddPasswordVerificationToken.Designer.cs">
       <DependentUpon>201504082031564_AddPasswordVerificationToken.cs</DependentUpon>
@@ -594,6 +595,7 @@
     <Content Include="Views\Clubs\_ClubsList.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\SetNewPassword.cshtml" />
+    <Content Include="Views\Tournament\TournamentResults.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

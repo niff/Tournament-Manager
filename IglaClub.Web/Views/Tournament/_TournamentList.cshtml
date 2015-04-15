@@ -1,22 +1,36 @@
-﻿@using IglaClub.Web.Helpers.Html
+﻿@using IglaClub.ObjectModel.Consts
+@using IglaClub.ObjectModel.Enums
+@using IglaClub.Web.Helpers.Html
 @model IglaClub.Web.Models.ViewModels.TounamentSingleListViewModel
 @{
     var userAction = @Model.ManageMode ? "Manage" : "Details";
+    var controller = "Tournament";
+    
 }
 <span class="medium-header">@Model.Header</span>
     @if (Model.Tournaments.Any() || (Model.TournamentsPast != null && Model.TournamentsPast.Any()))
     {
+        var validTournamentsCount = Model.Tournaments.Count;
+        var rowNumber = 0;
+        if (Model.NowPlayingMode)
+        {
+            userAction = "RoundDetails";
+            controller = "Round";
+        }
         <table class="table tournaments table-striped table-hover">
-
-            @foreach (var item in Model.Tournaments)
+            @*//todo jesli turniej jest started to w date i hour wyswietlac date z pola StatredDate a nie planned*@
+            @foreach (var item in Model.Tournaments.Union(Model.TournamentsPast))
             {
                 var status = item.TournamentStatus;
-                //var dateFormatted = item.PlannedStartDate != null ? @DateHelper.DaysLeftToDate((DateTime) item.PlannedStartDate) : "Not set yet";
                 var shortDate = item.PlannedStartDate != null ? item.PlannedStartDate.Value.ToShortDateString() : "None";
-                var hour = item.PlannedStartDate != null ? ((DateTime) item.PlannedStartDate).ToString("HH:mm") : "";
-                <tr>
+                var hour = item.PlannedStartDate != null ? ((DateTime)item.PlannedStartDate).ToString("HH:mm") : "";
+                var itemNotValid = Model.ManageMode && (item.TournamentStatus == TournamentStatus.Planned || item.TournamentStatus == TournamentStatus.Started) && item.PlannedStartDate < DateTime.Today.AddDays(-1);
+                var rowClass = rowNumber >= validTournamentsCount ? "past-tournaments" : "";
+
+                <tr class="@rowClass">
                     <td class="squeeze">@TournamentHelper.GetTournamentStatusIcon(status)</td>
-                    <td>@Html.ActionLink(item.Name, @userAction, "Tournament", new {tournamentId = @item.Id}, null)</td>
+                    <td>@Html.ActionLink(item.Name, @userAction, @controller, new {tournamentId = @item.Id}, null)</td>
+                    <td class="squeeze">@(itemNotValid ? Html.Raw(BootstrapHelper.Popover(@StringResources.InvalidTournamentPopMsg, "ban-circle error")) : new HtmlString(""))</td>
                     <td class="hidden-xs squeeze">@Html.Raw(DateHelper.DaysLeftToDate(item.PlannedStartDate))</td>
                     <td class="visible-xs squeeze">@shortDate</td>
                     <td class="squeeze">@hour</td>
@@ -25,27 +39,8 @@
                         <td class="squeeze">@TournamentHelper.GetSubscribtionStatus(item.UserIsSubscribed(HttpContext.Current.User.Identity.Name), item.Id)</td>
                     }
                 </tr>
+                rowNumber++;
             }
-
-   
-            @foreach (var item in Model.TournamentsPast)
-            {
-            var status = item.TournamentStatus;
-            var shortDate = item.PlannedStartDate != null ? item.PlannedStartDate.Value.ToShortDateString() : "None";
-            var hour = item.PlannedStartDate != null ? ((DateTime) item.PlannedStartDate).ToString("HH:mm") : "";
-            <tr class="past-tournaments">
-                <td class="squeeze">@TournamentHelper.GetTournamentStatusIcon(status)</td>
-                <td>@Html.ActionLink(item.Name, @userAction, "Tournament", new {tournamentId = @item.Id}, null)</td>
-                <td class="hidden-xs squeeze">@Html.Raw(DateHelper.DaysLeftToDate(item.PlannedStartDate))</td>
-                <td class="visible-xs squeeze">@shortDate</td>
-                <td class="squeeze">@hour</td>
-                @if (@Model.ShowSubscriptionStatus)
-                {
-                    <td class="squeeze">@TournamentHelper.GetSubscribtionStatus(item.UserIsSubscribed(HttpContext.Current.User.Identity.Name), item.Id)</td>
-                }
-            </tr>
-            }
-    
         </table>
     }
     else

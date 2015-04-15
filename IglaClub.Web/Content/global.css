@@ -139,6 +139,9 @@ a.btn {
 .right-side-margin {
     margin-right: 10px;
 }
+.right-side-margin-double {
+    margin-right: 20px;
+}
 
 .create-tournament {
     max-width: 400px;
@@ -291,13 +294,19 @@ i.glyphicon.result-icon {
 .tournemanet-quick-edit {
     line-height: 2em;
     vertical-align: text-bottom;
-    margin-left: 10px;
+    /*margin-left: 10px;*/
 }
 
     .tournemanet-quick-edit a {
         padding-right: 10px;
     }
-
+.popover {
+    color: darkgray;
+    background: lemonchiffon;
+}
+.popover.top > .arrow:after {
+    border-top-color: lemonchiffon;
+}
 .shadow-gradient-block {
     background: -webkit-linear-gradient(top, #f5f5f5 0%,#efefef 100%);
     border-radius: 7px;
@@ -409,6 +418,9 @@ span.blue-header {
     color: rgb(45, 214, 45);
 }
 
+.glyphicon.error {
+    color: red;
+}
 .indent100 {
     margin-left: 100px;
 }

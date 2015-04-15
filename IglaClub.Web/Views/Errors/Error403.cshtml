@@ -1,7 +1,12 @@
 ﻿@{
     var returnLink = @ViewBag.ReffererUrl ?? Url.Action("Index", "Tournament"); 
 }
+<div class="row">
+    <div class="col-md-12 column-padding">
+<span class="medium-header">Something's apparently wrong...</span><br/>
+<span class="small-header">@ViewBag.ErrorMessage</span><br/>
 
-<h2>@ViewBag.ErrorMessage</h2>
-
-<a href="@returnLink">Back</a>
+    <a href="@returnLink"><i class="glyphicon glyphicon-arrow-left right-side-margin"></i>Back</a>
+        
+        </div>
+        </div>

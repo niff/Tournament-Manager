@@ -66,10 +66,10 @@ namespace IglaClub.ObjectModel.Repositories
 
         public bool UserIsTournamentOwner(string userName, long tournamentId)
         {
+            var user = db.Users.FirstOrDefault(u => u.Login.Equals(userName)) ??
+                       db.Users.FirstOrDefault(u => u.Email.Equals(userName));
             var tournament = db.Tournaments.Find(tournamentId);
-            if (tournament == null || tournament.Owner == null ||
-                String.Compare(tournament.Owner.Login, userName, StringComparison.OrdinalIgnoreCase) != 0)
-                return false;
+            if (tournament == null || user == null || tournament.OwnerId != user.Id) return false;
             return true;
         }
 

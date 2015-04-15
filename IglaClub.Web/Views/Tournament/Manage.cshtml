@@ -36,7 +36,7 @@
                                 <i class="glyphicon glyphicon-edit"></i> Edit results
                             </a><br/><br/>
                 @Html.Partial("_TournamentStartedActions", @Model.Tournament, new ViewDataDictionary { { "notFinishedYet", toFinish > 0 } })
-                
+                @*//todo make this part automatically refreshed in a loop*@
 @*                <table class="table table-noborder table-small-padding">
                     <tr>
                         <td>

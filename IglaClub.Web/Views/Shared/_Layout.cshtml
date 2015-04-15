@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title>@ViewBag.Title - Igla Club</title>
-    <link href="../../Content/img/spade_icon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="../../Content/img/cards/hearts-icon.png" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
 
     @Styles.Render("~/Content/css")
@@ -75,5 +75,12 @@
                 }
             }
         });
+
+        $("[data-toggle=popover]").popover({
+            html: true,
+            trigger: "focus",
+            placement:"top"
+        });
     });
+
 </script>
