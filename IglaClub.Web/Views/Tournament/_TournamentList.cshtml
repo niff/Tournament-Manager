@@ -18,7 +18,7 @@
             controller = "Round";
         }
 
-        var seeAllAction = @Model.ManageMode ? "OwnerTournaments" : "Join";
+        var seeAllAction = @Model.ManageMode ? "OwnerTournaments" : (Model.ShowSubscriptionStatus ? "Join" : "MyTournamentsToPlay");
         <table class="table tournaments table-striped table-hover">
             @*//todo jesli turniej jest started to w date i hour wyswietlac date z pola StatredDate a nie planned*@
             @foreach (var item in Model.Tournaments.Union(Model.TournamentsPast))
@@ -36,21 +36,22 @@
                     <td class="hidden-xs squeeze">@Html.Raw(DateHelper.DaysLeftToDate(item.PlannedStartDate))</td>
                     <td class="visible-xs squeeze">@shortDate</td>
                     <td class="squeeze">@hour</td>
-                    @if (String.IsNullOrEmpty(rowClass) && @Model.ShowSubscriptionStatus)
-                    {
-                        <td class="squeeze">@TournamentHelper.GetSubscribtionStatus(item.UserIsSubscribed(HttpContext.Current.User.Identity.Name), item.Id)</td>
-                    }
-                    else
-                    {
-                        <td class="squeeze"></td>
-                    }
+                    <td class="squeeze">
+                        @if (String.IsNullOrEmpty(rowClass) && @Model.ShowSubscriptionStatus)
+                        {
+                            @TournamentHelper.GetSubscribtionStatus(item.UserIsSubscribed(HttpContext.Current.User.Identity.Name), item.Id)
+                        }
+                    </td>
                 </tr>
                 rowNumber++;
             }
             @if(isShortList){
                 <tr>
-                    <td colspan="6" class="text-right" style="background-color: white;"><a href="@Url.Action(seeAllAction)">
-                                                                                            <span class="glyphicon glyphicon-list right-side-margin"></span>See all...</a></td>
+                    <td colspan="6" class="text-right" style="background-color: white;">
+                        <a href="@Url.Action(seeAllAction)">
+                            <span class="glyphicon glyphicon-list right-side-margin"></span>See all...
+                        </a>
+                    </td>
                 </tr>
             }
         </table>

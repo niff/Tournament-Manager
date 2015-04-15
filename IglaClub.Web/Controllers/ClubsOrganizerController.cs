@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using IglaClub.ObjectModel.Entities;
@@ -67,6 +69,12 @@ namespace IglaClub.Web.Controllers
         {
             var club = clubRepository.Get<Club>(id);
             return View(club);
+        }
+
+        public PartialViewResult ClubMembers(int clubId)
+        {
+            IEnumerable<User> model = clubRepository.GetClubMembers(clubId);
+            return PartialView("_ClubMembers", model);
         }
 
         public ActionResult Index()
