@@ -29,6 +29,7 @@ namespace IglaClub.Web.Controllers
 
         private readonly INotificationService notificationService;
         private const int DEFAULT_TOURNAMENT_COUNT = 10;
+        private const int MAX_TOURNAMENT_COUNT = 1000;
         //todo add caching for tournaments and invalidate on add or edit
         public TournamentController()
         {
@@ -367,7 +368,7 @@ namespace IglaClub.Web.Controllers
 
         public PartialViewResult TournamentsListPlannedUserNotSubscribedPartial()
         {
-            var model = TournamentsListPlannedUserNotSubscribedModel();
+            var model = TournamentsListPlannedUserNotSubscribedModel(DEFAULT_TOURNAMENT_COUNT);
             return PartialView("_TournamentList", model);
         }
 
@@ -378,20 +379,20 @@ namespace IglaClub.Web.Controllers
                 {
                     TournamentsList = new List<TounamentSingleListViewModel>
                         {
-                            TournamentsListPlannedUserNotSubscribedModel()
+                            TournamentsListPlannedUserNotSubscribedModel(1000)
                         }
                 };
             return View("TournamentsList", model);
         }
 
-        private TounamentSingleListViewModel TournamentsListPlannedUserNotSubscribedModel()
+        private TounamentSingleListViewModel TournamentsListPlannedUserNotSubscribedModel(int count)
         {
             return CreateTounamentSingleListViewModelWithSortedItems(
                 tournamentRepository.GetAvailableTournamentsByUser(GetCurrentUserName()),
-                DEFAULT_TOURNAMENT_COUNT,
+                count,
                 "Tournaments that you can join",
                 manageMode: false,
-                showSubscriptionStatus: false
+                showSubscriptionStatus: true
                 );
         }
 
@@ -403,7 +404,7 @@ namespace IglaClub.Web.Controllers
 
                     TournamentsList = new List<TounamentSingleListViewModel>
                         {
-                            GetTournamentsCreatedByUser(GetCurrentUserName())
+                            GetTournamentsCreatedByUser(GetCurrentUserName(), MAX_TOURNAMENT_COUNT)
                         }
                 };
             return View("OwnerDashboard", model);//todo zamienic na wywolywanie akcji do kazdej listy w widoku a nie budowanie modelu zlozonego z list tutaj
@@ -411,15 +412,15 @@ namespace IglaClub.Web.Controllers
 
         public PartialViewResult OwnerTournamentsList()
         {
-            var model = GetTournamentsCreatedByUser(GetCurrentUserName());
+            var model = GetTournamentsCreatedByUser(GetCurrentUserName(), DEFAULT_TOURNAMENT_COUNT);
             return PartialView("_TournamentList", model);
         }
 
-        private TounamentSingleListViewModel GetTournamentsCreatedByUser(string user)
+        private TounamentSingleListViewModel GetTournamentsCreatedByUser(string user, int count)
         {
             var model = CreateTounamentSingleListViewModelWithSortedItems(
                                         tournamentRepository.GetTournamentsByOwnerUser(user),
-                                        DEFAULT_TOURNAMENT_COUNT,
+                                        count,
                                         "Tournaments created by you",
                                         manageMode :true,
                                         showSubscriptionStatus:false);
@@ -439,7 +440,8 @@ namespace IglaClub.Web.Controllers
                     Header = header,
                     ManageMode = manageMode,
                     ShowSubscriptionStatus = showSubscriptionStatus,
-                    NowPlayingMode = nowPlayingMode
+                    NowPlayingMode = nowPlayingMode,
+                    IsShortList = defaultTournamentCount == DEFAULT_TOURNAMENT_COUNT
                 };
         }
 
@@ -454,15 +456,15 @@ namespace IglaClub.Web.Controllers
                 {
                     CreateTounamentSingleListViewModelWithSortedItems(
                     tournamentRepository.GetCurrentlyPlayingByUser(GetCurrentUserName()),
-                    DEFAULT_TOURNAMENT_COUNT, 
+                    MAX_TOURNAMENT_COUNT, 
                     "Now playing", nowPlayingMode : true),
                     CreateTounamentSingleListViewModelWithSortedItems(
                     tournamentRepository.GetTournamentsToPlayByUser(GetCurrentUserName()),
-                    DEFAULT_TOURNAMENT_COUNT, 
+                    MAX_TOURNAMENT_COUNT, 
                     "Playing soon"),
                     CreateTounamentSingleListViewModelWithSortedItems(
                     tournamentRepository.GetTournamentsAlreadyPlayedByUser(GetCurrentUserName()),
-                    DEFAULT_TOURNAMENT_COUNT, 
+                    MAX_TOURNAMENT_COUNT, 
                     "Already played")
                 }
             };

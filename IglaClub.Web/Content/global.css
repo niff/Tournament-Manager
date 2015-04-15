@@ -61,7 +61,9 @@ footer {
     padding-left: 6px;
     padding-right: 6px;
 }
-
+.table {
+    width: auto !important;
+}
 .table.tournaments > tbody > tr > td {
     vertical-align: middle !important;
 }
@@ -165,7 +167,7 @@ a.btn {
 
 tr td.squeeze {
     padding: 3px !important;
-    width: 1%;
+    /*width: 1%;*/
     white-space: nowrap;
     font-size: small;
 }

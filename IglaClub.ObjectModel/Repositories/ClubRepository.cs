@@ -32,7 +32,7 @@ namespace IglaClub.ObjectModel.Repositories
             };
             //db.ClubUsers.Add(clubUser);
             //db.Entry(clubUser).State = EntityState.Added;
-            db.Refresh(RefreshMode.ClientWins, clubUser);
+            //db.Refresh(RefreshMode.ClientWins, clubUser);
             base.InsertOrUpdate(clubUser);
             //club.ClubUsers.Add(clubUser);
             db.ClubUsers.Add(clubUser);
