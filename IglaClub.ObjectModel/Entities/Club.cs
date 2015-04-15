@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace IglaClub.ObjectModel.Entities
@@ -14,7 +15,9 @@ namespace IglaClub.ObjectModel.Entities
         public string Coordinates { get; set; }
 
         public string Address { get; set; }
-
+        
+        public DateTime CreationDate { get; set; }
+        
         public bool UserIsSubscribed(long userId)
         {
             return this.ClubUsers.Any(cu => cu.User.Id == userId);

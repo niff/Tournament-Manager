@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using IglaClub.ObjectModel.Entities;
 using IglaClub.ObjectModel.Repositories;
@@ -39,10 +40,9 @@ namespace IglaClub.Web.Controllers
             if (!ModelState.IsValid)
                 return View();
             
-            var coordinates = Request.Form["coords"];
-            club.Coordinates = coordinates;
             var user = userRepository.GetUserByLogin(User.Identity.Name);
 
+            club.CreationDate = DateTime.UtcNow;
             clubRepository.Insert(club, user);
             
             return RedirectToAction("Index");
@@ -57,8 +57,8 @@ namespace IglaClub.Web.Controllers
         [HttpPost]
         public ActionResult Edit(Club club)
         {
-            var coordinates = Request.Form["coords"];
-            club.Coordinates = coordinates;
+            //var coordinates = Request.Form["coords"];
+            //club.Coordinates = coordinates;
             clubRepository.Update(club);
             return View("Details", club);
         }

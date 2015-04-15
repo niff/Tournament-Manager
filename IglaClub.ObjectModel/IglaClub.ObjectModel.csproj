@@ -57,6 +57,7 @@
     <Compile Include="Entities\Club.cs" />
     <Compile Include="Entities\ClubUser.cs" />
     <Compile Include="Entities\HelpEntry.cs" />
+    <Compile Include="Enums\MembershipStatus.cs" />
     <Compile Include="Entities\Pair.cs" />
     <Compile Include="Entities\Result.cs" />
     <Compile Include="Entities\Tournament.cs" />

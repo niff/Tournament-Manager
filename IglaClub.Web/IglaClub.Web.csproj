@@ -292,6 +292,18 @@
     <Compile Include="Migrations\201504091232505_HelpEntriesTable.Designer.cs">
       <DependentUpon>201504091232505_HelpEntriesTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504142009022_ClubUseridColumn.cs" />
+    <Compile Include="Migrations\201504142009022_ClubUseridColumn.Designer.cs">
+      <DependentUpon>201504142009022_ClubUseridColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504142029117_ClubUseridColumn1.cs" />
+    <Compile Include="Migrations\201504142029117_ClubUseridColumn1.Designer.cs">
+      <DependentUpon>201504142029117_ClubUseridColumn1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504142109218_ClubUseridFKColumns.cs" />
+    <Compile Include="Migrations\201504142109218_ClubUseridFKColumns.Designer.cs">
+      <DependentUpon>201504142109218_ClubUseridFKColumns.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ViewModels\Clubs\ClubsIndexViewModel.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\ResultsController.cs" />
@@ -640,6 +652,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504091232505_HelpEntriesTable.resx">
       <DependentUpon>201504091232505_HelpEntriesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504142009022_ClubUseridColumn.resx">
+      <DependentUpon>201504142009022_ClubUseridColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504142029117_ClubUseridColumn1.resx">
+      <DependentUpon>201504142029117_ClubUseridColumn1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504142109218_ClubUseridFKColumns.resx">
+      <DependentUpon>201504142109218_ClubUseridFKColumns.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
