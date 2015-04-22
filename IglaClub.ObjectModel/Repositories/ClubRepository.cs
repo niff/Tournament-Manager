@@ -53,16 +53,17 @@ namespace IglaClub.ObjectModel.Repositories
             return db.Users.Where(u => clubUsers.Contains(u.Id));
         }
 
-        public void Subscribe(long id, long userId)
+        public void Subscribe(long clubId, long userId)
         {
             this.InsertOrUpdate(new ClubUser
                 {
-                    ClubId = id,
+                    ClubId = clubId,
                     UserId = userId,
                     IsAdministrator = false,
                     MemberSince = DateTime.Now,
                     MembershipStatus = MembershipStatus.Unknown
                 });
+
             db.SaveChanges();
         }
 
