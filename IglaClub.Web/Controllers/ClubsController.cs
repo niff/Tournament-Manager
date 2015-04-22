@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using IglaClub.ObjectModel.Repositories;
 using IglaClub.Web.Infrastructure;
@@ -27,7 +28,7 @@ namespace IglaClub.Web.Controllers
         public ActionResult Index()
         {
             var user = this.userRepository.GetUserByLogin(User.Identity.Name);
-            var clubs = this.db.Clubs;
+            var clubs = this.db.Clubs.Include("ClubUsers");
             var clubsListViewModel = new ClubsIndexViewModel
             {
                 ClubsWithSubscribedUser = clubs.Where(c=>c.ClubUsers.Any(cu=>cu.User.Id == user.Id)).ToList(),
@@ -46,5 +47,47 @@ namespace IglaClub.Web.Controllers
         }
 
 
+        public ActionResult Subscribe(long id)
+        {
+            try
+            {
+                var user = userRepository.GetUserByLogin(GetCurrentUserName());
+                if (user != null)
+                {
+                    var userId = user.Id;
+                    clubRepository.Subscribe(id, userId);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                notificationService.DisplayError("Something went wrong. Try again later.");
+            }
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Unsubscribe(long id)
+        {
+            try
+            {
+                var user = userRepository.GetUserByLogin(GetCurrentUserName());
+                if (user != null)
+                {
+                    var userId = user.Id;
+                    clubRepository.Unsubscribe(id, userId);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                notificationService.DisplayError("Something went wrong. Try again later.");
+            }
+            return RedirectToAction("Index");
+        }
+
+        private string GetCurrentUserName()
+        {
+            return HttpContext.User.Identity.Name;
+        }
     }
 }

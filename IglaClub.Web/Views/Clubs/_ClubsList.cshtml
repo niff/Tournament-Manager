@@ -1,6 +1,6 @@
 ﻿@model IglaClub.Web.Models.ViewModels.Clubs.ClubsListViewModel
 
-
+<span class="medium-header">@Model.Header</span>
 <table class="table table-striped table-hover">
     <thead>
         <tr>
@@ -10,11 +10,14 @@
             <th>
                 Description
             </th>
-            <th>
+@*            <th>
                 Coordinates
+            </th>*@
+            <th>
+                Location
             </th>
             <th>
-                Address
+                Members
             </th>
             <th></th>
         </tr>
@@ -24,23 +27,31 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => club.Name)
+                    @Html.DisplayFor(modelItem => club.Club.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => club.Description)
+                    @Html.DisplayFor(modelItem => club.Club.Description)
                 </td>
-                <td>
+ @*               <td>
                     @Html.DisplayFor(modelItem => club.Coordinates)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => club.Club.Address)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => club.Address)
+                    @Html.DisplayFor(modelItem => club.MembersCount)
                 </td>
                 <td>
-                    @if (!club.UserIsSubscribed(Model.User.Id))
+                    @if (Model.SubscribeMode)
                     {
-                        @Html.ActionLink("Subscribe |", "Subscribe", new { id = club.Id })
+                        @Html.ActionLink("Subscribe |", "Subscribe", new {id = club.Club.Id})
                     }
-                    @Html.ActionLink("Details", "Details", new { id = club.Id })
+                    else
+                    {
+                        @Html.ActionLink("Unsubscribe |", "Unsubscribe", new {id = club.Club.Id})
+                        
+                    }
+                    @Html.ActionLink("Details", "Details", new { id = club.Club.Id })
                 </td>
             </tr>
         }

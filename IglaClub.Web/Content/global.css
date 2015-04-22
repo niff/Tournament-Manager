@@ -61,13 +61,15 @@ footer {
     padding-left: 6px;
     padding-right: 6px;
 }
-.table {
+.table.tournaments {
     width: auto !important;
 }
 .table.tournaments > tbody > tr > td {
     vertical-align: middle !important;
 }
-
+.table > thead > tr > th {
+      color: rgb(96, 96, 166);
+}
 tr.past-tournaments > td, tr.past-tournaments > td > a {
     color: #BEBEBE;
 }
@@ -185,17 +187,20 @@ tr td.squeeze {
     vertical-align: middle;
 }
 
-.result tr td {
+.result tr td,.result tr th {
     padding: 2px;
+    text-align: center;
 }
-
+.result tr th {
+    line-height: 10px;
+}
     .result tr td input {
         width: 100px;
         height: 25px;
     }
 
         .result tr td input[type="text"] {
-            width: 60px;
+            width: 62px;
         }
 
         .result tr td input[type="number"] {
@@ -215,7 +220,8 @@ tr td.squeeze {
     }
 
 table.result {
-    font-size: x-small;
+    font-size: small;
+    width: 100% !important;
 }
 
 i.glyphicon.result-icon {

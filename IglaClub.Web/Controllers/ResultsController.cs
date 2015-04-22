@@ -53,6 +53,15 @@ namespace IglaClub.Web.Controllers
             ViewBag.TournamentId = tournamentId;
             return View(results);
         }
+
+        public ActionResult AdvancedEdit(long tournamentId)
+        {
+            var results = db.Tournaments.Find(tournamentId).Results.ToList();
+            results = results.OrderBy(r => r.Board.BoardNumber).ThenBy(r => r.TableNumber).ToList();
+            //todo prebound to all methods in tournaments and result controller
+            ViewBag.TournamentId = tournamentId;
+            return View(results);
+        }
               
         [HttpPost]
         public ActionResult Edit(List<Result> results)
@@ -254,6 +263,7 @@ namespace IglaClub.Web.Controllers
             ViewData["SMCurrentRound"] = "Current round - " + tournament.CurrentRound;
             return View(new MyResultsVm(results, tournament, currentUser));
         }
+
 
     }
 }

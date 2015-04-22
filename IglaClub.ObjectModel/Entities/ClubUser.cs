@@ -18,5 +18,7 @@ namespace IglaClub.ObjectModel.Entities
         public DateTime MemberSince { get; set; }
 
         public MembershipStatus MembershipStatus { get; set; }
+
+        //todo add migration for remove pk from userid i clubid, add pk to ID, set id to notnull, set values for id existing rows
     }
 }

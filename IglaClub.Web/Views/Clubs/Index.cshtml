@@ -5,7 +5,27 @@
     ViewBag.Title = "Clubs";
 }
 
-<h2>All clubs</h2>
 
-@Html.Partial("_ClubsList", new ClubsListViewModel{Header = "My clubs", Clubs = Model.ClubsWithSubscribedUser, User = Model.User})
-@Html.Partial("_ClubsList", new ClubsListViewModel{Header = "Other clubs", Clubs = Model.ClubsWithNotSubscribedUser, User = Model.User})
+@Html.Partial("_ClubsList", new ClubsListViewModel
+    {
+        Header = "My clubs", 
+        Clubs = Model.ClubsWithSubscribedUser.Select(x => 
+            new ClubViewModel
+            {
+                Club = x, 
+                MembersCount = x.ClubUsers.Count
+            }).ToList(),
+        User = Model.User
+    })
+@Html.Partial("_ClubsList", new ClubsListViewModel
+    {
+        Header = "Other clubs", 
+        Clubs = Model.ClubsWithNotSubscribedUser.Select(x => 
+            new ClubViewModel
+            {
+                Club = x, 
+                MembersCount = x.ClubUsers.Count
+            }).ToList(),
+        User = Model.User,
+        SubscribeMode = true
+    })

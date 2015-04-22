@@ -597,6 +597,7 @@
     <Content Include="Views\Account\SetNewPassword.cshtml" />
     <Content Include="Views\Tournament\TournamentResults.cshtml" />
     <Content Include="Views\ClubsOrganizer\_ClubMembers.cshtml" />
+    <Content Include="Views\Results\AdvancedEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

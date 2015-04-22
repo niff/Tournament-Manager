@@ -30,7 +30,7 @@
                     <ul class="dropdown-menu" role="menu" aria-labelledby="drop2">
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Create", "Tournament", new { area = "" }, null)">Create tournament<br/><span>Add new tournament and invite users</span></a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("OwnerTournaments", "Tournament", new { area = "" }, null)">My tournaments<br/><span>Tournaments that I organize</span></a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("MyClubs", "ClubsOrganizer", new { area = "" }, null)">My clubs<br/><span>Bridge clubs that I manage</span></a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Index", "ClubsOrganizer", new { area = "" }, null)">My clubs<br/><span>Bridge clubs that I manage</span></a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("OrganizerFaq", "Home", new { area = "" }, null)">Faq<br/><span>Frequently asked questions</span></a></li>
                     </ul>
                 </li>
@@ -42,7 +42,7 @@
                     <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("GetAll", "Tournament", new { area = "" }, null)">All tournaments</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("FindOnMap", "Tournament", new { area = "" }, null)">Find on map</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("MyClubs", "ClubsOrganizer", new { area = "" }, null)">Players</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Index", "Clubs", new { area = "" }, null)">Clubs</a></li>
                     </ul>
                 </li>
             </ul>

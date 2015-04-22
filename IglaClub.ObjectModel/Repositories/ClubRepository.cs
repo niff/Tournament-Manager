@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
 using IglaClub.ObjectModel.Entities;
+using IglaClub.ObjectModel.Enums;
 
 namespace IglaClub.ObjectModel.Repositories
 {
@@ -50,6 +51,26 @@ namespace IglaClub.ObjectModel.Repositories
         {
             List<long> clubUsers = db.ClubUsers.Where(cu => cu.ClubId == clubId).Select(cu => cu.UserId).ToList();
             return db.Users.Where(u => clubUsers.Contains(u.Id));
+        }
+
+        public void Subscribe(long id, long userId)
+        {
+            this.InsertOrUpdate(new ClubUser
+                {
+                    ClubId = id,
+                    UserId = userId,
+                    IsAdministrator = false,
+                    MemberSince = DateTime.Now,
+                    MembershipStatus = MembershipStatus.Unknown
+                });
+            db.SaveChanges();
+        }
+
+        public void Unsubscribe(long id, long userId)
+        {
+            var item = db.ClubUsers.FirstOrDefault(c => c.ClubId == id && c.UserId == userId);
+            this.Delete(item);
+            db.SaveChanges();
         }
     }
 }

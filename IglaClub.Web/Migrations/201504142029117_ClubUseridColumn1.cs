@@ -8,7 +8,7 @@ namespace IglaClub.Web.Migrations
         {
             AddColumn("dbo.ClubUsers", "MembershipStatus", c => c.Int(nullable: false));
             AddColumn("dbo.Clubs", "CreationDate", c => c.DateTime(nullable: false, storeType:"DateTime2"));
-            Sql("ALTER TABLE dbo.ClubUsers DROP CONSTRAINT DF__ClubUsers__Membe__403A8C7D");
+            //Sql("ALTER TABLE dbo.ClubUsers DROP CONSTRAINT DF__ClubUsers__Membe__403A8C7D");
             AlterColumn("dbo.ClubUsers","MemberSince",c=>c.DateTime(storeType:"DateTime2"));
         }
         
