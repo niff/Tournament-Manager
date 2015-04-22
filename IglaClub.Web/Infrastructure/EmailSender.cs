@@ -24,7 +24,10 @@ namespace IglaClub.Web.Infrastructure
                 }
                 else
                 {
-                    var file = new System.IO.FileStream("C:/Temp/mail/"+DateTime.Now.Ticks+".txt", FileMode.OpenOrCreate);
+                    var tempMailDir = "C:/Temp/mail/";
+                    if (!Directory.Exists(tempMailDir))
+                        Directory.CreateDirectory(tempMailDir);
+                    var file = new FileStream(tempMailDir+DateTime.Now.Ticks+".txt", FileMode.OpenOrCreate);
                     file.Write(Encoding.UTF8.GetBytes(email.Html), 0, email.Html.Length);
 
                 }
