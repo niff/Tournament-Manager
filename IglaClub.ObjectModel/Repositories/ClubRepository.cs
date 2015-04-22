@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
+using System.Linq;
 using IglaClub.ObjectModel.Entities;
 
 namespace IglaClub.ObjectModel.Repositories
@@ -32,7 +33,7 @@ namespace IglaClub.ObjectModel.Repositories
             };
             //db.ClubUsers.Add(clubUser);
             //db.Entry(clubUser).State = EntityState.Added;
-            db.Refresh(RefreshMode.ClientWins, clubUser);
+            //db.Refresh(RefreshMode.ClientWins, clubUser);
             base.InsertOrUpdate(clubUser);
             //club.ClubUsers.Add(clubUser);
             db.ClubUsers.Add(clubUser);
@@ -43,6 +44,12 @@ namespace IglaClub.ObjectModel.Repositories
         {
             base.InsertOrUpdate(club);
             SaveChanges();
+        }
+
+        public IEnumerable<User> GetClubMembers(int clubId)
+        {
+            List<long> clubUsers = db.ClubUsers.Where(cu => cu.ClubId == clubId).Select(cu => cu.UserId).ToList();
+            return db.Users.Where(u => clubUsers.Contains(u.Id));
         }
     }
 }

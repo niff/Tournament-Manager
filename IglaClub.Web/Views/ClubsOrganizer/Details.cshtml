@@ -4,48 +4,62 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="form-wrapper">
-<fieldset>
-    <legend>Club</legend>
+<div class="row">
+    <div class="col-md-12 column-padding">
+        <div class="col-md-6">
+        
+            <div class="form-wrapper">
+                <fieldset>
+                    <legend>Club</legend>
 
-    <div class="display-label">
-         @Html.LabelFor(model => model.Name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Name)
-    </div>
+                    <div class="display-label">
+                        @Html.LabelFor(model => model.Name)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.Name)
+                    </div>
 
-    <div class="display-label">
-         @Html.LabelFor(model => model.Description)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Description)
-    </div>
+                    <div class="display-label">
+                        @Html.LabelFor(model => model.Description)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.Description)
+                    </div>
 
-@*    <div class="display-label">
+                    @*    <div class="display-label">
          @Html.DisplayNameFor(model => model.Coordinates)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Coordinates)
     </div>*@
 
-    <div class="display-label">
-         @Html.LabelFor(model => model.Address)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Address)
-    </div>
+                    <div class="display-label">
+                        @Html.LabelFor(model => model.Address)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.Address)
+                    </div>
     
-    <label>Location on map</label>
-        <div id="map-canvas"></div>
-</fieldset>
-<p class="submit-button">
-    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
-    </div>
+                    <label>Location on map</label>
+                    <div id="map-canvas"></div>
+                </fieldset>
+                <p class="submit-button">
+                    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+                    @Html.ActionLink("Back to List", "Index")
+                </p>
+            </div>
+        </div>
 
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+        <div class="col-md-6">
+        <span class="medium-header">Club members</span>
+        @Html.Action("ClubMembers", new { clubId = @Model.Id})
+        
+    </div>
+    </div>
+        </div>
+        
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
 <script src="~/Scripts/gmap-plugin.js"></script>
 <script>
     $(document).ready(function () {

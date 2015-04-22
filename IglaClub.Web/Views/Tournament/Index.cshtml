@@ -21,6 +21,8 @@
 
         <div class="col-md-6">
             @Html.Action("MyTournamentsToPlay")
+            <a href="@Url.Action("Join")" class="btn btn-info">
+            <span class="glyphicon glyphicon-search right-side-margin"></span>Find more tournaments...</a>
         </div>
         <div class="col-md-6">
             @if (@Model.UserIsManagingTournament)
@@ -28,8 +30,11 @@
                 @Html.Action("OwnerTournamentsList")
             }
         </div>
-        <div class="col-md-6">
+    <div class="col-md-6">
+        @if (!Model.UserIsManagingTournament)
+        {
             @Html.Action("TournamentsListPlannedUserNotSubscribedPartial")
+        }
         </div>
     </div>
 </div>

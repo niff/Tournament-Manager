@@ -11,5 +11,6 @@ namespace IglaClub.Web.Models.ViewModels
         public bool ManageMode { get; set; }
         public bool NowPlayingMode { get; set; }
         public bool ShowSubscriptionStatus { get; set; }
+        public bool IsShortList { get; set; }
     }
 }

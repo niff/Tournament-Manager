@@ -1,4 +1,4 @@
-namespace IglaClub.ObjectModel.Enums
+﻿namespace IglaClub.ObjectModel.Enums
 {
     public enum MembershipStatus
     {

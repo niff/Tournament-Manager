@@ -88,6 +88,7 @@
                 }
 
                 map.fitBounds(bounds);
+                map.setZoom(16);
             });
 
             google.maps.event.addListener(map, 'bounds_changed', function () {
