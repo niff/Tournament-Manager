@@ -346,8 +346,8 @@
     <Compile Include="Models\ViewModels\Clubs\ClubsListViewModel.cs" />
     <Compile Include="Models\ViewModels\MyResultsVm.cs" />
     <Compile Include="Models\ViewModels\ResetPasswordModel.cs" />
-    <Compile Include="Models\ViewModels\TounamentListViewModel.cs" />
-    <Compile Include="Models\ViewModels\TounamentSingleListViewModel.cs" />
+    <Compile Include="Models\ViewModels\TournamentListViewModel.cs" />
+    <Compile Include="Models\ViewModels\TournamentSingleListViewModel.cs" />
     <Compile Include="Controllers\TournamentController.cs" />
     <Compile Include="Helpers\Html\TournamentHelper.cs" />
     <Compile Include="Migrations\201503242214342_CreateTableClubusers.cs" />

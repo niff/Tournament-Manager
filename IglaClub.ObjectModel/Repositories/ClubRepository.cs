@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
 using IglaClub.ObjectModel.Entities;
@@ -55,16 +56,27 @@ namespace IglaClub.ObjectModel.Repositories
 
         public void Subscribe(long clubId, long userId)
         {
-            this.InsertOrUpdate(new ClubUser
-                {
-                    ClubId = clubId,
-                    UserId = userId,
-                    IsAdministrator = false,
-                    MemberSince = DateTime.Now,
-                    MembershipStatus = MembershipStatus.Unknown
-                });
+            try
+            {
+                //todo handle exception
+                base.InsertOrUpdate(new ClubUser
+                    {
+                        Id = 0,
+                        ClubId = clubId,
+                        UserId = userId,
+                        IsAdministrator = false,
+                        MemberSince = DateTime.Now,
+                        MembershipStatus = MembershipStatus.Unknown
+                    });
 
-            db.SaveChanges();
+                db.SaveChanges();
+            }
+            catch (OptimisticConcurrencyException)
+            {
+                //db.Refresh(RefreshMode.ClientWins, db.ClubUsers);
+                db.SaveChanges();
+            }
+
         }
 
         public void Unsubscribe(long id, long userId)

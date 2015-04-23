@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
@@ -20,7 +21,7 @@ namespace IglaClub.Web.Helpers.Html
                         <span class='hidden-xs'>Joined</span>");
             }
             return
-                new HtmlString(string.Format("<a href='details/{0}'><i class='glyphicon glyphicon-plus'></i><span class=\"hidden-xs\">Join</span></a>",
+                new HtmlString(string.Format("<a href='Tournament/Details/{0}'><i class='glyphicon glyphicon-plus'></i><span class=\"hidden-xs\">Join</span></a>",
                                              id));
         }
 

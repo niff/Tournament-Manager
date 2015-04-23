@@ -38,7 +38,7 @@
                 @Html.Raw(@p2Name)
             </td>
             <td>               
-                @if (userSubscribed)
+                @if (userSubscribed && pair.ContainsUser(Model.CurrentUser.Id))
                 {
                     <a href = "#" id="removePairLink" data-tournament-id="@Model.Tournament.Id" data-pair-id="@pair.Id" >
                         <i class="glyphicon glyphicon-trash" title="Remove"></i>

@@ -9,7 +9,7 @@
             <tr>
                 <td>@user.Login</td>
                 <td>@user.Name</td>
-
+                <td>@Html.ActionLink("Unsubscribe", "Unsubscribe", "Clubs", new { user.Id },null)</td>
             </tr>
         }
     </table>

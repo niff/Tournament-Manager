@@ -82,7 +82,11 @@ namespace IglaClub.Web.Controllers
             {
                 notificationService.DisplayError("Something went wrong. Try again later.");
             }
-            return RedirectToAction("Index");
+            
+            if (Request.UrlReferrer == null)
+                return RedirectToAction("Details", "Clubs", new {id});
+            return Redirect(Request.UrlReferrer.ToString());
+            //return RedirectToAction("Index");
         }
 
         private string GetCurrentUserName()

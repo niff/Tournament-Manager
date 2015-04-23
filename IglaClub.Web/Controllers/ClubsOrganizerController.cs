@@ -90,5 +90,6 @@ namespace IglaClub.Web.Controllers
             notificationService.DisplayInfo("Club {0} removed.",club.Name);
             return RedirectToAction("Index");
         }
+
     }
 }

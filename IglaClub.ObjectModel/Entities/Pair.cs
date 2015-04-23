@@ -33,5 +33,11 @@ namespace IglaClub.ObjectModel.Entities
                 return (Player1 == null && Player2 == null);
             } 
         }
+
+        public bool ContainsUser(long userId)
+        {
+            return (this.Player1 != null && this.Player1.Id == userId) ||
+                   (this.Player2 != null && this.Player2.Id == userId);
+        }
     }
 }
