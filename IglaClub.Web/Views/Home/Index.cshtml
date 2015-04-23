@@ -4,11 +4,11 @@
 
 <div class="row">
     <div class="col-md-12 column-padding">
-
-        <div class="col-md-12  center-block shadow-gradient-block start-text-block">
+        <div class="row">
+        <div class="col-md-8  col-xs-12 center-block shadow-gradient-block start-text-block">
             <div>
                 <div class="home-text hidden-xs">
-@*                    <table>
+                    @*                    <table>
                         <tr><td>Find bridge tournaments in your area and sign up.</td><td></td><td></td></tr>
                         <tr><td></td><td>Review your results.</td><td></td></tr>
                         <tr><td></td><td></td><td>Connect to other players.</td></tr>
@@ -24,8 +24,7 @@
                 </p>
             </div>
         </div>
-        @*  <div class="col-md-3 center-block shadow-gradient-block quick-sign-up-block">*@
-        <div class="col-md-4">
+        <div class="col-md-4 col-xs-12">
             <div class="center-block shadow-gradient-block quick-sign-up-block">
                 @*      <div class="quick-sign-up">*@
                 <span class="small-header">Quick sign up and start using!</span>
@@ -33,9 +32,26 @@
                 @*    </div>*@
             </div>
         </div>
-        <div class="col-md-8">
-
-            <div class="col-md-6">
+        @*  <div class="col-md-3 center-block shadow-gradient-block quick-sign-up-block">*@
+        <div class="row">
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="center-block shadow-gradient-block action">
+                    <div>
+                        <img src="~/Content/img/1408214039_search.png" />
+                        <div class="caption">
+                            <h3>Find a club...</h3>
+                            <p>... join and get info about new torunaments!</p>
+                            <p>
+                                <a href="@Url.Action("About", "Home")" class="btn btn-primary" role="button">See more...</a>
+                                <a href="@Url.Action("GetAll", "Tournament")" class="btn btn-default" role="button">Find a tournament</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
                 <div class="center-block shadow-gradient-block action">
                     <div>
                         <img src="~/Content/img/1408214039_search.png" />
@@ -50,7 +66,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="center-block shadow-gradient-block action">
                     <div>
                         <img src="~/Content/img/1408214416_file_add.png" />
@@ -65,6 +81,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
 
         </div>

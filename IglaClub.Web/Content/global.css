@@ -89,13 +89,34 @@ tr.past-tournaments > td, tr.past-tournaments > td > a {
 .label-default {
     background-color: #B3B3B3;
 }
+/*navbar customization-----------------*/
+.navbar {
+    background-color: rgb(37, 83, 153);
+}
 .navbar-header > .navbar-brand {
-    font-variant: small-caps;
+    /*font-variant: small-caps;
     text-shadow: 2px 2px rgb(211, 211, 211);
     font-weight: bold;
-    color: rgb(36, 104, 163);
+    color: rgb(36, 104, 163);*/
+      font-variant: small-caps;
+  text-shadow: 2px 2px rgb(14, 78, 102);
+  font-weight: bold;
+  color: rgb(255, 255, 255);
 }
-
+.navbar-header > .navbar-brand:hover {
+    color: white;
+    text-shadow: 2px 2px rgb(12, 152, 205);
+}
+.navbar-default .navbar-nav > li > a {
+    color: white;
+}
+.navbar-default .navbar-nav > li:hover{
+    background-color: white;
+}
+.navbar-default .navbar-nav > li:hover a {
+    color: rgb(37, 83, 153);
+}
+/*navbar customization------END-----------*/
 .spinner {
     width: 24px;
     height: 24px;
@@ -247,6 +268,35 @@ i.glyphicon.result-icon {
         background: url('img/cards/diamonds-icon.png');
     }
 
+    
+
+.shadow-gradient-block {
+    background: -webkit-linear-gradient(top, #f5f5f5 0%,#efefef 100%);
+    border-radius: 7px;
+    border: 1px solid #d8d8d8;
+    box-shadow: 0 0 1px 1px white inset, 0 33px 40px -38px #000;
+    height: auto;
+    max-width: 100%;
+    /*margin: 15px 0;*/
+    text-align: center;
+}
+
+.shadow-gradient-block.action {
+    padding: 25px;
+}
+
+.shadow-gradient-block img {
+    width: 82px;
+}
+
+.start-text-block {
+    border: none;
+    box-shadow: none;
+    /*background: rgb(49, 129, 199);*/
+    background: rgb(65, 169, 62);
+    color: white;
+    margin-bottom: 10px;
+}
 .home-text {
     padding: 15px;
     font-size: 20px;
@@ -260,7 +310,8 @@ i.glyphicon.result-icon {
 
     .home-text-big > .name {
         font-weight: bold;
-        text-shadow: 4px 4px rgb(37, 83, 153);
+        /*text-shadow: 4px 4px rgb(37, 83, 153);*/
+        text-shadow: 4px 4px rgb(44, 113, 40);
         font-variant: small-caps;
     }
 
@@ -315,32 +366,6 @@ i.glyphicon.result-icon {
 .popover.top > .arrow:after {
     border-top-color: lemonchiffon;
 }
-.shadow-gradient-block {
-    background: -webkit-linear-gradient(top, #f5f5f5 0%,#efefef 100%);
-    border-radius: 7px;
-    border: 1px solid #d8d8d8;
-    box-shadow: 0 0 1px 1px white inset, 0 33px 40px -38px #000;
-    height: auto;
-    max-width: 100%;
-    margin: 15px 0;
-    text-align: center;
-}
-
-.start-text-block {
-    border: none;
-    box-shadow: none;
-    background: rgb(49, 129, 199);
-    color: white;
-}
-
-.shadow-gradient-block.action {
-    padding: 25px;
-}
-
-.shadow-gradient-block img {
-    width: 82px;
-}
-
 .active-tournaments {
     padding-bottom: 10px;
 }
@@ -486,7 +511,9 @@ span.blue-header {
 }
 
 .quick-sign-up-block {
-    padding: 18px 47px;
+    padding: 18px 47px;  
+    margin-left: 10px;
+    width: 100%;
 }
 
     .quick-sign-up-block form {
@@ -624,4 +651,15 @@ span.blue-header {
         margin-bottom: 10px;
         font-size: x-small;
     }
+    .shadow-gradient-block.action {
+        padding: 5px;
+    }
+
+    .shadow-gradient-block img {
+        display: none;
+    }
+
+    /*.shadow-gradient-block {
+        margin: 0;
+    }*/
 }
