@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core;
 using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using IglaClub.ObjectModel.Entities;
 using IglaClub.ObjectModel.Enums;
@@ -19,7 +20,7 @@ namespace IglaClub.ObjectModel.Repositories
         public void Insert(Club club, User owner)
         {
             var user = db.Users.Find(owner.Id);
-            
+
             //club.ClubUsers = new List<ClubUser>();
 
             base.InsertOrUpdate(club);
@@ -56,27 +57,20 @@ namespace IglaClub.ObjectModel.Repositories
 
         public void Subscribe(long clubId, long userId)
         {
-            try
-            {
-                //todo handle exception
-                base.InsertOrUpdate(new ClubUser
-                    {
-                        Id = 0,
-                        ClubId = clubId,
-                        UserId = userId,
-                        IsAdministrator = false,
-                        MemberSince = DateTime.Now,
-                        MembershipStatus = MembershipStatus.Unknown
-                    });
 
-                db.SaveChanges();
-            }
-            catch (OptimisticConcurrencyException)
-            {
-                //db.Refresh(RefreshMode.ClientWins, db.ClubUsers);
-                db.SaveChanges();
-            }
+            var clubUser = new ClubUser
+                {
+                    Id = 0,
+                    ClubId = clubId,
+                    UserId = userId,
+                    IsAdministrator = false,
+                    MemberSince = DateTime.Now,
+                    MembershipStatus = MembershipStatus.Unknown
+                };
 
+
+            base.InsertOrUpdate(clubUser);
+            db.SaveChanges();
         }
 
         public void Unsubscribe(long id, long userId)

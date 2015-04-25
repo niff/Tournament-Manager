@@ -31,8 +31,8 @@ namespace IglaClub.Web.Controllers
             var clubs = this.db.Clubs.Include("ClubUsers");
             var clubsListViewModel = new ClubsIndexViewModel
             {
-                ClubsWithSubscribedUser = clubs.Where(c=>c.ClubUsers.Any(cu=>cu.User.Id == user.Id)).ToList(),
-                ClubsWithNotSubscribedUser = clubs.Where(c=>c.ClubUsers.All(cu=>cu.User.Id != user.Id)).ToList(),
+                ClubsWithSubscribedUser = clubs.Where(c => c.ClubUsers.Any(cu => cu.User.Id == user.Id)).ToList(),
+                ClubsWithNotSubscribedUser = clubs.Where(c => c.ClubUsers.All(cu => cu.User.Id != user.Id)).ToList(),
                 User = user
             };
             return View(clubsListViewModel);
@@ -52,18 +52,18 @@ namespace IglaClub.Web.Controllers
             try
             {
                 var user = userRepository.GetUserByLogin(GetCurrentUserName());
-                if (user != null)
-                {
-                    var userId = user.Id;
-                    clubRepository.Subscribe(id, userId);
+                var userId = user.Id;
+                clubRepository.Subscribe(id, userId);
 
-                }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 notificationService.DisplayError("Something went wrong. Try again later.");
             }
-            return RedirectToAction("Index");
+            
+            if (Request.UrlReferrer == null)
+                return RedirectToAction("Index");
+            return Redirect(Request.UrlReferrer.ToString());
         }
 
         public ActionResult Unsubscribe(long id)
@@ -82,11 +82,10 @@ namespace IglaClub.Web.Controllers
             {
                 notificationService.DisplayError("Something went wrong. Try again later.");
             }
-            
+
             if (Request.UrlReferrer == null)
-                return RedirectToAction("Details", "Clubs", new {id});
+                return RedirectToAction("Details", "Clubs", new { id });
             return Redirect(Request.UrlReferrer.ToString());
-            //return RedirectToAction("Index");
         }
 
         private string GetCurrentUserName()

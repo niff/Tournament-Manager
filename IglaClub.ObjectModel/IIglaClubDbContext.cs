@@ -19,5 +19,7 @@ namespace IglaClub.ObjectModel
         int SaveChanges();
 
         DbEntityEntry Entry(object entity);
+
+        Database Database { get; }
     }
 }

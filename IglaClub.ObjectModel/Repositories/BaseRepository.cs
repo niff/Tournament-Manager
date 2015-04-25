@@ -89,5 +89,10 @@ namespace IglaClub.ObjectModel.Repositories
         {
             return db.Entry(entity);
         }
+
+        public Database Database
+        {
+            get { return db.Database; }
+        }
     }
 }

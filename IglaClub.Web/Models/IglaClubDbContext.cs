@@ -15,6 +15,7 @@ namespace IglaClub.Web.Models
             //Database.SetInitializer(new DropCreateDatabaseAlways<IglaClubDbContext>());
         }
 
+
         public DbSet<User> Users { get; set; }
         public DbSet<Club> Clubs { get; set; }
         public DbSet<Tournament> Tournaments { get; set; }
@@ -26,11 +27,6 @@ namespace IglaClub.Web.Models
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<ClubUser> ClubUsers { get; set; }
         public DbSet<HelpEntry> HelpEntries { get; set; }
-
-        public new int SaveChanges()
-        {
-            return base.SaveChanges();
-        }
-
+        
     }
 }
