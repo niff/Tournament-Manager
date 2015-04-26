@@ -596,8 +596,11 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\SetNewPassword.cshtml" />
     <Content Include="Views\Tournament\TournamentResults.cshtml" />
-    <Content Include="Views\ClubsOrganizer\_ClubMembers.cshtml" />
+    <Content Include="Views\ClubsOrganizer\_ClubMembersAdmin.cshtml" />
     <Content Include="Views\Results\AdvancedEdit.cshtml" />
+    <Content Include="Views\Clubs\_ClubMembers.cshtml" />
+    <Content Include="Views\Clubs\Details.cshtml" />
+    <Content Include="Views\Tournament\ClubTournaments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

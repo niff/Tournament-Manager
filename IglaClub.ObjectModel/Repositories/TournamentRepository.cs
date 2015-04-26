@@ -137,6 +137,34 @@ namespace IglaClub.ObjectModel.Repositories
                 OrderByDescending(t => t.PlannedStartDate).ToList();
         }
 
+        private IQueryable<Tournament> GetTournamentsByClub(long clubId)
+        {
+            var res = from t in db.Tournaments
+                      where t.Club.Id == clubId
+                      orderby t.PlannedStartDate descending 
+                select t;
+            return res;
+        }
+
+        public IList<Tournament> GetTournamentsPlannedByClub(long clubId)
+        {
+            var tournaments = GetTournamentsByClub(clubId);
+            return tournaments.Where(t => t.TournamentStatus == TournamentStatus.Planned).
+                OrderBy(t => t.PlannedStartDate).ToList();
+        }
+        public IList<Tournament> GetTournamentsFinishedByClub(long clubId)
+        {
+            var tournaments = GetTournamentsByClub(clubId);
+            return tournaments.Where(t => t.TournamentStatus == TournamentStatus.Finished).
+                OrderBy(t => t.PlannedStartDate).ToList();
+        }
+        public IList<Tournament> GetTournamentsStartedByClub(long clubId)
+        {
+            var tournaments = GetTournamentsByClub(clubId);
+            return tournaments.Where(t => t.TournamentStatus == TournamentStatus.Started).
+                OrderBy(t => t.PlannedStartDate).ToList();
+        }
+
         public bool UserIsManagingAtLeastOneTournament(long userId)
         {
             return db.Tournaments.Any(t => t.OwnerId == userId);

@@ -28,8 +28,8 @@ namespace IglaClub.Web.Controllers
         private readonly ResultRepository resultRepository;
 
         private readonly INotificationService notificationService;
-        private const int DEFAULT_TOURNAMENT_COUNT = 10;
-        private const int MAX_TOURNAMENT_COUNT = 1000;
+        private const int DefaultTournamentCount = 10;
+        private const int MaxTournamentCount = 1000;
         //todo add caching for tournaments and invalidate on add or edit
         public TournamentController()
         {
@@ -338,7 +338,7 @@ namespace IglaClub.Web.Controllers
         {
             var model =
                 CreateTounamentSingleListViewModelWithSortedItems(
-                    tournamentRepository.GetTournamentsToPlayByUser(GetCurrentUserName()), DEFAULT_TOURNAMENT_COUNT,
+                    tournamentRepository.GetTournamentsToPlayByUser(GetCurrentUserName()), DefaultTournamentCount,
                     "You are playing soon", manageMode: false, showSubscriptionStatus: false);
             return PartialView("_TournamentList", model);
         }
@@ -347,7 +347,7 @@ namespace IglaClub.Web.Controllers
         {
             var model =
                 CreateTounamentSingleListViewModelWithSortedItems(
-                    tournamentRepository.GetTournamentsToPlayByUser(GetCurrentUserName()), DEFAULT_TOURNAMENT_COUNT,
+                    tournamentRepository.GetTournamentsToPlayByUser(GetCurrentUserName()), DefaultTournamentCount,
                     "You are playing soon", manageMode: false, showSubscriptionStatus: false);
             return View("TournamentsList", new TournamentListViewModel(model));
         }
@@ -376,7 +376,7 @@ namespace IglaClub.Web.Controllers
 
         public PartialViewResult TournamentsListPlannedUserNotSubscribedPartial()
         {
-            var model = TournamentsListPlannedUserNotSubscribedModel(DEFAULT_TOURNAMENT_COUNT);
+            var model = TournamentsListPlannedUserNotSubscribedModel(DefaultTournamentCount);
             return PartialView("_TournamentList", model);
         }
 
@@ -401,13 +401,13 @@ namespace IglaClub.Web.Controllers
         //[SiteMapTitle("Organize tournaments", Target = AttributeTarget.ParentNode)]
         public ActionResult OwnerTournaments()
         {
-            var model = new TournamentListViewModel(GetTournamentsCreatedByUser(GetCurrentUserName(), MAX_TOURNAMENT_COUNT));
+            var model = new TournamentListViewModel(GetTournamentsCreatedByUser(GetCurrentUserName(), MaxTournamentCount));
             return View("OwnerDashboard", model);//todo zamienic na wywolywanie akcji do kazdej listy w widoku a nie budowanie modelu zlozonego z list tutaj
         }
 
         public PartialViewResult OwnerTournamentsList()
         {
-            var model = GetTournamentsCreatedByUser(GetCurrentUserName(), DEFAULT_TOURNAMENT_COUNT);
+            var model = GetTournamentsCreatedByUser(GetCurrentUserName(), DefaultTournamentCount);
             return PartialView("_TournamentList", model);
         }
 
@@ -436,7 +436,7 @@ namespace IglaClub.Web.Controllers
                     ManageMode = manageMode,
                     ShowSubscriptionStatus = showSubscriptionStatus,
                     NowPlayingMode = nowPlayingMode,
-                    IsShortList = defaultTournamentCount == DEFAULT_TOURNAMENT_COUNT
+                    IsShortList = defaultTournamentCount == DefaultTournamentCount
                 };
         }
 
@@ -450,21 +450,42 @@ namespace IglaClub.Web.Controllers
                     {
                         CreateTounamentSingleListViewModelWithSortedItems(
                         tournamentRepository.GetCurrentlyPlayingByUser(GetCurrentUserName()),
-                        MAX_TOURNAMENT_COUNT, 
+                        MaxTournamentCount, 
                         "Now playing", nowPlayingMode : true),
                         CreateTounamentSingleListViewModelWithSortedItems(
                         tournamentRepository.GetTournamentsToPlayByUser(GetCurrentUserName()),
-                        MAX_TOURNAMENT_COUNT, 
+                        MaxTournamentCount, 
                         "Playing soon"),
                         CreateTounamentSingleListViewModelWithSortedItems(
                         tournamentRepository.GetTournamentsAlreadyPlayedByUser(GetCurrentUserName()),
-                        MAX_TOURNAMENT_COUNT, 
+                        MaxTournamentCount, 
                         "Already played")
                     }
                 );
             return View("TournamentsList", model);
         }
 
+        public PartialViewResult ClubTournaments(long clubId)
+        {
+            var model = new TournamentListViewModel
+                (new List<TournamentSingleListViewModel>
+                    {
+                        CreateTounamentSingleListViewModelWithSortedItems(
+                        tournamentRepository.GetTournamentsStartedByClub(clubId),
+                        MaxTournamentCount, 
+                        "Now playing", nowPlayingMode : true),
+                        CreateTounamentSingleListViewModelWithSortedItems(
+                        tournamentRepository.GetTournamentsPlannedByClub(clubId),
+                        MaxTournamentCount, 
+                        "Playing soon"),
+                        CreateTounamentSingleListViewModelWithSortedItems(
+                        tournamentRepository.GetTournamentsFinishedByClub(clubId),
+                        MaxTournamentCount, 
+                        "Already played")
+                    }
+                );
+            return PartialView(model);
+        }
        
         public ActionResult UndoStart(long id)
         {

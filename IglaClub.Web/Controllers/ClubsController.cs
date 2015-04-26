@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using IglaClub.ObjectModel.Entities;
 using IglaClub.ObjectModel.Repositories;
 using IglaClub.Web.Infrastructure;
 using IglaClub.Web.Models;
+using IglaClub.Web.Models.ViewModels;
 using IglaClub.Web.Models.ViewModels.Clubs;
 
 namespace IglaClub.Web.Controllers
@@ -43,9 +46,14 @@ namespace IglaClub.Web.Controllers
 
         public ActionResult Details(int id)
         {
-            return View();
+            var club = clubRepository.Get<Club>(id);
+            return View(club);
         }
-
+        public PartialViewResult ClubMembers(int clubId)
+        {
+            IEnumerable<User> model = clubRepository.GetClubMembers(clubId);
+            return PartialView("_ClubMembers", model);
+        }
 
         public ActionResult Subscribe(long id)
         {

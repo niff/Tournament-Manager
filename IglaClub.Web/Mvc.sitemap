@@ -25,5 +25,8 @@
         </mvcSiteMapNode>
       </mvcSiteMapNode>
     </mvcSiteMapNode>
+    <mvcSiteMapNode title="Clubs" controller="Clubs" action="Index" >
+      <mvcSiteMapNode title="Club details" action="Details" preservedRouteParameters="id" />
+    </mvcSiteMapNode>
   </mvcSiteMapNode>
 </mvcSiteMap>
