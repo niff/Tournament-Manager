@@ -73,9 +73,9 @@ namespace IglaClub.ObjectModel.Repositories
             db.SaveChanges();
         }
 
-        public void Unsubscribe(long id, long userId)
+        public void Unsubscribe(long clubId, long userId)
         {
-            var item = db.ClubUsers.FirstOrDefault(c => c.ClubId == id && c.UserId == userId);
+            var item = db.ClubUsers.FirstOrDefault(c => c.ClubId == clubId && c.UserId == userId);
             this.Delete(item);
             db.SaveChanges();
         }

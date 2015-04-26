@@ -1,16 +1,18 @@
-﻿@model IEnumerable<IglaClub.ObjectModel.Entities.User>
+﻿@model IglaClub.Web.Models.ViewModels.Clubs.ClubMembersViewModel
 @*todo: subscribe*@
-<button type="button" class="btn btn-primary btn-small" id="pairSearchSubmit">Subscribe</button>
-@if (Model.Any())
+@*todo: club handling*@
+@if (Model.Users.Any())
 {
     <table class="table table-striped table-hover">
     
-        @foreach (var user in Model)
+        @foreach (var user in Model.Users)
         {
             <tr>
-                <td>@user.Login</td>
-                <td>@user.Name</td>
-                <td>@Html.ActionLink("Unsubscribe", "Unsubscribe", "Clubs", new { user.Id },null)</td>
+                <td>@user.DisplayName</td>
+                @if(user.Login == Context.User.Identity.Name)
+                {
+                    <td>@Html.ActionLink("Unsubscribe", "Unsubscribe", "Clubs", new { user.Id },null)</td>
+                }
             </tr>
         }
     </table>

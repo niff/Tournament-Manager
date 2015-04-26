@@ -51,7 +51,9 @@ namespace IglaClub.Web.Controllers
         }
         public PartialViewResult ClubMembers(int clubId)
         {
-            IEnumerable<User> model = clubRepository.GetClubMembers(clubId);
+            var club = clubRepository.Get<Club>(clubId);
+            IEnumerable<User> users = clubRepository.GetClubMembers(clubId);
+            var model = new ClubMembersViewModel(users, club);
             return PartialView("_ClubMembers", model);
         }
 
@@ -74,17 +76,18 @@ namespace IglaClub.Web.Controllers
             return Redirect(Request.UrlReferrer.ToString());
         }
 
-        public ActionResult Unsubscribe(long id)
+        public ActionResult Unsubscribe(long clubId, long userId)
         {
             try
             {
-                var user = userRepository.GetUserByLogin(GetCurrentUserName());
-                if (user != null)
-                {
-                    var userId = user.Id;
-                    clubRepository.Unsubscribe(id, userId);
+                clubRepository.Unsubscribe(clubId, userId);
 
-                }
+                //var user = userRepository.GetUserByLogin(GetCurrentUserName());
+                //if (user != null)
+                //{
+                //    var userId = user.Id;
+                    
+                //}
             }
             catch (Exception ex)
             {
@@ -92,7 +95,7 @@ namespace IglaClub.Web.Controllers
             }
 
             if (Request.UrlReferrer == null)
-                return RedirectToAction("Details", "Clubs", new { id });
+                return RedirectToAction("Details", "Clubs", new { id = clubId });
             return Redirect(Request.UrlReferrer.ToString());
         }
 
