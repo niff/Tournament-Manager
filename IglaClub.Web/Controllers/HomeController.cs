@@ -41,6 +41,14 @@ namespace IglaClub.Web.Controllers
             var model = helpRepository.GetAll<HelpEntry>();
             return View(model);
         }
+        public ActionResult PrivacyPolicy()
+        {
+            return View();
+        }
+public ActionResult TermsAndConditions()
+        {
+            return View();
+        }
 
 
     }

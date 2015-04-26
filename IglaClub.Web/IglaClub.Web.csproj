@@ -601,6 +601,8 @@
     <Content Include="Views\Clubs\_ClubMembers.cshtml" />
     <Content Include="Views\Clubs\Details.cshtml" />
     <Content Include="Views\Tournament\ClubTournaments.cshtml" />
+    <Content Include="Views\Home\PrivacyPolicy.cshtml" />
+    <Content Include="Views\Home\TermsAndConditions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
