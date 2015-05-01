@@ -5,12 +5,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="row">
-    <div class="col-md-12 column-padding">
+    <button type="button" class="btn btn-primary btn-small" id="pairSearchSubmit">Subscribe</button>
+    <div class="row">
+
+
         <div class="col-md-6">
         
             <div class="form-wrapper">
                 <fieldset>
-                    <legend>Club</legend>
+                    <legend>@Model.Name</legend>
 
                     <div class="display-label">
                         @Html.LabelFor(model => model.Name)
@@ -26,13 +29,6 @@
                         @Html.DisplayFor(model => model.Description)
                     </div>
 
-                    @*    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Coordinates)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Coordinates)
-    </div>*@
-
                     <div class="display-label">
                         @Html.LabelFor(model => model.Address)
                     </div>
@@ -43,19 +39,19 @@
                     <label>Location on map</label>
                     <div id="map-canvas"></div>
                 </fieldset>
-                <p class="submit-button">
-                    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
-                    @Html.ActionLink("Back to List", "Index")
-                </p>
             </div>
         </div>
 
-        <div class="col-md-6">
-        <span class="medium-header">Club members</span>
-        @Html.Action("ClubMembers", new { clubId = @Model.Id})
-        
+        <div class="col-md-6 column-padding">
+            <a  href="@Url.Action("Create","Tournament")" class="btn btn-primary btn-small">Create Tournament</a>
+            @Html.Action("ClubTournaments", "Tournament", new { clubId = Model.Id })
+        </div>
     </div>
+    <div class="col-md-6">
+        <span class="medium-header blue-header">Club members</span>
+        @Html.Action("ClubMembers", new { clubId = @Model.Id })
     </div>
+
         </div>
         
 
