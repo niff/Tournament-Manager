@@ -5,12 +5,12 @@ namespace IglaClub.Web.Models.ViewModels.Clubs
 {
     public class ClubMembersViewModel
     {
-        public IEnumerable<User> Users { get; set; }
+        public IList<ClubUser> ClubUsers { get; set; }
         public Club Club { get; set; }
 
-        public ClubMembersViewModel(IEnumerable<User> users, Club club)
+        public ClubMembersViewModel(IList<ClubUser> users, Club club)
         {
-            Users = users;
+            ClubUsers = users;
             Club = club;
         }
     }

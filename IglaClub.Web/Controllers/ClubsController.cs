@@ -52,8 +52,8 @@ namespace IglaClub.Web.Controllers
         public PartialViewResult ClubMembers(int clubId)
         {
             var club = clubRepository.Get<Club>(clubId);
-            IEnumerable<User> users = clubRepository.GetClubMembers(clubId);
-            var model = new ClubMembersViewModel(users, club);
+            IList<ClubUser> clubUsers = clubRepository.GetClubUsers(clubId);
+            var model = new ClubMembersViewModel(clubUsers, club);
             return PartialView("_ClubMembers", model);
         }
 

@@ -5,11 +5,11 @@ namespace IglaClub.ObjectModel.Entities
 {
     public class ClubUser : BaseEntity
     {
-        public User User { get; set; }
+        public virtual User User { get; set; }
 
         public long UserId { get; set; }
 
-        public Club Club { get; set; }
+        public virtual Club Club { get; set; }
 
         public long ClubId { get; set; }
 
