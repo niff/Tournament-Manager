@@ -15,9 +15,10 @@
             var mapOptions = {
                 zoom: 15,
                 center: position,
+                mapTypeControl: false,
+                streetViewControl: false,
                 mapTypeControlOptions: {
-                    mapTypeIds: ['coordinate', google.maps.MapTypeId.ROADMAP],
-                    style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+                    mapTypeIds: ['coordinate', google.maps.MapTypeId.ROADMAP]
                 }
             };
             
