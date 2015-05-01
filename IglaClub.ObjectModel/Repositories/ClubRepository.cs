@@ -56,8 +56,6 @@ namespace IglaClub.ObjectModel.Repositories
             return db.ClubUsers.Include(cu=>cu.User).Where(cu => cu.ClubId == clubId).ToList();
         }
 
-
-
         public void Subscribe(long clubId, long userId)
         {
 
@@ -81,6 +79,11 @@ namespace IglaClub.ObjectModel.Repositories
             var item = db.ClubUsers.FirstOrDefault(c => c.ClubId == clubId && c.UserId == userId);
             this.Delete(item);
             db.SaveChanges();
+        }
+
+        public IList<Club> GetClubsByAdmin(long userId)
+        {
+            return db.Clubs.Where(c => c.ClubUsers.Any(cu => cu.IsAdministrator && cu.UserId == userId)).ToList();
         }
     }
 }

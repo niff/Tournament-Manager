@@ -1,58 +1,59 @@
-﻿@model IEnumerable<IglaClub.ObjectModel.Entities.Club>
+﻿@model IglaClub.Web.Models.ViewModels.Clubs.ClubsIndexAdminViewModel
 
 @{
-    ViewBag.Title = "Bridge Clubs";
+    ViewBag.Title = "My Clubs";
 }
 <div class="row">
     <div class="col-md-12 column-padding">
-<span class="medium-header">Bridge Clubs</span>
+        <span class="medium-header">Bridge Clubs</span>
 
-<p>
-    <a href="@Url.Action("Create")" class="btn btn-info">
-            <span class="glyphicon glyphicon-plus-sign right-side-margin"></span>Create club</a>
-</p>
-<table class="table table-striped table-hover">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-@*        <th class="hidden-xs">
-            @Html.DisplayNameFor(model => model.Description)
-        </th>*@
-        <th>
-            Members
-        </th>
-        <th>
-            Location
-        </th>
-        <th></th>
-    </tr>
+        <p>
+            <a href="@Url.Action("Create")" class="btn btn-info">
+                <span class="glyphicon glyphicon-plus-sign right-side-margin"></span>Create club
+            </a>
+        </p>
+        @if (Model.Clubs.Any())
+        {
+            <table class="table table-striped table-hover">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Clubs.First().Name)
+                    </th>
+                    <th>
+                        Members
+                    </th>
+                    <th>
+                        Location
+                    </th>
+                    <th></th>
+                </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            <a href="@Url.Action("Details", new { id= item.Id})">@Html.DisplayFor(modelItem => item.Name)</a>
-        </td>
-@*        <td class="hidden-xs">
-            <div>
-                @Html.DisplayFor(modelItem => item.Description)
-                </div>
-        </td>*@
-        <td>
-            12 @*//todo members count*@
-        </td>
-         <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
+                @foreach (var item in Model.Clubs)
+                {
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("Details", new {id = item.Id})">@Html.DisplayFor(modelItem => item.Name)</a>
+                        </td>
+                        <td>
+                            @item.ClubUsers.Count
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        <td>
 
-                @Html.ActionLink("Edit", "Edit", new {id = item.Id})
-                |
-                @Html.ActionLink("Delete", "Delete", new {id = item.Id})
-        </td>
-    </tr>
-}
-
-</table>
-</div>
-</div>
+                            @Html.ActionLink("Edit", "Edit", new {id = item.Id})
+                            |
+                            @Html.ActionLink("Delete", "Delete", new {id = item.Id})
+                        </td>
+                    </tr>
+                }
+                
+            </table>
+        }
+        else
+        {
+            <span>You don't have any yours clubs yet. You can easily create a new one. </span>
+        }
+        </div>
+    </div>
