@@ -16,6 +16,7 @@ namespace IglaClub.ObjectModel.Entities
         public string Description { get; set; }
 
         public virtual Club Club { get; set; }
+        public long? ClubId { get; set; }
 
         [DisplayName("Tournament Scoring Type")]
         public TournamentScoringType TournamentScoringType { get; set; }

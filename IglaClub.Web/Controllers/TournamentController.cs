@@ -107,9 +107,12 @@ namespace IglaClub.Web.Controllers
             return View(tournament);
         }
 
-        public ActionResult Create()
+        public ActionResult Create(long clubId = 0)
         {
-            var tournament = new Tournament {BoardsInRound = 2};
+            Club club = null;
+            if (clubId > 0)
+                club = this.tournamentRepository.Get<Club>(clubId);
+            var tournament = new Tournament {BoardsInRound = 2, Club = club};
             return View(tournament);
         }
 

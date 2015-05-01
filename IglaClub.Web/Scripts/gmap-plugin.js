@@ -1,5 +1,6 @@
 ﻿(function($) {
-    $.fn.initializeMap = function(params) {
+    $.fn.initializeMap = function (params) {
+        //utils.loadScript();
         var mapCanvasId = $(this).attr("id");
         var noLocationSet = false;
         var options = params;
@@ -128,5 +129,11 @@
         //    };
         //    return image;
         //}
+        loadScript: function () {
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places';
+            document.body.appendChild(script);
+        }
     };
 })(jQuery);
