@@ -274,6 +274,10 @@
     <Content Include="Content\themes\1408214423_file_add.png" />
     <Content Include="Content\global.css" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Migrations\201505011350241_ClubIdAddedToTournament.cs" />
+    <Compile Include="Migrations\201505011350241_ClubIdAddedToTournament.Designer.cs">
+      <DependentUpon>201505011350241_ClubIdAddedToTournament.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ViewModels\Clubs\ClubMembersViewModel.cs" />
     <Compile Include="Controllers\ClubsOrganizerController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
@@ -671,6 +675,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504142109218_ClubUseridFKColumns.resx">
       <DependentUpon>201504142109218_ClubUseridFKColumns.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505011350241_ClubIdAddedToTournament.resx">
+      <DependentUpon>201505011350241_ClubIdAddedToTournament.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

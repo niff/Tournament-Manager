@@ -71,6 +71,8 @@
         </div>
         @*<input name="coords" id="coords" type="hidden"/>*@
         @Html.HiddenFor(model=>model.Coordinates, new {name="coords", id="coords"})
+        @Html.HiddenFor(model=>model.ClubId)
+
     <label>Location on map</label>
         <div id="map-canvas"></div>
         <p class="submit-button">

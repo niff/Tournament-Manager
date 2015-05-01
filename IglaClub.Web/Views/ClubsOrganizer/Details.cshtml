@@ -43,7 +43,7 @@
         </div>
 
         <div class="col-md-6 column-padding">
-            <a  href="@Url.Action("Create","Tournament")" class="btn btn-primary btn-small">Create Tournament</a>
+            <a  href="@Url.Action("Create","Tournament", new {clubId = Model.Id})" class="btn btn-primary btn-small">Create Tournament</a>
             @Html.Action("ClubTournaments", "Tournament", new { clubId = Model.Id })
         </div>
     </div>
@@ -51,7 +51,6 @@
         <span class="medium-header blue-header">Club members</span>
         @Html.Action("ClubMembers", new { clubId = @Model.Id })
     </div>
-
 </div>
 
 
