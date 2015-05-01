@@ -6,8 +6,7 @@
 }
 <div class="row">
     <button type="button" class="btn btn-primary btn-small" id="pairSearchSubmit">Subscribe</button>
-    <div class="row">
-        
+    
         
         <div class="col-md-6">
 
@@ -40,16 +39,14 @@
                     <div id="map-canvas"></div>
                 </fieldset>
             </div>
+            
+        <span class="medium-header blue-header">Club members</span>
+        @Html.Action("ClubMembers", new { clubId = @Model.Id })
         </div>
 
         <div class="col-md-6 column-padding">
             @Html.Action("ClubTournaments", "Tournament", new { clubId = Model.Id })
         </div>
-    </div>
-    <div class="col-md-6">
-        <span class="medium-header blue-header">Club members</span>
-        @Html.Action("ClubMembers", new { clubId = @Model.Id })
-    </div>
 
 </div>
 

@@ -7,7 +7,7 @@
 @if (admins.Any())
 {
 
-    <h3 class="blue-header small-header">Administrators</h3>
+    <span class="blue-header small-header">Administrators</span>
     <table class="table table-striped table-hover">
 
         @foreach (var clubUser in admins)
@@ -26,7 +26,7 @@
     @*todo: add more instead of showing all*@
     @if (members.Any())
     {
-        <h3 class="blue-header small-header">Members</h3>
+        <span class="blue-header small-header">Members</span>
         <table class="table table-striped table-hover">
 
             @foreach (var clubUser in members)
