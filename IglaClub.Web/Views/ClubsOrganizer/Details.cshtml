@@ -8,8 +8,6 @@
 
 
         <div class="col-md-6">
-            
-    <button type="button" class="btn btn-primary btn-small" id="pairSearchSubmit">Subscribe</button>
             <div class="form-wrapper">
                 <fieldset>
                     <legend>@Model.Name</legend>
@@ -48,7 +46,7 @@
         <div class="col-md-6">
             <a  href="@Url.Action("Create","Tournament", new {clubId = Model.Id})" class="btn btn-primary btn-small"><i class="glyphicon glyphicon-plus right-side-margin"></i>Create Tournament</a>
            <br/>
-             @Html.Action("ClubTournaments", "Tournament", new { clubId = Model.Id })
+            @Html.Action("ClubTournaments", "Tournament", new { clubId = Model.Id })
         </div>
     </div>
 

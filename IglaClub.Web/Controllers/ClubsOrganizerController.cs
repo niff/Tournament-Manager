@@ -82,8 +82,9 @@ namespace IglaClub.Web.Controllers
 
         public ActionResult Index()
         {
-            var clubs = db.Clubs;
-            return View(clubs);
+            var user = userRepository.GetUserByLogin(User.Identity.Name);
+            var clubs = clubRepository.GetClubsByAdmin(user.Id);
+            return View(new ClubsIndexAdminViewModel(clubs));
         }
 
         public ActionResult Delete(long id)

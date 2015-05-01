@@ -310,6 +310,7 @@
     <Compile Include="Migrations\201504142109218_ClubUseridFKColumns.Designer.cs">
       <DependentUpon>201504142109218_ClubUseridFKColumns.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModels\Clubs\ClubsIndexAdminViewModel.cs" />
     <Compile Include="Models\ViewModels\Clubs\ClubsIndexViewModel.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\ResultsController.cs" />
