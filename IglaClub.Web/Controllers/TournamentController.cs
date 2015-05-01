@@ -33,13 +33,13 @@ namespace IglaClub.Web.Controllers
         //todo add caching for tournaments and invalidate on add or edit
         public TournamentController()
         {
-             pairRepository = new PairRepository(db);
-             userRepository = new UserRepository(db);
-             tournamentRepository = new TournamentRepository(db);
-             resultRepository = new ResultRepository(db);
-             notificationService = new NotificationService(TempData);
+            pairRepository = new PairRepository(db);
+            userRepository = new UserRepository(db);
+            tournamentRepository = new TournamentRepository(db);
+            resultRepository = new ResultRepository(db);
+            notificationService = new NotificationService(TempData);
         }
-        
+
         public ActionResult Index()
         {
             var currentUser = userRepository.GetUserByLogin(GetCurrentUserName());
@@ -61,27 +61,27 @@ namespace IglaClub.Web.Controllers
         public ActionResult Manage(long tournamentId = 0)
         {
             Tournament tournament = db.Tournaments.
-                Include(t=>t.Pairs).
-                Include(t=>t.Owner).
+                Include(t => t.Pairs).
+                Include(t => t.Owner).
                 FirstOrDefault(t => t.Id == tournamentId);
-            
+
             if (tournament == null)
             {
                 return HttpNotFound();
             }
             var tournamentVm = new TournamentManageVm() { Tournament = tournament };
             return View(tournamentVm);
-            
+
         }
 
         [SiteMapTitle("TournamentName")]
         public ActionResult Details(long tournamentId = 0)
         {
             Tournament tournament = db.Tournaments.
-                Include(t=>t.Pairs).
-                Include(t=>t.Owner).
-                FirstOrDefault(t => t.Id == tournamentId);           
-          
+                Include(t => t.Pairs).
+                Include(t => t.Owner).
+                FirstOrDefault(t => t.Id == tournamentId);
+
             if (tournament == null)
             {
                 return HttpNotFound();
@@ -94,10 +94,10 @@ namespace IglaClub.Web.Controllers
         public ActionResult TournamentResults(long tournamentId = 0)
         {
             Tournament tournament = db.Tournaments.
-                Include(t=>t.Pairs).
-                Include(t=>t.Owner).
-                FirstOrDefault(t => t.Id == tournamentId);           
-          
+                Include(t => t.Pairs).
+                Include(t => t.Owner).
+                FirstOrDefault(t => t.Id == tournamentId);
+
             if (tournament == null)
             {
                 return HttpNotFound();
@@ -109,10 +109,15 @@ namespace IglaClub.Web.Controllers
 
         public ActionResult Create(long clubId = 0)
         {
-            Club club = null;
+            var tournament = new Tournament { BoardsInRound = 2 };
             if (clubId > 0)
-                club = this.tournamentRepository.Get<Club>(clubId);
-            var tournament = new Tournament {BoardsInRound = 2, Club = club};
+            {
+                var club = this.tournamentRepository.Get<Club>(clubId);
+                tournament.Club = club;
+                tournament.Coordinates = club.Coordinates;
+                tournament.Address = club.Address;
+            }
+
             return View(tournament);
         }
 
@@ -128,11 +133,12 @@ namespace IglaClub.Web.Controllers
                     notificationService.DisplayError("We are very sorry, but only cavendish type is supported by now :(");
                     return View(tournament);
                 }
-                
-                //var coordinates = Request.Form["coords"];
-                //tournament.Coordinates = coordinates;
+
                 tournamentManager.Create(tournament, GetCurrentUserName());
-                return RedirectToAction("OwnerTournaments");
+                if (Request.UrlReferrer == null)
+                    return RedirectToAction("OwnerTournaments");
+                return Redirect(Request.UrlReferrer.ToString());
+
             }
 
             return View(tournament);
@@ -141,23 +147,23 @@ namespace IglaClub.Web.Controllers
         //todo: check why it doesn't show the message on redirect
         protected override void OnException(ExceptionContext filterContext)
         {
-            if (filterContext.ExceptionHandled) 
+            if (filterContext.ExceptionHandled)
                 return;
-            
+
             Exception ex = filterContext.Exception;
             if (ex.GetType() == typeof(OperationException))
             {
                 this.notificationService.DisplayMessage(ex.Message, NotificationType.Warning);
-               // notificationService.DisplayError(ex.Message);
-                 if (filterContext.HttpContext.Request.UrlReferrer != null)
-                filterContext.HttpContext.Response.Redirect(filterContext.HttpContext.Request.UrlReferrer.ToString(),true);
+                // notificationService.DisplayError(ex.Message);
+                if (filterContext.HttpContext.Request.UrlReferrer != null)
+                    filterContext.HttpContext.Response.Redirect(filterContext.HttpContext.Request.UrlReferrer.ToString(), true);
             }
 
-           
+
         }
 
         [TournamentOwner]
-        [SiteMapTitle("Name", Target= AttributeTarget.ParentNode)]
+        [SiteMapTitle("Name", Target = AttributeTarget.ParentNode)]
         public ActionResult Edit(long id = 0)
         {
             Tournament tournament = db.Tournaments.Find(id);
@@ -172,19 +178,19 @@ namespace IglaClub.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Tournament tournament)
         {
-            if (!ModelState.IsValid) 
+            if (!ModelState.IsValid)
                 return View(tournament);
             if (tournament.TournamentMovingType != TournamentMovingType.Cavendish)
             {
                 notificationService.DisplayError("We are very sorry, but only cavendish type is supported by now :(");
                 return View(tournament);
             }
-            
+
             //var coordinates = Request.Form["coords"];
             //tournament.Coordinates = coordinates;
             db.Entry(tournament).State = EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("Manage", new {tournament.Id});
+            return RedirectToAction("Manage", new { tournament.Id });
         }
 
         [TournamentOwner]
@@ -221,7 +227,7 @@ namespace IglaClub.Web.Controllers
             {
                 notificationService.DisplayError(result.ErrorMessage);
             }
-            return RedirectToAction("Manage", new {id});
+            return RedirectToAction("Manage", new { id });
         }
 
         public ActionResult CalculateResultsComplete(long id)
@@ -232,12 +238,12 @@ namespace IglaClub.Web.Controllers
                 return RedirectToAction("Manage", "Tournament", new { tournamentId = id });
             return Redirect(Request.UrlReferrer.ToString());
         }
-        
+
         public ActionResult CalculateResults(long id)
         {
             tournamentManager.CalculateResults(id);
 
-            
+
             if (Request.UrlReferrer == null)
                 return RedirectToAction("Manage", "Tournament", new { tournamentId = id });
             return Redirect(Request.UrlReferrer.ToString());
@@ -249,7 +255,7 @@ namespace IglaClub.Web.Controllers
             if (Request.UrlReferrer == null)
                 return RedirectToAction("Manage", "Results", new { tournamentId = id });
             return Redirect(Request.UrlReferrer.ToString());
-            
+
         }
 
         [HttpPost]
@@ -268,7 +274,7 @@ namespace IglaClub.Web.Controllers
             tournamentManager.AddPair(tournamentId, user1, user2);
             return Json(new { success = true });
         }
-        
+
         public PartialViewResult TournamentParticipantsEdit(long tournamentId)
         {
             var model = CreatePairsViewModel(tournamentId);
@@ -288,7 +294,7 @@ namespace IglaClub.Web.Controllers
             var model = new PairsViewModel
             {
                 //todo add caching for tournaments, users, and invalidate on add or edit
-                PairsInTounament = tournament.Pairs.ToList(), 
+                PairsInTounament = tournament.Pairs.ToList(),
                 AvailableUsers = userRepository.GetAvailableUsersForTournament(tournamentId),
                 Tournament = tournament,
                 CurrentUser = currentUser
@@ -303,12 +309,12 @@ namespace IglaClub.Web.Controllers
             var list = new List<PairRosterViewModel>();
             foreach (var result in results)
             {
-                if(list.Any(prvm=>prvm.TableNumber == result.TableNumber))
+                if (list.Any(prvm => prvm.TableNumber == result.TableNumber))
                     continue;
-                list.Add(new PairRosterViewModel(){NsPair = result.NS, EwPair = result.EW, TableNumber = result.TableNumber, Section = 0});
+                list.Add(new PairRosterViewModel() { NsPair = result.NS, EwPair = result.EW, TableNumber = result.TableNumber, Section = 0 });
             }
-            
-            return PartialView("_PairPlacing",list);
+
+            return PartialView("_PairPlacing", list);
         }
 
         public ActionResult GenerateNextRound(long tournamentId, bool withPairsRepeat)
@@ -320,10 +326,10 @@ namespace IglaClub.Web.Controllers
                 this.notificationService.DisplayMessage(status.ErrorMessage, NotificationType.Warning);
             }
             if (Request.UrlReferrer == null)
-                return RedirectToAction("Manage", "Tournament", new {tournamentId });
+                return RedirectToAction("Manage", "Tournament", new { tournamentId });
             return Redirect(Request.UrlReferrer.ToString());
         }
-        
+
         [HttpPost]
         public void Add(PairsViewModel pairsViewModel)
         {
@@ -354,7 +360,7 @@ namespace IglaClub.Web.Controllers
                     "You are playing soon", manageMode: false, showSubscriptionStatus: false);
             return View("TournamentsList", new TournamentListViewModel(model));
         }
-        
+
         [AllowAnonymous]
         public ActionResult GetAll()
         {
@@ -420,11 +426,11 @@ namespace IglaClub.Web.Controllers
                                         tournamentRepository.GetTournamentsByOwnerUser(user),
                                         count,
                                         "Tournaments created by you",
-                                        manageMode :true,
-                                        showSubscriptionStatus:false);
-           return model;
+                                        manageMode: true,
+                                        showSubscriptionStatus: false);
+            return model;
         }
-       
+
         private TournamentSingleListViewModel CreateTounamentSingleListViewModelWithSortedItems(IEnumerable<Tournament> tournaments, int defaultTournamentCount, string header, bool manageMode = false, bool showSubscriptionStatus = false, bool nowPlayingMode = false)
         {
             var tournamentsDefaultCount = tournaments.Take(defaultTournamentCount).ToList();
@@ -443,7 +449,7 @@ namespace IglaClub.Web.Controllers
                 };
         }
 
-      
+
 
         public ActionResult PlayerTournaments()
         {
@@ -489,11 +495,33 @@ namespace IglaClub.Web.Controllers
                 );
             return PartialView(model);
         }
-       
+
+        public PartialViewResult ClubTournamentsAdmin(long clubId)
+        {
+            var model = new TournamentListViewModel
+                (new List<TournamentSingleListViewModel>
+                    {
+                        CreateTounamentSingleListViewModelWithSortedItems(
+                        tournamentRepository.GetTournamentsStartedByClub(clubId),
+                        MaxTournamentCount, 
+                        "Now playing", nowPlayingMode : true, manageMode:true),
+                        CreateTounamentSingleListViewModelWithSortedItems(
+                        tournamentRepository.GetTournamentsPlannedByClub(clubId),
+                        MaxTournamentCount, 
+                        "Playing soon", manageMode:true),
+                        CreateTounamentSingleListViewModelWithSortedItems(
+                        tournamentRepository.GetTournamentsFinishedByClub(clubId),
+                        MaxTournamentCount, 
+                        "Already played", manageMode:true)
+                    }
+                );
+            return PartialView("ClubTournaments",model);
+        }
+
         public ActionResult UndoStart(long id)
         {
             this.tournamentManager.UndoTournamentStart(id);
-            
+
             if (Request.UrlReferrer == null)
                 return RedirectToAction("Manage", "Tournament", new { tournamentId = id });
             return Redirect(Request.UrlReferrer.ToString());
@@ -518,7 +546,7 @@ namespace IglaClub.Web.Controllers
             else
                 notificationService.DisplayError("Some errors during tournament finish. \r\n Details: {0}",
                     operationStatus.ErrorMessage);
-            
+
             if (Request.UrlReferrer == null)
                 return RedirectToAction("Manage", "Tournament", new { tournamentId = id });
             return Redirect(Request.UrlReferrer.ToString());

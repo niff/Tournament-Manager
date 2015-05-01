@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -11,6 +10,7 @@ using IglaClub.Web.Models.ViewModels.Clubs;
 
 namespace IglaClub.Web.Controllers
 {
+    [Authorize]
     public class ClubsOrganizerController : Controller
     {
         private readonly IglaClubDbContext db = new IglaClubDbContext();

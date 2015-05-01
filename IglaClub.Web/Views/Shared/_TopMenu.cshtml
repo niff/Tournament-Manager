@@ -40,9 +40,9 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("GetAll", "Tournament", new { area = "" }, null)">All tournaments</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("FindOnMap", "Tournament", new { area = "" }, null)">Find on map</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Index", "Clubs", new { area = "" }, null)">Clubs</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("GetAll", "Tournament", new { area = "" }, null)">All tournaments<br /><span>Look thru all available tournaments</span></a></li>
+                        @*todo <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("FindOnMap", "Tournament", new { area = "" }, null)">Find on map</a><br /><span>Look for something close to your location</span></li>*@
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Index", "Clubs", new { area = "" }, null)">Clubs<br /><span>Looking for a club in your neightbourhood?</span></a></li>
                     </ul>
                 </li>
             </ul>
