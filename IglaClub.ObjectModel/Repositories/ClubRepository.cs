@@ -21,9 +21,8 @@ namespace IglaClub.ObjectModel.Repositories
         {
             var user = db.Users.Find(owner.Id);
 
-            //club.ClubUsers = new List<ClubUser>();
-
             base.InsertOrUpdate(club);
+            
             SaveChanges();
 
             var find = db.Clubs.Find(club.Id);
@@ -34,11 +33,8 @@ namespace IglaClub.ObjectModel.Repositories
                 IsAdministrator = true,
                 MemberSince = DateTime.UtcNow
             };
-            //db.ClubUsers.Add(clubUser);
-            //db.Entry(clubUser).State = EntityState.Added;
-            //db.Refresh(RefreshMode.ClientWins, clubUser);
+            
             base.InsertOrUpdate(clubUser);
-            //club.ClubUsers.Add(clubUser);
             db.ClubUsers.Add(clubUser);
             SaveChanges();
         }
@@ -54,6 +50,13 @@ namespace IglaClub.ObjectModel.Repositories
             List<long> clubUsers = db.ClubUsers.Where(cu => cu.ClubId == clubId).Select(cu => cu.UserId).ToList();
             return db.Users.Where(u => clubUsers.Contains(u.Id));
         }
+
+        public IList<ClubUser> GetClubUsers(int clubId)
+        {
+            return db.ClubUsers.Include(cu=>cu.User).Where(cu => cu.ClubId == clubId).ToList();
+        }
+
+
 
         public void Subscribe(long clubId, long userId)
         {

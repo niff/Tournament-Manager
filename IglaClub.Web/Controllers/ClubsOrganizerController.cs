@@ -7,6 +7,7 @@ using IglaClub.ObjectModel.Entities;
 using IglaClub.ObjectModel.Repositories;
 using IglaClub.Web.Infrastructure;
 using IglaClub.Web.Models;
+using IglaClub.Web.Models.ViewModels.Clubs;
 
 namespace IglaClub.Web.Controllers
 {
@@ -73,7 +74,9 @@ namespace IglaClub.Web.Controllers
 
         public PartialViewResult ClubMembers(int clubId)
         {
-            IEnumerable<User> model = clubRepository.GetClubMembers(clubId);
+            var club = clubRepository.Get<Club>(clubId);
+            IList<ClubUser> clubUsers = clubRepository.GetClubUsers(clubId);
+            var model = new ClubMembersViewModel(clubUsers, club);
             return PartialView("_ClubMembersAdmin", model);
         }
 
