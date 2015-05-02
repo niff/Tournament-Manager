@@ -31,13 +31,14 @@ namespace IglaClub.Web.Controllers
             var clubs = db.Clubs.Where(c=>c.ClubUsers.Any(cu=>cu.User.Login == User.Identity.Name && cu.IsAdministrator));
             return View(clubs);
         }
-
+        
         public ActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [AntiSpam]
         public ActionResult Create(Club club)
         {
             if (!ModelState.IsValid)
@@ -91,6 +92,7 @@ namespace IglaClub.Web.Controllers
         {
             var club = db.Clubs.Find(id);
             db.Clubs.Remove(club);
+            db.SaveChanges();
             notificationService.DisplayInfo("Club {0} removed.",club.Name);
             return RedirectToAction("Index");
         }

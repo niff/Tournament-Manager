@@ -32,6 +32,10 @@
             <span class="descr-label">description: </span>@(!String.IsNullOrEmpty(Model.Description) ? Model.Description : "None")
             
         </div>
+        <div>
+            <span class="descr-label">location: </span>@(!String.IsNullOrEmpty(Model.Address) ? Model.Address : "Unknown")
+            
+        </div>
         @if (isOwner)
         {
         <span class="tournemanet-quick-edit">
