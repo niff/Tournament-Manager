@@ -25,10 +25,13 @@
             </div>
         </div>
         <div class="col-md-4 col-xs-12">
-            <div class="center-block shadow-gradient-block quick-sign-up-block">
+            <div class="center-block shadow-gradient-block action">
                 @*      <div class="quick-sign-up">*@
-                <span class="small-header">Quick sign up and start using!</span>
-                @Html.Partial("_RegisterPartial")
+                @*<span class="small-header">Quick sign up and start using!</span>*@
+                @Html.Action("MyTournamentsToPlayPartial", "Tournament")
+                <a href="@Url.Action("Join","Tournament")" class="btn btn-info">
+                    <span class="glyphicon glyphicon-search right-side-margin"></span>Find more tournaments...
+                </a>
                 @*    </div>*@
             </div>
         </div>
@@ -60,7 +63,7 @@
                             <p>... and sign up!</p>
                             <p>
                                 <a href="@Url.Action("About", "Home")" class="btn btn-primary" role="button">See more...</a>
-                                <a href="@Url.Action("GetAll", "Tournament")" class="btn btn-default" role="button">Find a tournament</a>
+                                <a href="@Url.Action("Join", "Tournament")" class="btn btn-default" role="button">Find a tournament</a>
                             </p>
                         </div>
                     </div>

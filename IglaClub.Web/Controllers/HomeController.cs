@@ -13,12 +13,17 @@ namespace IglaClub.Web.Controllers
         {
             helpRepository = new HelpRepository(db);
         }
+
+        public ActionResult Start()
+        {
+            if (Request.IsAuthenticated)
+               return RedirectToAction("Index", "Home");
+            return View();
+        }
         public ActionResult Index()
         {
-            //ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
-            //return RedirectToAction("Index","Tournament");
-            if (Request.IsAuthenticated)
-               return RedirectToAction("Index", "Tournament");
+            if (!Request.IsAuthenticated)
+               return RedirectToAction("Start", "Home");
             return View();
         }
 

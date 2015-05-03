@@ -43,10 +43,13 @@ namespace IglaClub.Web.Controllers
         public ActionResult Index()
         {
             var currentUser = userRepository.GetUserByLogin(GetCurrentUserName());
+            if (currentUser == null)
+                return View(new TournamentMainPageModel());
+
             var model = new TournamentMainPageModel
                 {
-                    CurrentlyPlayedByUser = tournamentRepository.GetCurrentlyPlayingByUser(GetCurrentUserName()),
-                    UserIsManagingTournament = currentUser != null && tournamentRepository.UserIsManagingAtLeastOneTournament(currentUser.Id)
+                    CurrentlyPlayedByUser = tournamentRepository.GetCurrentlyPlayingByUser(currentUser.Login),
+                    UserIsManagingTournament = tournamentRepository.UserIsManagingAtLeastOneTournament(currentUser.Id)
                 };
             return View(model);
         }
@@ -135,9 +138,10 @@ namespace IglaClub.Web.Controllers
                 }
 
                 tournamentManager.Create(tournament, GetCurrentUserName());
-                if (Request.UrlReferrer == null)
-                    return RedirectToAction("OwnerTournaments");
-                return Redirect(Request.UrlReferrer.ToString());
+                return RedirectToAction("OwnerTournaments");
+                //if (Request.UrlReferrer == null)
+                //    return RedirectToAction("OwnerTournaments");
+                //return Redirect(Request.UrlReferrer.ToString());
 
             }
 
