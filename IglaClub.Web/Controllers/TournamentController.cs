@@ -273,10 +273,16 @@ namespace IglaClub.Web.Controllers
         }
 
         [HttpPost]
+        [AntiSpam]
         public ActionResult AddPair(int user1, int user2, long tournamentId)
         {
-            tournamentManager.AddPair(tournamentId, user1, user2);
-            return Json(new { success = true });
+            if (ModelState.IsValid)
+            {
+                tournamentManager.AddPair(tournamentId, user1, user2);
+                return Json(new { success = true });    
+            }
+            return Json(new { success = false });    
+            
         }
 
         public PartialViewResult TournamentParticipantsEdit(long tournamentId)

@@ -18,15 +18,20 @@ namespace IglaClub.TournamentManager
             this.db = dbContext;
         }
 
-        public bool AddPair(long tournamentId, long player1Id, long player2Id)
+        public OperationStatus AddPair(long tournamentId, long player1Id, long player2Id)
         {
             Tournament tournament = db.Tournaments.Find(tournamentId);
             User player1 = db.Users.Find(player1Id);
             User player2 = db.Users.Find(player2Id);
+            var userSubscribedToPair = tournament.Pairs.FirstOrDefault(p => p.ContainsUser(player1Id) || p.ContainsUser(player2Id));
+            if (userSubscribedToPair != null)
+            {
+                return new OperationStatus(false,string.Format("User is already subscribed to another pair ({0})", userSubscribedToPair.ToString()));
+            }
             int pairNumber = tournament.Pairs.Any() ? tournament.Pairs.Max(p => p.PairNumber) + 1 : 1;
             tournament.Pairs.Add(new Pair() { Tournament = tournament, PairNumber = pairNumber, Player1 = player1, Player2 = player2} );
             db.SaveChanges();
-            return true;
+            return OperationStatus.SucceedOperation;
         }
 
         public OperationStatus StartTournament(long tournamentId)
