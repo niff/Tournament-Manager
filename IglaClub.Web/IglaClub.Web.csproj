@@ -278,6 +278,10 @@
     <Compile Include="Migrations\201505011350241_ClubIdAddedToTournament.Designer.cs">
       <DependentUpon>201505011350241_ClubIdAddedToTournament.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201505141741406_ClubUserIndexFix.cs" />
+    <Compile Include="Migrations\201505141741406_ClubUserIndexFix.Designer.cs">
+      <DependentUpon>201505141741406_ClubUserIndexFix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ViewModels\Clubs\ClubMembersViewModel.cs" />
     <Compile Include="Controllers\ClubsOrganizerController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
@@ -680,6 +684,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201505011350241_ClubIdAddedToTournament.resx">
       <DependentUpon>201505011350241_ClubIdAddedToTournament.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505141741406_ClubUserIndexFix.resx">
+      <DependentUpon>201505141741406_ClubUserIndexFix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
