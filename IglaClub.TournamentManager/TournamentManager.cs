@@ -96,9 +96,7 @@ namespace IglaClub.TournamentManager
             var result = new Result();
             result.Tournament = tournament;
             result.RoundNumber = tournament.CurrentRound;
-            var firstResult = tournament.Results.FirstOrDefault(r => r.RoundNumber == tournament.CurrentRound);
-            if (firstResult != null)
-                result.Board = firstResult.Board;
+            result.Board = GetBoardForNewResult(tournament);
 
             result.NS = tournament.Pairs.FirstOrDefault();
             result.EW = tournament.Pairs.FirstOrDefault(p=>p.Id != result.NS.Id);
@@ -106,6 +104,20 @@ namespace IglaClub.TournamentManager
             tournament.Results.Add(result);
             db.SaveChanges();
             return new OperationStatus(true);
+        }
+
+        private BoardInstance GetBoardForNewResult(Tournament tournament)
+        {
+            var firstResult = tournament.Results.FirstOrDefault(r => r.RoundNumber == tournament.CurrentRound) ??
+                              tournament.Results.FirstOrDefault();
+
+            if (firstResult == null)
+            {
+                var maxBoardNumber = tournament.Boards.Max(b => b.BoardNumber);
+                return CreateEmptyBoardInstance(tournament, maxBoardNumber + 1);
+            }
+            
+            return firstResult.Board;
         }
 
         private IEnumerable<BoardInstance> GenerateEmptyBoards(Tournament tournament)
