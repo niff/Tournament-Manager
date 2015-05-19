@@ -69,29 +69,48 @@ namespace IglaClub.Web.Controllers
             if (!ModelState.IsValid)
                 return View(results);
 
-            if (results != null)
+            if (results == null || !results.Any()) 
+                return null;
+
+            var tournament = tournamentRepository.Get<Tournament>(results.First().TournamentId);
+
+            for (int i = 0; i < results.Count; i++)
             {
+                var result = results[i];
 
+                var color = (ContractColors)(int.Parse(Request.Form["contract-color_" + i]));
+                result.ContractColor = color;
 
-                for (int i = 0; i < results.Count; i++)
-                {
-                    var result = results[i];
+                int newBoardNumber = result.Board.BoardNumber;
+                result.Board = tournament.Boards.FirstOrDefault(b => b.BoardNumber == newBoardNumber);
+                if(result.Board == null)
+                    notificationService.DisplayError("Board with number {0} does not exist", newBoardNumber);
 
-                    var color = (ContractColors)(int.Parse(Request.Form["contract-color_" + i]));
-                    result.ContractColor = color;
+                int newNsNumber = result.NS.PairNumber;
+                result.NS = tournament.Pairs.FirstOrDefault(p => p.PairNumber == newNsNumber);
+                if(result.NS == null)
+                    notificationService.DisplayError("Pair with number {0} does not exist", newNsNumber);
 
-                    var parsedResult = ResultsParser.Parse(Request["ShortScore[" + i + "]"]);
-                    if (parsedResult != null)
-                        result = ResultsParser.UpdateResult(result, parsedResult);
-                    resultRepository.InsertOrUpdate(result);
-                }
-                this.resultRepository.SaveChanges();
+                int newEwNumber = result.EW.PairNumber;
+                result.EW = tournament.Pairs.FirstOrDefault(p => p.PairNumber == newEwNumber);
+                if(result.EW == null)
+                    notificationService.DisplayError("Pair with number {0} does not exist", newNsNumber);
 
-                if (results.Any())
-                {
-                    this.tournamentManager.CalculateResultsComplete(results[0].TournamentId);
-                    return RedirectToAction("Manage", new { results.FirstOrDefault().TournamentId });
-                }
+                if(newEwNumber == newNsNumber)
+                    notificationService.DisplayError("Pair NS and EW has the same number ({0})", newNsNumber);
+
+                var parsedResult = ResultsParser.Parse(Request["ShortScore[" + i + "]"]);
+                if (parsedResult != null)
+                    result = ResultsParser.UpdateResult(result, parsedResult);
+
+                resultRepository.InsertOrUpdate(result);
+            }
+            this.resultRepository.SaveChanges();
+
+            if (results.Any())
+            {
+                this.tournamentManager.CalculateResultsComplete(results[0].TournamentId);
+                return RedirectToAction("Manage", new { results.FirstOrDefault().TournamentId });
             }
             return null;
         }

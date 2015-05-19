@@ -9,6 +9,9 @@ namespace IglaClub.Web.Infrastructure
 {
     public class AntiSpamAttribute : ActionFilterAttribute
     {
+        /// <summary>
+        /// Delay between two requests in seconds
+        /// </summary>
         public int DelayRequest = 10;
         public string ErrorMessage = "Excessive request attempts detected. Please wait 10 seconds before next attempt.";
         public string RedirectURL;

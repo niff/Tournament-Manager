@@ -273,7 +273,7 @@ namespace IglaClub.Web.Controllers
         }
 
         [HttpPost]
-        [AntiSpam]
+        [AntiSpam(DelayRequest = 1)]
         public ActionResult AddPair(int user1, int user2, long tournamentId)
         {
             if (ModelState.IsValid)

@@ -89,8 +89,16 @@ namespace IglaClub.TournamentManager
                         TableNumber = i + 1,
                         PlayedBy = PlayedBy.Unavailable
                     };
+                    //TODO dorobić średnią jesli to BYE
+                    if (result.EW.IsByePair)
+                    {
+                        result.PlayedBy = PlayedBy.DirectorScore;
+                        result.ScoreEw = 0;
+                        result.ScoreNs = sortedPairsList.Count + 1;
+                    }
                     results.Add(result);
                 }
+                
             }
             return results;
         }
