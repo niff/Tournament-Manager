@@ -81,23 +81,39 @@ namespace IglaClub.Web.Controllers
                 var color = (ContractColors)(int.Parse(Request.Form["contract-color_" + i]));
                 result.ContractColor = color;
 
-                int newBoardNumber = result.Board.BoardNumber;
-                result.Board = tournament.Boards.FirstOrDefault(b => b.BoardNumber == newBoardNumber);
-                if(result.Board == null)
-                    notificationService.DisplayError("Board with number {0} does not exist", newBoardNumber);
+                if(result.Board != null)
+                {
+                    int newBoardNumber = result.Board.BoardNumber;
+                    var newBoard = tournament.Boards.FirstOrDefault(b => b.BoardNumber == newBoardNumber);
+                    if (newBoard == null)
+                        notificationService.DisplayError("Board with number {0} does not exist", newBoardNumber);
+                    else
+                        result.BoardId = newBoard.Id;
+                }
 
-                int newNsNumber = result.NS.PairNumber;
-                result.NS = tournament.Pairs.FirstOrDefault(p => p.PairNumber == newNsNumber);
-                if(result.NS == null)
-                    notificationService.DisplayError("Pair with number {0} does not exist", newNsNumber);
 
-                int newEwNumber = result.EW.PairNumber;
-                result.EW = tournament.Pairs.FirstOrDefault(p => p.PairNumber == newEwNumber);
-                if(result.EW == null)
-                    notificationService.DisplayError("Pair with number {0} does not exist", newNsNumber);
+                if (result.NS!=null)
+                {
+                    int newNsNumber = result.NS.PairNumber;
+                    var newNS = tournament.Pairs.FirstOrDefault(p => p.PairNumber == newNsNumber);
+                    if (newNS == null)
+                        notificationService.DisplayError("Pair with number {0} does not exist", newNsNumber);
+                    else
+                        result.NSId = newNS.Id;
+                    
+                }
+                if (result.EW != null)
+                {
+                    int newEwNumber = result.EW.PairNumber;
+                    var newEW = tournament.Pairs.FirstOrDefault(p => p.PairNumber == newEwNumber);
+                    if (newEW == null)
+                        notificationService.DisplayError("Pair with number {0} does not exist", newEwNumber);
+                    else
+                        result.EWId = newEW.Id;
+                }
 
-                if(newEwNumber == newNsNumber)
-                    notificationService.DisplayError("Pair NS and EW has the same number ({0})", newNsNumber);
+                if(result.EW != null && result.NS != null && result.NSId == result.EWId)
+                    notificationService.DisplayError("Pair NS and EW has the same number ({0})", result.NS.PairNumber);
 
                 var parsedResult = ResultsParser.Parse(Request["ShortScore[" + i + "]"]);
                 if (parsedResult != null)
@@ -110,7 +126,7 @@ namespace IglaClub.Web.Controllers
             if (results.Any())
             {
                 this.tournamentManager.CalculateResultsComplete(results[0].TournamentId);
-                return RedirectToAction("Manage", new { results.FirstOrDefault().TournamentId });
+                return RedirectToAction("Manage", new { results.First().TournamentId });
             }
             return null;
         }

@@ -33,21 +33,18 @@
     <td>NS:</td>
     <td>
         @Model.NS.PairNumber
-    @Html.HiddenFor(m => m.NS.PairNumber)
 </td>
 </tr>
 <tr>
     <td>EW:</td>
     <td>
         @Model.EW.PairNumber
-    @Html.HiddenFor(m => m.EW.PairNumber)
 </td>
 </tr>
 <tr>
     <td>Board:</td>
     <td>
         @Model.Board.BoardNumber
-    @Html.HiddenFor(m => m.Board.BoardNumber)
 </td>
 </tr>
 
@@ -100,6 +97,9 @@
                 @Html.HiddenFor(m => m.ResultNsPoints)
                 @Html.HiddenFor(m => m.ScoreEw)
                 @Html.HiddenFor(m => m.ScoreNs)
+                @Html.HiddenFor(m => m.NSId)
+                @Html.HiddenFor(m => m.EWId)
+
             </td>
         </tr>
     </table>
