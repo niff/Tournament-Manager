@@ -262,6 +262,8 @@ namespace IglaClub.TournamentManager
         {
             var tournament = db.Tournaments.Find(tournamentid);
             tournament.TournamentStatus = TournamentStatus.Finished;
+            tournament.FinishDate = DateTime.UtcNow;
+            db.SaveChanges();
             return new OperationStatus(true);
         }
     }

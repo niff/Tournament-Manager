@@ -23,6 +23,13 @@
             <span class="descr-label">at</span> @Model.StartDate.Value.ToShortTimeString()
         </span>
     }
+    else if (Model.TournamentStatus == TournamentStatus.Finished && Model.FinishDate != null)
+    {
+        <span>
+            <span class="descr-label">finished on</span> @Model.FinishDate.Value.ToLongDateString()
+            <span class="descr-label">at</span> @Model.FinishDate.Value.ToShortTimeString()
+        </span>
+    }
     <a class="" data-toggle="collapse" data-target="#viewdetails">Show details &raquo;</a>
     <div id="viewdetails" class="collapse">
         <div>
