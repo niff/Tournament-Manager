@@ -362,6 +362,17 @@ namespace IglaClub.Web.Controllers
             return PartialView("_TournamentList", model);
         }
 
+        public PartialViewResult CurrentlyPlayingPartial()
+        {
+            var currentUser = userRepository.GetUserByLogin(GetCurrentUserName());
+            if (currentUser == null)
+                return PartialView(new List<Tournament>());
+
+            var model = tournamentRepository.GetCurrentlyPlayingByUser(currentUser.Login);
+            
+            return PartialView(model);
+        }
+
         public ActionResult MyTournamentsToPlay()
         {
             var model =
