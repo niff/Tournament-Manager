@@ -1,4 +1,5 @@
-﻿@model List<IglaClub.Web.Models.ViewModels.PairRosterViewModel>
+﻿@using System.Globalization
+@model List<IglaClub.Web.Models.ViewModels.PairRosterViewModel>
 
 <div class="pairs">
     <p>Placing</p>
@@ -16,11 +17,11 @@
                     @item.TableNumber
                 </td>
                 <td>
-                    <span class="label label-default label-light-gray">@item.NsPair.PairNumber</span>
+                    <span class="label label-default label-light-gray">@(item.NsPair==null ? "-" : @item.NsPair.PairNumber.ToString(CultureInfo.InvariantCulture))</span>
                     @item.NsPair
                 </td>
                 <td>
-                    <span class="label label-default label-light-gray">@item.EwPair.PairNumber</span>
+                    <span class="label label-default label-light-gray">@(item.EwPair == null ? "-" : @item.EwPair.PairNumber.ToString(CultureInfo.InvariantCulture))</span>
                     @item.EwPair
                 </td>
 
