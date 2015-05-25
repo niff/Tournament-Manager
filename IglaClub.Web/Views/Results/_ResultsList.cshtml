@@ -1,4 +1,5 @@
-﻿@using IglaClub.ObjectModel.Enums
+﻿@using System.Globalization
+@using IglaClub.ObjectModel.Enums
 @using IglaClub.ObjectModel.Tools
 @using IglaClub.Web.Extensions
 @using IglaClub.Web.Helpers.Html
@@ -95,10 +96,14 @@
                     @Html.DisplayFor(modelItem => item.TableNumber)
                 </td>
                 <td>
-                    <span title="@item.NS">@item.NS.PairNumber</span> 
+                    <span title="@item.NS">
+                        @(item.NS == null ? "-" : item.NS.PairNumber.ToString(CultureInfo.InvariantCulture))
+                    </span> 
                 </td>
                 <td>
-                    <span title="@item.EW">@item.EW.PairNumber</span> 
+                    <span title="@item.EW">
+                        @(item.EW == null ? "-" : item.EW.PairNumber.ToString(CultureInfo.InvariantCulture))
+                    </span> 
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Board.BoardNumber)
