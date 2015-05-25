@@ -566,7 +566,7 @@
     <Content Include="Views\Results\Edit.cshtml" />
     <Content Include="Views\Results\_PairsResults.cshtml" />
     <Content Include="Views\Tournament\_TournamentList.cshtml" />
-    <Content Include="Views\Tournament\_PairPlacing.cshtml" />
+    <Content Include="Views\Tournament\_PairRoster.cshtml" />
     <Content Include="Views\Errors\Error403.cshtml" />
     <Content Include="Views\Results\_ResultsList.cshtml" />
     <Content Include="Views\Round\RoundDetails.cshtml" />

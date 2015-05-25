@@ -324,7 +324,7 @@ namespace IglaClub.Web.Controllers
                 list.Add(new PairRosterViewModel() { NsPair = result.NS, EwPair = result.EW, TableNumber = result.TableNumber, Section = 0 });
             }
 
-            return PartialView("_PairPlacing", list);
+            return PartialView("_PairRoster", list);
         }
 
         public ActionResult GenerateNextRound(long tournamentId, bool withPairsRepeat)
