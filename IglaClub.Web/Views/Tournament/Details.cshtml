@@ -21,7 +21,7 @@
             <div class="col-md-12">
                 @Html.Partial("_TournamentShortInfo", Model)
             </div>
-            @if (isSubscribed)
+            @if (isSubscribed && Model.TournamentStatus != TournamentStatus.Finished)
             {
                 var goToRoundDetailsText = Model.TournamentStatus == TournamentStatus.Planned ? "Wait for tournament start and click here" : "Go to my table details";
                 var goToRoundDetailsAction = Model.TournamentStatus == TournamentStatus.Planned ?
