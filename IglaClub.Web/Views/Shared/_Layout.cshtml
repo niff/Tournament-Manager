@@ -32,6 +32,52 @@
         ga('send', 'pageview');
 
     </script>
+
+</head>
+    <body>
+        <div class="wrapper">
+            <div class="container">
+                @Html.Partial("_TopMenu")
+
+                @{
+                    var message = TempData["Message"];
+                    var type = TempData["MessageType"] != null ? TempData["MessageType"].ToString().ToLower() : "info";
+
+                    if (message != null && message is string)
+                    {
+                        <div class="alert alert-@type alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            @Html.Raw(message)
+                        </div>
+                    }
+                }
+
+                @RenderSection("featured", required: false)
+                <div class="column-padding-layout">
+                    @Html.MvcSiteMap().SiteMapPath("BootstrapSiteMapPathHelperModel") 
+                    @RenderBody()
+                    <button id="auth-button" hidden>Authorize</button>
+
+                    <h1>Hello Analytics</h1>
+
+                    <textarea cols="80" rows="20" id="query-output"></textarea>
+                </div>
+            </div>
+
+            <footer>
+                <div class="footer-menu">
+                    <span>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</span> |
+                    <span>@Html.ActionLink("About", "About", "Home", new { area = "" }, null)</span>|
+                    <span>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, null)</span>
+                </div>
+                <div class="row text-center text-muted small">
+                    <p>&copy; @DateTime.Now.Year - Igla Club - All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </body>
     
     <script>
 
@@ -53,13 +99,13 @@
             };
 
             gapi.auth.authorize(authData, function (response) {
-               // var authButton = document.getElementById('auth-button');
+                var authButton = document.getElementById('auth-button');
                 if (response.error) {
-                    //authButton.hidden = false
+                    authButton.hidden = false
                     console.log(response.error);
                 }
                 else {
-                    //authButton.hidden = true;
+                    authButton.hidden = true;
                     queryAccounts();
                     console.log(response.error);
 
@@ -172,55 +218,15 @@
         }
 
         // Add an event listener to the 'auth-button'.
-        //document.getElementById('auth-button').addEventListener('click', authorize);
+        document.getElementById('auth-button').addEventListener('click', authorize);
 
-        $(document).ready(function (){
-            //authorize();
-        });
+        //$(document).ready(function (){
+        //    //authorize();
+        //});
     </script>
 
 
 <script src="https://apis.google.com/js/client.js?onload=authorize"></script>
-</head>
-<body>
-    <div class="wrapper">
-        <div class="container">
-            @Html.Partial("_TopMenu")
-
-            @{
-                var message = TempData["Message"];
-                var type = TempData["MessageType"] != null ? TempData["MessageType"].ToString().ToLower() : "info";
-
-                if (message != null && message is string)
-                {
-                <div class="alert alert-@type alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    @Html.Raw(message)
-                </div>
-                }
-            }
-
-            @RenderSection("featured", required: false)
-            <div class="column-padding-layout">
-                @Html.MvcSiteMap().SiteMapPath("BootstrapSiteMapPathHelperModel") 
-                @RenderBody()
-            </div>
-        </div>
-
-        <footer>
-            <div class="footer-menu">
-                <span>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</span> |
-                <span>@Html.ActionLink("About", "About", "Home", new { area = "" }, null)</span>|
-                <span>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, null)</span>
-            </div>
-            <div class="row text-center text-muted small">
-                <p>&copy; @DateTime.Now.Year - Igla Club - All rights reserved.</p>
-            </div>
-        </footer>
-    </div>
-</body>
 @RenderSection("scripts", required: false)
 </html>
 <script>
