@@ -33,10 +33,13 @@
         {
             <tr>
                 <td>@clubUser.User.DisplayName</td>
+                <td>
                 @if(clubUser.User.Login == Context.User.Identity.Name)
                 {
-                    <td>@Html.ActionLink("Unsubscribe", "Unsubscribe", "Clubs", new {clubId = clubUser.ClubId, userId = clubUser.UserId },null)</td>
+                    @Html.ActionLink("Unsubscribe", "Unsubscribe", "Clubs", 
+                    new {clubId = clubUser.ClubId, userId = clubUser.UserId },null)
                 }
+                    </td>
             </tr>
         }
     </table>
