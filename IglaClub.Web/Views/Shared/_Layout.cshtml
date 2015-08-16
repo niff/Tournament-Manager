@@ -53,13 +53,16 @@
             };
 
             gapi.auth.authorize(authData, function (response) {
-                var authButton = document.getElementById('auth-button');
+               // var authButton = document.getElementById('auth-button');
                 if (response.error) {
-                    authButton.hidden = false;
+                    //authButton.hidden = false
+                    console.log(response.error);
                 }
                 else {
-                    authButton.hidden = true;
+                    //authButton.hidden = true;
                     queryAccounts();
+                    console.log(response.error);
+
                 }
             });
         }
