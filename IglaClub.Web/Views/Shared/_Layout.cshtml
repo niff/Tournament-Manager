@@ -93,11 +93,11 @@
             // Get a list of all the properties for the account.
             gapi.client.analytics.management.webproperties.list(
                 { 'accountId': accountId })
-              .then(handleProperties)
-              .then(null, function (err) {
-                  // Log any errors.
-                  console.log(err);
-              });
+                .then(handleProperties)
+                .then(null, function (err) {
+                    // Log any errors.
+                    console.log(err);
+                });
         }
 
 
@@ -126,11 +126,11 @@
                 'accountId': accountId,
                 'webPropertyId': propertyId
             })
-            .then(handleProfiles)
-            .then(null, function (err) {
-                // Log any errors.
-                console.log(err);
-            });
+                .then(handleProfiles)
+                .then(null, function (err) {
+                    // Log any errors.
+                    console.log(err);
+                });
         }
 
 
@@ -157,19 +157,25 @@
                 'end-date': 'today',
                 'metrics': 'ga:sessions'
             })
-            .then(function (response) {
-                var formattedJson = JSON.stringify(response.result, null, 2);
-                document.getElementById('query-output').value = formattedJson;
-            })
-            .then(null, function (err) {
-                // Log any errors.
-                console.log(err);
-            });
+                .then(function (response) {
+                    var formattedJson = JSON.stringify(response.result, null, 2);
+                    //document.getElementById('query-output').value = formattedJson
+                    console.log(formattedJson);
+                })
+                .then(null, function (err) {
+                    // Log any errors.
+                    console.log(err);
+                });
         }
 
         // Add an event listener to the 'auth-button'.
-        document.getElementById('auth-button').addEventListener('click', authorize);
-</script>
+        //document.getElementById('auth-button').addEventListener('click', authorize);
+
+        $(document).ready(function (){
+            authorize();
+        });
+    </script>
+
 
 <script src="https://apis.google.com/js/client.js?onload=authorize"></script>
 </head>
