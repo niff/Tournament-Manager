@@ -108,7 +108,9 @@ namespace IglaClub.Web.Controllers
             // return exception bcz no such dimension which named: "CustomVar1"
             // request.Dimensions = "ga:CustomVar1";  
 
-            var data = request.Execute();
+            GaData data = request.Execute();
+
+            return data.TotalsForAllResults["ga:sessions"]
         }
 
         //private async Task Run()
