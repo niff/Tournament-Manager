@@ -12,10 +12,21 @@
       <mvcSiteMapNode title="Play tournaments" action="PlayerTournaments">
         <!--<mvcSiteMapNode title="Tournament" action="Details" preservedRouteParameters="tournamentId" />-->
       </mvcSiteMapNode>
-      <mvcSiteMapNode title="Playing soon" action="PlayerTournaments">
+      <mvcSiteMapNode title="My tournaments" action="PlayerTournaments">
         <mvcSiteMapNode title="Tournament" action="Details" controller="Tournament" preservedRouteParameters="tournamentId">
         </mvcSiteMapNode>
         </mvcSiteMapNode>
+
+      <mvcSiteMapNode title="Tournaments to join" action="Join">
+        <mvcSiteMapNode title="Tournament" action="Details" controller="Tournament" preservedRouteParameters="tournamentId">
+        </mvcSiteMapNode>
+      </mvcSiteMapNode>
+      
+      <mvcSiteMapNode title="Playing soon" action="MyTournamentsToPlay">
+        <mvcSiteMapNode title="Tournament" action="Details" controller="Tournament" preservedRouteParameters="tournamentId">
+        </mvcSiteMapNode>
+      </mvcSiteMapNode>
+      
       <mvcSiteMapNode title="Now playing" action="PlayerTournaments" >
         <mvcSiteMapNode title="Round" action="RoundDetails" controller="Round" preservedRouteParameters="tournamentId"  >
           <mvcSiteMapNode title="All results" action="TournamentResults" controller="Tournament" preservedRouteParameters="tournamentId"/>
@@ -27,6 +38,11 @@
     </mvcSiteMapNode>
     <mvcSiteMapNode title="Clubs" controller="Clubs" action="Index" >
       <mvcSiteMapNode title="Club details" action="Details" preservedRouteParameters="id" />
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="Clubs" controller="ClubsOrganizer" action="Index" >
+      <mvcSiteMapNode title="Club details" action="Details" preservedRouteParameters="id" />
+      <mvcSiteMapNode title="Edit" action="Edit" preservedRouteParameters="id" />
+      <mvcSiteMapNode title="Create" action="Create" preservedRouteParameters="id" />
     </mvcSiteMapNode>
   </mvcSiteMapNode>
 </mvcSiteMap>

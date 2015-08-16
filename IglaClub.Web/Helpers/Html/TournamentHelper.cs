@@ -21,7 +21,7 @@ namespace IglaClub.Web.Helpers.Html
                         <span class='hidden-xs'>Joined</span>");
             }
             return
-                new HtmlString(string.Format("<a href='Tournament/Details/{0}'><i class='glyphicon glyphicon-plus'></i><span class=\"hidden-xs\">Join</span></a>",
+                new HtmlString(string.Format("<a href='Details/{0}'><i class='glyphicon glyphicon-plus'></i><span class=\"hidden-xs\">Join</span></a>",
                                              id));
         }
 

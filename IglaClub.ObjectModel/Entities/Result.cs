@@ -10,7 +10,13 @@ namespace IglaClub.ObjectModel.Entities
     {
         public virtual Pair NS { get; set; }
 
+        [Column("NS_Id")]
+        public long? NSId { get; set; }
+        
         public virtual Pair EW { get; set; }
+
+        [Column("EW_Id")]
+        public long? EWId { get; set; }
 
         [DisplayName ("Level")]
         [Range(0, 7, ErrorMessage = "Level must be between 1 and 7")]

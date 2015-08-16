@@ -8,6 +8,7 @@
     var status = @Model.Tournament.TournamentStatus;
     bool isStarted = status == TournamentStatus.Started;
     bool isPlanned = status == TournamentStatus.Planned;
+    bool isFinished = status == TournamentStatus.Finished;
     
 }
     <div class="row">
@@ -66,6 +67,10 @@
         @Html.Action("PairRoster", new { tournamentId = @Model.Tournament.Id })
 
     </div>
+}
+@if (isFinished || isStarted)
+{
+
     <div class="col-md-6 col-sm-12 col-xs-12 action-pane">
         @Html.Action("PairsResults", "Results", new { tournamentId = @Model.Tournament.Id })
     </div>

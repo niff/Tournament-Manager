@@ -96,6 +96,7 @@
                 </td>
                 <td>
                     @Html.TextBoxFor(m => m[i].NS.PairNumber, new { @class = "form-control" })
+                    @*TODO: add it and board as drop down list @Html.DropDownListFor(m => m[i].NS, new { @class = "form-control" })*@
                 </td>
                 <td>
                     @Html.TextBoxFor(m => m[i].EW.PairNumber, new { @class = "form-control" })
@@ -139,6 +140,8 @@
                     @Html.HiddenFor(m => m[i].TournamentId)
                     @Html.HiddenFor(m => m[i].BoardId)
                     @Html.HiddenFor(m => m[i].Id)
+                    @Html.HiddenFor(m => m[i].NSId)
+                    @Html.HiddenFor(m => m[i].EWId)
             </tr>
         }
     </table>

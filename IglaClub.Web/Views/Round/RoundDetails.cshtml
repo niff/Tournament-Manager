@@ -1,6 +1,14 @@
-﻿@using IglaClub.ObjectModel.Tools;
+﻿@using IglaClub.ObjectModel.Enums
+@using IglaClub.ObjectModel.Tools;
 @model IglaClub.Web.Models.ViewModels.RoundDetailsViewModel
 
+@if (Model.Tournament.TournamentStatus == TournamentStatus.Finished)
+{
+    ViewBag.Title = "Tournament is finished";
+    <span class="medium-header right-side-margin">Tournament is finished</span>
+    <p>Only director can change any score by now. In order to see the results, please click @Html.ActionLink("here","Details","Tournament", new {id = Model.Tournament.Id}, null)</p>
+    return;
+}
 @{
     ViewBag.Title = "Current round";
 }

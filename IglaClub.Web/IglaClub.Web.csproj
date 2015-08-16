@@ -278,6 +278,10 @@
     <Compile Include="Migrations\201505011350241_ClubIdAddedToTournament.Designer.cs">
       <DependentUpon>201505011350241_ClubIdAddedToTournament.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201505141741406_ClubUserIndexFix.cs" />
+    <Compile Include="Migrations\201505141741406_ClubUserIndexFix.Designer.cs">
+      <DependentUpon>201505141741406_ClubUserIndexFix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ViewModels\Clubs\ClubMembersViewModel.cs" />
     <Compile Include="Controllers\ClubsOrganizerController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
@@ -562,7 +566,7 @@
     <Content Include="Views\Results\Edit.cshtml" />
     <Content Include="Views\Results\_PairsResults.cshtml" />
     <Content Include="Views\Tournament\_TournamentList.cshtml" />
-    <Content Include="Views\Tournament\_PairPlacing.cshtml" />
+    <Content Include="Views\Tournament\_PairRoster.cshtml" />
     <Content Include="Views\Errors\Error403.cshtml" />
     <Content Include="Views\Results\_ResultsList.cshtml" />
     <Content Include="Views\Round\RoundDetails.cshtml" />
@@ -609,6 +613,8 @@
     <Content Include="Views\Tournament\ClubTournaments.cshtml" />
     <Content Include="Views\Home\PrivacyPolicy.cshtml" />
     <Content Include="Views\Home\TermsAndConditions.cshtml" />
+    <Content Include="Views\Home\Start.cshtml" />
+    <Content Include="Views\Tournament\CurrentlyPlayingPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -679,6 +685,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201505011350241_ClubIdAddedToTournament.resx">
       <DependentUpon>201505011350241_ClubIdAddedToTournament.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505141741406_ClubUserIndexFix.resx">
+      <DependentUpon>201505141741406_ClubUserIndexFix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

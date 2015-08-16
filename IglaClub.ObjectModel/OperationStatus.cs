@@ -8,6 +8,8 @@ namespace IglaClub.ObjectModel
 {
     public class OperationStatus
     {
+        public static OperationStatus SucceedOperation { get { return new OperationStatus(true);} }
+
         public OperationStatus(bool ok)
         {
             this.Ok = ok;

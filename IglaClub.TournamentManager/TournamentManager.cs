@@ -18,15 +18,20 @@ namespace IglaClub.TournamentManager
             this.db = dbContext;
         }
 
-        public bool AddPair(long tournamentId, long player1Id, long player2Id)
+        public OperationStatus AddPair(long tournamentId, long player1Id, long player2Id)
         {
             Tournament tournament = db.Tournaments.Find(tournamentId);
             User player1 = db.Users.Find(player1Id);
             User player2 = db.Users.Find(player2Id);
+            var userSubscribedToPair = tournament.Pairs.FirstOrDefault(p => p.ContainsUser(player1Id) || p.ContainsUser(player2Id));
+            if (userSubscribedToPair != null)
+            {
+                return new OperationStatus(false,string.Format("User is already subscribed to another pair ({0})", userSubscribedToPair.ToString()));
+            }
             int pairNumber = tournament.Pairs.Any() ? tournament.Pairs.Max(p => p.PairNumber) + 1 : 1;
             tournament.Pairs.Add(new Pair() { Tournament = tournament, PairNumber = pairNumber, Player1 = player1, Player2 = player2} );
             db.SaveChanges();
-            return true;
+            return OperationStatus.SucceedOperation;
         }
 
         public OperationStatus StartTournament(long tournamentId)
@@ -91,9 +96,7 @@ namespace IglaClub.TournamentManager
             var result = new Result();
             result.Tournament = tournament;
             result.RoundNumber = tournament.CurrentRound;
-            var firstResult = tournament.Results.FirstOrDefault(r => r.RoundNumber == tournament.CurrentRound);
-            if (firstResult != null)
-                result.Board = firstResult.Board;
+            result.Board = GetBoardForNewResult(tournament);
 
             result.NS = tournament.Pairs.FirstOrDefault();
             result.EW = tournament.Pairs.FirstOrDefault(p=>p.Id != result.NS.Id);
@@ -101,6 +104,20 @@ namespace IglaClub.TournamentManager
             tournament.Results.Add(result);
             db.SaveChanges();
             return new OperationStatus(true);
+        }
+
+        private BoardInstance GetBoardForNewResult(Tournament tournament)
+        {
+            var firstResult = tournament.Results.FirstOrDefault(r => r.RoundNumber == tournament.CurrentRound) ??
+                              tournament.Results.FirstOrDefault();
+
+            if (firstResult == null)
+            {
+                var maxBoardNumber = tournament.Boards.Max(b => b.BoardNumber);
+                return CreateEmptyBoardInstance(tournament, maxBoardNumber + 1);
+            }
+            
+            return firstResult.Board;
         }
 
         private IEnumerable<BoardInstance> GenerateEmptyBoards(Tournament tournament)
@@ -245,6 +262,8 @@ namespace IglaClub.TournamentManager
         {
             var tournament = db.Tournaments.Find(tournamentid);
             tournament.TournamentStatus = TournamentStatus.Finished;
+            tournament.FinishDate = DateTime.UtcNow;
+            db.SaveChanges();
             return new OperationStatus(true);
         }
     }

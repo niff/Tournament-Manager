@@ -131,6 +131,9 @@
     @Html.HiddenFor(m => m.ResultNsPoints)
     @Html.HiddenFor(m => m.ScoreEw)
     @Html.HiddenFor(m => m.ScoreNs)
+    @Html.HiddenFor(m => m.NSId)
+    @Html.HiddenFor(m => m.EWId)
+
     <p class="submit-button">
         <button class="btn btn-success save-quick-result">Save</button>
     </p>
@@ -163,6 +166,8 @@
                 TableNumber: "@Model.TableNumber",
                 ScoreNs: "@Model.ScoreNs",
                 ScoreEw: "@Model.ScoreEw",
+                NSId: "@Model.NSId",
+                EWId: "@Model.EWId",
                 ShortScore: $("#ShortScore").val()
             };
             $.ajax({

@@ -9,9 +9,14 @@ namespace IglaClub.Web.Infrastructure
 {
     public class AntiSpamAttribute : ActionFilterAttribute
     {
+        /// <summary>
+        /// Delay between two requests in seconds
+        /// </summary>
         public int DelayRequest = 10;
         public string ErrorMessage = "Excessive request attempts detected. Please wait 10 seconds before next attempt.";
         public string RedirectURL;
+
+        private static readonly object cacheLocker = new object();
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
@@ -27,16 +32,18 @@ namespace IglaClub.Web.Infrastructure
             // Generate a hash for your strings (this appends each of the bytes of the value into a single hashed string
             var hashValue = string.Join("", MD5.Create().
                 ComputeHash(Encoding.ASCII.GetBytes(originationInfo + targetInfo)).Select(s => s.ToString("x2")));
-
-            if (cache[hashValue] != null)
+            lock (cacheLocker)
             {
-                filterContext.Controller.ViewData.ModelState.AddModelError("ExcessiveRequests", ErrorMessage);
-                //filterContext.Result = new RedirectResult("Index");
+                if (cache[hashValue] != null)
+                {
+                    filterContext.Controller.ViewData.ModelState.AddModelError("ExcessiveRequests", ErrorMessage);
+                }
+                else
+                {
+                    cache.Insert(hashValue, "", null, DateTime.Now.AddSeconds(DelayRequest), Cache.NoSlidingExpiration);
+                }
             }
-            else
-            {
-                cache.Insert(hashValue, "", null, DateTime.Now.AddSeconds(DelayRequest), Cache.NoSlidingExpiration);
-            }
+            
             base.OnActionExecuting(filterContext);
         }
     }
