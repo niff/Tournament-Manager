@@ -33,6 +33,7 @@ namespace IglaClub.Web.Controllers
         {
         }
 
+        [HttpGet]
         public string ActiveUsers()
         {
             return GaService.GetGAData();
