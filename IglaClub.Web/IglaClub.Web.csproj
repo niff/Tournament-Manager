@@ -71,10 +71,6 @@
       <HintPath>..\packages\Google.Apis.Core.1.9.3\lib\portable-net40+sl50+win+wpa81+wp80\Google.Apis.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Google.Apis.Discovery.v1, Version=1.9.2.51, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.Discovery.v1.1.9.2.510\lib\portable-net40+sl50+win+wpa81+wp80\Google.Apis.Discovery.v1.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Google.Apis.PlatformServices, Version=1.9.3.19381, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Apis.1.9.3\lib\net40\Google.Apis.PlatformServices.dll</HintPath>
       <Private>True</Private>
@@ -333,6 +329,7 @@
     <Content Include="Content\themes\1408214423_file_add.png" />
     <Content Include="Content\global.css" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Controllers\GAController.cs" />
     <Compile Include="Migrations\201505011350241_ClubIdAddedToTournament.cs" />
     <Compile Include="Migrations\201505011350241_ClubIdAddedToTournament.Designer.cs">
       <DependentUpon>201505011350241_ClubIdAddedToTournament.cs</DependentUpon>
