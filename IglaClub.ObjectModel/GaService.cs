@@ -28,7 +28,7 @@ namespace IglaClub.ObjectModel
             var certificate = new X509Certificate2(byt, keyPassword, X509KeyStorageFlags.Exportable);
             var scopes =
                     new string[] {     
-             AnalyticsService.Scope.Analytics,              // view and manage your analytics data    
+             AnalyticsService.Scope.Analytics,              // view and manage your analytics data      
              AnalyticsService.Scope.AnalyticsEdit,          // edit management actives    
              AnalyticsService.Scope.AnalyticsManageUsers,   // manage users    
              AnalyticsService.Scope.AnalyticsReadonly};     // View analytics data    
@@ -45,16 +45,16 @@ namespace IglaClub.ObjectModel
                 HttpClientInitializer = credential
             });
             
-            DataResource.GaResource.GetRequest request = service.Data.Ga.Get(
-                       "ga:" + websiteCode,
-                       DateTime.Today.AddDays(-15).ToString("yyyy-MM-dd"),
-                       DateTime.Today.ToString("yyyy-MM-dd"),
-                       "ga:sessions,ga:users");
+            //DataResource.GaResource.GetRequest request = service.Data.Ga.Get(
+            //           "ga:" + websiteCode,
+            //           DateTime.Today.AddDays(-15).ToString("yyyy-MM-dd"),
+            //           DateTime.Today.ToString("yyyy-MM-dd"),
+            //           "ga:sessions,ga:users");
 
-            DataResource.RealtimeResource.GetRequest request1 = service.Data.Realtime.Get("ga:56789", "rt:activeUsers");
+            DataResource.RealtimeResource.GetRequest request1 = service.Data.Realtime.Get("ga:106889360", "rt:activeUsers");
 
  
-            GaData data = request.Execute();
+            //GaData data = request.Execute();
 
             RealtimeData realtimeData = request1.Execute();
 

@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using IglaClub.ObjectModel;
 using IglaClub.ObjectModel.Entities;
 using IglaClub.Web.Models;
 
@@ -29,7 +30,8 @@ namespace IglaClub.Web.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "";
+            var data =GaService.GetGAData();
+            ViewBag.Users = data;
 
             return View();
         }

@@ -329,6 +329,7 @@
     <Content Include="Content\themes\1408214423_file_add.png" />
     <Content Include="Content\global.css" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\GAController.cs" />
     <Compile Include="Migrations\201505011350241_ClubIdAddedToTournament.cs" />
     <Compile Include="Migrations\201505011350241_ClubIdAddedToTournament.Designer.cs">

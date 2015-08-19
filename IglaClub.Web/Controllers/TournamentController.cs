@@ -17,7 +17,7 @@ using MvcSiteMapProvider.Web.Mvc.Filters;
 namespace IglaClub.Web.Controllers
 {
     [Authorize]
-    public class TournamentController : Controller
+    public class TournamentController : CommonController
     {
         private readonly IglaClubDbContext db = new IglaClubDbContext();
         private readonly TournamentManager.TournamentManager tournamentManager = new TournamentManager.TournamentManager(new IglaClubDbContext());
