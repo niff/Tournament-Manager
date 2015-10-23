@@ -31,11 +31,13 @@ namespace IglaClub.Web.Controllers
         public ActionResult Index()
         {
             var user = this.userRepository.GetUserByLogin(User.Identity.Name);
+            var userId = user != null ? user.Id : 0;
             var clubs = this.db.Clubs.Include("ClubUsers");
+
             var clubsListViewModel = new ClubsIndexViewModel
             {
-                ClubsWithSubscribedUser = clubs.Where(c => c.ClubUsers.Any(cu => cu.User.Id == user.Id)).ToList(),
-                ClubsWithNotSubscribedUser = clubs.Where(c => c.ClubUsers.All(cu => cu.User.Id != user.Id)).ToList(),
+                ClubsWithSubscribedUser = clubs.Where(c => c.ClubUsers.Any(cu => cu.User.Id == userId)).ToList(),
+                ClubsWithNotSubscribedUser = clubs.Where(c => c.ClubUsers.All(cu => cu.User.Id != userId)).ToList(),
                 User = user
             };
             return View(clubsListViewModel);

@@ -7,7 +7,7 @@ namespace IglaClub.Web.Migrations
     {
         public override void Up()
         {
-            AddColumn("dbo.ClubUsers", "MemberSince", c => c.DateTime(nullable: false));
+            AddColumn("dbo.ClubUsers", "MemberSince", c => c.DateTime(nullable: false, storeType:"DateTime2"));
         }
         
         public override void Down()
