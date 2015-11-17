@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - Igla Club</title>
+    <link href="../../Content/img/cards/hearts-icon.png" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/qtip")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <!--[if IE]>
+<style type="text/css">
+  .only-ie {
+      display: inline;
+  }
+</style>
+    <![endif]-->
+
+</head>
+    <body>
+        <div class="wrapper">
+            <div class="container">
+                @Html.Partial("_TopMenu")
+
+                @{
+                    var message = TempData["Message"];
+                    var type = TempData["MessageType"] != null ? TempData["MessageType"].ToString().ToLower() : "info";
+
+                    if (message != null && message is string)
+                    {
+                        <div class="alert alert-@type alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            @Html.Raw(message)
+                        </div>
+                    }
+                }
+
+                @RenderSection("featured", required: false)
+                <div class="column-padding-layout">
+                    @Html.MvcSiteMap().SiteMapPath("BootstrapSiteMapPathHelperModel") 
+                    @RenderBody()
+                    <button id="auth-button" hidden>Authorize</button>
+
+
+                </div>
+            </div>
+
+            <footer>
+                <div class="footer-menu">
+                    <span>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</span> |
+                    <span>@Html.ActionLink("About", "About", "Home", new { area = "" }, null)</span>|
+                    <span>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, null)</span>
+                </div>
+                <div class="row text-center text-muted small">
+                    <p>&copy; @DateTime.Now.Year - Igla Club - All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </body>
+    
+@RenderSection("scripts", required: false)
+</html>
+<script>
+    $(document).ready(function () {
+        $('[title!=""]').qtip({
+            style: {"font-size" : 12},
+            position: {
+                my: 'center left',  // Position my top left...
+                at: 'center right',// at the bottom right of...
+                corner: {
+                    target: 'leftMiddle',
+                    tooltip: 'leftMiddle'
+                }
+            }
+        });
+
+        $("[data-toggle=popover]").popover({
+            html: true,
+            trigger: "focus",
+            placement:"top"
+        });
+    });
+
+</script>
