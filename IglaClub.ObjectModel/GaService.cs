@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -16,7 +17,11 @@ namespace IglaClub.ObjectModel
         public static string GetGAData()
         {
             // path of my .p12 file
-            string keyFilePath = @"C:\Users\Justyna\Desktop\IglaClub-key.p12";
+            string keyFilePath = @"C:\Users\Bartek\Desktop\Igla Club-97752d3d324c.p12";
+
+            if (!File.Exists(keyFilePath))
+                return string.Empty;
+
             string serviceAccountEmail = "682454275672-31klq8q3d73q63iasr9p4v9cr8fn908o@developer.gserviceaccount.com";
             string websiteCode = "106889360";
 
